@@ -317,7 +317,7 @@
 
         /* Guest Details Section */
         .guests-details {
-            margin: 2rem 0;
+            margin: 1rem 0;
             padding: 1.5rem;
             background: var(--blush);
             border-radius: 15px;
@@ -366,6 +366,92 @@
 
         .guest-fields select {
             cursor: pointer;
+        }
+
+        /* Menu Selection */
+        .menu-selection {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: var(--blush);
+            border-radius: 15px;
+        }
+
+        .menu-selection h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--forest);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .menu-info {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--sage);
+            margin-bottom: 1rem;
+        }
+
+        .menu-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .menu-option {
+            position: relative;
+        }
+
+        .menu-option input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .menu-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 1rem;
+            border: 2px solid var(--sage);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: var(--white);
+        }
+
+        .menu-option input:checked + .menu-card {
+            border-color: var(--gold);
+            background: linear-gradient(135deg, rgba(212, 165, 116, 0.1) 0%, rgba(244, 230, 225, 0.5) 100%);
+            transform: scale(1.02);
+        }
+
+        .menu-card:hover {
+            border-color: var(--gold);
+        }
+
+        .menu-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-name {
+            font-weight: 600;
+            color: var(--forest);
+        }
+
+        /* Form Messages */
+        .form-message {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--blush);
+            border-radius: 15px;
+            margin-top: 1rem;
+        }
+
+        .form-message p {
+            font-size: 1.1rem;
+            color: var(--forest);
+            margin-bottom: 0;
         }
 
         .submit-btn {
@@ -1251,6 +1337,10 @@
                 grid-template-columns: 1fr;
             }
 
+            .menu-options {
+                grid-template-columns: 1fr;
+            }
+
             .timeline::before {
                 left: 20px;
             }
@@ -1375,81 +1465,131 @@
         <p class="section-subtitle fade-in">Por favor, confirma antes del 1 de septiembre de 2026</p>
         <div class="rsvp-container fade-in">
             <form id="rsvp-form" action="https://formspree.io/f/xqarovpl" method="POST">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="name">Nombre Completo</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                </div>
                 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="phone">Teléfono</label>
-                        <input type="tel" id="phone" name="phone">
-                    </div>
-                    <div class="form-group">
-                        <label for="guests">Número de invitados</label>
-                        <select id="guests" name="guests" onchange="updateGuestFields()">
-                            <option value="1">Solo yo</option>
-                            <option value="2">2 personas</option>
-                            <option value="3">3 personas</option>
-                            <option value="4">4 personas</option>
-                            <option value="5">5 personas</option>
-                            <option value="6">6 personas</option>
-                        </select>
-                    </div>
-                </div>
-
+                <!-- PASO 1: ¿Asistirás? -->
                 <div class="form-group">
-                    <label for="attendance">¿Asistirás?</label>
-                    <select id="attendance" name="attendance" required>
+                    <label for="attendance">¿Asistirás a nuestra boda?</label>
+                    <select id="attendance" name="asistencia" required onchange="handleAttendance()">
                         <option value="">Selecciona una opción</option>
-                        <option value="yes">¡Sí, allí estaré!</option>
-                        <option value="ceremony">Solo a la ceremonia</option>
+                        <option value="si">¡Sí, allí estaré!</option>
+                        <option value="solo_ceremonia">Solo a la ceremonia</option>
                         <option value="no">Lo siento, no podré asistir</option>
                     </select>
                 </div>
 
-                <div class="guests-details" id="guests-details">
-                    <h4>Detalles de los invitados</h4>
-                    <div class="guest-entry">
-                        <div class="guest-number">Invitado 1</div>
-                        <div class="guest-fields">
-                            <input type="text" name="invitado_1_nombre" placeholder="Nombre" required>
-                            <select name="invitado_1_menu" required>
-                                <option value="">Selecciona menú</option>
-                                <option value="carne">🥩 Carne</option>
-                                <option value="pescado">🐟 Pescado</option>
-                                <option value="vegetariano">🥗 Vegetariano</option>
-                                <option value="infantil">👶 Infantil</option>
-                            </select>
+                <!-- Mensaje si no asiste -->
+                <div id="no-attendance-msg" class="form-message" style="display: none;">
+                    <p>😢 ¡Qué pena que no puedas venir! Te echaremos de menos.</p>
+                    <div class="form-group" style="margin-top: 1rem;">
+                        <label for="name-no">Tu nombre (para saber quién no puede venir)</label>
+                        <input type="text" id="name-no" name="nombre" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Enviar</button>
+                </div>
+
+                <!-- Mensaje si solo ceremonia -->
+                <div id="ceremony-only-msg" class="form-message" style="display: none;">
+                    <p>🙏 ¡Genial! Te esperamos en la Catedral de Ávila.</p>
+                    <div class="form-group" style="margin-top: 1rem;">
+                        <label for="name-ceremony">Tu nombre</label>
+                        <input type="text" id="name-ceremony" name="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email-ceremony">Email</label>
+                        <input type="email" id="email-ceremony" name="email" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Confirmar</button>
+                </div>
+
+                <!-- PASO 2: Datos personales (si asiste completo) -->
+                <div id="full-attendance" style="display: none;">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Tu nombre</label>
+                            <input type="text" id="name" name="nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="phone">Teléfono</label>
+                        <input type="tel" id="phone" name="telefono">
+                    </div>
+
+                    <!-- Tu menú -->
+                    <div class="menu-selection">
+                        <h4>Tu menú</h4>
+                        <p class="menu-info">Todos los menús incluyen: Entrante + Plato principal + Tarta árabe de postre</p>
+                        <div class="menu-options">
+                            <label class="menu-option">
+                                <input type="radio" name="mi_menu" value="carne" required>
+                                <div class="menu-card">
+                                    <span class="menu-icon">🥩</span>
+                                    <span class="menu-name">Carne</span>
+                                </div>
+                            </label>
+                            <label class="menu-option">
+                                <input type="radio" name="mi_menu" value="pescado">
+                                <div class="menu-card">
+                                    <span class="menu-icon">🐟</span>
+                                    <span class="menu-name">Pescado</span>
+                                </div>
+                            </label>
+                            <label class="menu-option">
+                                <input type="radio" name="mi_menu" value="vegano">
+                                <div class="menu-card">
+                                    <span class="menu-icon">🥗</span>
+                                    <span class="menu-name">Vegano</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- PASO 3: ¿Acompañantes? -->
+                    <div class="form-group">
+                        <label for="has-guests">¿Vienes con acompañantes?</label>
+                        <select id="has-guests" name="tiene_acompanantes" onchange="handleGuests()">
+                            <option value="no">No, voy solo/a</option>
+                            <option value="si">Sí, vengo con más personas</option>
+                        </select>
+                    </div>
+
+                    <!-- PASO 4: Número y datos de acompañantes -->
+                    <div id="guests-section" style="display: none;">
+                        <div class="form-group">
+                            <label for="num-guests">¿Cuántos acompañantes?</label>
+                            <select id="num-guests" name="num_acompanantes" onchange="updateGuestFields()">
+                                <option value="1">1 acompañante</option>
+                                <option value="2">2 acompañantes</option>
+                                <option value="3">3 acompañantes</option>
+                                <option value="4">4 acompañantes</option>
+                                <option value="5">5 acompañantes</option>
+                            </select>
+                        </div>
+                        <div id="guests-details" class="guests-details"></div>
+                    </div>
+
+                    <!-- PASO 5: Extras -->
+                    <div class="form-group">
+                        <label for="allergies">Alergias o restricciones alimentarias</label>
+                        <input type="text" id="allergies" name="alergias" placeholder="Celiaquía, intolerancia a la lactosa, etc.">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bus">¿Necesitas autobús desde la catedral al banquete?</label>
+                        <select id="bus" name="autobus">
+                            <option value="si">Sí, por favor</option>
+                            <option value="no">No, iré por mi cuenta</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Confirmar Asistencia</button>
                 </div>
 
-                <div class="form-group">
-                    <label for="allergies">Alergias o restricciones alimentarias</label>
-                    <input type="text" id="allergies" name="allergies" placeholder="Celiaquía, intolerancia a la lactosa, etc.">
-                </div>
-
-                <div class="form-group">
-                    <label for="bus">¿Necesitas autobús desde la catedral?</label>
-                    <select id="bus" name="bus">
-                        <option value="yes">Sí, por favor</option>
-                        <option value="no">No, iré por mi cuenta</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="message">Mensaje para los novios</label>
-                    <textarea id="message" name="message" rows="3" placeholder="¡Escríbenos unas palabras!"></textarea>
-                </div>
-
-                <button type="submit" class="submit-btn">Confirmar Asistencia</button>
             </form>
         </div>
     </section>
@@ -2012,25 +2152,70 @@
 
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-        // Función para actualizar campos de invitados dinámicamente
+        // Función para manejar la selección de asistencia
+        function handleAttendance() {
+            const attendance = document.getElementById('attendance').value;
+            const noMsg = document.getElementById('no-attendance-msg');
+            const ceremonyMsg = document.getElementById('ceremony-only-msg');
+            const fullForm = document.getElementById('full-attendance');
+            
+            // Ocultar todo primero
+            noMsg.style.display = 'none';
+            ceremonyMsg.style.display = 'none';
+            fullForm.style.display = 'none';
+            
+            // Desactivar required en campos ocultos
+            document.querySelectorAll('#no-attendance-msg input, #ceremony-only-msg input, #full-attendance input, #full-attendance select').forEach(el => {
+                el.required = false;
+            });
+            
+            if (attendance === 'no') {
+                noMsg.style.display = 'block';
+                document.getElementById('name-no').required = true;
+            } else if (attendance === 'solo_ceremonia') {
+                ceremonyMsg.style.display = 'block';
+                document.getElementById('name-ceremony').required = true;
+                document.getElementById('email-ceremony').required = true;
+            } else if (attendance === 'si') {
+                fullForm.style.display = 'block';
+                document.getElementById('name').required = true;
+                document.getElementById('email').required = true;
+                document.querySelector('input[name="mi_menu"]').required = true;
+            }
+        }
+
+        // Función para manejar acompañantes
+        function handleGuests() {
+            const hasGuests = document.getElementById('has-guests').value;
+            const guestsSection = document.getElementById('guests-section');
+            
+            if (hasGuests === 'si') {
+                guestsSection.style.display = 'block';
+                updateGuestFields();
+            } else {
+                guestsSection.style.display = 'none';
+                document.getElementById('guests-details').innerHTML = '';
+            }
+        }
+
+        // Función para actualizar campos de acompañantes dinámicamente
         function updateGuestFields() {
-            const numGuests = parseInt(document.getElementById('guests').value);
+            const numGuests = parseInt(document.getElementById('num-guests').value);
             const container = document.getElementById('guests-details');
             
-            let html = '<h4>Detalles de los invitados</h4>';
+            let html = '<h4>Datos de acompañantes</h4>';
             
             for (let i = 1; i <= numGuests; i++) {
                 html += `
                     <div class="guest-entry">
-                        <div class="guest-number">Invitado ${i}</div>
+                        <div class="guest-number">Acompañante +${i}</div>
                         <div class="guest-fields">
-                            <input type="text" name="invitado_${i}_nombre" placeholder="Nombre" required>
-                            <select name="invitado_${i}_menu" required>
+                            <input type="text" name="acompanante_${i}_nombre" placeholder="Nombre" required>
+                            <select name="acompanante_${i}_menu" required>
                                 <option value="">Selecciona menú</option>
                                 <option value="carne">🥩 Carne</option>
                                 <option value="pescado">🐟 Pescado</option>
-                                <option value="vegetariano">🥗 Vegetariano</option>
-                                <option value="infantil">👶 Infantil</option>
+                                <option value="vegano">🥗 Vegano</option>
                             </select>
                         </div>
                     </div>
