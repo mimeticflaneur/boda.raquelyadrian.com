@@ -1365,7 +1365,7 @@
         <h2 class="section-title fade-in">Confirma tu Asistencia</h2>
         <p class="section-subtitle fade-in">Por favor, confirma antes del 1 de septiembre de 2026</p>
         <div class="rsvp-container fade-in">
-            <form id="rsvp-form">
+            <form id="rsvp-form" action="https://formspree.io/f/xqarovpl" method="POST">
                 <div class="form-row">
                     <div class="form-group">
                         <label for="name">Nombre Completo</label>
@@ -1919,8 +1919,12 @@
             </div>
             <div class="song-request fade-in">
                 <h4>Sugiere una canción</h4>
-                <input type="text" id="song-input" placeholder="Nombre de la canción y artista">
-                <button onclick="suggestSong()">Sugerir</button>
+                <form id="song-form" action="https://formspree.io/f/xeoywbav" method="POST">
+                    <input type="text" name="cancion" placeholder="Nombre de la canción" required>
+                    <input type="text" name="artista" placeholder="Artista" style="margin-top: 0.5rem;">
+                    <input type="text" name="nombre" placeholder="Tu nombre" style="margin-top: 0.5rem;">
+                    <button type="submit">Sugerir</button>
+                </form>
             </div>
         </div>
     </section>
@@ -1931,9 +1935,11 @@
         <p class="section-subtitle fade-in">Déjanos un mensaje especial que guardaremos para siempre</p>
         <div class="guestbook-container">
             <div class="guestbook-form fade-in">
-                <textarea id="guestbook-message" placeholder="Escribe tu mensaje para los novios..."></textarea>
-                <input type="text" id="guestbook-name" placeholder="Tu nombre">
-                <button class="submit-btn" onclick="addMessage()">Firmar el libro</button>
+                <form id="guestbook-form" action="https://formspree.io/f/movgzoer" method="POST">
+                    <textarea name="mensaje" placeholder="Escribe tu mensaje para los novios..." required></textarea>
+                    <input type="text" name="nombre" placeholder="Tu nombre" required>
+                    <button type="submit" class="submit-btn">Firmar el libro</button>
+                </form>
             </div>
             <div class="guestbook-messages" id="guestbook-messages">
                 <div class="guestbook-message fade-in">
@@ -2008,47 +2014,21 @@
 
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-        // RSVP Form
+        // RSVP Form - Formspree handles submission
         document.getElementById('rsvp-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('¡Gracias por confirmar tu asistencia! Nos pondremos en contacto contigo pronto. 💕');
-            this.reset();
+            // Let Formspree handle the submission
+            // Show confirmation after redirect
         });
 
-        // Guestbook
-        function addMessage() {
-            const message = document.getElementById('guestbook-message').value;
-            const name = document.getElementById('guestbook-name').value;
-            
-            if (message && name) {
-                const messagesContainer = document.getElementById('guestbook-messages');
-                const newMessage = document.createElement('div');
-                newMessage.className = 'guestbook-message fade-in visible';
-                newMessage.innerHTML = `
-                    <p>"${message}"</p>
-                    <span class="author">— ${name}</span>
-                `;
-                messagesContainer.insertBefore(newMessage, messagesContainer.firstChild);
-                
-                document.getElementById('guestbook-message').value = '';
-                document.getElementById('guestbook-name').value = '';
-                
-                alert('¡Gracias por tu mensaje! 💕');
-            } else {
-                alert('Por favor, escribe un mensaje y tu nombre.');
-            }
-        }
+        // Song Form - Formspree handles submission
+        document.getElementById('song-form').addEventListener('submit', function(e) {
+            // Let Formspree handle the submission
+        });
 
-        // Song suggestion
-        function suggestSong() {
-            const song = document.getElementById('song-input').value;
-            if (song) {
-                alert('¡Gracias por tu sugerencia! Añadiremos "' + song + '" a nuestra lista. 🎵');
-                document.getElementById('song-input').value = '';
-            } else {
-                alert('Por favor, escribe el nombre de una canción.');
-            }
-        }
+        // Guestbook Form - Formspree handles submission  
+        document.getElementById('guestbook-form').addEventListener('submit', function(e) {
+            // Let Formspree handle the submission
+        });
 
         // Smooth scroll for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
