@@ -264,7 +264,7 @@
             <h1>Raquel & Adrián</h1>
             <p class="quote">"Y sin amor, todo es nada"</p>
             <p class="quote-author">— Santa Teresa de Jesús</p>
-            <p class="date">11 DE OCTUBRE DE 2026 • ÁVILA</p>
+            <p class="date">12 DE JUNIO DE 2027 • ÁVILA</p>
             <div class="countdown">
                 <div class="countdown-item"><span class="countdown-number" id="days">000</span><span class="countdown-label">Días</span></div>
                 <div class="countdown-item"><span class="countdown-number" id="hours">00</span><span class="countdown-label">Horas</span></div>
@@ -277,7 +277,7 @@
 
     <section id="rsvp" class="rsvp">
         <h2 class="section-title fade-in">Confirma tu Asistencia</h2>
-        <p class="section-subtitle fade-in">Por favor, confirma antes del 1 de septiembre de 2026</p>
+        <p class="section-subtitle fade-in">Por favor, confirma antes del 1 de mayo de 2027</p>
         <div class="rsvp-container fade-in">
             <form id="rsvp-form" action="https://formspree.io/f/xqarovpl" method="POST">
                 <div class="form-group">
@@ -292,16 +292,16 @@
                 <div id="no-attendance-msg" class="form-message" style="display: none;">
                     <p>😢 ¡Qué pena que no puedas venir! Te echaremos de menos.</p>
                     <div class="form-group" style="margin-top: 1rem;">
-                        <label for="name-no">Tu nombre</label>
-                        <input type="text" id="name-no" name="nombre_no_asiste">
+                        <label for="name-no">Tu nombre *</label>
+                        <input type="text" id="name-no" name="nombre_no_asiste" required>
                     </div>
                     <button type="submit" class="submit-btn">Enviar</button>
                 </div>
                 <div id="ceremony-only-msg" class="form-message" style="display: none;">
                     <p>🙏 ¡Genial! Te esperamos en la Catedral de Ávila.</p>
                     <div class="form-group" style="margin-top: 1rem;">
-                        <label for="name-ceremony">Tu nombre</label>
-                        <input type="text" id="name-ceremony" name="nombre_ceremonia">
+                        <label for="name-ceremony">Tu nombre *</label>
+                        <input type="text" id="name-ceremony" name="nombre_ceremonia" required>
                     </div>
                     <div class="form-group">
                         <label for="email-ceremony">Email</label>
@@ -311,18 +311,19 @@
                 </div>
                 <div id="full-attendance" style="display: none;">
                     <div class="form-row">
-                        <div class="form-group"><label for="name">Tu nombre</label><input type="text" id="name" name="nombre"></div>
-                        <div class="form-group"><label for="email">Email</label><input type="email" id="email" name="email"></div>
+                        <div class="form-group"><label for="name">Tu nombre *</label><input type="text" id="name" name="nombre" required></div>
+                        <div class="form-group"><label for="email">Email *</label><input type="email" id="email" name="email" required></div>
                     </div>
                     <div class="form-group"><label for="phone">Teléfono</label><input type="tel" id="phone" name="telefono"></div>
                     <div class="menu-selection">
-                        <h4>Tu menú</h4>
+                        <h4>Tu menú <span style="color: #d4a574;">*</span></h4>
                         <p class="menu-info">Todos los menús incluyen: Entrante + Plato principal + Tarta árabe de postre</p>
                         <div class="menu-options">
-                            <label class="menu-option"><input type="radio" name="mi_menu" value="carne"><div class="menu-card"><span class="menu-icon">🥩</span><span class="menu-name">Carne</span></div></label>
-                            <label class="menu-option"><input type="radio" name="mi_menu" value="pescado"><div class="menu-card"><span class="menu-icon">🐟</span><span class="menu-name">Pescado</span></div></label>
-                            <label class="menu-option"><input type="radio" name="mi_menu" value="vegano"><div class="menu-card"><span class="menu-icon">🥗</span><span class="menu-name">Vegano</span></div></label>
+                            <label class="menu-option"><input type="radio" name="mi_menu" value="carne" required><div class="menu-card"><span class="menu-icon">🥩</span><span class="menu-name">Carne</span></div></label>
+                            <label class="menu-option"><input type="radio" name="mi_menu" value="pescado" required><div class="menu-card"><span class="menu-icon">🐟</span><span class="menu-name">Pescado</span></div></label>
+                            <label class="menu-option"><input type="radio" name="mi_menu" value="vegano" required><div class="menu-card"><span class="menu-icon">🥗</span><span class="menu-name">Vegano</span></div></label>
                         </div>
+                        <p id="menu-error" style="display: none; color: #d4a574; font-size: 0.9rem; margin-top: 0.5rem; text-align: center;">Por favor, selecciona tu menú</p>
                     </div>
                     <div class="form-group">
                         <label for="has-guests">¿Vienes con acompañantes?</label>
@@ -473,7 +474,7 @@
                 <div class="hotel-info">
                     <p class="hotel-category">Hotel de diseño</p><h3>Fontecruz Ávila</h3><p class="hotel-stars">⭐⭐⭐⭐</p><p class="hotel-address">📍 San Segundo, 28</p>
                     <div class="hotel-features"><span class="hotel-feature">Moderno</span><span class="hotel-feature">Vistas murallas</span><span class="hotel-feature">Terraza</span></div>
-                    <div class="hotel-discount"><strong>20% de descuento</strong><span>Bloqueo de habitaciones hasta 01/09/2026</span></div>
+                    <div class="hotel-discount"><strong>20% de descuento</strong><span>Bloqueo de habitaciones hasta 01/05/2027</span></div>
                     <div class="hotel-contact"><a href="tel:+34920353100">📞 920 35 31 00</a><a href="https://www.fontecruzhoteles.com" target="_blank">🌐 Web del hotel</a></div>
                     <a href="https://www.fontecruzhoteles.com" target="_blank" class="hotel-reserve-btn">Reservar</a>
                 </div>
@@ -489,18 +490,18 @@
                 </div>
             </div>
         </div>
-        <div class="hotels-note fade-in"><p>💡 <strong>Importante:</strong> Os recomendamos reservar con antelación ya que octubre es temporada alta en Ávila. Los descuentos están disponibles hasta el <strong>1 de septiembre de 2026</strong>.</p></div>
+        <div class="hotels-note fade-in"><p>💡 <strong>Importante:</strong> Os recomendamos reservar con antelación ya que junio es temporada alta en Ávila. Los descuentos están disponibles hasta el <strong>1 de mayo de 2027</strong>.</p></div>
     </section>
 
     <section id="details" class="details">
         <h2 class="section-title fade-in">Detalles del Evento</h2>
         <div class="details-grid">
-            <div class="detail-card fade-in"><div class="detail-icon">📅</div><h3>Fecha</h3><p>Domingo, 11 de Octubre<br>2026</p></div>
+            <div class="detail-card fade-in"><div class="detail-icon">📅</div><h3>Fecha</h3><p>Sábado, 12 de Junio<br>2027</p></div>
             <div class="detail-card fade-in"><div class="detail-icon">⏰</div><h3>Horario</h3><p>Ceremonia: 12:00h<br>Cóctel: 14:30h</p></div>
             <div class="detail-card fade-in"><div class="detail-icon">👗</div><h3>Código de Vestimenta</h3><p>Etiqueta<br>Sugerimos tonos cálidos</p></div>
             <div class="detail-card fade-in"><div class="detail-icon">🚗</div><h3>Transporte</h3><p>Parking disponible en ambas ubicaciones<br>Autobús desde la catedral a la finca</p></div>
             <div class="detail-card fade-in"><div class="detail-icon">👶</div><h3>Niños</h3><p>¡Los peques son bienvenidos!<br>Habrá zona infantil</p></div>
-            <div class="detail-card fade-in"><div class="detail-icon">📸</div><h3>Hashtag</h3><p>#RaquelYAdrian2026<br>¡Comparte tus fotos!</p></div>
+            <div class="detail-card fade-in"><div class="detail-icon">📸</div><h3>Hashtag</h3><p>#RaquelYAdrian2027<br>¡Comparte tus fotos!</p></div>
         </div>
     </section>
 
@@ -567,9 +568,9 @@
     </section>
 
     <footer>
-        <p class="footer-hashtag">#RaquelYAdrian2026</p>
+        <p class="footer-hashtag">#RaquelYAdrian2027</p>
         <p class="footer-quote">"Y sin amor, todo es nada" — Santa Teresa de Jesús</p>
-        <p class="footer-names">Raquel & Adrián • 11 de Octubre de 2026</p>
+        <p class="footer-names">Raquel & Adrián • 12 de Junio de 2027</p>
     </footer>
 
     <script>
@@ -577,7 +578,7 @@
         document.querySelectorAll('.nav-links a').forEach(link => { link.addEventListener('click', () => { document.querySelector('.nav-links').classList.remove('active'); }); });
 
         function updateCountdown() {
-            const weddingDate = new Date('2026-10-11T12:00:00').getTime();
+            const weddingDate = new Date('2027-06-12T12:00:00').getTime();
             const now = new Date().getTime();
             const distance = weddingDate - now;
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -600,15 +601,56 @@
             const noMsg = document.getElementById('no-attendance-msg');
             const ceremonyMsg = document.getElementById('ceremony-only-msg');
             const fullForm = document.getElementById('full-attendance');
+
+            // Ocultar todas las secciones
             noMsg.style.display = 'none';
             ceremonyMsg.style.display = 'none';
             fullForm.style.display = 'none';
+
+            // Limpiar campos de los tres formularios
+            const nameNo = document.getElementById('name-no');
+            const nameCeremony = document.getElementById('name-ceremony');
+            const emailCeremony = document.getElementById('email-ceremony');
+            const name = document.getElementById('name');
+            const email = document.getElementById('email');
+            const phone = document.getElementById('phone');
+            const allergies = document.getElementById('allergies');
+
+            if (nameNo) nameNo.value = '';
+            if (nameCeremony) nameCeremony.value = '';
+            if (emailCeremony) emailCeremony.value = '';
+            if (name) name.value = '';
+            if (email) email.value = '';
+            if (phone) phone.value = '';
+            if (allergies) allergies.value = '';
+
+            // Limpiar selección de menú
+            const menuRadios = document.querySelectorAll('input[name="mi_menu"]');
+            menuRadios.forEach(radio => radio.checked = false);
+
+            // Limpiar mensaje de error del menú
+            const menuError = document.getElementById('menu-error');
+            if (menuError) menuError.style.display = 'none';
+
+            // Limpiar acompañantes
             document.getElementById('guests-details').innerHTML = '';
             document.getElementById('guests-section').style.display = 'none';
             if (document.getElementById('has-guests')) document.getElementById('has-guests').value = 'no';
-            if (attendance === 'no') { noMsg.style.display = 'block'; }
-            else if (attendance === 'solo_ceremonia') { ceremonyMsg.style.display = 'block'; }
-            else if (attendance === 'si') { fullForm.style.display = 'block'; }
+
+            // Mostrar el formulario correcto
+            if (attendance === 'no') {
+                noMsg.style.display = 'block';
+                if (nameNo) nameNo.setAttribute('required', 'required');
+            }
+            else if (attendance === 'solo_ceremonia') {
+                ceremonyMsg.style.display = 'block';
+                if (nameCeremony) nameCeremony.setAttribute('required', 'required');
+            }
+            else if (attendance === 'si') {
+                fullForm.style.display = 'block';
+                if (name) name.setAttribute('required', 'required');
+                if (email) email.setAttribute('required', 'required');
+            }
         }
 
         function handleGuests() {
@@ -623,7 +665,7 @@
             const container = document.getElementById('guests-details');
             let html = '<h4>Datos de acompañantes</h4>';
             for (let i = 1; i <= numGuests; i++) {
-                html += '<div class="guest-entry"><div class="guest-number">Acompañante +' + i + '</div><div class="guest-fields"><input type="text" name="acompanante_' + i + '_nombre" placeholder="Nombre"><select name="acompanante_' + i + '_menu"><option value="">Selecciona menú</option><option value="carne">🥩 Carne</option><option value="pescado">🐟 Pescado</option><option value="vegano">🥗 Vegano</option></select></div></div>';
+                html += '<div class="guest-entry"><div class="guest-number">Acompañante +' + i + '</div><div class="guest-fields"><input type="text" name="acompanante_' + i + '_nombre" placeholder="Nombre" required><select name="acompanante_' + i + '_menu" required><option value="">Selecciona menú</option><option value="carne">🥩 Carne</option><option value="pescado">🐟 Pescado</option><option value="vegano">🥗 Vegano</option></select></div></div>';
             }
             container.innerHTML = html;
         }
@@ -633,17 +675,52 @@
             if (!form) return;
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
+
+                // Validación especial para el menú si es el formulario RSVP
+                if (formId === 'rsvp-form') {
+                    const attendance = document.getElementById('attendance').value;
+                    if (attendance === 'si') {
+                        const menuSelected = document.querySelector('input[name="mi_menu"]:checked');
+                        if (!menuSelected) {
+                            document.getElementById('menu-error').style.display = 'block';
+                            return;
+                        } else {
+                            document.getElementById('menu-error').style.display = 'none';
+                        }
+                    }
+                }
+
                 const btn = form.querySelector('button[type="submit"]');
                 const origText = btn.textContent;
                 btn.textContent = 'Enviando...';
                 btn.disabled = true;
+
                 fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
                 .then(response => {
                     if (response.ok) {
-                        if (formId === 'rsvp-form') { form.innerHTML = '<div class="form-success"><h3>¡Gracias por confirmar! 💕</h3><p>Hemos recibido tu confirmación. ¡Nos vemos en la boda!</p></div>'; }
-                        else { form.innerHTML = '<p class="form-success-small">' + successMsg + '</p>'; }
-                    } else { btn.textContent = origText; btn.disabled = false; alert('Hubo un error. Por favor, inténtalo de nuevo.'); }
-                }).catch(() => { btn.textContent = origText; btn.disabled = false; alert('Hubo un error. Por favor, inténtalo de nuevo.'); });
+                        if (formId === 'rsvp-form') {
+                            form.innerHTML = '<div class="form-success"><h3>¡Gracias por confirmar! 💕</h3><p>Hemos recibido tu confirmación. ¡Nos vemos en la boda!</p></div>';
+                        }
+                        else {
+                            form.innerHTML = '<p class="form-success-small">' + successMsg + '</p>';
+                        }
+                    } else {
+                        response.json().then(data => {
+                            btn.textContent = origText;
+                            btn.disabled = false;
+                            alert('Error al enviar: ' + (data.error || 'Por favor, inténtalo de nuevo.'));
+                        }).catch(() => {
+                            btn.textContent = origText;
+                            btn.disabled = false;
+                            alert('Hubo un error al enviar el formulario. Por favor, verifica los datos e inténtalo de nuevo.');
+                        });
+                    }
+                }).catch((error) => {
+                    console.error('Error:', error);
+                    btn.textContent = origText;
+                    btn.disabled = false;
+                    alert('Error de conexión. Por favor, verifica tu conexión a internet e inténtalo de nuevo.');
+                });
             });
         }
         setupForm('rsvp-form', '¡Gracias!');
