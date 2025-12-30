@@ -50,8 +50,9 @@
         .quote-author { font-size: 0.9rem; color: var(--sage); margin-bottom: 2rem; }
         .date { font-size: 1.1rem; letter-spacing: 3px; color: var(--forest); margin-bottom: 3rem; }
         .countdown { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
-        .countdown-item { text-align: center; }
-        .countdown-number { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; color: var(--forest); line-height: 1; display: block; }
+        .countdown-item { text-align: center; padding: 1.5rem; background: rgba(255,255,255,0.6); backdrop-filter: blur(10px); border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); transition: transform 0.3s ease; }
+        .countdown-item:hover { transform: translateY(-5px); }
+        .countdown-number { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; color: var(--forest); line-height: 1; display: block; text-shadow: 0 2px 8px rgba(44, 62, 45, 0.1); }
         .countdown-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--sage); }
         .scroll-hint { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); font-size: 0.85rem; color: var(--sage); animation: bounce 2s infinite; }
         @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); } 40% { transform: translateX(-50%) translateY(-10px); } 60% { transform: translateX(-50%) translateY(-5px); } }
@@ -59,7 +60,8 @@
         .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 400; text-align: center; color: var(--forest); margin-bottom: 1rem; }
         .section-subtitle { text-align: center; color: var(--sage); margin-bottom: 3rem; font-size: 1rem; }
         .rsvp { background: linear-gradient(180deg, var(--blush) 0%, var(--cream) 100%); }
-        .rsvp-container { max-width: 700px; margin: 0 auto; background: var(--white); padding: 3rem; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
+        .rsvp-container { max-width: 700px; margin: 0 auto; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); padding: 3rem; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.12), 0 0 1px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.3); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .rsvp-container:hover { transform: translateY(-5px); box-shadow: 0 25px 70px rgba(0,0,0,0.15), 0 0 1px rgba(0,0,0,0.1); }
         .form-group { margin-bottom: 1.5rem; }
         .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--forest); }
         .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 1rem; border: 1px solid var(--sage); border-radius: 10px; font-family: inherit; font-size: 1rem; transition: border-color 0.3s, box-shadow 0.3s; background: var(--white); }
@@ -86,9 +88,12 @@
         .menu-name { font-weight: 600; color: var(--forest); }
         .form-message { text-align: center; padding: 1.5rem; background: var(--blush); border-radius: 15px; margin-top: 1rem; }
         .form-message p { font-size: 1.1rem; color: var(--forest); margin-bottom: 0; }
-        .submit-btn { width: 100%; padding: 1.2rem; background: var(--forest); color: var(--white); border: none; border-radius: 10px; font-family: inherit; font-size: 1rem; font-weight: 500; cursor: pointer; transition: background 0.3s, transform 0.2s; margin-top: 1rem; }
-        .submit-btn:hover { background: var(--sage); transform: translateY(-2px); }
-        .submit-btn:disabled { background: var(--sage); cursor: not-allowed; transform: none; }
+        .submit-btn { width: 100%; padding: 1.2rem; background: linear-gradient(135deg, var(--forest) 0%, #3d5a3e 100%); color: var(--white); border: none; border-radius: 10px; font-family: inherit; font-size: 1rem; font-weight: 500; cursor: pointer; transition: all 0.3s ease; margin-top: 1rem; box-shadow: 0 4px 15px rgba(44, 62, 45, 0.3); position: relative; overflow: hidden; }
+        .submit-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s; }
+        .submit-btn:hover { background: linear-gradient(135deg, var(--sage) 0%, #a8bda4 100%); transform: translateY(-3px); box-shadow: 0 8px 25px rgba(44, 62, 45, 0.4); }
+        .submit-btn:hover::before { left: 100%; }
+        .submit-btn:active { transform: translateY(-1px); }
+        .submit-btn:disabled { background: var(--sage); cursor: not-allowed; transform: none; opacity: 0.6; }
         .form-success { text-align: center; padding: 2rem; }
         .form-success h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--forest); margin-bottom: 0.5rem; }
         .form-success p { color: var(--sage); }
@@ -106,15 +111,18 @@
         .gallery-item:first-child { grid-column: span 2; grid-row: span 2; }
         .padrinos { background: var(--white); }
         .padrinos-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
-        .padrino-card { text-align: center; padding: 2rem 1rem; background: var(--cream); border-radius: 20px; transition: transform 0.3s; }
-        .padrino-card:hover { transform: translateY(-5px); }
+        .padrino-card { text-align: center; padding: 2rem 1rem; background: rgba(250, 248, 245, 0.9); backdrop-filter: blur(10px); border-radius: 20px; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 8px 25px rgba(0,0,0,0.06); border: 1px solid rgba(255,255,255,0.5); }
+        .padrino-card:hover { transform: translateY(-10px) scale(1.05); box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+        .padrino-photo { transition: transform 0.3s ease; }
+        .padrino-card:hover .padrino-photo { transform: scale(1.1) rotate(5deg); }
         .padrino-photo { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, var(--sage) 0%, var(--forest) 100%); margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
         .padrino-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--forest); margin-bottom: 0.5rem; }
         .padrino-role { color: var(--gold); font-weight: 500; font-size: 0.9rem; margin-bottom: 0.25rem; }
         .padrino-relation { color: var(--sage); font-size: 0.85rem; }
         .locations { background: var(--cream); }
         .locations-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-        .location-card { background: var(--white); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
+        .location-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; box-shadow: 0 15px 45px rgba(0,0,0,0.1); transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.3); }
+        .location-card:hover { transform: translateY(-8px); box-shadow: 0 20px 55px rgba(0,0,0,0.15); }
         .location-map { height: 250px; background: var(--sage); }
         .location-map iframe { width: 100%; height: 100%; border: none; }
         .location-info { padding: 2rem; text-align: center; }
@@ -122,13 +130,15 @@
         .location-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--forest); margin-bottom: 1rem; }
         .location-info p { color: var(--text); margin-bottom: 0.5rem; font-size: 0.95rem; }
         .location-time { color: var(--sage); font-weight: 500; margin: 1rem 0; }
-        .location-btn { display: inline-block; padding: 0.8rem 2rem; background: var(--forest); color: var(--white); text-decoration: none; border-radius: 25px; font-size: 0.9rem; transition: background 0.3s; }
-        .location-btn:hover { background: var(--sage); }
+        .location-btn { display: inline-block; padding: 0.8rem 2rem; background: linear-gradient(135deg, var(--forest) 0%, #3d5a3e 100%); color: var(--white); text-decoration: none; border-radius: 25px; font-size: 0.9rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(44, 62, 45, 0.25); position: relative; overflow: hidden; }
+        .location-btn::before { content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; border-radius: 50%; background: rgba(255,255,255,0.3); transform: translate(-50%, -50%); transition: width 0.6s, height 0.6s; }
+        .location-btn:hover { background: linear-gradient(135deg, var(--sage) 0%, #a8bda4 100%); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(44, 62, 45, 0.35); }
+        .location-btn:hover::before { width: 300px; height: 300px; }
         .hotels { background: var(--white); }
         .hotels-intro { text-align: center; max-width: 700px; margin: 0 auto 3rem; color: var(--text); line-height: 1.8; }
         .hotels-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-        .hotel-card { background: var(--cream); border-radius: 20px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; }
-        .hotel-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+        .hotel-card { background: rgba(250, 248, 245, 0.9); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid rgba(255,255,255,0.5); }
+        .hotel-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 50px rgba(0,0,0,0.15), 0 0 0 1px rgba(212, 165, 116, 0.1); }
         .hotel-image { height: 180px; background: linear-gradient(135deg, var(--sage) 0%, var(--forest) 100%); display: flex; align-items: center; justify-content: center; font-size: 4rem; position: relative; }
         .hotel-badge { position: absolute; top: 1rem; right: 1rem; background: var(--gold); color: var(--white); padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
         .hotel-info { padding: 1.5rem; }
@@ -144,15 +154,17 @@
         .hotel-contact { display: flex; flex-direction: column; gap: 0.5rem; }
         .hotel-contact a { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--forest); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
         .hotel-contact a:hover { color: var(--gold); }
-        .hotel-reserve-btn { display: block; text-align: center; padding: 0.8rem; background: var(--forest); color: var(--white); text-decoration: none; border-radius: 10px; font-size: 0.9rem; font-weight: 500; margin-top: 1rem; transition: background 0.3s; }
-        .hotel-reserve-btn:hover { background: var(--gold); }
+        .hotel-reserve-btn { display: block; text-align: center; padding: 0.8rem; background: linear-gradient(135deg, var(--forest) 0%, #3d5a3e 100%); color: var(--white); text-decoration: none; border-radius: 10px; font-size: 0.9rem; font-weight: 500; margin-top: 1rem; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(44, 62, 45, 0.25); }
+        .hotel-reserve-btn:hover { background: linear-gradient(135deg, var(--gold) 0%, #e0b888 100%); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(212, 165, 116, 0.35); }
         .hotels-note { text-align: center; margin-top: 3rem; padding: 1.5rem; background: var(--blush); border-radius: 15px; max-width: 800px; margin-left: auto; margin-right: auto; }
         .hotels-note p { color: var(--forest); font-size: 0.95rem; }
         .hotels-note strong { color: var(--gold); }
         .details { background: var(--blush); }
         .details-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-        .detail-card { background: var(--white); padding: 2rem; border-radius: 20px; text-align: center; transition: transform 0.3s; }
-        .detail-card:hover { transform: translateY(-5px); }
+        .detail-card { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); padding: 2rem; border-radius: 20px; text-align: center; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 8px 25px rgba(0,0,0,0.08); border: 1px solid rgba(255,255,255,0.5); }
+        .detail-card:hover { transform: translateY(-8px) scale(1.03); box-shadow: 0 15px 40px rgba(0,0,0,0.12); }
+        .detail-card .detail-icon { transition: transform 0.3s ease; }
+        .detail-card:hover .detail-icon { transform: scale(1.2) rotate(5deg); }
         .detail-icon { font-size: 2.5rem; margin-bottom: 1rem; }
         .detail-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--forest); margin-bottom: 0.75rem; }
         .detail-card p { color: var(--text); font-size: 0.95rem; line-height: 1.6; }
@@ -171,8 +183,10 @@
         .gifts { background: var(--cream); }
         .gifts-intro { text-align: center; max-width: 600px; margin: 0 auto 3rem; color: var(--text); }
         .gifts-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-        .gift-card { background: var(--white); border-radius: 20px; padding: 2rem; text-align: center; transition: transform 0.3s; }
-        .gift-card:hover { transform: translateY(-5px); }
+        .gift-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 20px; padding: 2rem; text-align: center; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid rgba(255,255,255,0.5); }
+        .gift-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 18px 45px rgba(0,0,0,0.12); }
+        .gift-icon { transition: transform 0.3s ease; }
+        .gift-card:hover .gift-icon { transform: scale(1.15) rotate(-5deg); }
         .gift-icon { font-size: 3rem; margin-bottom: 1rem; }
         .gift-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--forest); margin-bottom: 0.5rem; }
         .gift-card p { color: var(--sage); font-size: 0.9rem; margin-bottom: 1rem; }
@@ -180,9 +194,9 @@
         .gift-progress { height: 8px; background: var(--cream); border-radius: 10px; overflow: hidden; margin-bottom: 0.5rem; }
         .gift-progress-bar { height: 100%; background: linear-gradient(90deg, var(--sage) 0%, var(--gold) 100%); border-radius: 10px; transition: width 1s ease-out; }
         .gift-status { font-size: 0.85rem; color: var(--sage); margin-bottom: 1rem; }
-        .gift-btn { display: inline-block; padding: 0.7rem 1.5rem; background: var(--forest); color: var(--white); text-decoration: none; border-radius: 25px; font-size: 0.85rem; transition: background 0.3s; }
-        .gift-btn:hover { background: var(--gold); }
-        .gift-btn.reserved { background: var(--sage); cursor: default; }
+        .gift-btn { display: inline-block; padding: 0.7rem 1.5rem; background: linear-gradient(135deg, var(--forest) 0%, #3d5a3e 100%); color: var(--white); text-decoration: none; border-radius: 25px; font-size: 0.85rem; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(44, 62, 45, 0.25); }
+        .gift-btn:hover { background: linear-gradient(135deg, var(--gold) 0%, #e0b888 100%); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(212, 165, 116, 0.35); }
+        .gift-btn.reserved { background: linear-gradient(135deg, var(--sage) 0%, #a8bda4 100%); cursor: default; opacity: 0.7; }
         .playlist { background: var(--forest); color: var(--white); }
         .playlist .section-title { color: var(--white); }
         .playlist .section-subtitle { color: var(--sage); }
@@ -207,8 +221,10 @@
         .footer-hashtag { font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 1rem; }
         .footer-quote { font-style: italic; color: var(--sage); margin-bottom: 1rem; }
         .footer-names { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--gold); }
-        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .section-title { text-shadow: 0 2px 10px rgba(44, 62, 45, 0.1); }
+        .hero h1 { text-shadow: 0 3px 15px rgba(44, 62, 45, 0.15); }
         @media (max-width: 992px) { .hotels-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) {
             .nav-links { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: var(--cream); flex-direction: column; padding: 1rem; gap: 1rem; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
