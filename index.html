@@ -193,8 +193,11 @@
         .hotels-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
         .hotel-card { background: var(--bg-card-hover); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 10px 30px var(--shadow-sm); border: 1px solid var(--border-color); }
         .hotel-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 50px rgba(0,0,0,0.15), 0 0 0 1px rgba(212, 165, 116, 0.1); }
-        .hotel-image { height: 180px; background: linear-gradient(135deg, var(--sage) 0%, var(--forest) 100%); display: flex; align-items: center; justify-content: center; font-size: 4rem; position: relative; }
-        .hotel-badge { position: absolute; top: 1rem; right: 1rem; background: var(--gold); color: var(--white); padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+        .hotel-image-link { display: block; text-decoration: none; }
+        .hotel-image { height: 200px; background: linear-gradient(135deg, var(--sage) 0%, var(--forest) 100%); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .hotel-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+        .hotel-image-link:hover .hotel-image img { transform: scale(1.05); }
+        .hotel-badge { position: absolute; top: 1rem; right: 1rem; background: var(--gold); color: var(--white); padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; z-index: 2; }
         .hotel-info { padding: 1.5rem; }
         .hotel-category { color: var(--gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; transition: color 0.3s ease; }
         .hotel-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--text-secondary); margin-bottom: 0.5rem; transition: color 0.3s ease; }
