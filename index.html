@@ -169,11 +169,8 @@
         .minister-card p { color: var(--gold); font-size: 1.1rem; font-weight: 500; transition: color 0.3s ease; }
         .music-intro { text-align: center; max-width: 700px; margin: 0 auto 2rem; color: var(--text-primary); line-height: 1.7; transition: color 0.3s ease; }
         .download-section { text-align: center; margin: 2rem 0 3rem; }
-        .download-pdf-btn { display: inline-flex; align-items: center; gap: 0.8rem; padding: 1rem 2rem; background: linear-gradient(135deg, var(--forest) 0%, #3d5a3e 100%); color: var(--white); text-decoration: none; border-radius: 15px; font-size: 1rem; font-weight: 500; box-shadow: 0 6px 20px rgba(44, 62, 45, 0.3); transition: all 0.3s ease; position: relative; overflow: hidden; }
-        .download-pdf-btn::before { content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; border-radius: 50%; background: rgba(255,255,255,0.2); transform: translate(-50%, -50%); transition: width 0.5s, height 0.5s; }
-        .download-pdf-btn:hover { background: linear-gradient(135deg, var(--gold) 0%, #e0b888 100%); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(212, 165, 116, 0.4); }
-        .download-pdf-btn:hover::before { width: 300px; height: 300px; }
-        .pdf-icon { font-size: 1.5rem; }
+        .download-pdf-link { color: var(--gold); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: all 0.3s ease; opacity: 0.85; }
+        .download-pdf-link:hover { opacity: 1; text-decoration: underline; }
         .music-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; max-width: 1100px; margin: 0 auto; }
         .music-card { background: var(--bg-card); backdrop-filter: blur(10px); border-radius: 20px; padding: 2rem; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 8px 25px var(--shadow-sm); border: 1px solid var(--border-color); border-top: 4px solid var(--gold); }
         .music-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 15px 40px var(--shadow-md); }
@@ -243,22 +240,26 @@
         .timeline-content h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 0.25rem; transition: color 0.3s ease; }
         .timeline-content p { color: var(--sage); font-size: 0.9rem; transition: color 0.3s ease; }
         .gifts { background: var(--bg-primary); }
-        .gifts-intro { text-align: center; max-width: 600px; margin: 0 auto 3rem; color: var(--text-primary); transition: color 0.3s ease; }
-        .gifts-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-        .gift-card { background: var(--bg-card); backdrop-filter: blur(10px); border-radius: 20px; padding: 2rem; text-align: center; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 10px 30px var(--shadow-sm); border: 1px solid var(--border-color); }
-        .gift-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 18px 45px var(--shadow-md); }
-        .gift-icon { transition: transform 0.3s ease; }
-        .gift-card:hover .gift-icon { transform: scale(1.15) rotate(-5deg); }
-        .gift-icon { font-size: 3rem; margin-bottom: 1rem; }
-        .gift-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--text-secondary); margin-bottom: 0.5rem; transition: color 0.3s ease; }
-        .gift-card p { color: var(--sage); font-size: 0.9rem; margin-bottom: 1rem; transition: color 0.3s ease; }
-        .gift-price { font-weight: 600; color: var(--text-secondary); margin-bottom: 1rem; transition: color 0.3s ease; }
-        .gift-progress { height: 8px; background: var(--bg-accent); border-radius: 10px; overflow: hidden; margin-bottom: 0.5rem; transition: background 0.3s ease; }
-        .gift-progress-bar { height: 100%; background: linear-gradient(90deg, var(--sage) 0%, var(--gold) 100%); border-radius: 10px; transition: width 1s ease-out; }
-        .gift-status { font-size: 0.85rem; color: var(--sage); margin-bottom: 1rem; }
-        .gift-btn { display: inline-block; padding: 0.7rem 1.5rem; background: linear-gradient(135deg, var(--forest) 0%, #3d5a3e 100%); color: var(--white); text-decoration: none; border-radius: 25px; font-size: 0.85rem; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(44, 62, 45, 0.25); }
-        .gift-btn:hover { background: linear-gradient(135deg, var(--gold) 0%, #e0b888 100%); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(212, 165, 116, 0.35); }
-        .gift-btn.reserved { background: linear-gradient(135deg, var(--sage) 0%, #a8bda4 100%); cursor: default; opacity: 0.7; }
+        .gifts-intro { text-align: center; max-width: 600px; margin: 0 auto 1.5rem; color: var(--text-primary); transition: color 0.3s ease; }
+        .gifts-subtitle { text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--text-secondary); margin: 3rem 0 2rem; transition: color 0.3s ease; }
+        .donations-info { max-width: 700px; margin: 0 auto 3rem; background: var(--bg-card); backdrop-filter: blur(10px); border-radius: 20px; padding: 2.5rem; box-shadow: 0 8px 25px var(--shadow-sm); border: 1px solid var(--border-color); transition: all 0.3s ease; }
+        .donations-info h3 { text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--text-secondary); margin-bottom: 1.5rem; transition: color 0.3s ease; }
+        .donation-methods { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        .donation-method { display: flex; flex-direction: column; gap: 0.5rem; }
+        .donation-method label { font-weight: 600; color: var(--gold); font-size: 0.95rem; }
+        .donation-method input { padding: 0.8rem 1rem; border: 2px solid var(--border-color); border-radius: 12px; background: var(--bg-secondary); color: var(--text-primary); font-size: 0.9rem; text-align: center; cursor: pointer; transition: all 0.3s ease; }
+        .donation-method input:hover { border-color: var(--gold); background: var(--bg-accent); }
+        .carousel-container { position: relative; max-width: 1100px; margin: 0 auto; padding: 0 60px; }
+        .gifts-carousel { display: flex; gap: 1.5rem; overflow-x: hidden; scroll-behavior: smooth; padding: 1rem 0; }
+        .gift-card { min-width: 280px; background: var(--bg-card); backdrop-filter: blur(10px); border-radius: 20px; padding: 2rem; text-align: center; transition: all 0.4s ease; box-shadow: 0 10px 30px var(--shadow-sm); border: 1px solid var(--border-color); flex-shrink: 0; }
+        .gift-card:hover { transform: translateY(-10px); box-shadow: 0 18px 45px var(--shadow-md); }
+        .gift-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--text-secondary); margin-bottom: 0.8rem; transition: color 0.3s ease; }
+        .gift-card p { color: var(--sage); font-size: 0.9rem; margin-bottom: 0.5rem; transition: color 0.3s ease; }
+        .gift-price { font-weight: 600; color: var(--gold); font-size: 1.1rem; margin-top: 1rem; }
+        .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: var(--bg-card); backdrop-filter: blur(10px); border: 2px solid var(--border-color); color: var(--text-secondary); width: 45px; height: 45px; border-radius: 50%; font-size: 2rem; cursor: pointer; transition: all 0.3s ease; z-index: 10; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px var(--shadow-sm); }
+        .carousel-btn:hover { background: var(--gold); color: var(--white); border-color: var(--gold); transform: translateY(-50%) scale(1.1); }
+        .carousel-btn.prev { left: 0; }
+        .carousel-btn.next { right: 0; }
         .playlist { background: var(--forest); color: var(--white); }
         .playlist .section-title { color: var(--white); }
         .playlist .section-subtitle { color: var(--sage); }
@@ -295,9 +296,10 @@
             .theme-toggle { margin-left: 0.5rem; width: 36px; height: 36px; font-size: 1rem; }
             .story-content, .locations-grid, .playlist-container { grid-template-columns: 1fr; }
             .music-grid { grid-template-columns: 1fr; }
-            .padrinos-grid, .details-grid, .gifts-grid, .hotels-grid { grid-template-columns: 1fr; }
-            .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
-            .gallery-item:first-child { grid-column: span 2; }
+            .padrinos-grid, .details-grid, .hotels-grid { grid-template-columns: 1fr; }
+            .donation-methods { grid-template-columns: 1fr; }
+            .carousel-container { padding: 0 50px; }
+            .carousel-btn { width: 40px; height: 40px; font-size: 1.5rem; }
             .form-row { grid-template-columns: 1fr; }
             .guest-fields { grid-template-columns: 1fr; }
             .menu-options { grid-template-columns: 1fr; }
@@ -319,7 +321,6 @@
                 <li><a href="#home">Inicio</a></li>
                 <li><a href="#rsvp">Confirmar</a></li>
                 <li><a href="#story">Historia</a></li>
-                <li><a href="#gallery">Galería</a></li>
                 <li><a href="#ceremony">Ceremonia</a></li>
                 <li><a href="#locations">Lugares</a></li>
                 <li><a href="#hotels">Hoteles</a></li>
@@ -328,7 +329,18 @@
                 <li><a href="#guestbook">Firmas</a></li>
             </ul>
             <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">
-                <span id="theme-icon">Dark</span>
+                <svg id="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- Sol (visible en light mode) -->
+                    <circle cx="12" cy="12" r="4"/>
+                    <line x1="12" y1="1" x2="12" y2="3"/>
+                    <line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="3" y2="12"/>
+                    <line x1="21" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
             </button>
             <div class="menu-toggle" onclick="toggleMenu()"><span></span><span></span><span></span></div>
         </div>
@@ -336,58 +348,6 @@
 
     <section id="home" class="hero">
         <div class="hero-content">
-            <svg class="sacred-heart" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <!-- Corazón anatómico mejorado -->
-                <path d="M 50,88 C 20,65 12,45 12,35 C 12,25 18,20 25,20 C 32,20 40,24 50,32 C 60,24 68,20 75,20 C 82,20 88,25 88,35 C 88,45 80,65 50,88 Z"
-                      fill="none" stroke="#d4a574" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" class="heart"/>
-
-                <!-- Cruz teresiana pequeña en el centro superior -->
-                <g stroke="#d4a574" stroke-width="2" fill="none" opacity="0.8">
-                    <line x1="50" y1="10" x2="50" y2="18" stroke-linecap="round"/>
-                    <line x1="46" y1="14" x2="54" y2="14" stroke-linecap="round"/>
-                </g>
-
-                <!-- Llamas mejoradas con más detalle -->
-                <g fill="#d4a574" class="flames">
-                    <!-- Llama central principal -->
-                    <path d="M 50,30 Q 48,22 49,16 Q 49.5,20 50,16 Q 51,22 50,30 Z" opacity="0.9"/>
-                    <path d="M 50,28 Q 49,24 50,20 Q 51,24 50,28 Z" opacity="0.7"/>
-
-                    <!-- Llama izquierda -->
-                    <path d="M 38,28 Q 36,21 37,16 Q 37.5,19 38,16 Q 39,21 38,28 Z" opacity="0.85"/>
-                    <path d="M 38,26 Q 37.5,23 38,21 Q 38.5,23 38,26 Z" opacity="0.6"/>
-
-                    <!-- Llama derecha -->
-                    <path d="M 62,28 Q 61,21 62,16 Q 62.5,19 63,16 Q 64,21 62,28 Z" opacity="0.85"/>
-                    <path d="M 62,26 Q 61.5,23 62,21 Q 62.5,23 62,26 Z" opacity="0.6"/>
-
-                    <!-- Llamas laterales adicionales -->
-                    <path d="M 44,27 Q 43,22 44,19 Q 45,22 44,27 Z" opacity="0.65"/>
-                    <path d="M 56,27 Q 55,22 56,19 Q 57,22 56,27 Z" opacity="0.65"/>
-                </g>
-
-                <!-- Flecha/Lanza de oro mejorada -->
-                <g stroke="#2c3e2d" fill="#2c3e2d">
-                    <!-- Asta principal con grosor variable -->
-                    <line x1="15" y1="85" x2="85" y2="15" stroke-width="3.5" stroke-linecap="round" opacity="0.95"/>
-                    <line x1="16" y1="84" x2="84" y2="16" stroke-width="2" stroke-linecap="round" stroke="#9aad96" opacity="0.4"/>
-
-                    <!-- Punta de la lanza mejorada -->
-                    <path d="M 85,15 L 75,18 L 78,28 Z" opacity="0.95"/>
-                    <path d="M 85,15 L 77,17 L 79,25 Z" fill="#9aad96" opacity="0.3"/>
-
-                    <!-- Detalles de la empuñadura -->
-                    <line x1="15" y1="85" x2="12" y2="82" stroke-width="2.5" stroke-linecap="round"/>
-                    <line x1="15" y1="85" x2="18" y2="88" stroke-width="2.5" stroke-linecap="round"/>
-                    <line x1="19" y1="81" x2="16" y2="78" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
-                    <line x1="19" y1="81" x2="22" y2="84" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
-
-                    <!-- Pequeños detalles ornamentales en el asta -->
-                    <circle cx="35" cy="65" r="1.5" opacity="0.6"/>
-                    <circle cx="50" cy="50" r="1.5" opacity="0.6"/>
-                    <circle cx="65" cy="35" r="1.5" opacity="0.6"/>
-                </g>
-            </svg>
             <h1>Raquel & Adrián</h1>
             <p class="quote">"Y sin amor, todo es nada"</p>
             <p class="quote-author">— Santa Teresa de Jesús</p>
@@ -496,20 +456,6 @@
         </div>
     </section>
 
-    <section id="gallery" class="gallery">
-        <h2 class="section-title fade-in">Nuestra Galería</h2>
-        <p class="section-subtitle fade-in">Momentos que atesoramos juntos</p>
-        <div class="gallery-grid">
-            <div class="gallery-item fade-in">Primera foto juntos </div>
-            <div class="gallery-item fade-in">Viaje especial</div>
-            <div class="gallery-item fade-in">La pedida</div>
-            <div class="gallery-item fade-in">Celebración</div>
-            <div class="gallery-item fade-in">Aventuras</div>
-            <div class="gallery-item fade-in">Momentos</div>
-            <div class="gallery-item fade-in">Risas</div>
-        </div>
-    </section>
-
     <section id="padrinos" class="padrinos">
         <h2 class="section-title fade-in">Padrinos y Testigos</h2>
         <p class="section-subtitle fade-in">Las personas especiales que nos acompañarán</p>
@@ -535,10 +481,7 @@
             <p class="music-intro fade-in">La música acompañará cada momento especial de nuestra ceremonia, creando una atmósfera de solemnidad y belleza.</p>
 
             <div class="download-section fade-in">
-                <a href="assets/escaleta-musical.pdf" class="download-pdf-btn" download>
-                    <span class="pdf-icon">PDF</span>
-                    <span>Descargar Escaleta Completa (PDF)</span>
-                </a>
+                <a href="assets/escaleta-musical.pdf" class="download-pdf-link" download>[Descarga la Escaleta completa]</a>
             </div>
 
             <div class="music-grid">
@@ -728,13 +671,39 @@
     <section id="gifts" class="gifts">
         <h2 class="section-title fade-in">Lista de Bodas</h2>
         <p class="gifts-intro fade-in">Vuestra presencia es el mejor regalo. Pero si deseáis hacernos un obsequio, aquí tenéis algunas ideas que nos harían mucha ilusión:</p>
-        <div class="gifts-grid">
-            <div class="gift-card fade-in"><div class="gift-icon"></div><h4>Luna de Miel en Maldivas</h4><p>Ayúdanos a hacer realidad el viaje de nuestros sueños</p><p class="gift-price">Contribución libre</p><div class="gift-progress"><div class="gift-progress-bar" style="width: 35%"></div></div><p class="gift-status">35% completado</p><a href="#" class="gift-btn">Contribuir</a></div>
-            <div class="gift-card fade-in"><div class="gift-icon"></div><h4>Robot de Cocina Thermomix</h4><p>Para preparar deliciosas recetas juntos</p><p class="gift-price">1.299€</p><div class="gift-progress"><div class="gift-progress-bar" style="width: 60%"></div></div><p class="gift-status">60% completado</p><a href="#" class="gift-btn">Contribuir</a></div>
-            <div class="gift-card fade-in"><div class="gift-icon"></div><h4>Cafetera De'Longhi</h4><p>Para nuestros desayunos de domingo</p><p class="gift-price">549€</p><div class="gift-progress"><div class="gift-progress-bar" style="width: 100%"></div></div><p class="gift-status">¡Completado! Gracias </p><a href="#" class="gift-btn reserved">Reservado</a></div>
-            <div class="gift-card fade-in"><div class="gift-icon"></div><h4>Sofá Chester</h4><p>El sofá de nuestros sueños para el salón</p><p class="gift-price">1.800€</p><div class="gift-progress"><div class="gift-progress-bar" style="width: 25%"></div></div><p class="gift-status">25% completado</p><a href="#" class="gift-btn">Contribuir</a></div>
-            <div class="gift-card fade-in"><div class="gift-icon"></div><h4>Vinoteca</h4><p>Para conservar nuestros vinos favoritos</p><p class="gift-price">450€</p><div class="gift-progress"><div class="gift-progress-bar" style="width: 80%"></div></div><p class="gift-status">80% completado</p><a href="#" class="gift-btn">Contribuir</a></div>
-            <div class="gift-card fade-in"><div class="gift-icon"></div><h4>Cuadro Personalizado</h4><p>Obra de arte con nuestra foto favorita</p><p class="gift-price">280€</p><div class="gift-progress"><div class="gift-progress-bar" style="width: 0%"></div></div><p class="gift-status">Disponible</p><a href="#" class="gift-btn">Regalar</a></div>
+
+        <div class="donations-info fade-in">
+            <h3>Contribuciones económicas</h3>
+            <div class="donation-methods">
+                <div class="donation-method">
+                    <label>IBAN</label>
+                    <input type="text" value="ES00 0000 0000 0000 0000 0000" readonly onclick="this.select()">
+                </div>
+                <div class="donation-method">
+                    <label>PayPal</label>
+                    <input type="text" value="raquelyadrian@ejemplo.com" readonly onclick="this.select()">
+                </div>
+            </div>
+        </div>
+
+        <h3 class="gifts-subtitle fade-in">Regalos sugeridos</h3>
+        <div class="carousel-container">
+            <button class="carousel-btn prev" onclick="moveCarousel(-1)">‹</button>
+            <div class="gifts-carousel">
+                <div class="gift-card"><h4>Luna de Miel en Maldivas</h4><p>Ayúdanos a hacer realidad el viaje de nuestros sueños</p><p class="gift-price">Contribución libre</p></div>
+                <div class="gift-card"><h4>Robot de Cocina Thermomix</h4><p>Para preparar deliciosas recetas juntos</p><p class="gift-price">1.299€</p></div>
+                <div class="gift-card"><h4>Cafetera De'Longhi</h4><p>Para nuestros desayunos de domingo</p><p class="gift-price">549€</p></div>
+                <div class="gift-card"><h4>Sofá Chester</h4><p>El sofá de nuestros sueños para el salón</p><p class="gift-price">1.800€</p></div>
+                <div class="gift-card"><h4>Vinoteca Premium</h4><p>Para conservar nuestros vinos favoritos</p><p class="gift-price">450€</p></div>
+                <div class="gift-card"><h4>Cuadro Personalizado</h4><p>Obra de arte con nuestra foto favorita</p><p class="gift-price">280€</p></div>
+                <div class="gift-card"><h4>Juego de Maletas</h4><p>Para todos nuestros futuros viajes juntos</p><p class="gift-price">380€</p></div>
+                <div class="gift-card"><h4>Set de Sábanas de Lujo</h4><p>Sábanas de algodón egipcio premium</p><p class="gift-price">220€</p></div>
+                <div class="gift-card"><h4>Batidora KitchenAid</h4><p>Para hornear nuestras tartas favoritas</p><p class="gift-price">599€</p></div>
+                <div class="gift-card"><h4>Experiencia Gastronómica</h4><p>Cena en restaurante con estrella Michelin</p><p class="gift-price">350€</p></div>
+                <div class="gift-card"><h4>Set de Cuchillos Japoneses</h4><p>Cuchillos profesionales para nuestra cocina</p><p class="gift-price">425€</p></div>
+                <div class="gift-card"><h4>Lámpara de Diseño</h4><p>Iluminar nuestro hogar con estilo</p><p class="gift-price">340€</p></div>
+            </div>
+            <button class="carousel-btn next" onclick="moveCarousel(1)">›</button>
         </div>
     </section>
 
@@ -794,8 +763,14 @@
             html.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
 
-            // Cambiar icono
-            themeIcon.textContent = newTheme === 'dark' ? 'Light' : 'Dark';
+            // Cambiar icono SVG
+            if (newTheme === 'dark') {
+                // Luna
+                themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+            } else {
+                // Sol
+                themeIcon.innerHTML = '<circle cx="12" cy="12" r="4"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+            }
         }
 
         // Cargar tema guardado (por defecto: light)
@@ -806,14 +781,33 @@
 
             if (theme === 'dark') {
                 document.documentElement.setAttribute('data-theme', 'dark');
-                themeIcon.textContent = 'Light';
+                // Luna
+                themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
             } else {
-                themeIcon.textContent = 'Dark';
+                // Sol
+                themeIcon.innerHTML = '<circle cx="12" cy="12" r="4"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
             }
         }
 
         // Cargar tema al inicio
         loadTheme();
+
+        // Carrusel de regalos
+        let carouselPosition = 0;
+        function moveCarousel(direction) {
+            const carousel = document.querySelector('.gifts-carousel');
+            const cardWidth = 280 + 24; // width + gap
+            const visibleCards = Math.floor(carousel.offsetWidth / cardWidth);
+            const maxPosition = carousel.children.length - visibleCards;
+
+            carouselPosition += direction;
+            carouselPosition = Math.max(0, Math.min(carouselPosition, maxPosition));
+
+            carousel.scrollTo({
+                left: carouselPosition * cardWidth,
+                behavior: 'smooth'
+            });
+        }
 
         function updateCountdown() {
             const weddingDate = new Date('2027-06-12T12:00:00').getTime();
