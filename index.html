@@ -143,14 +143,18 @@
         .gallery-item:first-child { grid-column: span 2; grid-row: span 2; }
         .padrinos { background: var(--bg-secondary); }
         .padrinos-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
-        .padrino-card { text-align: center; padding: 2rem 1rem; background: var(--bg-card-hover); backdrop-filter: blur(10px); border-radius: 20px; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 8px 25px var(--shadow-sm); border: 1px solid var(--border-color); }
-        .padrino-card:hover { transform: translateY(-10px) scale(1.05); box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
-        .padrino-photo { transition: transform 0.3s ease; }
-        .padrino-card:hover .padrino-photo { transform: scale(1.1) rotate(5deg); }
-        .padrino-photo { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, var(--sage) 0%, var(--forest) 100%); margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
-        .padrino-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--text-secondary); margin-bottom: 0.5rem; transition: color 0.3s ease; }
-        .padrino-role { color: var(--gold); font-weight: 500; font-size: 0.9rem; margin-bottom: 0.25rem; transition: color 0.3s ease; }
-        .padrino-relation { color: var(--sage); font-size: 0.85rem; transition: color 0.3s ease; }
+        .padrino-card-flip { perspective: 1000px; height: 380px; cursor: pointer; }
+        .padrino-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.8s; transform-style: preserve-3d; }
+        .padrino-card-flip:hover .padrino-card-inner, .padrino-card-flip.flipped .padrino-card-inner { transform: rotateY(180deg); }
+        .padrino-card-front, .padrino-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 20px; padding: 2rem 1rem; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 8px 25px var(--shadow-sm); border: 1px solid var(--border-color); }
+        .padrino-card-front { background: var(--bg-card); backdrop-filter: blur(10px); }
+        .padrino-card-front img { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; margin-bottom: 1.5rem; border: 4px solid var(--gold); }
+        .padrino-photo-placeholder { width: 180px; height: 180px; border-radius: 50%; background: linear-gradient(135deg, var(--sage) 0%, var(--forest) 100%); margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 4rem; color: var(--white); font-weight: 600; border: 4px solid var(--gold); }
+        .padrino-card-front h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--text-secondary); text-align: center; transition: color 0.3s ease; }
+        .padrino-card-back { background: linear-gradient(135deg, var(--forest) 0%, var(--sage) 100%); transform: rotateY(180deg); color: var(--white); text-align: center; gap: 1rem; }
+        .back-role { font-size: 1.5rem; font-weight: 600; color: var(--gold); margin: 0; }
+        .back-relation { font-size: 1.1rem; font-weight: 500; margin: 0; }
+        .back-description { font-size: 0.95rem; line-height: 1.6; opacity: 0.9; margin: 0; }
         .ceremony { background: var(--bg-primary); }
         .ceremony-content { max-width: 1000px; margin: 0 auto; }
         .minister-card { text-align: center; padding: 2.5rem; background: var(--bg-card); backdrop-filter: blur(10px); border-radius: 20px; margin-bottom: 3rem; box-shadow: 0 10px 30px var(--shadow-sm); border: 1px solid var(--border-color); transition: all 0.3s ease; }
@@ -288,6 +292,7 @@
             .story-content, .locations-grid, .playlist-container { grid-template-columns: 1fr; }
             .music-grid { grid-template-columns: 1fr; }
             .padrinos-grid, .details-grid, .hotels-grid { grid-template-columns: 1fr; }
+            .padrino-card-flip { height: 350px; }
             .donation-methods { grid-template-columns: 1fr; }
             .carousel-container { padding: 0 50px; }
             .carousel-btn { width: 40px; height: 40px; font-size: 1.5rem; }
@@ -452,10 +457,58 @@
         <h2 class="section-title fade-in">Padrinos y Testigos</h2>
         <p class="section-subtitle fade-in">Las personas especiales que nos acompañarán</p>
         <div class="padrinos-grid">
-            <div class="padrino-card fade-in"><div class="padrino-photo">👨</div><h4>Antonio Sainz</h4><p class="padrino-role">Padrino</p><p class="padrino-relation">Padre de la novia</p></div>
-            <div class="padrino-card fade-in"><div class="padrino-photo">👩</div><h4>María del Rosario Rollán</h4><p class="padrino-role">Madrina</p><p class="padrino-relation">Madre del novio</p></div>
-            <div class="padrino-card fade-in"><div class="padrino-photo">👤</div><h4>Alejandro Pedrera</h4><p class="padrino-role">Testigo</p><p class="padrino-relation">Amigo del novio</p></div>
-            <div class="padrino-card fade-in"><div class="padrino-photo">👤</div><h4>Zuriñe</h4><p class="padrino-role">Testigo</p><p class="padrino-relation">Amiga de la novia</p></div>
+            <div class="padrino-card-flip fade-in">
+                <div class="padrino-card-inner">
+                    <div class="padrino-card-front">
+                        <div class="padrino-photo-placeholder">AS</div>
+                        <h4>Antonio Sainz</h4>
+                    </div>
+                    <div class="padrino-card-back">
+                        <p class="back-role">Padrino</p>
+                        <p class="back-relation">Padre de la novia</p>
+                        <p class="back-description">Una figura fundamental que nos acompaña en este día tan especial</p>
+                    </div>
+                </div>
+            </div>
+            <div class="padrino-card-flip fade-in">
+                <div class="padrino-card-inner">
+                    <div class="padrino-card-front">
+                        <div class="padrino-photo-placeholder">MR</div>
+                        <h4>María del Rosario Rollán</h4>
+                    </div>
+                    <div class="padrino-card-back">
+                        <p class="back-role">Madrina</p>
+                        <p class="back-relation">Madre del novio</p>
+                        <p class="back-description">Su amor y apoyo han sido esenciales en nuestro camino</p>
+                    </div>
+                </div>
+            </div>
+            <div class="padrino-card-flip fade-in">
+                <div class="padrino-card-inner">
+                    <div class="padrino-card-front">
+                        <img src="assets/padrinos/alejandro-pedrera.jpg" alt="Alejandro Pedrera">
+                        <h4>Alejandro Pedrera</h4>
+                    </div>
+                    <div class="padrino-card-back">
+                        <p class="back-role">Testigo</p>
+                        <p class="back-relation">Amigo del novio</p>
+                        <p class="back-description">Un hermano de vida, confidente y compañero de aventuras</p>
+                    </div>
+                </div>
+            </div>
+            <div class="padrino-card-flip fade-in">
+                <div class="padrino-card-inner">
+                    <div class="padrino-card-front">
+                        <div class="padrino-photo-placeholder">Z</div>
+                        <h4>Zuriñe</h4>
+                    </div>
+                    <div class="padrino-card-back">
+                        <p class="back-role">Testigo</p>
+                        <p class="back-relation">Amiga de la novia</p>
+                        <p class="back-description">Una amistad inquebrantable que nos acompaña en este momento único</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -783,6 +836,13 @@
 
         // Cargar tema al inicio
         loadTheme();
+
+        // Flip cards en móvil (click para voltear)
+        document.querySelectorAll('.padrino-card-flip').forEach(card => {
+            card.addEventListener('click', function() {
+                this.classList.toggle('flipped');
+            });
+        });
 
         // Carrusel de regalos
         let carouselPosition = 0;
