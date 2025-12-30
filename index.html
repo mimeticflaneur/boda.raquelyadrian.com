@@ -154,6 +154,20 @@
         .padrino-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--text-secondary); margin-bottom: 0.5rem; transition: color 0.3s ease; }
         .padrino-role { color: var(--gold); font-weight: 500; font-size: 0.9rem; margin-bottom: 0.25rem; transition: color 0.3s ease; }
         .padrino-relation { color: var(--sage); font-size: 0.85rem; transition: color 0.3s ease; }
+        .ceremony { background: var(--bg-primary); }
+        .ceremony-content { max-width: 1000px; margin: 0 auto; }
+        .minister-card { text-align: center; padding: 2.5rem; background: var(--bg-card); backdrop-filter: blur(10px); border-radius: 20px; margin-bottom: 3rem; box-shadow: 0 10px 30px var(--shadow-sm); border: 1px solid var(--border-color); transition: all 0.3s ease; }
+        .minister-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px var(--shadow-md); }
+        .minister-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+        .minister-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--text-secondary); margin-bottom: 0.5rem; transition: color 0.3s ease; }
+        .minister-card p { color: var(--gold); font-size: 1.1rem; font-weight: 500; transition: color 0.3s ease; }
+        .music-timeline { position: relative; padding: 2rem 0; }
+        .music-item { display: grid; grid-template-columns: 200px 1fr; gap: 2rem; margin-bottom: 2rem; padding: 1.5rem; background: var(--bg-card); backdrop-filter: blur(10px); border-radius: 15px; border-left: 4px solid var(--gold); transition: all 0.3s ease; box-shadow: 0 5px 20px var(--shadow-sm); }
+        .music-item:hover { transform: translateX(10px); box-shadow: 0 8px 30px var(--shadow-md); }
+        .music-moment { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--gold); font-weight: 600; display: flex; align-items: center; transition: color 0.3s ease; }
+        .music-details h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--text-secondary); margin-bottom: 0.5rem; transition: color 0.3s ease; }
+        .music-details p { color: var(--text-primary); font-size: 0.95rem; line-height: 1.6; transition: color 0.3s ease; }
+        .composer { color: var(--sage); font-style: italic; font-size: 0.9rem; margin-top: 0.25rem; transition: color 0.3s ease; }
         .locations { background: var(--bg-primary); }
         .locations-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
         .location-card { background: var(--bg-card); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; box-shadow: 0 15px 45px var(--shadow-md); transition: all 0.3s ease; border: 1px solid var(--border-color); }
@@ -267,6 +281,7 @@
             .menu-toggle { display: flex; }
             .theme-toggle { margin-left: 0.5rem; width: 36px; height: 36px; font-size: 1rem; }
             .story-content, .locations-grid, .playlist-container { grid-template-columns: 1fr; }
+            .music-item { grid-template-columns: 1fr; gap: 1rem; }
             .padrinos-grid, .details-grid, .gifts-grid, .hotels-grid { grid-template-columns: 1fr; }
             .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
             .gallery-item:first-child { grid-column: span 2; }
@@ -292,6 +307,7 @@
                 <li><a href="#rsvp">Confirmar</a></li>
                 <li><a href="#story">Historia</a></li>
                 <li><a href="#gallery">Galería</a></li>
+                <li><a href="#ceremony">Ceremonia</a></li>
                 <li><a href="#locations">Lugares</a></li>
                 <li><a href="#hotels">Hoteles</a></li>
                 <li><a href="#timeline">Programa</a></li>
@@ -485,10 +501,97 @@
         <h2 class="section-title fade-in">Padrinos y Testigos</h2>
         <p class="section-subtitle fade-in">Las personas especiales que nos acompañarán</p>
         <div class="padrinos-grid">
-            <div class="padrino-card fade-in"><div class="padrino-photo">👨</div><h4>[Nombre del Padrino]</h4><p class="padrino-role">Padrino</p><p class="padrino-relation">Padre de la novia</p></div>
-            <div class="padrino-card fade-in"><div class="padrino-photo">👩</div><h4>[Nombre de la Madrina]</h4><p class="padrino-role">Madrina</p><p class="padrino-relation">Madre del novio</p></div>
-            <div class="padrino-card fade-in"><div class="padrino-photo">👤</div><h4>[Nombre Testigo 1]</h4><p class="padrino-role">Testigo</p><p class="padrino-relation">Mejor amigo del novio</p></div>
-            <div class="padrino-card fade-in"><div class="padrino-photo">👤</div><h4>[Nombre Testigo 2]</h4><p class="padrino-role">Testigo</p><p class="padrino-relation">Hermana de la novia</p></div>
+            <div class="padrino-card fade-in"><div class="padrino-photo">👨</div><h4>Antonio Sainz</h4><p class="padrino-role">Padrino</p><p class="padrino-relation">Padre de la novia</p></div>
+            <div class="padrino-card fade-in"><div class="padrino-photo">👩</div><h4>María del Rosario Rollán</h4><p class="padrino-role">Madrina</p><p class="padrino-relation">Madre del novio</p></div>
+            <div class="padrino-card fade-in"><div class="padrino-photo">👤</div><h4>Alejandro Pedrera</h4><p class="padrino-role">Testigo</p><p class="padrino-relation">Amigo del novio</p></div>
+            <div class="padrino-card fade-in"><div class="padrino-photo">👤</div><h4>Zuriñe</h4><p class="padrino-role">Testigo</p><p class="padrino-relation">Amiga de la novia</p></div>
+        </div>
+    </section>
+
+    <section id="ceremony" class="ceremony">
+        <h2 class="section-title fade-in">La Ceremonia</h2>
+        <p class="section-subtitle fade-in">Un momento sagrado que compartiremos con vosotros</p>
+        <div class="ceremony-content">
+            <div class="minister-card fade-in">
+                <div class="minister-icon">⛪</div>
+                <h3>Alejandro Santos</h3>
+                <p>Ministro de la celebración</p>
+            </div>
+
+            <h3 class="section-title fade-in" style="font-size: 2rem; margin-bottom: 2rem;">Escaleta Musical</h3>
+            <div class="music-timeline">
+                <div class="music-item fade-in">
+                    <div class="music-moment">🎵 Preludio</div>
+                    <div class="music-details">
+                        <h4>Canon en Re Mayor</h4>
+                        <p>Mientras los invitados toman asiento, esta pieza clásica creará un ambiente de serenidad y anticipación.</p>
+                        <p class="composer">Johann Pachelbel</p>
+                    </div>
+                </div>
+
+                <div class="music-item fade-in">
+                    <div class="music-moment">👰 Entrada de la novia</div>
+                    <div class="music-details">
+                        <h4>Ave María</h4>
+                        <p>El momento más esperado, acompañado por esta sublime plegaria mariana que elevará el espíritu de todos los presentes.</p>
+                        <p class="composer">Franz Schubert</p>
+                    </div>
+                </div>
+
+                <div class="music-item fade-in">
+                    <div class="music-moment">📖 Durante la liturgia</div>
+                    <div class="music-details">
+                        <h4>Salve Regina</h4>
+                        <p>Tras las lecturas, esta antífona mariana medieval nos invitará a la contemplación y la oración.</p>
+                        <p class="composer">Canto gregoriano</p>
+                    </div>
+                </div>
+
+                <div class="music-item fade-in">
+                    <div class="music-moment">🕊️ Ofertorio</div>
+                    <div class="music-details">
+                        <h4>Ave Verum Corpus</h4>
+                        <p>Durante la presentación de las ofrendas, este motete sobre el Cuerpo de Cristo nos preparará para el momento más sagrado.</p>
+                        <p class="composer">Wolfgang Amadeus Mozart</p>
+                    </div>
+                </div>
+
+                <div class="music-item fade-in">
+                    <div class="music-moment">🕊️ Ofertorio (cont.)</div>
+                    <div class="music-details">
+                        <h4>O Sacrum Convivium</h4>
+                        <p>Una segunda pieza durante el ofertorio que medita sobre el banquete sagrado de la Eucaristía.</p>
+                        <p class="composer">Santo Tomás de Aquino</p>
+                    </div>
+                </div>
+
+                <div class="music-item fade-in">
+                    <div class="music-moment">🍞 Comunión</div>
+                    <div class="music-details">
+                        <h4>Pie Jesu</h4>
+                        <p>Durante la comunión, esta dulce súplica al Señor misericordioso nos acompañará en un momento de profunda intimidad espiritual.</p>
+                        <p class="composer">Gabriel Fauré</p>
+                    </div>
+                </div>
+
+                <div class="music-item fade-in">
+                    <div class="music-moment">🍞 Comunión (cont.)</div>
+                    <div class="music-details">
+                        <h4>Panis Angelicus</h4>
+                        <p>El "Pan de los Ángeles" cierra el momento de la comunión con una melodía celestial que nos eleva.</p>
+                        <p class="composer">César Franck</p>
+                    </div>
+                </div>
+
+                <div class="music-item fade-in">
+                    <div class="music-moment">💒 Salida de los novios</div>
+                    <div class="music-details">
+                        <h4>Aleluya</h4>
+                        <p>¡Aleluya! Con este canto de júbilo y celebración, saldremos como esposos para comenzar nuestra nueva vida juntos.</p>
+                        <p class="composer">George Frideric Handel</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
