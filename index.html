@@ -56,7 +56,6 @@
         [data-theme="dark"] .nav-links a { color: var(--forest); }
         [data-theme="dark"] .nav-links a:hover { color: var(--gold); }
         [data-theme="dark"] .menu-toggle span { background: var(--forest); }
-        [data-theme="dark"] .theme-toggle { border-color: var(--forest); color: var(--forest); }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; transition: background-color 0.3s ease; }
         body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-primary); color: var(--text-primary); line-height: 1.6; transition: background-color 0.3s ease, color 0.3s ease; }
@@ -67,8 +66,18 @@
         .nav-links a:hover { color: var(--gold); }
         .menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
         .menu-toggle span { width: 25px; height: 2px; background: var(--forest); transition: 0.3s; }
-        .theme-toggle { background: none; border: 2px solid var(--forest); border-radius: 50%; width: 40px; height: 40px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: all 0.3s ease; margin-left: 1rem; }
-        .theme-toggle:hover { background: var(--gold); border-color: var(--gold); transform: rotate(15deg) scale(1.1); }
+        .theme-toggle-switch { position: relative; display: inline-block; width: 60px; height: 30px; margin-left: 1rem; }
+        .theme-toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, var(--sage) 0%, var(--forest) 100%); border-radius: 30px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 2px 8px var(--shadow-sm); }
+        .slider:before { content: ""; position: absolute; height: 24px; width: 24px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); }
+        .theme-toggle-switch input:checked + .slider { background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%); }
+        .theme-toggle-switch input:checked + .slider:before { transform: translateX(30px); }
+        .slider-icon { position: absolute; top: 50%; transform: translateY(-50%); font-size: 16px; transition: opacity 0.3s ease; }
+        .slider-icon.sun { left: 8px; opacity: 0; }
+        .slider-icon.moon { right: 8px; opacity: 1; color: white; }
+        .theme-toggle-switch input:checked + .slider .sun { opacity: 1; }
+        .theme-toggle-switch input:checked + .slider .moon { opacity: 0; }
+        .theme-toggle-switch:hover .slider { transform: scale(1.05); }
         .nav-right { display: flex; align-items: center; }
         .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 6rem 2rem 4rem; background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-accent) 50%, var(--bg-primary) 100%); position: relative; overflow: hidden; transition: background 0.3s ease; }
         .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239aad96' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); opacity: 0.5; }
@@ -135,6 +144,8 @@
         .story-text p { margin-bottom: 1.5rem; color: var(--text-primary); line-height: 1.8; transition: color 0.3s ease; }
         .story-text h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--text-secondary); margin-bottom: 1.5rem; transition: color 0.3s ease; }
         .story-image { position: relative; }
+        .story-image img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 20px; box-shadow: 0 10px 40px var(--shadow-md); transition: transform 0.3s ease; }
+        .story-image img:hover { transform: scale(1.02); }
         .story-image-placeholder { aspect-ratio: 4/5; background: linear-gradient(135deg, var(--blush) 0%, var(--sage) 100%); border-radius: 20px; display: flex; align-items: center; justify-content: center; color: var(--white); font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; }
         .gallery { background: var(--bg-primary); }
         .gallery-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 250px); gap: 1rem; }
@@ -148,7 +159,7 @@
         .padrino-card-flip:hover .padrino-card-inner, .padrino-card-flip.flipped .padrino-card-inner { transform: rotateY(180deg); }
         .padrino-card-front, .padrino-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 20px; padding: 2rem 1rem; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 8px 25px var(--shadow-sm); border: 1px solid var(--border-color); }
         .padrino-card-front { background: var(--bg-card); backdrop-filter: blur(10px); }
-        .padrino-card-front img { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; margin-bottom: 1.5rem; border: 4px solid var(--gold); }
+        .padrino-card-front img { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; object-position: center 30%; margin-bottom: 1.5rem; border: 4px solid var(--gold); }
         .padrino-photo-placeholder { width: 180px; height: 180px; border-radius: 50%; background: linear-gradient(135deg, var(--sage) 0%, var(--forest) 100%); margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 4rem; color: var(--white); font-weight: 600; border: 4px solid var(--gold); }
         .padrino-card-front h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--text-secondary); text-align: center; transition: color 0.3s ease; }
         .padrino-card-back { background: linear-gradient(135deg, var(--forest) 0%, var(--sage) 100%); transform: rotateY(180deg); color: var(--white); text-align: center; gap: 1rem; }
@@ -291,7 +302,7 @@
             .nav-links { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: var(--bg-card); flex-direction: column; padding: 1rem; gap: 1rem; box-shadow: 0 10px 20px var(--shadow-md); }
             .nav-links.active { display: flex; }
             .menu-toggle { display: flex; }
-            .theme-toggle { position: absolute; left: 50%; transform: translateX(-50%); margin-left: 0; width: 36px; height: 36px; font-size: 1rem; }
+            .theme-toggle-switch { position: absolute; left: 50%; transform: translateX(-50%); margin-left: 0; width: 54px; height: 26px; }
             .story-content, .locations-grid, .playlist-container { grid-template-columns: 1fr; }
             .music-grid { grid-template-columns: 1fr; }
             .padrinos-grid, .details-grid, .hotels-grid { grid-template-columns: 1fr; }
@@ -330,20 +341,13 @@
                 <li><a href="#gifts">Regalos</a></li>
                 <li><a href="#guestbook">Firmas</a></li>
             </ul>
-            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">
-                <svg id="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <!-- Sol (visible en light mode) -->
-                    <circle cx="12" cy="12" r="4"/>
-                    <line x1="12" y1="1" x2="12" y2="3"/>
-                    <line x1="12" y1="21" x2="12" y2="23"/>
-                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-                    <line x1="1" y1="12" x2="3" y2="12"/>
-                    <line x1="21" y1="12" x2="23" y2="12"/>
-                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-                </svg>
-            </button>
+            <label class="theme-toggle-switch" aria-label="Cambiar tema">
+                <input type="checkbox" id="theme-checkbox" onchange="toggleTheme()">
+                <span class="slider">
+                    <span class="slider-icon sun">☀</span>
+                    <span class="slider-icon moon">☾</span>
+                </span>
+            </label>
             <div class="menu-toggle" onclick="toggleMenu()"><span></span><span></span><span></span></div>
         </div>
     </nav>
@@ -455,7 +459,9 @@
                 <p>A lo largo de estos años hemos construido juntos una relación llena de amor, risas, aventuras y complicidad. Hemos crecido juntos y hemos aprendido que el amor verdadero se construye día a día.</p>
                 <p>Ahora estamos listos para dar el siguiente paso y queremos celebrarlo con todas las personas que más queremos. ¡Esperamos verte en nuestra boda!</p>
             </div>
-            <div class="story-image fade-in"><div class="story-image-placeholder">Tu foto favorita aquí </div></div>
+            <div class="story-image fade-in">
+                <img src="assets/nuestra-historia.jpeg" alt="Raquel y Adrián" loading="lazy">
+            </div>
         </div>
     </section>
 
@@ -505,13 +511,39 @@
             <div class="padrino-card-flip fade-in">
                 <div class="padrino-card-inner">
                     <div class="padrino-card-front">
-                        <div class="padrino-photo-placeholder">Z</div>
-                        <h4>Zuriñe</h4>
+                        <div class="padrino-photo-placeholder">JMP</div>
+                        <h4>José María Palacios</h4>
+                    </div>
+                    <div class="padrino-card-back">
+                        <p class="back-role">Testigo</p>
+                        <p class="back-relation">Amigo del novio</p>
+                        <p class="back-description">Un compañero leal que nos acompaña en este día especial</p>
+                    </div>
+                </div>
+            </div>
+            <div class="padrino-card-flip fade-in">
+                <div class="padrino-card-inner">
+                    <div class="padrino-card-front">
+                        <div class="padrino-photo-placeholder">ZC</div>
+                        <h4>Zuriñe Caballero</h4>
                     </div>
                     <div class="padrino-card-back">
                         <p class="back-role">Testigo</p>
                         <p class="back-relation">Amiga de la novia</p>
                         <p class="back-description">Una amistad inquebrantable que nos acompaña en este momento único</p>
+                    </div>
+                </div>
+            </div>
+            <div class="padrino-card-flip fade-in">
+                <div class="padrino-card-inner">
+                    <div class="padrino-card-front">
+                        <div class="padrino-photo-placeholder">SR</div>
+                        <h4>Sara Redondo</h4>
+                    </div>
+                    <div class="padrino-card-back">
+                        <p class="back-role">Testigo</p>
+                        <p class="back-relation">Amiga de la novia</p>
+                        <p class="back-description">Una amiga especial que comparte este momento inolvidable con nosotros</p>
                     </div>
                 </div>
             </div>
@@ -689,7 +721,7 @@
                     </div>
                 </a>
                 <div class="hotel-info">
-                    <p class="hotel-category">Hotel de diseño</p><h3>La Casa del Presidente</h3><p class="hotel-stars">★★★★</p><p class="hotel-address">Calle Comuneros de Castilla, 5</p>
+                    <p class="hotel-category">Hotel de diseño</p><h3>La Casa del Presidente</h3><p class="hotel-stars">★★★★★</p><p class="hotel-address">Calle Comuneros de Castilla, 5</p>
                     <div class="hotel-features"><span class="hotel-feature">Moderno</span><span class="hotel-feature">Vistas murallas</span><span class="hotel-feature">Terraza</span></div>
                     <a href="https://www.booking.com/hotel/es/la-casa-del-presidente.es.html" target="_blank" class="hotel-reserve-btn">Ver en Booking</a>
                 </div>
@@ -824,37 +856,21 @@
         // Dark Mode Toggle
         function toggleTheme() {
             const html = document.documentElement;
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            const themeIcon = document.getElementById('theme-icon');
+            const checkbox = document.getElementById('theme-checkbox');
+            const newTheme = checkbox.checked ? 'dark' : 'light';
 
             html.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
-
-            // Cambiar icono SVG
-            if (newTheme === 'dark') {
-                // Luna
-                themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
-            } else {
-                // Sol
-                themeIcon.innerHTML = '<circle cx="12" cy="12" r="4"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
-            }
         }
 
         // Cargar tema guardado (por defecto: light)
         function loadTheme() {
             const savedTheme = localStorage.getItem('theme');
             const theme = savedTheme || 'light';
-            const themeIcon = document.getElementById('theme-icon');
+            const checkbox = document.getElementById('theme-checkbox');
 
-            if (theme === 'dark') {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                // Luna
-                themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
-            } else {
-                // Sol
-                themeIcon.innerHTML = '<circle cx="12" cy="12" r="4"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
-            }
+            document.documentElement.setAttribute('data-theme', theme);
+            checkbox.checked = (theme === 'dark');
         }
 
         // Cargar tema al inicio
