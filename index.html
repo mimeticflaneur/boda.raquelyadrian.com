@@ -135,6 +135,8 @@
         .story-text p { margin-bottom: 1.5rem; color: var(--text-primary); line-height: 1.8; transition: color 0.3s ease; }
         .story-text h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--text-secondary); margin-bottom: 1.5rem; transition: color 0.3s ease; }
         .story-image { position: relative; }
+        .story-image img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 20px; box-shadow: 0 10px 40px var(--shadow-md); transition: transform 0.3s ease; }
+        .story-image img:hover { transform: scale(1.02); }
         .story-image-placeholder { aspect-ratio: 4/5; background: linear-gradient(135deg, var(--blush) 0%, var(--sage) 100%); border-radius: 20px; display: flex; align-items: center; justify-content: center; color: var(--white); font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; }
         .gallery { background: var(--bg-primary); }
         .gallery-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 250px); gap: 1rem; }
@@ -455,7 +457,9 @@
                 <p>A lo largo de estos años hemos construido juntos una relación llena de amor, risas, aventuras y complicidad. Hemos crecido juntos y hemos aprendido que el amor verdadero se construye día a día.</p>
                 <p>Ahora estamos listos para dar el siguiente paso y queremos celebrarlo con todas las personas que más queremos. ¡Esperamos verte en nuestra boda!</p>
             </div>
-            <div class="story-image fade-in"><div class="story-image-placeholder">Tu foto favorita aquí </div></div>
+            <div class="story-image fade-in">
+                <img src="assets/nuestra-historia.jpeg" alt="Raquel y Adrián" loading="lazy">
+            </div>
         </div>
     </section>
 
