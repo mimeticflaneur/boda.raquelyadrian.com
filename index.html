@@ -73,7 +73,7 @@
         .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 6rem 2rem 4rem; background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-accent) 50%, var(--bg-primary) 100%); position: relative; overflow: hidden; transition: background 0.3s ease; }
         .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239aad96' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); opacity: 0.5; }
         .hero-content { position: relative; z-index: 1; }
-        .sacred-heart { width: 540px; height: 540px; margin-bottom: 0.5rem; animation: float 3s ease-in-out infinite; }
+        .sacred-heart { width: 540px; height: 540px; margin-bottom: -1rem; animation: float 3s ease-in-out infinite; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
         @keyframes heartGlow { 0%, 100% { filter: drop-shadow(0 0 8px rgba(212, 165, 116, 0.5)); } 50% { filter: drop-shadow(0 0 15px rgba(212, 165, 116, 0.8)); } }
         @keyframes flicker { 0%, 100% { opacity: 0.7; transform: translateY(0) scale(1); } 50% { opacity: 1; transform: translateY(-2px) scale(1.05); } }
@@ -193,8 +193,11 @@
         .hotels-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
         .hotel-card { background: var(--bg-card-hover); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 10px 30px var(--shadow-sm); border: 1px solid var(--border-color); }
         .hotel-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 50px rgba(0,0,0,0.15), 0 0 0 1px rgba(212, 165, 116, 0.1); }
-        .hotel-image { height: 180px; background: linear-gradient(135deg, var(--sage) 0%, var(--forest) 100%); display: flex; align-items: center; justify-content: center; font-size: 4rem; position: relative; }
-        .hotel-badge { position: absolute; top: 1rem; right: 1rem; background: var(--gold); color: var(--white); padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+        .hotel-image-link { display: block; text-decoration: none; }
+        .hotel-image { height: 200px; background: linear-gradient(135deg, var(--sage) 0%, var(--forest) 100%); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .hotel-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+        .hotel-image-link:hover .hotel-image img { transform: scale(1.05); }
+        .hotel-badge { position: absolute; top: 1rem; right: 1rem; background: var(--gold); color: var(--white); padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; z-index: 2; }
         .hotel-info { padding: 1.5rem; }
         .hotel-category { color: var(--gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; transition: color 0.3s ease; }
         .hotel-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--text-secondary); margin-bottom: 0.5rem; transition: color 0.3s ease; }
@@ -304,8 +307,11 @@
             .timeline-time, .timeline-item:nth-child(odd) .timeline-time { text-align: left; padding: 0; margin-bottom: 0.5rem; }
             .timeline-content, .timeline-item:nth-child(odd) .timeline-content { padding: 0; text-align: left; }
             .timeline-dot { position: absolute; left: 12px; }
-            .countdown { gap: 1rem; }
-            .countdown-number { font-size: 2.5rem; }
+            .countdown { gap: 0.5rem; margin-bottom: 2rem; }
+            .countdown-item { padding: 0.8rem 1rem; }
+            .countdown-number { font-size: 2rem; }
+            .countdown-label { font-size: 0.8rem; }
+            .sacred-heart { width: 300px; height: 300px; margin-bottom: -0.5rem; }
         }
     </style>
 </head>
@@ -621,66 +627,72 @@
 
     <section id="hotels" class="hotels">
         <h2 class="section-title fade-in">Hoteles Recomendados</h2>
-        <p class="section-subtitle fade-in">Alojamiento con descuentos especiales para nuestros invitados</p>
-        <p class="hotels-intro fade-in">Hemos acordado tarifas especiales con varios hoteles de Ávila para que podáis disfrutar de vuestra estancia. Al reservar, mencionad que venís de parte de <strong>"Boda Raquel y Adrián"</strong> para obtener el descuento.</p>
+        <p class="section-subtitle fade-in">Alojamiento en Ávila para nuestros invitados</p>
         <div class="hotels-grid">
             <div class="hotel-card fade-in">
-                <div class="hotel-image"><span class="hotel-badge">Recomendado</span></div>
+                <a href="https://www.booking.com/hotel/es/parador-de-avila.html" target="_blank" class="hotel-image-link">
+                    <div class="hotel-image">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=600&fit=crop" alt="Parador de Ávila" loading="lazy">
+                        <span class="hotel-badge">Recomendado</span>
+                    </div>
+                </a>
                 <div class="hotel-info">
-                    <p class="hotel-category">Hotel de lujo</p><h3>Parador de Ávila</h3><p class="hotel-stars">⭐⭐⭐⭐</p><p class="hotel-address">📍 Marqués de Canales de Chozas, 2</p>
+                    <p class="hotel-category">Hotel de lujo</p><h3>Parador de Ávila</h3><p class="hotel-stars">★★★★</p><p class="hotel-address">Marqués de Canales de Chozas, 2</p>
                     <div class="hotel-features"><span class="hotel-feature">Murallas</span><span class="hotel-feature">Jardín</span><span class="hotel-feature">Restaurante</span></div>
-                    <div class="hotel-discount"><strong>15% de descuento</strong><span>Código: BODA-RAQUELADRIAN</span></div>
-                    <div class="hotel-contact"><a href="tel:+34920211340">📞 920 21 13 40</a><a href="https://www.parador.es/es/paradores/parador-de-avila" target="_blank">🌐 Web del hotel</a></div>
-                    <a href="https://www.parador.es/es/paradores/parador-de-avila" target="_blank" class="hotel-reserve-btn">Reservar</a>
+                    <a href="https://www.booking.com/hotel/es/parador-de-avila.html" target="_blank" class="hotel-reserve-btn">Ver en Booking</a>
                 </div>
             </div>
             <div class="hotel-card fade-in">
-                <div class="hotel-image"><span class="hotel-badge">Centro histórico</span></div>
+                <a href="https://www.booking.com/hotel/es/palacio-de-los-velada.html" target="_blank" class="hotel-image-link">
+                    <div class="hotel-image">
+                        <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&h=600&fit=crop" alt="Hotel Palacio de los Velada" loading="lazy">
+                        <span class="hotel-badge">Centro histórico</span>
+                    </div>
+                </a>
                 <div class="hotel-info">
-                    <p class="hotel-category">Palacio histórico</p><h3>Hotel Palacio de los Velada</h3><p class="hotel-stars">⭐⭐⭐⭐</p><p class="hotel-address">📍 Plaza de la Catedral, 10</p>
+                    <p class="hotel-category">Palacio histórico</p><h3>Hotel Palacio de los Velada</h3><p class="hotel-stars">★★★★</p><p class="hotel-address">Plaza de la Catedral, 10</p>
                     <div class="hotel-features"><span class="hotel-feature">Junto Catedral</span><span class="hotel-feature">Spa</span><span class="hotel-feature">Patio histórico</span></div>
-                    <div class="hotel-discount"><strong>12% de descuento</strong><span>Mencionar "Boda Raquel y Adrián"</span></div>
-                    <div class="hotel-contact"><a href="tel:+34920255100">📞 920 25 51 00</a><a href="https://www.veladahoteles.com/hotel-palacio-de-los-velada" target="_blank">🌐 Web del hotel</a></div>
-                    <a href="https://www.veladahoteles.com/hotel-palacio-de-los-velada" target="_blank" class="hotel-reserve-btn">Reservar</a>
+                    <a href="https://www.booking.com/hotel/es/palacio-de-los-velada.html" target="_blank" class="hotel-reserve-btn">Ver en Booking</a>
                 </div>
             </div>
             <div class="hotel-card fade-in">
-                <div class="hotel-image"><span class="hotel-badge">Con encanto</span></div>
+                <a href="https://www.booking.com/hotel/es/las-leyendas.html" target="_blank" class="hotel-image-link">
+                    <div class="hotel-image">
+                        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&h=600&fit=crop" alt="Hotel Las Leyendas" loading="lazy">
+                        <span class="hotel-badge">Con encanto</span>
+                    </div>
+                </a>
                 <div class="hotel-info">
-                    <p class="hotel-category">Hotel boutique</p><h3>Hotel Las Leyendas</h3><p class="hotel-stars">⭐⭐⭐⭐</p><p class="hotel-address">📍 Francisco Gallego, 3</p>
+                    <p class="hotel-category">Hotel boutique</p><h3>Hotel Las Leyendas</h3><p class="hotel-stars">★★★★</p><p class="hotel-address">Francisco Gallego, 3</p>
                     <div class="hotel-features"><span class="hotel-feature">Intramuros</span><span class="hotel-feature">Romántico</span><span class="hotel-feature">Desayuno incluido</span></div>
-                    <div class="hotel-discount"><strong>10% de descuento</strong><span>Reservar con código BODA2026</span></div>
-                    <div class="hotel-contact"><a href="tel:+34920352042">📞 920 35 20 42</a><a href="https://www.lasleyendas.es" target="_blank">🌐 Web del hotel</a></div>
-                    <a href="https://www.lasleyendas.es" target="_blank" class="hotel-reserve-btn">Reservar</a>
+                    <a href="https://www.booking.com/hotel/es/las-leyendas.html" target="_blank" class="hotel-reserve-btn">Ver en Booking</a>
                 </div>
             </div>
             <div class="hotel-card fade-in">
-                <div class="hotel-image"></div>
+                <a href="https://www.booking.com/hotel/es/nh-palacio-de-avila.html" target="_blank" class="hotel-image-link">
+                    <div class="hotel-image">
+                        <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&h=600&fit=crop" alt="NH Collection Palacio de Ávila" loading="lazy">
+                    </div>
+                </a>
                 <div class="hotel-info">
-                    <p class="hotel-category">Cadena hotelera</p><h3>NH Collection Palacio de Ávila</h3><p class="hotel-stars">⭐⭐⭐⭐</p><p class="hotel-address">📍 Calle Tomás Luis de Victoria, 6</p>
+                    <p class="hotel-category">Cadena hotelera</p><h3>NH Collection Palacio de Ávila</h3><p class="hotel-stars">★★★★</p><p class="hotel-address">Calle Tomás Luis de Victoria, 6</p>
                     <div class="hotel-features"><span class="hotel-feature">Parking</span><span class="hotel-feature">Gimnasio</span><span class="hotel-feature">Bar</span></div>
-                    <div class="hotel-discount"><strong>15% de descuento</strong><span>Código corporativo: BODARYA26</span></div>
-                    <div class="hotel-contact"><a href="tel:+34920211023">📞 920 21 10 23</a><a href="https://www.nh-hoteles.es" target="_blank">🌐 Web del hotel</a></div>
-                    <a href="https://www.nh-hoteles.es" target="_blank" class="hotel-reserve-btn">Reservar</a>
+                    <a href="https://www.booking.com/hotel/es/nh-palacio-de-avila.html" target="_blank" class="hotel-reserve-btn">Ver en Booking</a>
                 </div>
             </div>
             <div class="hotel-card fade-in">
                 <div class="hotel-image"><span class="hotel-badge">Premium</span></div>
                 <div class="hotel-info">
-                    <p class="hotel-category">Hotel de diseño</p><h3>Fontecruz Ávila</h3><p class="hotel-stars">⭐⭐⭐⭐</p><p class="hotel-address">📍 San Segundo, 28</p>
+                    <p class="hotel-category">Hotel de diseño</p><h3>Fontecruz Ávila</h3><p class="hotel-stars">★★★★</p><p class="hotel-address">San Segundo, 28</p>
                     <div class="hotel-features"><span class="hotel-feature">Moderno</span><span class="hotel-feature">Vistas murallas</span><span class="hotel-feature">Terraza</span></div>
-                    <div class="hotel-discount"><strong>20% de descuento</strong><span>Bloqueo de habitaciones hasta 01/05/2027</span></div>
-                    <div class="hotel-contact"><a href="tel:+34920353100">📞 920 35 31 00</a><a href="https://www.fontecruzhoteles.com" target="_blank">🌐 Web del hotel</a></div>
                     <a href="https://www.fontecruzhoteles.com" target="_blank" class="hotel-reserve-btn">Reservar</a>
                 </div>
             </div>
             <div class="hotel-card fade-in">
                 <div class="hotel-image"><span class="hotel-badge">Económico</span></div>
                 <div class="hotel-info">
-                    <p class="hotel-category">Opción económica</p><h3>Hotel Arco San Vicente</h3><p class="hotel-stars">⭐⭐⭐</p><p class="hotel-address">📍 Paseo Rastro, 2</p>
+                    <p class="hotel-category">Opción económica</p><h3>Hotel Arco San Vicente</h3><p class="hotel-stars">⭐⭐⭐</p><p class="hotel-address">Paseo Rastro, 2</p>
                     <div class="hotel-features"><span class="hotel-feature">Céntrico</span><span class="hotel-feature">Familiar</span><span class="hotel-feature">Wifi gratis</span></div>
-                    <div class="hotel-discount"><strong>10% de descuento</strong><span>Tarifa especial bodas</span></div>
-                    <div class="hotel-contact"><a href="tel:+34920220200">📞 920 22 02 00</a><a href="https://www.hotelesavila.com" target="_blank">🌐 Web del hotel</a></div>
                     <a href="https://www.hotelesavila.com" target="_blank" class="hotel-reserve-btn">Reservar</a>
                 </div>
             </div>
