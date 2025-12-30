@@ -50,6 +50,12 @@
             --sage: #a0b396;
             --blush: rgba(244, 230, 225, 0.1);
         }
+        [data-theme="dark"] nav { background: rgba(255, 255, 255, 0.95); }
+        [data-theme="dark"] .logo { color: var(--forest); }
+        [data-theme="dark"] .nav-links a { color: var(--forest); }
+        [data-theme="dark"] .nav-links a:hover { color: var(--gold); }
+        [data-theme="dark"] .menu-toggle span { background: var(--forest); }
+        [data-theme="dark"] .theme-toggle { border-color: var(--forest); color: var(--forest); }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; transition: background-color 0.3s ease; }
         body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-primary); color: var(--text-primary); line-height: 1.6; transition: background-color 0.3s ease, color 0.3s ease; }
@@ -322,7 +328,7 @@
                 <li><a href="#guestbook">Firmas</a></li>
             </ul>
             <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">
-                <span id="theme-icon">🌙</span>
+                <span id="theme-icon">Dark</span>
             </button>
             <div class="menu-toggle" onclick="toggleMenu()"><span></span><span></span><span></span></div>
         </div>
@@ -486,7 +492,7 @@
                 <p>A lo largo de estos años hemos construido juntos una relación llena de amor, risas, aventuras y complicidad. Hemos crecido juntos y hemos aprendido que el amor verdadero se construye día a día.</p>
                 <p>Ahora estamos listos para dar el siguiente paso y queremos celebrarlo con todas las personas que más queremos. ¡Esperamos verte en nuestra boda!</p>
             </div>
-            <div class="story-image fade-in"><div class="story-image-placeholder">Tu foto favorita aquí ♡</div></div>
+            <div class="story-image fade-in"><div class="story-image-placeholder">Tu foto favorita aquí </div></div>
         </div>
     </section>
 
@@ -494,7 +500,7 @@
         <h2 class="section-title fade-in">Nuestra Galería</h2>
         <p class="section-subtitle fade-in">Momentos que atesoramos juntos</p>
         <div class="gallery-grid">
-            <div class="gallery-item fade-in">Primera foto juntos ♡</div>
+            <div class="gallery-item fade-in">Primera foto juntos </div>
             <div class="gallery-item fade-in">Viaje especial</div>
             <div class="gallery-item fade-in">La pedida</div>
             <div class="gallery-item fade-in">Celebración</div>
@@ -520,7 +526,7 @@
         <p class="section-subtitle fade-in">Un momento sagrado que compartiremos con vosotros</p>
         <div class="ceremony-content">
             <div class="minister-card fade-in">
-                <div class="minister-icon">⛪</div>
+                <div class="minister-icon"></div>
                 <h3>Alejandro Santos</h3>
                 <p>Ministro de la celebración</p>
             </div>
@@ -530,63 +536,63 @@
 
             <div class="download-section fade-in">
                 <a href="assets/escaleta-musical.pdf" class="download-pdf-btn" download>
-                    <span class="pdf-icon">📄</span>
+                    <span class="pdf-icon">PDF</span>
                     <span>Descargar Escaleta Completa (PDF)</span>
                 </a>
             </div>
 
             <div class="music-grid">
                 <div class="music-card fade-in">
-                    <div class="music-moment-badge">🎵 Preludio</div>
+                    <div class="music-moment-badge">Preludio</div>
                     <h4>Canon en Re Mayor</h4>
                     <span class="composer">Johann Pachelbel</span>
                     <p>Mientras los invitados toman asiento, esta pieza clásica creará un ambiente de serenidad y anticipación.</p>
                 </div>
 
                 <div class="music-card fade-in">
-                    <div class="music-moment-badge">👰 Entrada de la novia</div>
+                    <div class="music-moment-badge">Entrada de la novia</div>
                     <h4>Ave María</h4>
                     <span class="composer">Franz Schubert</span>
                     <p>El momento más esperado, acompañado por esta sublime plegaria mariana que elevará el espíritu de todos los presentes.</p>
                 </div>
 
                 <div class="music-card fade-in">
-                    <div class="music-moment-badge">📖 Durante la liturgia</div>
+                    <div class="music-moment-badge">Durante la liturgia</div>
                     <h4>Salve Regina</h4>
                     <span class="composer">Canto gregoriano</span>
                     <p>Tras las lecturas, esta antífona mariana medieval nos invitará a la contemplación y la oración.</p>
                 </div>
 
                 <div class="music-card fade-in">
-                    <div class="music-moment-badge">🕊️ Ofertorio</div>
+                    <div class="music-moment-badge">Ofertorio</div>
                     <h4>Ave Verum Corpus</h4>
                     <span class="composer">Wolfgang Amadeus Mozart</span>
                     <p>Durante la presentación de las ofrendas, este motete sobre el Cuerpo de Cristo nos preparará para el momento más sagrado.</p>
                 </div>
 
                 <div class="music-card fade-in">
-                    <div class="music-moment-badge">🕊️ Ofertorio (cont.)</div>
+                    <div class="music-moment-badge">Ofertorio (cont.)</div>
                     <h4>O Sacrum Convivium</h4>
                     <span class="composer">Santo Tomás de Aquino</span>
                     <p>Una segunda pieza durante el ofertorio que medita sobre el banquete sagrado de la Eucaristía.</p>
                 </div>
 
                 <div class="music-card fade-in">
-                    <div class="music-moment-badge">🍞 Comunión</div>
+                    <div class="music-moment-badge">Comunión</div>
                     <h4>Pie Jesu</h4>
                     <span class="composer">Gabriel Fauré</span>
                     <p>Durante la comunión, esta dulce súplica al Señor misericordioso nos acompañará en un momento de profunda intimidad espiritual.</p>
                 </div>
 
                 <div class="music-card fade-in">
-                    <div class="music-moment-badge">🍞 Comunión (cont.)</div>
+                    <div class="music-moment-badge">Comunión (cont.)</div>
                     <h4>Panis Angelicus</h4>
                     <span class="composer">César Franck</span>
                     <p>El "Pan de los Ángeles" cierra el momento de la comunión con una melodía celestial que nos eleva.</p>
                 </div>
 
                 <div class="music-card fade-in">
-                    <div class="music-moment-badge">💒 Salida de los novios</div>
+                    <div class="music-moment-badge">Salida de los novios</div>
                     <h4>Aleluya</h4>
                     <span class="composer">George Frideric Handel</span>
                     <p>¡Aleluya! Con este canto de júbilo y celebración, saldremos como esposos para comenzar nuestra nueva vida juntos.</p>
@@ -631,7 +637,7 @@
         <p class="hotels-intro fade-in">Hemos acordado tarifas especiales con varios hoteles de Ávila para que podáis disfrutar de vuestra estancia. Al reservar, mencionad que venís de parte de <strong>"Boda Raquel y Adrián"</strong> para obtener el descuento.</p>
         <div class="hotels-grid">
             <div class="hotel-card fade-in">
-                <div class="hotel-image">🏰<span class="hotel-badge">Recomendado</span></div>
+                <div class="hotel-image"><span class="hotel-badge">Recomendado</span></div>
                 <div class="hotel-info">
                     <p class="hotel-category">Hotel de lujo</p><h3>Parador de Ávila</h3><p class="hotel-stars">⭐⭐⭐⭐</p><p class="hotel-address">📍 Marqués de Canales de Chozas, 2</p>
                     <div class="hotel-features"><span class="hotel-feature">Murallas</span><span class="hotel-feature">Jardín</span><span class="hotel-feature">Restaurante</span></div>
@@ -641,7 +647,7 @@
                 </div>
             </div>
             <div class="hotel-card fade-in">
-                <div class="hotel-image">🏛️<span class="hotel-badge">Centro histórico</span></div>
+                <div class="hotel-image"><span class="hotel-badge">Centro histórico</span></div>
                 <div class="hotel-info">
                     <p class="hotel-category">Palacio histórico</p><h3>Hotel Palacio de los Velada</h3><p class="hotel-stars">⭐⭐⭐⭐</p><p class="hotel-address">📍 Plaza de la Catedral, 10</p>
                     <div class="hotel-features"><span class="hotel-feature">Junto Catedral</span><span class="hotel-feature">Spa</span><span class="hotel-feature">Patio histórico</span></div>
@@ -651,7 +657,7 @@
                 </div>
             </div>
             <div class="hotel-card fade-in">
-                <div class="hotel-image">🏠<span class="hotel-badge">Con encanto</span></div>
+                <div class="hotel-image"><span class="hotel-badge">Con encanto</span></div>
                 <div class="hotel-info">
                     <p class="hotel-category">Hotel boutique</p><h3>Hotel Las Leyendas</h3><p class="hotel-stars">⭐⭐⭐⭐</p><p class="hotel-address">📍 Francisco Gallego, 3</p>
                     <div class="hotel-features"><span class="hotel-feature">Intramuros</span><span class="hotel-feature">Romántico</span><span class="hotel-feature">Desayuno incluido</span></div>
@@ -661,7 +667,7 @@
                 </div>
             </div>
             <div class="hotel-card fade-in">
-                <div class="hotel-image">🏨</div>
+                <div class="hotel-image"></div>
                 <div class="hotel-info">
                     <p class="hotel-category">Cadena hotelera</p><h3>NH Collection Palacio de Ávila</h3><p class="hotel-stars">⭐⭐⭐⭐</p><p class="hotel-address">📍 Calle Tomás Luis de Victoria, 6</p>
                     <div class="hotel-features"><span class="hotel-feature">Parking</span><span class="hotel-feature">Gimnasio</span><span class="hotel-feature">Bar</span></div>
@@ -671,7 +677,7 @@
                 </div>
             </div>
             <div class="hotel-card fade-in">
-                <div class="hotel-image">✨<span class="hotel-badge">Premium</span></div>
+                <div class="hotel-image"><span class="hotel-badge">Premium</span></div>
                 <div class="hotel-info">
                     <p class="hotel-category">Hotel de diseño</p><h3>Fontecruz Ávila</h3><p class="hotel-stars">⭐⭐⭐⭐</p><p class="hotel-address">📍 San Segundo, 28</p>
                     <div class="hotel-features"><span class="hotel-feature">Moderno</span><span class="hotel-feature">Vistas murallas</span><span class="hotel-feature">Terraza</span></div>
@@ -681,7 +687,7 @@
                 </div>
             </div>
             <div class="hotel-card fade-in">
-                <div class="hotel-image">💰<span class="hotel-badge">Económico</span></div>
+                <div class="hotel-image"><span class="hotel-badge">Económico</span></div>
                 <div class="hotel-info">
                     <p class="hotel-category">Opción económica</p><h3>Hotel Arco San Vicente</h3><p class="hotel-stars">⭐⭐⭐</p><p class="hotel-address">📍 Paseo Rastro, 2</p>
                     <div class="hotel-features"><span class="hotel-feature">Céntrico</span><span class="hotel-feature">Familiar</span><span class="hotel-feature">Wifi gratis</span></div>
@@ -691,18 +697,18 @@
                 </div>
             </div>
         </div>
-        <div class="hotels-note fade-in"><p>💡 <strong>Importante:</strong> Os recomendamos reservar con antelación ya que junio es temporada alta en Ávila. Los descuentos están disponibles hasta el <strong>1 de mayo de 2027</strong>.</p></div>
+        <div class="hotels-note fade-in"><p><strong>Importante:</strong> Os recomendamos reservar con antelación ya que junio es temporada alta en Ávila. Los descuentos están disponibles hasta el <strong>1 de mayo de 2027</strong>.</p></div>
     </section>
 
     <section id="details" class="details">
         <h2 class="section-title fade-in">Detalles del Evento</h2>
         <div class="details-grid">
-            <div class="detail-card fade-in"><div class="detail-icon">📅</div><h3>Fecha</h3><p>Sábado, 12 de Junio<br>2027</p></div>
-            <div class="detail-card fade-in"><div class="detail-icon">⏰</div><h3>Horario</h3><p>Ceremonia: 12:00h<br>Cóctel: 14:30h</p></div>
-            <div class="detail-card fade-in"><div class="detail-icon">👗</div><h3>Código de Vestimenta</h3><p>Etiqueta<br>Sugerimos tonos cálidos</p></div>
-            <div class="detail-card fade-in"><div class="detail-icon">🚗</div><h3>Transporte</h3><p>Parking disponible en ambas ubicaciones<br>Autobús desde la catedral a la finca</p></div>
-            <div class="detail-card fade-in"><div class="detail-icon">👶</div><h3>Niños</h3><p>¡Los peques son bienvenidos!<br>Habrá zona infantil</p></div>
-            <div class="detail-card fade-in"><div class="detail-icon">📸</div><h3>Hashtag</h3><p>#RaquelYAdrian2027<br>¡Comparte tus fotos!</p></div>
+            <div class="detail-card fade-in"><div class="detail-icon"></div><h3>Fecha</h3><p>Sábado, 12 de Junio<br>2027</p></div>
+            <div class="detail-card fade-in"><div class="detail-icon"></div><h3>Horario</h3><p>Ceremonia: 12:00h<br>Cóctel: 14:30h</p></div>
+            <div class="detail-card fade-in"><div class="detail-icon"></div><h3>Código de Vestimenta</h3><p>Etiqueta<br>Sugerimos tonos cálidos</p></div>
+            <div class="detail-card fade-in"><div class="detail-icon"></div><h3>Transporte</h3><p>Parking disponible en ambas ubicaciones<br>Autobús desde la catedral a la finca</p></div>
+            <div class="detail-card fade-in"><div class="detail-icon"></div><h3>Niños</h3><p>¡Los peques son bienvenidos!<br>Habrá zona infantil</p></div>
+            <div class="detail-card fade-in"><div class="detail-icon"></div><h3>Hashtag</h3><p>#RaquelYAdrian2027<br>¡Comparte tus fotos!</p></div>
         </div>
     </section>
 
@@ -723,12 +729,12 @@
         <h2 class="section-title fade-in">Lista de Bodas</h2>
         <p class="gifts-intro fade-in">Vuestra presencia es el mejor regalo. Pero si deseáis hacernos un obsequio, aquí tenéis algunas ideas que nos harían mucha ilusión:</p>
         <div class="gifts-grid">
-            <div class="gift-card fade-in"><div class="gift-icon">🌴</div><h4>Luna de Miel en Maldivas</h4><p>Ayúdanos a hacer realidad el viaje de nuestros sueños</p><p class="gift-price">Contribución libre</p><div class="gift-progress"><div class="gift-progress-bar" style="width: 35%"></div></div><p class="gift-status">35% completado</p><a href="#" class="gift-btn">Contribuir</a></div>
-            <div class="gift-card fade-in"><div class="gift-icon">🍳</div><h4>Robot de Cocina Thermomix</h4><p>Para preparar deliciosas recetas juntos</p><p class="gift-price">1.299€</p><div class="gift-progress"><div class="gift-progress-bar" style="width: 60%"></div></div><p class="gift-status">60% completado</p><a href="#" class="gift-btn">Contribuir</a></div>
-            <div class="gift-card fade-in"><div class="gift-icon">☕</div><h4>Cafetera De'Longhi</h4><p>Para nuestros desayunos de domingo</p><p class="gift-price">549€</p><div class="gift-progress"><div class="gift-progress-bar" style="width: 100%"></div></div><p class="gift-status">¡Completado! Gracias ♡</p><a href="#" class="gift-btn reserved">Reservado</a></div>
-            <div class="gift-card fade-in"><div class="gift-icon">🛋️</div><h4>Sofá Chester</h4><p>El sofá de nuestros sueños para el salón</p><p class="gift-price">1.800€</p><div class="gift-progress"><div class="gift-progress-bar" style="width: 25%"></div></div><p class="gift-status">25% completado</p><a href="#" class="gift-btn">Contribuir</a></div>
-            <div class="gift-card fade-in"><div class="gift-icon">🍷</div><h4>Vinoteca</h4><p>Para conservar nuestros vinos favoritos</p><p class="gift-price">450€</p><div class="gift-progress"><div class="gift-progress-bar" style="width: 80%"></div></div><p class="gift-status">80% completado</p><a href="#" class="gift-btn">Contribuir</a></div>
-            <div class="gift-card fade-in"><div class="gift-icon">🎨</div><h4>Cuadro Personalizado</h4><p>Obra de arte con nuestra foto favorita</p><p class="gift-price">280€</p><div class="gift-progress"><div class="gift-progress-bar" style="width: 0%"></div></div><p class="gift-status">Disponible</p><a href="#" class="gift-btn">Regalar</a></div>
+            <div class="gift-card fade-in"><div class="gift-icon"></div><h4>Luna de Miel en Maldivas</h4><p>Ayúdanos a hacer realidad el viaje de nuestros sueños</p><p class="gift-price">Contribución libre</p><div class="gift-progress"><div class="gift-progress-bar" style="width: 35%"></div></div><p class="gift-status">35% completado</p><a href="#" class="gift-btn">Contribuir</a></div>
+            <div class="gift-card fade-in"><div class="gift-icon"></div><h4>Robot de Cocina Thermomix</h4><p>Para preparar deliciosas recetas juntos</p><p class="gift-price">1.299€</p><div class="gift-progress"><div class="gift-progress-bar" style="width: 60%"></div></div><p class="gift-status">60% completado</p><a href="#" class="gift-btn">Contribuir</a></div>
+            <div class="gift-card fade-in"><div class="gift-icon"></div><h4>Cafetera De'Longhi</h4><p>Para nuestros desayunos de domingo</p><p class="gift-price">549€</p><div class="gift-progress"><div class="gift-progress-bar" style="width: 100%"></div></div><p class="gift-status">¡Completado! Gracias </p><a href="#" class="gift-btn reserved">Reservado</a></div>
+            <div class="gift-card fade-in"><div class="gift-icon"></div><h4>Sofá Chester</h4><p>El sofá de nuestros sueños para el salón</p><p class="gift-price">1.800€</p><div class="gift-progress"><div class="gift-progress-bar" style="width: 25%"></div></div><p class="gift-status">25% completado</p><a href="#" class="gift-btn">Contribuir</a></div>
+            <div class="gift-card fade-in"><div class="gift-icon"></div><h4>Vinoteca</h4><p>Para conservar nuestros vinos favoritos</p><p class="gift-price">450€</p><div class="gift-progress"><div class="gift-progress-bar" style="width: 80%"></div></div><p class="gift-status">80% completado</p><a href="#" class="gift-btn">Contribuir</a></div>
+            <div class="gift-card fade-in"><div class="gift-icon"></div><h4>Cuadro Personalizado</h4><p>Obra de arte con nuestra foto favorita</p><p class="gift-price">280€</p><div class="gift-progress"><div class="gift-progress-bar" style="width: 0%"></div></div><p class="gift-status">Disponible</p><a href="#" class="gift-btn">Regalar</a></div>
         </div>
     </section>
 
@@ -789,21 +795,20 @@
             localStorage.setItem('theme', newTheme);
 
             // Cambiar icono
-            themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+            themeIcon.textContent = newTheme === 'dark' ? 'Light' : 'Dark';
         }
 
-        // Cargar tema guardado o detectar preferencia del sistema
+        // Cargar tema guardado (por defecto: light)
         function loadTheme() {
             const savedTheme = localStorage.getItem('theme');
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+            const theme = savedTheme || 'light';
             const themeIcon = document.getElementById('theme-icon');
 
             if (theme === 'dark') {
                 document.documentElement.setAttribute('data-theme', 'dark');
-                themeIcon.textContent = '☀️';
+                themeIcon.textContent = 'Light';
             } else {
-                themeIcon.textContent = '🌙';
+                themeIcon.textContent = 'Dark';
             }
         }
 
@@ -957,7 +962,7 @@
             });
         }
         setupForm('rsvp-form', '¡Gracias!');
-        setupForm('song-form', '¡Gracias por tu sugerencia! 🎵');
+        setupForm('song-form', '¡Gracias por tu sugerencia! ');
         setupForm('guestbook-form', '¡Gracias por tu mensaje! 💕');
 
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
