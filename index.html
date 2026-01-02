@@ -907,14 +907,21 @@
         function openInvitation() {
             const envelope = document.querySelector('.envelope');
             const overlay = document.getElementById('invitation-overlay');
+            const button = document.querySelector('.open-btn');
 
-            // Abrir sobre
-            envelope.classList.add('open');
+            // Ocultar botón
+            button.style.opacity = '0';
+            button.style.pointerEvents = 'none';
 
-            // Ocultar todo después de la animación
+            // Abrir sobre después de un pequeño delay
+            setTimeout(() => {
+                envelope.classList.add('open');
+            }, 300);
+
+            // Ocultar todo después de la animación completa
             setTimeout(() => {
                 overlay.classList.add('hidden');
-            }, 2000);
+            }, 2500);
         }
 
         function toggleMenu() { document.querySelector('.nav-links').classList.toggle('active'); }
