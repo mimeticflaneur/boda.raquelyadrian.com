@@ -56,6 +56,22 @@
         [data-theme="dark"] .nav-links a { color: var(--forest); }
         [data-theme="dark"] .nav-links a:hover { color: var(--gold); }
         [data-theme="dark"] .menu-toggle span { background: var(--forest); }
+
+        /* Animación de invitación */
+        .invitation-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: linear-gradient(135deg, #f5f3ed 0%, #e8e5d8 100%); display: flex; align-items: center; justify-content: center; z-index: 9999; transition: opacity 0.8s ease, visibility 0.8s ease; }
+        .invitation-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .envelope { position: relative; width: 400px; height: 280px; perspective: 1000px; }
+        .envelope-body { position: absolute; width: 100%; height: 100%; background: linear-gradient(135deg, #f4e6d9 0%, #e8d5c4 100%); border-radius: 0 0 10px 10px; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); overflow: hidden; }
+        .envelope-flap { position: absolute; width: 100%; height: 50%; top: 0; left: 0; background: linear-gradient(135deg, #e8d5c4 0%, #d4c4b4 100%); transform-origin: top; transform: rotateX(0deg); transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); z-index: 10; clip-path: polygon(0 0, 50% 100%, 100% 0); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); }
+        .envelope.open .envelope-flap { transform: rotateX(-180deg); }
+        .invitation-card { position: absolute; width: 90%; height: 240px; background: white; left: 5%; top: 100%; border-radius: 8px; padding: 2rem; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); transition: top 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s; }
+        .envelope.open .invitation-card { top: -20px; }
+        .card-icon { width: 60px; height: 60px; margin-bottom: 1rem; animation: float 3s ease-in-out infinite; }
+        .invitation-card h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--forest); margin-bottom: 0.5rem; }
+        .invitation-card p { font-size: 1rem; color: var(--sage); margin-bottom: 1.5rem; letter-spacing: 1px; }
+        .open-btn { background: linear-gradient(135deg, var(--sage) 0%, var(--forest) 100%); color: white; border: none; padding: 0.8rem 2rem; border-radius: 25px; font-size: 1rem; font-weight: 500; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(44, 62, 45, 0.3); }
+        .open-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(44, 62, 45, 0.4); }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; transition: background-color 0.3s ease; }
         body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-primary); color: var(--text-primary); line-height: 1.6; transition: background-color 0.3s ease, color 0.3s ease; }
@@ -68,14 +84,14 @@
         .menu-toggle span { width: 25px; height: 2px; background: var(--forest); transition: 0.3s; }
         .theme-toggle-switch { position: relative; display: inline-block; width: 60px; height: 30px; margin-left: 1rem; }
         .theme-toggle-switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, var(--sage) 0%, var(--forest) 100%); border-radius: 30px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 2px 8px var(--shadow-sm); }
-        .slider:before { content: ""; position: absolute; height: 24px; width: 24px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); }
-        .theme-toggle-switch input:checked + .slider { background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%); }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, #e8e8e8 0%, #d0d0d0 100%); border-radius: 30px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); border: 1px solid rgba(0, 0, 0, 0.1); }
+        .slider:before { content: ""; position: absolute; height: 22px; width: 22px; left: 4px; bottom: 3px; background: white; border-radius: 50%; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); }
+        .theme-toggle-switch input:checked + .slider { background: linear-gradient(135deg, #2c3e2d 0%, #1a2320 100%); }
         .theme-toggle-switch input:checked + .slider:before { transform: translateX(30px); }
-        .slider-icon { position: absolute; top: 50%; transform: translateY(-50%); font-size: 16px; transition: opacity 0.3s ease; }
-        .slider-icon.sun { left: 8px; opacity: 0; }
-        .slider-icon.moon { right: 8px; opacity: 1; color: white; }
-        .theme-toggle-switch input:checked + .slider .sun { opacity: 1; }
+        .slider-icon { position: absolute; top: 50%; transform: translateY(-50%); font-size: 14px; transition: opacity 0.3s ease; pointer-events: none; }
+        .slider-icon.sun { left: 7px; opacity: 0; }
+        .slider-icon.moon { right: 7px; opacity: 1; color: white; }
+        .theme-toggle-switch input:checked + .slider .sun { opacity: 1; color: #ffd700; }
         .theme-toggle-switch input:checked + .slider .moon { opacity: 0; }
         .theme-toggle-switch:hover .slider { transform: scale(1.05); }
         .nav-right { display: flex; align-items: center; }
@@ -302,7 +318,12 @@
             .nav-links { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: var(--bg-card); flex-direction: column; padding: 1rem; gap: 1rem; box-shadow: 0 10px 20px var(--shadow-md); }
             .nav-links.active { display: flex; }
             .menu-toggle { display: flex; }
-            .theme-toggle-switch { position: absolute; left: 50%; transform: translateX(-50%); margin-left: 0; width: 54px; height: 26px; }
+            .theme-toggle-switch { position: absolute; left: 50%; transform: translateX(-50%); margin-left: 0; width: 54px; height: 26px; top: 50%; margin-top: -13px; }
+            .theme-toggle-switch .slider:before { height: 20px; width: 20px; bottom: 2px; }
+            .theme-toggle-switch input:checked + .slider:before { transform: translateX(28px); }
+            .slider-icon { font-size: 12px; }
+            .slider-icon.sun { left: 6px; }
+            .slider-icon.moon { right: 6px; }
             .story-content, .locations-grid, .playlist-container { grid-template-columns: 1fr; }
             .music-grid { grid-template-columns: 1fr; }
             .padrinos-grid, .details-grid, .hotels-grid { grid-template-columns: 1fr; }
@@ -323,10 +344,31 @@
             .countdown-number { font-size: 2rem; }
             .countdown-label { font-size: 0.8rem; }
             .sacred-heart { width: 300px; height: 300px; margin-bottom: -0.5rem; }
+            .envelope { width: 320px; height: 240px; }
+            .invitation-card { height: 200px; padding: 1.5rem; }
+            .card-icon { width: 50px; height: 50px; }
+            .invitation-card h2 { font-size: 1.6rem; }
+            .invitation-card p { font-size: 0.9rem; }
+            .open-btn { padding: 0.7rem 1.5rem; font-size: 0.9rem; }
         }
     </style>
 </head>
 <body>
+    <!-- Animación de apertura de invitación -->
+    <div id="invitation-overlay" class="invitation-overlay">
+        <div class="envelope">
+            <div class="envelope-flap"></div>
+            <div class="envelope-body">
+                <div class="invitation-card">
+                    <img src="assets/corazon_transverberado.svg" class="card-icon" alt="Corazón">
+                    <h2>Raquel & Adrián</h2>
+                    <p>12 de Junio de 2027</p>
+                    <button class="open-btn" onclick="openInvitation()">Abrir Invitación</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <nav>
         <a href="#home" class="logo">R & A</a>
         <div class="nav-right">
@@ -850,6 +892,20 @@
     </footer>
 
     <script>
+        // Animación de invitación
+        function openInvitation() {
+            const envelope = document.querySelector('.envelope');
+            const overlay = document.getElementById('invitation-overlay');
+
+            // Abrir sobre
+            envelope.classList.add('open');
+
+            // Ocultar todo después de la animación
+            setTimeout(() => {
+                overlay.classList.add('hidden');
+            }, 2000);
+        }
+
         function toggleMenu() { document.querySelector('.nav-links').classList.toggle('active'); }
         document.querySelectorAll('.nav-links a').forEach(link => { link.addEventListener('click', () => { document.querySelector('.nav-links').classList.remove('active'); }); });
 
