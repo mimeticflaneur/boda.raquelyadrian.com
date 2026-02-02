@@ -130,6 +130,21 @@
         .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 8vw, 6rem); font-weight: 300; color: var(--text-secondary); margin-bottom: 1rem; letter-spacing: 2px; transition: color 0.3s ease; }
         .quote { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-style: italic; color: var(--gold); margin-bottom: 0.5rem; max-width: 500px; transition: color 0.3s ease; }
         .quote-author { font-size: 0.9rem; color: var(--sage); margin-bottom: 2rem; transition: color 0.3s ease; }
+
+        /* Slider de fotos en hero */
+        .hero-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; transition: opacity 2s ease-in-out; }
+        .hero-slide.active { opacity: 1; }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.35); z-index: 1; }
+
+        /* Diseño de fecha mejorado */
+        .wedding-date { display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin: 2rem 0 3rem; flex-wrap: wrap; }
+        .date-day { font-family: 'Cormorant Garamond', serif; font-size: 5rem; font-weight: 300; color: var(--gold); line-height: 1; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); transition: color 0.3s ease; }
+        .date-details { display: flex; flex-direction: column; align-items: flex-start; gap: 0.2rem; }
+        .date-month { font-size: 1.2rem; letter-spacing: 3px; font-weight: 400; color: var(--text-secondary); transition: color 0.3s ease; }
+        .date-year { font-size: 1.2rem; letter-spacing: 3px; font-weight: 400; color: var(--text-secondary); transition: color 0.3s ease; }
+        .date-location { font-size: 1.2rem; letter-spacing: 3px; color: var(--sage); padding: 0.5rem 1.5rem; border-left: 2px solid var(--gold); transition: all 0.3s ease; }
+
         .date { font-size: 1.1rem; letter-spacing: 3px; color: var(--text-secondary); margin-bottom: 3rem; transition: color 0.3s ease; }
         .countdown { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
         .countdown-item { text-align: center; padding: 1.5rem; background: var(--bg-card); backdrop-filter: blur(10px); border-radius: 15px; box-shadow: 0 8px 20px var(--shadow-sm); transition: all 0.3s ease; border: 1px solid var(--border-color); }
@@ -330,6 +345,15 @@
         .guestbook-message { background: var(--bg-card); padding: 1.5rem; border-radius: 15px; position: relative; transition: background 0.3s ease; border: 1px solid var(--border-color); }
         .guestbook-message p { font-style: italic; color: var(--text-primary); margin-bottom: 1rem; line-height: 1.7; transition: color 0.3s ease; }
         .guestbook-message .author { color: var(--gold); font-weight: 500; transition: color 0.3s ease; }
+
+        /* Sección de Enlaces */
+        .enlaces-section { background: linear-gradient(180deg, var(--bg-accent) 0%, #f7f6f0 100%); padding: 4rem 2rem; border-top: 1px solid var(--border-color); }
+        .enlaces-container { max-width: 800px; margin: 0 auto; text-align: center; }
+        .enlaces-title { font-size: 0.9rem; letter-spacing: 3px; color: var(--sage); margin-bottom: 2rem; font-weight: 500; }
+        .enlaces-nav { display: flex; flex-direction: column; gap: 0.8rem; }
+        .enlace-item { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; color: var(--text-secondary); text-decoration: none; transition: all 0.3s ease; padding: 0.5rem; display: block; }
+        .enlace-item:hover { color: var(--gold); transform: translateX(10px); }
+
         footer { background: var(--forest); color: var(--white); text-align: center; padding: 3rem 2rem; }
         .footer-hashtag { font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 1rem; }
         .footer-quote { font-style: italic; color: var(--sage); margin-bottom: 1rem; }
@@ -371,6 +395,10 @@
             .countdown-label { font-size: 0.8rem; }
             .sacred-heart { width: 120px; height: 120px; margin-top: 5rem; margin-bottom: -0.5rem; }
             .hero h1 { white-space: nowrap; font-size: 2.5rem; }
+            .date-day { font-size: 3.5rem; }
+            .date-month, .date-year, .date-location { font-size: 1rem; letter-spacing: 2px; }
+            .wedding-date { gap: 1rem; }
+            .enlace-item { font-size: 1.5rem; }
             .initial-seal { width: 220px; height: 220px; }
             .seal-initials { font-size: 3.5rem; }
             .envelope { width: 320px; height: 240px; }
@@ -422,12 +450,30 @@
     </nav>
 
     <section id="home" class="hero">
+        <!-- Slider de fotos de fondo -->
+        <div class="hero-slider">
+            <div class="hero-slide active" style="background-image: url('assets/nuestra-historia.jpeg')"></div>
+            <div class="hero-slide" style="background-image: url('assets/nuestra-historia.jpeg')"></div>
+            <div class="hero-slide" style="background-image: url('assets/nuestra-historia.jpeg')"></div>
+        </div>
+        <div class="hero-overlay"></div>
+
         <div class="hero-content">
             <img src="assets/corazon_transverberado.svg" class="sacred-heart" alt="Corazón Transverberado">
             <h1>Raquel & Adrián</h1>
             <p class="quote">"Y sin amor, todo es nada"</p>
             <p class="quote-author">— Santa Teresa de Jesús</p>
-            <p class="date">12 DE JUNIO DE 2027 • ÁVILA</p>
+
+            <!-- Fecha rediseñada -->
+            <div class="wedding-date">
+                <span class="date-day">12</span>
+                <div class="date-details">
+                    <span class="date-month">JUNIO</span>
+                    <span class="date-year">2027</span>
+                </div>
+                <span class="date-location">ÁVILA</span>
+            </div>
+
             <div class="countdown">
                 <div class="countdown-item"><span class="countdown-number" id="days">000</span><span class="countdown-label">Días</span></div>
                 <div class="countdown-item"><span class="countdown-number" id="hours">00</span><span class="countdown-label">Horas</span></div>
@@ -911,6 +957,21 @@
         </div>
     </section>
 
+    <!-- Sección de Enlaces -->
+    <section class="enlaces-section">
+        <div class="enlaces-container">
+            <p class="enlaces-title">ENLACES</p>
+            <nav class="enlaces-nav">
+                <a href="#rsvp" class="enlace-item">Confirmar asistencia</a>
+                <a href="#ceremony" class="enlace-item">Ceremonia</a>
+                <a href="#hotels" class="enlace-item">Hoteles</a>
+                <a href="#details" class="enlace-item">Detalles del evento</a>
+                <a href="#gifts" class="enlace-item">Lista de bodas</a>
+                <a href="#guestbook" class="enlace-item">Libro de firmas</a>
+            </nav>
+        </div>
+    </section>
+
     <footer>
         <p class="footer-hashtag">#RaquelYAdrian2027</p>
         <p class="footer-quote">"Y sin amor, todo es nada" — Santa Teresa de Jesús</p>
@@ -966,6 +1027,22 @@
 
         // Cargar tema al inicio
         loadTheme();
+
+        // Slider automático en hero
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        const totalSlides = slides.length;
+
+        function showNextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % totalSlides;
+            slides[currentSlide].classList.add('active');
+        }
+
+        // Cambiar slide cada 5 segundos
+        if (slides.length > 0) {
+            setInterval(showNextSlide, 5000);
+        }
 
         // Flip cards en móvil (click para voltear)
         document.querySelectorAll('.padrino-card-flip').forEach(card => {
