@@ -3,1148 +3,1180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Raquel & Adrián - Nuestra Boda</title>
+    <title>R&A — Ávila, 12.06.27</title>
     <link rel="icon" type="image/svg+xml" href="assets/corazon_transverberado.svg">
-    <meta name="description" content="Boda de Raquel y Adrián | 11 Octubre 2026 | Ávila">
+    <meta name="description" content="Boda de Raquel y Adrián | 12 Junio 2027 | Ávila">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400;1,6..96,500&family=Jost:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
     <style>
         :root {
-            --cream: #faf8f5;
-            --sage: #9aad96;
-            --forest: #2c3e2d;
-            --gold: #d4a574;
-            --blush: #f4e6e1;
-            --text: #3a3a3a;
-            --white: #ffffff;
-
-            /* Variables dinámicas para temas */
-            --bg-primary: #faf8f5;
-            --bg-secondary: #ffffff;
-            --bg-card: rgba(255, 255, 255, 0.95);
-            --bg-card-hover: rgba(250, 248, 245, 0.9);
-            --bg-accent: #f4e6e1;
-            --text-primary: #3a3a3a;
-            --text-secondary: #2c3e2d;
-            --border-color: rgba(154, 173, 150, 0.3);
-            --shadow-sm: rgba(0, 0, 0, 0.08);
-            --shadow-md: rgba(0, 0, 0, 0.12);
-            --shadow-lg: rgba(0, 0, 0, 0.15);
+            --ink: #111;
+            --paper: #f5f2ec;
+            --warm: #eae5db;
+            --dark: #161413;
+            --sienna: #9e4a2f;
+            --sienna-soft: #c17a5a;
+            --mute: #8a8580;
+            --rule: rgba(0,0,0,0.08);
+            --bg: var(--paper);
+            --fg: var(--ink);
+            --fg-mute: var(--mute);
+            --bg-inv: var(--dark);
+            --fg-inv: var(--paper);
         }
-
-        [data-theme="dark"] {
-            --bg-primary: #1a2320;
-            --bg-secondary: #222d2a;
-            --bg-card: rgba(44, 62, 45, 0.25);
-            --bg-card-hover: rgba(44, 62, 45, 0.35);
-            --bg-accent: rgba(61, 90, 62, 0.3);
-            --text-primary: #f5f3ed;
-            --text-secondary: #c4c8bc;
-            --border-color: rgba(160, 179, 150, 0.2);
-            --shadow-sm: rgba(0, 0, 0, 0.3);
-            --shadow-md: rgba(0, 0, 0, 0.4);
-            --shadow-lg: rgba(0, 0, 0, 0.5);
-
-            /* Ajustar colores base para dark mode */
-            --gold: #e6bc8a;
-            --sage: #a0b396;
-            --blush: rgba(244, 230, 225, 0.1);
-        }
-        [data-theme="dark"] nav { background: rgba(255, 255, 255, 0.95); }
-        [data-theme="dark"] .logo { color: var(--forest); }
-        [data-theme="dark"] .nav-links a { color: var(--forest); }
-        [data-theme="dark"] .nav-links a:hover { color: var(--gold); }
-        [data-theme="dark"] .menu-toggle span { background: var(--forest); }
-
-        /* Animación de invitación */
-        .invitation-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: linear-gradient(135deg, #f5f3ed 0%, #e8e5d8 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; transition: opacity 0.8s ease, visibility 0.8s ease; }
-        .invitation-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-
-        /* Sello inicial grande */
-        .initial-seal { width: 280px; height: 280px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #f0ebe3, #e0d5c7); cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), inset -8px -8px 20px rgba(0, 0, 0, 0.08), inset 8px 8px 20px rgba(255, 255, 255, 0.5); transition: all 0.3s ease; position: relative; }
-        .initial-seal::before { content: ''; position: absolute; width: 100%; height: 100%; border-radius: 50%; background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), transparent 60%); }
-        .initial-seal::after { content: ''; position: absolute; width: 260px; height: 260px; border-radius: 50%; border: 2px solid rgba(0, 0, 0, 0.05); }
-        .initial-seal:hover { transform: scale(1.05); box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2), inset -8px -8px 20px rgba(0, 0, 0, 0.08), inset 8px 8px 20px rgba(255, 255, 255, 0.5); }
-        .seal-content { position: relative; z-index: 2; text-align: center; }
-        .seal-initials { font-family: 'Cormorant Garamond', serif; font-size: 5rem; font-weight: 300; font-style: italic; color: #d4c4b4; text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8), -1px -1px 2px rgba(0, 0, 0, 0.1); letter-spacing: 0.3rem; }
-        .invitation-text { margin-top: 2.5rem; font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-style: italic; color: var(--sage); text-align: center; opacity: 0; animation: fadeInText 1s ease 0.5s forwards; }
-        @keyframes fadeInText { to { opacity: 1; } }
-        .initial-seal.breaking { animation: sealBreak 0.8s ease forwards; }
-        .invitation-text.fading { animation: fadeOutText 0.5s ease forwards; }
-        @keyframes fadeOutText { to { opacity: 0; } }
-        @keyframes sealBreak { 0% { transform: scale(1) rotate(0deg); opacity: 1; } 50% { transform: scale(1.1) rotate(5deg); } 100% { transform: scale(0) rotate(180deg); opacity: 0; } }
-
-        .envelope { position: relative; width: 400px; height: 280px; perspective: 1000px; cursor: pointer; transition: transform 0.3s ease; }
-        .hidden-envelope { opacity: 0; transform: scale(0.8); pointer-events: none; }
-        .envelope.visible { opacity: 1; transform: scale(1); transition: opacity 0.5s ease 0.4s, transform 0.5s ease 0.4s; }
-        .envelope:hover { transform: translateY(-5px); }
-        .click-hint { margin-top: 2rem; font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--sage); animation: bounce 2s infinite; transition: opacity 0.3s ease; }
-        .envelope-body { position: absolute; width: 100%; height: 100%; background: linear-gradient(135deg, #f4e6d9 0%, #e8d5c4 100%); border-radius: 0 0 10px 10px; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); overflow: hidden; }
-        .envelope-flap { position: absolute; width: 100%; height: 50%; top: 0; left: 0; background: linear-gradient(135deg, #e8d5c4 0%, #d4c4b4 100%); transform-origin: top; transform: rotateX(0deg); transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); z-index: 10; clip-path: polygon(0 0, 50% 100%, 100% 0); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); }
-        .envelope.open .envelope-flap { transform: rotateX(-180deg); }
-        .wax-seal { position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%); width: 80px; height: 80px; background: radial-gradient(circle at 30% 30%, #c41e3a, #8b1a2d); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(139, 26, 45, 0.5), inset -3px -3px 8px rgba(0, 0, 0, 0.3), inset 3px 3px 8px rgba(255, 255, 255, 0.1); border: 3px solid rgba(139, 26, 45, 0.8); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
-        .wax-seal::before { content: ''; position: absolute; width: 100%; height: 100%; border-radius: 50%; background: radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.15), transparent 50%); }
-        .wax-seal::after { content: ''; position: absolute; width: 90%; height: 90%; border-radius: 50%; box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3); }
-        .wax-seal img { width: 50px; height: 50px; filter: brightness(0) invert(1); opacity: 0.9; position: relative; z-index: 1; }
-        .envelope.open .wax-seal { transform: translateX(-50%) scale(0) rotate(180deg); opacity: 0; }
-        .invitation-card { position: absolute; width: 90%; height: 240px; background: white; left: 5%; top: 100%; border-radius: 8px; padding: 2rem; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); transition: top 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s; }
-        .envelope.open .invitation-card { top: -20px; }
-        .card-icon { width: 60px; height: 60px; margin-bottom: 1rem; animation: float 3s ease-in-out infinite; }
-        .invitation-card h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--forest); margin-bottom: 0.5rem; }
-        .invitation-card p { font-size: 1rem; color: var(--sage); margin-bottom: 1.5rem; letter-spacing: 1px; }
-        .open-btn { background: linear-gradient(135deg, var(--sage) 0%, var(--forest) 100%); color: white; border: none; padding: 0.8rem 2rem; border-radius: 25px; font-size: 1rem; font-weight: 500; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(44, 62, 45, 0.3); }
-        .open-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(44, 62, 45, 0.4); }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; transition: background-color 0.3s ease; }
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-primary); color: var(--text-primary); line-height: 1.6; transition: background-color 0.3s ease, color 0.3s ease; }
-        nav { position: fixed; top: 0; width: 100%; background: var(--bg-card); backdrop-filter: blur(10px); z-index: 1000; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 20px var(--shadow-sm); transition: background-color 0.3s ease; }
-        .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--forest); text-decoration: none; font-weight: 500; }
-        .nav-links { display: flex; gap: 2rem; list-style: none; }
-        .nav-links a { text-decoration: none; color: var(--forest); font-size: 0.85rem; font-weight: 500; letter-spacing: 0.5px; transition: color 0.3s; }
-        .nav-links a:hover { color: var(--gold); }
-        .menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
-        .menu-toggle span { width: 25px; height: 2px; background: var(--forest); transition: 0.3s; }
-        .theme-toggle-switch { position: relative; display: inline-block; width: 60px; height: 30px; margin-left: 1rem; }
-        .theme-toggle-switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, #e8e8e8 0%, #d0d0d0 100%); border-radius: 30px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); border: 1px solid rgba(0, 0, 0, 0.1); }
-        .slider:before { content: ""; position: absolute; height: 22px; width: 22px; left: 4px; bottom: 3px; background: white; border-radius: 50%; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); }
-        .theme-toggle-switch input:checked + .slider { background: linear-gradient(135deg, #2c3e2d 0%, #1a2320 100%); }
-        .theme-toggle-switch input:checked + .slider:before { transform: translateX(30px); }
-        .slider-icon { position: absolute; top: 50%; transform: translateY(-50%); font-size: 14px; transition: opacity 0.3s ease; pointer-events: none; }
-        .slider-icon.sun { left: 7px; opacity: 0; }
-        .slider-icon.moon { right: 7px; opacity: 1; color: white; }
-        .theme-toggle-switch input:checked + .slider .sun { opacity: 1; color: #ffd700; }
-        .theme-toggle-switch input:checked + .slider .moon { opacity: 0; }
-        .theme-toggle-switch:hover .slider { transform: scale(1.05); }
-        .nav-right { display: flex; align-items: center; }
-        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 1rem 2rem 4rem; background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-accent) 50%, var(--bg-primary) 100%); position: relative; overflow: hidden; transition: background 0.3s ease; }
-        .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e8e3db' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); opacity: 1; pointer-events: none; }
-        .hero-content { position: relative; z-index: 1; }
-        .sacred-heart { width: 280px; height: 280px; margin-bottom: -1.5rem; animation: float 3s ease-in-out infinite; }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-        @keyframes heartGlow { 0%, 100% { filter: drop-shadow(0 0 8px rgba(212, 165, 116, 0.5)); } 50% { filter: drop-shadow(0 0 15px rgba(212, 165, 116, 0.8)); } }
-        @keyframes flicker { 0%, 100% { opacity: 0.7; transform: translateY(0) scale(1); } 50% { opacity: 1; transform: translateY(-2px) scale(1.05); } }
-        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 8vw, 6rem); font-weight: 300; color: var(--text-secondary); margin-bottom: 1rem; letter-spacing: 2px; transition: color 0.3s ease; }
-        .quote { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-style: italic; color: var(--gold); margin-bottom: 0.5rem; max-width: 500px; transition: color 0.3s ease; }
-        .quote-author { font-size: 0.9rem; color: var(--sage); margin-bottom: 2rem; transition: color 0.3s ease; }
-        .date { font-size: 1.1rem; letter-spacing: 3px; color: var(--text-secondary); margin-bottom: 3rem; transition: color 0.3s ease; }
-        .countdown { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
-        .countdown-item { text-align: center; padding: 1.5rem; background: var(--bg-card); backdrop-filter: blur(10px); border-radius: 15px; box-shadow: 0 8px 20px var(--shadow-sm); transition: all 0.3s ease; border: 1px solid var(--border-color); }
-        .countdown-item:hover { transform: translateY(-5px); }
-        .countdown-number { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; color: var(--text-secondary); line-height: 1; display: block; text-shadow: 0 2px 8px var(--shadow-sm); transition: color 0.3s ease; }
-        .countdown-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--sage); transition: color 0.3s ease; }
-        .scroll-hint { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); font-size: 0.85rem; color: var(--sage); animation: bounce 2s infinite; }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); } 40% { transform: translateX(-50%) translateY(-10px); } 60% { transform: translateX(-50%) translateY(-5px); } }
-        section { padding: 5rem 2rem; transition: background-color 0.3s ease; }
-        .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 400; text-align: center; color: var(--text-secondary); margin-bottom: 1rem; transition: color 0.3s ease; }
-        .section-subtitle { text-align: center; color: var(--sage); margin-bottom: 3rem; font-size: 1rem; transition: color 0.3s ease; }
-        .rsvp { background: linear-gradient(180deg, var(--bg-accent) 0%, var(--bg-primary) 100%); }
-        .rsvp-container { max-width: 700px; margin: 0 auto; background: var(--bg-card); backdrop-filter: blur(10px); padding: 3rem; border-radius: 20px; box-shadow: 0 20px 60px var(--shadow-md), 0 0 1px var(--shadow-sm); border: 1px solid var(--border-color); transition: all 0.3s ease; }
-        .rsvp-container:hover { transform: translateY(-5px); box-shadow: 0 25px 70px var(--shadow-lg), 0 0 1px var(--shadow-sm); }
-        .form-group { margin-bottom: 1.5rem; }
-        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--text-secondary); transition: color 0.3s ease; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 1rem; border: 1px solid var(--border-color); border-radius: 10px; font-family: inherit; font-size: 1rem; transition: all 0.3s; background: var(--bg-secondary); color: var(--text-primary); }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.2); }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        .guests-details { margin: 1rem 0; padding: 1.5rem; background: var(--bg-accent); border-radius: 15px; transition: background 0.3s ease; }
-        .guests-details h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--text-secondary); margin-bottom: 1rem; text-align: center; transition: color 0.3s ease; }
-        .guest-entry { background: var(--bg-secondary); padding: 1rem; border-radius: 10px; margin-bottom: 1rem; transition: background 0.3s ease; }
-        .guest-entry:last-child { margin-bottom: 0; }
-        .guest-number { font-weight: 600; color: var(--text-secondary); margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.3s ease; }
-        .guest-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-        .guest-fields input, .guest-fields select { padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 8px; font-family: inherit; font-size: 0.95rem; background: var(--bg-secondary); color: var(--text-primary); transition: all 0.3s; }
-        .guest-fields select { cursor: pointer; }
-        .menu-selection { margin: 2rem 0; padding: 1.5rem; background: var(--bg-accent); border-radius: 15px; transition: background 0.3s ease; }
-        .menu-selection h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-align: center; transition: color 0.3s ease; }
-        .menu-info { text-align: center; font-size: 0.9rem; color: var(--sage); margin-bottom: 1rem; }
-        .menu-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-        .menu-option { position: relative; }
-        .menu-option input { position: absolute; opacity: 0; cursor: pointer; }
-        .menu-card { display: flex; flex-direction: column; align-items: center; padding: 1.5rem 1rem; border: 2px solid var(--border-color); border-radius: 15px; cursor: pointer; transition: all 0.3s; background: var(--bg-secondary); }
-        .menu-option input:checked + .menu-card { border-color: var(--gold); background: linear-gradient(135deg, rgba(212, 165, 116, 0.15) 0%, var(--bg-accent) 100%); transform: scale(1.02); }
-        .menu-card:hover { border-color: var(--gold); }
-        .menu-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
-        .menu-name { font-weight: 600; color: var(--text-secondary); transition: color 0.3s ease; }
-        .form-message { text-align: center; padding: 1.5rem; background: var(--bg-accent); border-radius: 15px; margin-top: 1rem; transition: background 0.3s ease; }
-        .form-message p { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 0; transition: color 0.3s ease; }
-        .submit-btn { width: 100%; padding: 1.2rem; background: linear-gradient(135deg, var(--forest) 0%, #3d5a3e 100%); color: var(--white); border: none; border-radius: 10px; font-family: inherit; font-size: 1rem; font-weight: 500; cursor: pointer; transition: all 0.3s ease; margin-top: 1rem; box-shadow: 0 4px 15px rgba(44, 62, 45, 0.3); position: relative; overflow: hidden; }
-        .submit-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s; }
-        .submit-btn:hover { background: linear-gradient(135deg, var(--sage) 0%, #a8bda4 100%); transform: translateY(-3px); box-shadow: 0 8px 25px rgba(44, 62, 45, 0.4); }
-        .submit-btn:hover::before { left: 100%; }
-        .submit-btn:active { transform: translateY(-1px); }
-        .submit-btn:disabled { background: var(--sage); cursor: not-allowed; transform: none; opacity: 0.6; }
-        .form-success { text-align: center; padding: 2rem; }
-        .form-success h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--text-secondary); margin-bottom: 0.5rem; transition: color 0.3s ease; }
-        .form-success p { color: var(--sage); transition: color 0.3s ease; }
-        .form-success-small { text-align: center; padding: 1rem; color: var(--text-secondary); font-weight: 500; transition: color 0.3s ease; }
-        .story { background: var(--bg-secondary); }
-        .story-content { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-        .story-text p { margin-bottom: 1.5rem; color: var(--text-primary); line-height: 1.8; transition: color 0.3s ease; }
-        .story-text h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--text-secondary); margin-bottom: 1.5rem; transition: color 0.3s ease; }
-        .story-image { position: relative; }
-        .story-image img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 20px; box-shadow: 0 10px 40px var(--shadow-md); transition: transform 0.3s ease; }
-        .story-image img:hover { transform: scale(1.02); }
-        .story-image-placeholder { aspect-ratio: 4/5; background: linear-gradient(135deg, var(--blush) 0%, var(--sage) 100%); border-radius: 20px; display: flex; align-items: center; justify-content: center; color: var(--white); font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; }
-        .gallery { background: var(--bg-primary); }
-        .gallery-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 250px); gap: 1rem; }
-        .gallery-item { border-radius: 15px; overflow: hidden; position: relative; background: linear-gradient(135deg, var(--sage) 0%, var(--forest) 100%); display: flex; align-items: center; justify-content: center; color: var(--white); font-family: 'Cormorant Garamond', serif; font-style: italic; transition: transform 0.3s; }
-        .gallery-item:hover { transform: scale(1.02); }
-        .gallery-item:first-child { grid-column: span 2; grid-row: span 2; }
-        .padrinos { background: var(--bg-secondary); }
-        .padrinos-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
-        .padrino-card-flip { perspective: 1000px; height: 380px; cursor: pointer; }
-        .padrino-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.8s; transform-style: preserve-3d; }
-        .padrino-card-flip:hover .padrino-card-inner, .padrino-card-flip.flipped .padrino-card-inner { transform: rotateY(180deg); }
-        .padrino-card-front, .padrino-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 20px; padding: 2rem 1rem; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 8px 25px var(--shadow-sm); border: 1px solid var(--border-color); }
-        .padrino-card-front { background: var(--bg-card); backdrop-filter: blur(10px); }
-        .padrino-card-front img { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; object-position: center 30%; margin-bottom: 1.5rem; border: 4px solid var(--gold); }
-        .padrino-photo-placeholder { width: 180px; height: 180px; border-radius: 50%; background: linear-gradient(135deg, var(--sage) 0%, var(--forest) 100%); margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 4rem; color: var(--white); font-weight: 600; border: 4px solid var(--gold); }
-        .padrino-card-front h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--text-secondary); text-align: center; transition: color 0.3s ease; }
-        .padrino-card-back { background: linear-gradient(135deg, var(--forest) 0%, var(--sage) 100%); transform: rotateY(180deg); color: var(--white); text-align: center; gap: 1rem; }
-        .back-role { font-size: 1.5rem; font-weight: 600; color: var(--gold); margin: 0; }
-        .back-relation { font-size: 1.1rem; font-weight: 500; margin: 0; }
-        .back-description { font-size: 0.95rem; line-height: 1.6; opacity: 0.9; margin: 0; }
-        .ceremony { background: var(--bg-primary); }
-        .ceremony-content { max-width: 1000px; margin: 0 auto; }
-        .minister-card { text-align: center; padding: 2.5rem; background: var(--bg-card); backdrop-filter: blur(10px); border-radius: 20px; margin-bottom: 3rem; box-shadow: 0 10px 30px var(--shadow-sm); border: 1px solid var(--border-color); transition: all 0.3s ease; }
-        .minister-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px var(--shadow-md); }
-        .minister-icon { font-size: 3.5rem; margin-bottom: 1rem; }
-        .minister-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--text-secondary); margin-bottom: 0.5rem; transition: color 0.3s ease; }
-        .minister-card p { color: var(--gold); font-size: 1.1rem; font-weight: 500; transition: color 0.3s ease; }
-        .music-intro { text-align: center; max-width: 700px; margin: 0 auto 2rem; color: var(--text-primary); line-height: 1.7; transition: color 0.3s ease; }
-        .download-section { text-align: center; margin: 2rem 0 3rem; }
-        .download-pdf-link { color: var(--gold); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: all 0.3s ease; opacity: 0.85; }
-        .download-pdf-link:hover { opacity: 1; text-decoration: underline; }
-        .music-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; max-width: 1100px; margin: 0 auto; }
-        .music-card { background: var(--bg-card); backdrop-filter: blur(10px); border-radius: 20px; padding: 2rem; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 8px 25px var(--shadow-sm); border: 1px solid var(--border-color); border-top: 4px solid var(--gold); }
-        .music-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 15px 40px var(--shadow-md); }
-        .music-moment-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: linear-gradient(135deg, var(--gold) 0%, #e0b888 100%); color: var(--white); padding: 0.6rem 1.2rem; border-radius: 25px; font-size: 0.9rem; font-weight: 600; margin-bottom: 1.5rem; box-shadow: 0 4px 12px rgba(212, 165, 116, 0.3); }
-        .music-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--text-secondary); margin-bottom: 0.5rem; transition: color 0.3s ease; }
-        .music-card .composer { color: var(--sage); font-style: italic; font-size: 0.95rem; margin-bottom: 1rem; display: block; transition: color 0.3s ease; }
-        .music-card p { color: var(--text-primary); font-size: 0.95rem; line-height: 1.6; transition: color 0.3s ease; }
-        .locations { background: var(--bg-primary); }
-        .locations-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-        .location-card { background: var(--bg-card); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; box-shadow: 0 15px 45px var(--shadow-md); transition: all 0.3s ease; border: 1px solid var(--border-color); }
-        .location-card:hover { transform: translateY(-8px); box-shadow: 0 20px 55px rgba(0,0,0,0.15); }
-        .location-map { height: 250px; background: var(--sage); }
-        .location-map iframe { width: 100%; height: 100%; border: none; }
-        .location-info { padding: 2rem; text-align: center; }
-        .location-type { color: var(--gold); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem; transition: color 0.3s ease; }
-        .location-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--text-secondary); margin-bottom: 1rem; transition: color 0.3s ease; }
-        .location-info p { color: var(--text-primary); margin-bottom: 0.5rem; font-size: 0.95rem; transition: color 0.3s ease; }
-        .location-time { color: var(--sage); font-weight: 500; margin: 1rem 0; transition: color 0.3s ease; }
-        .location-btn { display: inline-block; padding: 0.8rem 2rem; background: linear-gradient(135deg, var(--forest) 0%, #3d5a3e 100%); color: var(--white); text-decoration: none; border-radius: 25px; font-size: 0.9rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(44, 62, 45, 0.25); position: relative; overflow: hidden; }
-        .location-btn::before { content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; border-radius: 50%; background: rgba(255,255,255,0.3); transform: translate(-50%, -50%); transition: width 0.6s, height 0.6s; }
-        .location-btn:hover { background: linear-gradient(135deg, var(--sage) 0%, #a8bda4 100%); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(44, 62, 45, 0.35); }
-        .location-btn:hover::before { width: 300px; height: 300px; }
-        .hotels { background: var(--bg-secondary); }
-        .hotels-intro { text-align: center; max-width: 700px; margin: 0 auto 3rem; color: var(--text-primary); line-height: 1.8; transition: color 0.3s ease; }
-        .hotels-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-        .hotel-card { background: var(--bg-card-hover); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 10px 30px var(--shadow-sm); border: 1px solid var(--border-color); }
-        .hotel-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 50px rgba(0,0,0,0.15), 0 0 0 1px rgba(212, 165, 116, 0.1); }
-        .hotel-image-link { display: block; text-decoration: none; }
-        .hotel-image { height: 200px; background: linear-gradient(135deg, var(--sage) 0%, var(--forest) 100%); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-        .hotel-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
-        .hotel-image-link:hover .hotel-image img { transform: scale(1.05); }
-        .hotel-badge { position: absolute; top: 1rem; right: 1rem; background: var(--gold); color: var(--white); padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; z-index: 2; }
-        .hotel-info { padding: 1.5rem; }
-        .hotel-category { color: var(--gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; transition: color 0.3s ease; }
-        .hotel-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--text-secondary); margin-bottom: 0.5rem; transition: color 0.3s ease; }
-        .hotel-stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 0.75rem; transition: color 0.3s ease; }
-        .hotel-address { color: var(--sage); font-size: 0.85rem; margin-bottom: 1rem; transition: color 0.3s ease; }
-        .hotel-features { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
-        .hotel-feature { background: var(--bg-secondary); padding: 0.3rem 0.7rem; border-radius: 15px; font-size: 0.75rem; color: var(--text-secondary); transition: all 0.3s ease; }
-        .hotel-discount { background: linear-gradient(135deg, var(--forest) 0%, var(--sage) 100%); color: var(--white); padding: 1rem; border-radius: 10px; margin-bottom: 1rem; }
-        .hotel-discount strong { display: block; font-size: 1.1rem; margin-bottom: 0.25rem; }
-        .hotel-discount span { font-size: 0.85rem; opacity: 0.9; }
-        .hotel-contact { display: flex; flex-direction: column; gap: 0.5rem; }
-        .hotel-contact a { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
-        .hotel-contact a:hover { color: var(--gold); }
-        .hotel-reserve-btn { display: block; text-align: center; padding: 0.8rem; background: linear-gradient(135deg, var(--forest) 0%, #3d5a3e 100%); color: var(--white); text-decoration: none; border-radius: 10px; font-size: 0.9rem; font-weight: 500; margin-top: 1rem; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(44, 62, 45, 0.25); }
-        .hotel-reserve-btn:hover { background: linear-gradient(135deg, var(--gold) 0%, #e0b888 100%); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(212, 165, 116, 0.35); }
-        .hotels-note { text-align: center; margin-top: 3rem; padding: 1.5rem; background: var(--bg-accent); border-radius: 15px; max-width: 800px; margin-left: auto; margin-right: auto; transition: background 0.3s ease; }
-        .hotels-note p { color: var(--text-secondary); font-size: 0.95rem; transition: color 0.3s ease; }
-        .hotels-note strong { color: var(--gold); transition: color 0.3s ease; }
-        .details { background: var(--bg-accent); }
-        .details-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-        .detail-card { background: var(--bg-card); backdrop-filter: blur(10px); padding: 2rem; border-radius: 20px; text-align: center; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 8px 25px var(--shadow-sm); border: 1px solid var(--border-color); }
-        .detail-card:hover { transform: translateY(-8px) scale(1.03); box-shadow: 0 15px 40px var(--shadow-md); }
-        .detail-card .detail-icon { transition: transform 0.3s ease; }
-        .detail-card:hover .detail-icon { transform: scale(1.2) rotate(5deg); }
-        .detail-icon { font-size: 2.5rem; margin-bottom: 1rem; }
-        .detail-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--text-secondary); margin-bottom: 0.75rem; transition: color 0.3s ease; }
-        .detail-card p { color: var(--text-primary); font-size: 0.95rem; line-height: 1.6; transition: color 0.3s ease; }
-        .timeline-section { background: var(--bg-secondary); }
-        .timeline { max-width: 700px; margin: 0 auto; position: relative; }
-        .timeline::before { content: ''; position: absolute; left: 50%; transform: translateX(-50%); width: 2px; height: 100%; background: var(--sage); }
-        .timeline-item { display: flex; align-items: center; margin-bottom: 2rem; }
-        .timeline-item:nth-child(odd) { flex-direction: row-reverse; }
-        .timeline-time { flex: 1; text-align: right; padding-right: 2rem; font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--gold); transition: color 0.3s ease; }
-        .timeline-item:nth-child(odd) .timeline-time { text-align: left; padding-right: 0; padding-left: 2rem; }
-        .timeline-dot { width: 16px; height: 16px; background: var(--gold); border-radius: 50%; border: 3px solid var(--bg-secondary); box-shadow: 0 0 0 3px var(--sage); z-index: 1; transition: all 0.3s ease; }
-        .timeline-content { flex: 1; padding-left: 2rem; }
-        .timeline-item:nth-child(odd) .timeline-content { padding-left: 0; padding-right: 2rem; text-align: right; }
-        .timeline-content h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 0.25rem; transition: color 0.3s ease; }
-        .timeline-content p { color: var(--sage); font-size: 0.9rem; transition: color 0.3s ease; }
-        .gifts { background: var(--bg-primary); }
-        .gifts-intro { text-align: center; max-width: 600px; margin: 0 auto 1.5rem; color: var(--text-primary); transition: color 0.3s ease; }
-        .gifts-subtitle { text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--text-secondary); margin: 3rem 0 2rem; transition: color 0.3s ease; }
-        .donations-info { max-width: 700px; margin: 0 auto 3rem; background: var(--bg-card); backdrop-filter: blur(10px); border-radius: 20px; padding: 2.5rem; box-shadow: 0 8px 25px var(--shadow-sm); border: 1px solid var(--border-color); transition: all 0.3s ease; }
-        .donations-info h3 { text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--text-secondary); margin-bottom: 1.5rem; transition: color 0.3s ease; }
-        .donation-methods { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-        .donation-method { display: flex; flex-direction: column; gap: 0.5rem; }
-        .donation-method label { font-weight: 600; color: var(--gold); font-size: 0.95rem; }
-        .donation-method input { padding: 0.8rem 1rem; border: 2px solid var(--border-color); border-radius: 12px; background: var(--bg-secondary); color: var(--text-primary); font-size: 0.9rem; text-align: center; cursor: pointer; transition: all 0.3s ease; }
-        .donation-method input:hover { border-color: var(--gold); background: var(--bg-accent); }
-        .carousel-container { position: relative; max-width: 1100px; margin: 0 auto; padding: 0 60px; }
-        .gifts-carousel { display: flex; gap: 1.5rem; overflow-x: hidden; scroll-behavior: smooth; padding: 1rem 0; }
-        .gift-card { min-width: 280px; background: var(--bg-card); backdrop-filter: blur(10px); border-radius: 20px; padding: 2rem; text-align: center; transition: all 0.4s ease; box-shadow: 0 10px 30px var(--shadow-sm); border: 1px solid var(--border-color); flex-shrink: 0; }
-        .gift-card:hover { transform: translateY(-10px); box-shadow: 0 18px 45px var(--shadow-md); }
-        .gift-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--text-secondary); margin-bottom: 0.8rem; transition: color 0.3s ease; }
-        .gift-card p { color: var(--sage); font-size: 0.9rem; margin-bottom: 0.5rem; transition: color 0.3s ease; }
-        .gift-price { font-weight: 600; color: var(--gold); font-size: 1.1rem; margin-top: 1rem; }
-        .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: var(--bg-card); backdrop-filter: blur(10px); border: 2px solid var(--border-color); color: var(--text-secondary); width: 45px; height: 45px; border-radius: 50%; font-size: 2rem; cursor: pointer; transition: all 0.3s ease; z-index: 10; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px var(--shadow-sm); }
-        .carousel-btn:hover { background: var(--gold); color: var(--white); border-color: var(--gold); transform: translateY(-50%) scale(1.1); }
-        .carousel-btn.prev { left: 0; }
-        .carousel-btn.next { right: 0; }
-        .playlist { background: var(--forest); color: var(--white); }
-        .playlist .section-title { color: var(--white); }
-        .playlist .section-subtitle { color: var(--sage); }
-        .playlist-container { max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
-        .spotify-embed { border-radius: 15px; overflow: hidden; }
-        .song-request { background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px; backdrop-filter: blur(10px); }
-        .song-request h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; margin-bottom: 1rem; }
-        .song-request input { width: 100%; padding: 1rem; border: none; border-radius: 10px; margin-bottom: 1rem; font-family: inherit; background: var(--bg-secondary); color: var(--text-primary); transition: all 0.3s; }
-        .song-request button { width: 100%; padding: 1rem; background: var(--gold); color: var(--white); border: none; border-radius: 10px; font-family: inherit; font-weight: 500; cursor: pointer; transition: background 0.3s; }
-        .song-request button:hover { background: var(--sage); }
-        .song-request button:disabled { background: var(--sage); cursor: not-allowed; }
-        .guestbook { background: var(--bg-accent); }
-        .guestbook-container { max-width: 800px; margin: 0 auto; }
-        .guestbook-form { background: var(--bg-card); padding: 2rem; border-radius: 20px; margin-bottom: 3rem; transition: background 0.3s ease; border: 1px solid var(--border-color); }
-        .guestbook-form textarea { width: 100%; padding: 1rem; border: 1px solid var(--border-color); border-radius: 10px; font-family: inherit; font-size: 1rem; resize: vertical; min-height: 120px; margin-bottom: 1rem; background: var(--bg-secondary); color: var(--text-primary); transition: all 0.3s; }
-        .guestbook-form input { width: 100%; padding: 1rem; border: 1px solid var(--border-color); border-radius: 10px; font-family: inherit; font-size: 1rem; margin-bottom: 1rem; background: var(--bg-secondary); color: var(--text-primary); transition: all 0.3s; }
-        .guestbook-messages { display: flex; flex-direction: column; gap: 1.5rem; }
-        .guestbook-message { background: var(--bg-card); padding: 1.5rem; border-radius: 15px; position: relative; transition: background 0.3s ease; border: 1px solid var(--border-color); }
-        .guestbook-message p { font-style: italic; color: var(--text-primary); margin-bottom: 1rem; line-height: 1.7; transition: color 0.3s ease; }
-        .guestbook-message .author { color: var(--gold); font-weight: 500; transition: color 0.3s ease; }
-        footer { background: var(--forest); color: var(--white); text-align: center; padding: 3rem 2rem; }
-        .footer-hashtag { font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 1rem; }
-        .footer-quote { font-style: italic; color: var(--sage); margin-bottom: 1rem; }
-        .footer-names { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--gold); }
-        .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
-        .section-title { text-shadow: 0 2px 10px rgba(44, 62, 45, 0.1); }
-        .hero h1 { text-shadow: 0 3px 15px rgba(44, 62, 45, 0.15); }
-        @media (max-width: 992px) { .hotels-grid { grid-template-columns: repeat(2, 1fr); } }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Jost', sans-serif; font-weight: 300;
+            background: var(--bg); color: var(--fg);
+            line-height: 1.8;
+            transition: background 0.5s, color 0.5s;
+            -webkit-font-smoothing: antialiased;
+        }
+        ::selection { background: var(--sienna); color: white; }
+
+        /* === TYPO === */
+        .serif { font-family: 'Bodoni Moda', serif; }
+        .upper { text-transform: uppercase; letter-spacing: 0.18em; font-weight: 500; }
+        .micro { font-size: 0.65rem; }
+        .small { font-size: 0.8rem; }
+
+        /* === NAV === */
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.5rem 3rem;
+            mix-blend-mode: difference;
+        }
+        .nav-brand {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 1.1rem; color: white;
+            text-decoration: none; letter-spacing: 0.1em;
+        }
+        .nav-brand em { font-style: italic; }
+        .nav-actions { display: flex; align-items: center; gap: 1.5rem; }
+        .nav-link {
+            font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em;
+            color: white; text-decoration: none; font-weight: 500;
+            transition: opacity 0.2s;
+        }
+        .nav-link:hover { opacity: 0.5; }
+        .burger { display: none; background: none; border: none; cursor: pointer; padding: 0; }
+        .burger span { display: block; width: 20px; height: 1px; background: white; margin: 5px 0; }
+
+        /* Mobile overlay */
+        .overlay-menu {
+            position: fixed; inset: 0; z-index: 200;
+            background: var(--dark);
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center; gap: 2rem;
+            opacity: 0; visibility: hidden;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .overlay-menu.open { opacity: 1; visibility: visible; }
+        .overlay-menu a {
+            font-family: 'Bodoni Moda', serif; font-size: 2.5rem;
+            color: var(--paper); text-decoration: none;
+            opacity: 0; transform: translateY(20px);
+            transition: all 0.4s ease;
+        }
+        .overlay-menu.open a {
+            opacity: 1; transform: translateY(0);
+        }
+        .overlay-menu.open a:nth-child(1) { transition-delay: 0.1s; }
+        .overlay-menu.open a:nth-child(2) { transition-delay: 0.15s; }
+        .overlay-menu.open a:nth-child(3) { transition-delay: 0.2s; }
+        .overlay-menu.open a:nth-child(4) { transition-delay: 0.25s; }
+        .overlay-menu.open a:nth-child(5) { transition-delay: 0.3s; }
+        .overlay-menu.open a:nth-child(6) { transition-delay: 0.35s; }
+        .overlay-menu.open a:nth-child(7) { transition-delay: 0.4s; }
+        .overlay-menu a:hover { color: var(--sienna-soft); }
+        .close-btn {
+            position: absolute; top: 1.5rem; right: 3rem;
+            background: none; border: none; color: var(--paper);
+            font-size: 2rem; cursor: pointer;
+        }
+
+        /* === HERO — full cinematic === */
+        .hero {
+            height: 100vh; height: 100dvh;
+            background: var(--dark);
+            display: grid;
+            grid-template-rows: 1fr auto 1fr;
+            grid-template-columns: 1fr;
+            align-items: center; justify-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-top {
+            align-self: end;
+            padding-bottom: 1rem;
+        }
+        .hero-crest { width: 48px; height: 48px; color: var(--sienna); }
+        .hero-crest svg { width: 100%; height: 100%; }
+        .hero-center { z-index: 1; }
+        .hero-date {
+            font-size: 0.6rem; color: rgba(245,242,236,0.4);
+            letter-spacing: 0.3em; text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+        .hero-names {
+            font-family: 'Bodoni Moda', serif;
+            font-weight: 400;
+            font-size: clamp(4rem, 12vw, 10rem);
+            line-height: 0.9;
+            color: var(--paper);
+            letter-spacing: -0.03em;
+        }
+        .hero-names em { font-style: italic; font-weight: 400; }
+        .hero-names .amp {
+            display: block;
+            font-style: italic;
+            font-size: 0.35em;
+            letter-spacing: 0.1em;
+            margin: 0.3em 0;
+            color: var(--sienna-soft);
+        }
+        .hero-bottom {
+            align-self: start;
+            padding-top: 2rem;
+            text-align: center;
+        }
+        .hero-quote {
+            font-family: 'Bodoni Moda', serif;
+            font-style: italic; font-size: 0.95rem;
+            color: var(--sienna-soft);
+            margin-bottom: 0.3rem;
+        }
+        .hero-author {
+            font-size: 0.6rem; color: rgba(245,242,236,0.3);
+            letter-spacing: 0.15em; text-transform: uppercase;
+        }
+        .hero-countdown {
+            position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%);
+            display: flex; gap: 2.5rem;
+        }
+        .cd-item { text-align: center; }
+        .cd-num {
+            font-family: 'Bodoni Moda', serif;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            color: var(--paper); display: block; line-height: 1;
+            transition: opacity 0.3s ease;
+        }
+        .cd-num.tick { opacity: 0.5; }
+        .cd-label {
+            font-size: 0.55rem; text-transform: uppercase;
+            letter-spacing: 0.2em; color: rgba(245,242,236,0.25);
+        }
+        .scroll-indicator {
+            position: absolute; bottom: 1.2rem; left: 50%;
+            width: 1px; height: 30px; background: rgba(245,242,236,0.15);
+            animation: pulse 3s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%,100% { opacity: 0.1; } 50% { opacity: 0.4; } }
+
+        /* Hero stagger */
+        .hs { opacity: 0; transform: translateY(12px); }
+        .hero.loaded .hs { opacity: 1; transform: none; transition: all 0.9s cubic-bezier(0.16,1,0.3,1); }
+        .hero.loaded .hs:nth-child(1) { transition-delay: 0.2s; }
+        .hero.loaded .hs:nth-child(2) { transition-delay: 0.5s; }
+        .hero.loaded .hs:nth-child(3) { transition-delay: 0.8s; }
+
+        /* === MARQUEE STRIP === */
+        .marquee-strip {
+            background: var(--sienna);
+            padding: 0.6rem 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-track {
+            display: inline-flex;
+            animation: scroll-marquee 30s linear infinite;
+        }
+        .marquee-track span {
+            font-family: 'Bodoni Moda', serif;
+            font-style: italic;
+            font-size: 0.75rem;
+            color: white;
+            padding: 0 3rem;
+            letter-spacing: 0.1em;
+        }
+        @keyframes scroll-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* === LAYOUT === */
+        .pad { padding: clamp(5rem, 12vw, 10rem) clamp(1.5rem, 5vw, 6rem); }
+        .pad-sm { padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 6rem); }
+        .max-narrow { max-width: 640px; margin: 0 auto; }
+        .max-content { max-width: 1100px; margin: 0 auto; }
+        .bg-paper { background: var(--bg); }
+        .bg-warm { background: var(--warm); }
+        .bg-dark { background: var(--bg-inv); color: var(--fg-inv); }
+        .center { text-align: center; }
+
+        /* === SECTION HEADERS (fashion magazine) === */
+        .sec-head {
+            text-align: center;
+            margin-bottom: clamp(3rem, 6vw, 5rem);
+        }
+        .sec-tag {
+            font-size: 0.55rem; letter-spacing: 0.35em; text-transform: uppercase;
+            font-weight: 500; color: var(--sienna); margin-bottom: 0.8rem;
+        }
+        .sec-title {
+            font-family: 'Bodoni Moda', serif; font-weight: 400;
+            font-size: clamp(2.2rem, 5vw, 4rem);
+            line-height: 1.05; letter-spacing: -0.02em;
+        }
+        .sec-title em { font-style: italic; }
+        .sec-sub {
+            font-size: 0.85rem; color: var(--fg-mute);
+            margin-top: 1rem; max-width: 480px; margin-left: auto; margin-right: auto;
+        }
+
+        /* === EDITORIAL DIVIDER === */
+        .divider {
+            display: flex; align-items: center; justify-content: center;
+            gap: 1.5rem; padding: 0.5rem 0;
+        }
+        .divider::before, .divider::after {
+            content: ''; flex: 1; max-width: 120px;
+            height: 1px; background: var(--rule);
+        }
+        .divider-dot {
+            width: 4px; height: 4px; background: var(--sienna);
+            border-radius: 50%;
+        }
+
+        /* === RSVP === */
+        .rsvp-box { max-width: 520px; margin: 0 auto; }
+        .field { margin-bottom: 2rem; }
+        .field label {
+            display: block; font-size: 0.6rem; font-weight: 500;
+            text-transform: uppercase; letter-spacing: 0.2em;
+            color: var(--fg-mute); margin-bottom: 0.5rem;
+        }
+        .field input, .field select, .field textarea {
+            width: 100%; padding: 0.7rem 0;
+            border: none; border-bottom: 1px solid var(--rule);
+            background: transparent; font-family: 'Jost', sans-serif;
+            font-size: 1rem; font-weight: 300; color: var(--fg);
+            transition: border-color 0.3s; border-radius: 0;
+            -webkit-appearance: none;
+        }
+        .field input:focus, .field select:focus, .field textarea:focus {
+            outline: none; border-bottom-color: var(--sienna);
+        }
+        .field select {
+            cursor: pointer;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Cpath d='M2 3l3 4 3-4' stroke='%238a8580' fill='none' stroke-width='1.2'/%3E%3C/svg%3E") no-repeat right center;
+        }
+        .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+
+        .menu-pick { margin: 2.5rem 0; }
+        .menu-pick h4 { font-family: 'Bodoni Moda', serif; font-size: 1.1rem; margin-bottom: 1rem; }
+        .menu-opts { display: flex; gap: 0.8rem; }
+        .menu-opt { position: relative; flex: 1; }
+        .menu-opt input { position: absolute; opacity: 0; }
+        .menu-opt-label {
+            display: block; text-align: center; padding: 1rem 0.5rem;
+            border: 1px solid var(--rule); cursor: pointer;
+            font-weight: 500; font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 0.15em;
+            transition: all 0.2s;
+        }
+        .menu-opt input:checked + .menu-opt-label {
+            border-color: var(--sienna); color: var(--sienna);
+        }
+        .menu-opt-label:hover { border-color: var(--sienna); }
+
+        .guests-box { margin: 1.5rem 0; padding: 1.5rem; border: 1px solid var(--rule); }
+        .guests-box h4 { font-family: 'Bodoni Moda', serif; font-size: 1rem; margin-bottom: 1rem; }
+        .g-entry { margin-bottom: 1rem; }
+        .g-num { font-size: 0.6rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.15em; color: var(--sienna); margin-bottom: 0.4rem; }
+        .g-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .g-fields input, .g-fields select {
+            padding: 0.5rem 0; border: none; border-bottom: 1px solid var(--rule);
+            background: transparent; font-family: 'Jost', sans-serif;
+            font-size: 0.9rem; font-weight: 300; color: var(--fg);
+            border-radius: 0; -webkit-appearance: none;
+        }
+        .g-fields select { cursor: pointer; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Cpath d='M2 3l3 4 3-4' stroke='%238a8580' fill='none' stroke-width='1.2'/%3E%3C/svg%3E") no-repeat right center; }
+        .g-fields input:focus, .g-fields select:focus { outline: none; border-bottom-color: var(--sienna); }
+
+        .btn-submit {
+            width: 100%; padding: 1.1rem; margin-top: 2rem;
+            background: var(--ink); color: var(--paper); border: none;
+            font-family: 'Jost', sans-serif; font-weight: 500;
+            font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.25em;
+            cursor: pointer; transition: all 0.3s;
+        }
+        .btn-submit:hover { background: var(--sienna); color: white; }
+        .btn-submit:disabled { opacity: 0.3; cursor: not-allowed; }
+        .form-msg { text-align: center; padding: 1.5rem; border: 1px solid var(--rule); margin-top: 1rem; }
+        .form-ok { text-align: center; padding: 2rem; }
+        .form-ok h3 { font-family: 'Bodoni Moda', serif; font-size: 1.3rem; margin-bottom: 0.3rem; }
+        .form-ok p { color: var(--fg-mute); font-size: 0.9rem; }
+        .form-ok-sm { text-align: center; padding: 1rem; font-weight: 500; font-size: 0.9rem; }
+        #menu-error { color: var(--sienna); font-size: 0.8rem; margin-top: 0.5rem; text-align: center; }
+
+        /* === STORY — editorial spread === */
+        .story-spread {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 80vh;
+        }
+        .story-photo { position: relative; overflow: hidden; }
+        .story-photo img {
+            width: 100%; height: 100%; object-fit: cover;
+            display: block;
+            transition: transform 8s cubic-bezier(0.16,1,0.3,1);
+        }
+        .story-photo:hover img { transform: scale(1.05); }
+        .story-copy {
+            display: flex; flex-direction: column; justify-content: center;
+            padding: clamp(3rem, 6vw, 6rem);
+        }
+        .story-copy .sec-tag { text-align: left; margin-bottom: 1rem; }
+        .story-copy h2 {
+            font-family: 'Bodoni Moda', serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            line-height: 1.05; margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+        .story-copy p { color: var(--fg-mute); margin-bottom: 1.2rem; font-size: 0.95rem; }
+
+        /* === CEREMONY — dark cinematic === */
+        .ceremony-intro {
+            font-size: 0.9rem; color: var(--fg-inv);
+            opacity: 0.6; text-align: center; margin-bottom: 3rem;
+        }
+        .ceremony-intro strong {
+            font-family: 'Bodoni Moda', serif; font-weight: 500;
+            font-size: 1rem; opacity: 1;
+        }
+        .music-editorial { max-width: 580px; margin: 0 auto; }
+        .music-piece {
+            padding: 1.8rem 0;
+            border-bottom: 1px solid rgba(245,242,236,0.06);
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1.5rem;
+            align-items: baseline;
+        }
+        .music-piece:last-child { border-bottom: none; }
+        .m-moment {
+            font-size: 0.5rem; text-transform: uppercase; letter-spacing: 0.3em;
+            font-weight: 500; color: var(--sienna-soft);
+            min-width: 100px;
+            padding-top: 0.15rem;
+        }
+        .m-info {}
+        .m-title {
+            font-family: 'Bodoni Moda', serif; font-weight: 500;
+            font-size: 1.1rem; color: var(--fg-inv);
+        }
+        .m-composer {
+            font-family: 'Jost', sans-serif; font-weight: 300;
+            font-style: italic; font-size: 0.8rem;
+            color: var(--fg-inv); opacity: 0.35;
+        }
+        .dl-link {
+            display: inline-block; margin-top: 2.5rem;
+            color: var(--sienna-soft); font-size: 0.65rem;
+            text-transform: uppercase; letter-spacing: 0.25em;
+            text-decoration: none; font-weight: 500;
+            border-bottom: 1px solid var(--sienna-soft);
+            padding-bottom: 2px;
+            transition: opacity 0.2s;
+        }
+        .dl-link:hover { opacity: 0.5; }
+
+        /* === VENUES — side by side with maps === */
+        .venues-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 3rem; max-width: 1100px; margin: 0 auto;
+        }
+        .venue {}
+        .venue-map { height: 300px; margin-bottom: 1.5rem; }
+        .venue-map iframe { width: 100%; height: 100%; border: none; display: block; filter: grayscale(1) contrast(1.1); transition: filter 0.4s; }
+        .venue-map:hover iframe { filter: none; }
+        .venue-tag { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.3em; font-weight: 500; color: var(--sienna); margin-bottom: 0.3rem; }
+        .venue h3 { font-family: 'Bodoni Moda', serif; font-size: 1.3rem; margin-bottom: 0.3rem; }
+        .venue p { font-size: 0.85rem; color: var(--fg-mute); }
+        .venue-time { color: var(--fg); font-weight: 500; font-size: 0.85rem; margin: 0.5rem 0; }
+        .venue-link {
+            font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.2em;
+            color: var(--sienna); text-decoration: none; font-weight: 500;
+            border-bottom: 1px solid var(--sienna);
+            padding-bottom: 1px; transition: opacity 0.2s;
+        }
+        .venue-link:hover { opacity: 0.5; }
+
+        /* === TIMELINE — minimal === */
+        .tl { max-width: 520px; margin: 0 auto; position: relative; }
+        .tl::before {
+            content: ''; position: absolute; left: 0; top: 0;
+            width: 1px; height: var(--line-h, 0);
+            background: var(--sienna); opacity: 0.3;
+            transition: height 0.1s linear;
+        }
+        .tl-item {
+            display: grid; grid-template-columns: 70px 1fr;
+            padding: 1.2rem 0 1.2rem 2rem;
+            position: relative;
+        }
+        .tl-item::before {
+            content: ''; position: absolute; left: -2.5px; top: 1.6rem;
+            width: 6px; height: 6px; background: var(--sienna);
+            border-radius: 50%;
+        }
+        .tl-time { font-weight: 500; font-size: 0.85rem; color: var(--fg-mute); }
+        .tl-event { font-family: 'Bodoni Moda', serif; font-weight: 500; font-size: 1rem; }
+        .tl-desc { font-size: 0.8rem; color: var(--fg-mute); }
+
+        /* === HOTELS — editorial grid === */
+        .hotels-mosaic {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 1px; background: var(--rule);
+            max-width: 1100px; margin: 0 auto;
+        }
+        .hotel {
+            background: var(--bg);
+            padding: 0;
+            transition: background 0.3s;
+        }
+        .hotel-img { height: 200px; overflow: hidden; }
+        .hotel-img img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(0.3); transition: all 0.5s; }
+        .hotel:hover .hotel-img img { filter: none; transform: scale(1.03); }
+        .hotel-body { padding: 1.2rem 1.5rem; }
+        .hotel-cat { font-size: 0.5rem; text-transform: uppercase; letter-spacing: 0.3em; color: var(--sienna); font-weight: 500; }
+        .hotel h3 { font-family: 'Bodoni Moda', serif; font-size: 1.05rem; margin: 0.2rem 0; }
+        .hotel-stars { font-size: 0.75rem; color: var(--sienna); }
+        .hotel-addr { font-size: 0.75rem; color: var(--fg-mute); margin-bottom: 0.8rem; }
+        .hotel-go {
+            font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.2em;
+            color: var(--sienna); text-decoration: none; font-weight: 500;
+            transition: opacity 0.2s;
+        }
+        .hotel-go:hover { opacity: 0.5; }
+
+        /* === DETAILS — key/value strips === */
+        .details-strips { max-width: 700px; margin: 0 auto; }
+        .detail-strip {
+            display: flex; justify-content: space-between; align-items: baseline;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid var(--rule);
+        }
+        .detail-strip:last-child { border-bottom: none; }
+        .d-key {
+            font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.3em;
+            font-weight: 500; color: var(--sienna); min-width: 140px;
+        }
+        .d-val { text-align: right; font-size: 0.95rem; }
+
+        /* === GIFTS — editorial list === */
+        .gifts-content { max-width: 640px; margin: 0 auto; }
+        .gifts-intro { text-align: center; color: var(--fg-mute); margin-bottom: 3rem; font-size: 0.95rem; }
+        .contrib-box { border: 1px solid var(--rule); padding: 2rem; margin-bottom: 3rem; }
+        .contrib-box h3 { font-family: 'Bodoni Moda', serif; font-size: 1.2rem; text-align: center; margin-bottom: 1.5rem; }
+        .contrib-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .contrib-item label { display: block; font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--sienna); font-weight: 500; margin-bottom: 0.3rem; }
+        .contrib-item input { width: 100%; padding: 0.5rem 0; border: none; border-bottom: 1px solid var(--rule); background: transparent; font-family: 'Jost', sans-serif; font-size: 0.85rem; color: var(--fg); text-align: center; cursor: pointer; }
+        .gifts-sub { font-family: 'Bodoni Moda', serif; font-size: 1.2rem; text-align: center; margin-bottom: 2rem; }
+        .gift-line {
+            display: flex; justify-content: space-between; align-items: baseline;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--rule);
+        }
+        .gift-line:last-child { border-bottom: none; }
+        .gift-name { font-size: 0.95rem; }
+        .gift-price { font-weight: 500; color: var(--sienna); font-size: 0.9rem; white-space: nowrap; }
+
+        /* === PLAYLIST — dark split === */
+        .playlist-split {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 2.5rem; max-width: 800px; margin: 0 auto;
+        }
+        .song-form-box {
+            border: 1px solid rgba(245,242,236,0.1);
+            padding: 2rem;
+        }
+        .song-form-box h4 { font-family: 'Bodoni Moda', serif; font-size: 1.1rem; margin-bottom: 1.5rem; color: var(--fg-inv); }
+        .song-form-box input {
+            width: 100%; padding: 0.6rem 0; margin-bottom: 1rem;
+            border: none; border-bottom: 1px solid rgba(245,242,236,0.12);
+            background: transparent; font-family: 'Jost', sans-serif;
+            font-size: 0.9rem; font-weight: 300; color: var(--fg-inv);
+            border-radius: 0;
+        }
+        .song-form-box input::placeholder { color: rgba(245,242,236,0.25); }
+        .song-form-box input:focus { outline: none; border-bottom-color: var(--sienna-soft); }
+        .song-btn {
+            width: 100%; padding: 0.9rem; margin-top: 0.5rem;
+            background: var(--sienna); color: white; border: none;
+            font-family: 'Jost', sans-serif; font-weight: 500;
+            font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.25em;
+            cursor: pointer; transition: opacity 0.2s;
+        }
+        .song-btn:hover { opacity: 0.8; }
+        .song-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        /* === GUESTBOOK === */
+        .gb-container { max-width: 640px; margin: 0 auto; }
+        .gb-form {
+            border: 1px solid var(--rule);
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+        .gb-form textarea {
+            width: 100%; padding: 0.7rem 0; min-height: 80px; resize: vertical;
+            border: none; border-bottom: 1px solid var(--rule);
+            background: transparent; font-family: 'Jost', sans-serif;
+            font-size: 1rem; font-weight: 300; color: var(--fg);
+            margin-bottom: 1rem; border-radius: 0;
+        }
+        .gb-form input {
+            width: 100%; padding: 0.7rem 0;
+            border: none; border-bottom: 1px solid var(--rule);
+            background: transparent; font-family: 'Jost', sans-serif;
+            font-size: 1rem; font-weight: 300; color: var(--fg);
+            margin-bottom: 1rem; border-radius: 0;
+        }
+        .gb-form textarea:focus, .gb-form input:focus { outline: none; border-bottom-color: var(--sienna); }
+        .gb-messages { display: flex; flex-direction: column; gap: 2.5rem; }
+        .gb-msg {}
+        .gb-msg p {
+            font-family: 'Bodoni Moda', serif; font-style: italic;
+            font-size: 1.1rem; line-height: 1.6; margin-bottom: 0.4rem;
+        }
+        .gb-msg .who { font-family: 'Jost', sans-serif; font-style: normal; font-size: 0.7rem; color: var(--fg-mute); text-transform: uppercase; letter-spacing: 0.15em; }
+
+        /* === FOOTER === */
+        .foot {
+            background: var(--dark); color: var(--paper);
+            text-align: center; padding: 5rem 2rem;
+            position: relative;
+        }
+        .foot-crest { width: 36px; height: 36px; color: var(--sienna); margin: 0 auto 1.5rem; }
+        .foot-crest svg { width: 100%; height: 100%; }
+        .foot-names { font-family: 'Bodoni Moda', serif; font-size: 1.4rem; margin-bottom: 0.3rem; }
+        .foot-names em { font-style: italic; }
+        .foot-date { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.3em; opacity: 0.35; margin-bottom: 0.3rem; }
+        .foot-hash { font-size: 0.75rem; opacity: 0.2; margin-bottom: 2rem; }
+        .foot-quote { font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 0.85rem; opacity: 0.2; max-width: 350px; margin: 0 auto; }
+
+        .hotels-note { text-align: center; margin-top: 2.5rem; font-size: 0.85rem; color: var(--fg-mute); }
+        .hotels-note strong { color: var(--sienna); }
+
+        /* === CALENDAR BUTTON === */
+        .cal-btn {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            margin-top: 2rem;
+            padding: 0.9rem 2rem;
+            border: 1px solid var(--sienna); background: transparent;
+            color: var(--sienna); font-family: 'Jost', sans-serif;
+            font-size: 0.6rem; font-weight: 500;
+            text-transform: uppercase; letter-spacing: 0.2em;
+            cursor: pointer; transition: all 0.3s;
+            text-decoration: none;
+        }
+        .cal-btn:hover { background: var(--sienna); color: white; }
+        .cal-btn svg { width: 14px; height: 14px; }
+
+        /* === GALLERY — editorial lookbook === */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 320px 280px;
+            gap: 3px;
+            max-width: 1200px; margin: 0 auto;
+        }
+        .gallery-grid .g-item { overflow: hidden; position: relative; }
+        .gallery-grid .g-item:first-child { grid-row: 1 / 3; }
+        .gallery-grid .g-item img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+            filter: grayscale(0.2); transition: all 0.8s cubic-bezier(0.16,1,0.3,1);
+        }
+        .gallery-grid .g-item:hover img { filter: none; transform: scale(1.04); }
+        .gallery-grid .g-caption {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.5));
+            color: white; font-size: 0.55rem; text-transform: uppercase;
+            letter-spacing: 0.25em; font-weight: 500;
+            opacity: 0; transition: opacity 0.4s;
+        }
+        .gallery-grid .g-item:hover .g-caption { opacity: 1; }
+
+        /* === FAQ — accordion === */
+        .faq-list { max-width: 700px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid var(--rule); }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-q {
+            width: 100%; display: flex; justify-content: space-between; align-items: center;
+            padding: 1.3rem 0; background: none; border: none;
+            font-family: 'Bodoni Moda', serif; font-size: 1.05rem;
+            color: var(--fg); cursor: pointer; text-align: left;
+            transition: color 0.2s;
+        }
+        .faq-q:hover { color: var(--sienna); }
+        .faq-q::after {
+            content: '+'; font-family: 'Jost', sans-serif; font-weight: 300;
+            font-size: 1.3rem; color: var(--sienna);
+            transition: transform 0.3s;
+        }
+        .faq-item.open .faq-q::after { transform: rotate(45deg); }
+        .faq-a {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1);
+        }
+        .faq-item.open .faq-a { max-height: 200px; }
+        .faq-a p {
+            padding-bottom: 1.3rem; font-size: 0.9rem;
+            color: var(--fg-mute); line-height: 1.7;
+        }
+
+        /* === FOOTER copyright === */
+        .foot-dev {
+            margin-top: 3rem; padding-top: 1.5rem;
+            border-top: 1px solid rgba(245,242,236,0.06);
+            font-size: 0.55rem; text-transform: uppercase;
+            letter-spacing: 0.2em; opacity: 0.2;
+        }
+        .foot-dev a { color: inherit; text-decoration: none; transition: opacity 0.2s; }
+        .foot-dev a:hover { opacity: 0.6; }
+
+        /* === REVEAL === */
+        .rv { opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16,1,0.3,1); }
+        .rv.in { opacity: 1; transform: none; }
+
+        /* === RESPONSIVE === */
         @media (max-width: 768px) {
-            .nav-links { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: var(--bg-card); flex-direction: column; padding: 1rem; gap: 1rem; box-shadow: 0 10px 20px var(--shadow-md); }
-            .nav-links.active { display: flex; }
-            .hide-mobile { display: none !important; }
-            .menu-toggle { display: flex; }
-            .theme-toggle-switch { position: absolute; left: 50%; transform: translateX(-50%); margin-left: 0; width: 54px; height: 26px; top: 50%; margin-top: -13px; }
-            .theme-toggle-switch .slider:before { height: 20px; width: 20px; bottom: 2px; }
-            .theme-toggle-switch input:checked + .slider:before { transform: translateX(28px); }
-            .slider-icon { font-size: 12px; }
-            .slider-icon.sun { left: 6px; }
-            .slider-icon.moon { right: 6px; }
-            .story-content, .locations-grid, .playlist-container { grid-template-columns: 1fr; }
-            .music-grid { grid-template-columns: 1fr; }
-            .padrinos-grid, .details-grid, .hotels-grid { grid-template-columns: 1fr; }
-            .padrino-card-flip { height: 350px; }
-            .donation-methods { grid-template-columns: 1fr; }
-            .carousel-container { padding: 0 50px; }
-            .carousel-btn { width: 40px; height: 40px; font-size: 1.5rem; }
-            .form-row { grid-template-columns: 1fr; }
-            .guest-fields { grid-template-columns: 1fr; }
-            .menu-options { grid-template-columns: 1fr; }
-            .timeline::before { left: 20px; }
-            .timeline-item, .timeline-item:nth-child(odd) { flex-direction: column; align-items: flex-start; padding-left: 50px; }
-            .timeline-time, .timeline-item:nth-child(odd) .timeline-time { text-align: left; padding: 0; margin-bottom: 0.5rem; }
-            .timeline-content, .timeline-item:nth-child(odd) .timeline-content { padding: 0; text-align: left; }
-            .timeline-dot { position: absolute; left: 12px; }
-            .countdown { gap: 0.5rem; margin-bottom: 2rem; }
-            .countdown-item { padding: 0.8rem 1rem; }
-            .countdown-number { font-size: 2rem; }
-            .countdown-label { font-size: 0.8rem; }
-            .sacred-heart { width: 150px; height: 150px; margin-top: 5rem; margin-bottom: -0.5rem; }
-            .hero h1 { white-space: nowrap; font-size: 2.5rem; }
-            .initial-seal { width: 220px; height: 220px; }
-            .seal-initials { font-size: 3.5rem; }
-            .envelope { width: 320px; height: 240px; }
-            .wax-seal { width: 70px; height: 70px; bottom: -40px; }
-            .wax-seal img { width: 45px; height: 45px; }
-            .invitation-card { height: 200px; padding: 1.5rem; }
-            .card-icon { width: 50px; height: 50px; }
-            .invitation-card h2 { font-size: 1.6rem; }
-            .invitation-card p { font-size: 0.9rem; }
-            .open-btn { padding: 0.7rem 1.5rem; font-size: 0.9rem; }
+            .nav { padding: 1.2rem 1.5rem; }
+            .nav-actions .nav-link { display: none; }
+            .burger { display: block; }
+            .story-spread { grid-template-columns: 1fr; }
+            .story-photo { height: 60vh; }
+            .venues-grid { grid-template-columns: 1fr; }
+            .venue-map { height: 220px; }
+            .hotels-mosaic { grid-template-columns: 1fr; }
+            .playlist-split { grid-template-columns: 1fr; }
+            .field-row { grid-template-columns: 1fr; }
+            .menu-opts { flex-direction: column; }
+            .g-fields { grid-template-columns: 1fr; }
+            .contrib-row { grid-template-columns: 1fr; }
+            .music-piece { grid-template-columns: 1fr; gap: 0.3rem; }
+            .m-moment { min-width: unset; }
+            .close-btn { right: 1.5rem; }
+            .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+            .gallery-grid .g-item { height: 250px; }
+            .gallery-grid .g-item:first-child { grid-row: auto; }
+        }
+        @media (max-width: 480px) {
+            .hero-names { font-size: clamp(3rem, 15vw, 5rem); }
+            .hero-countdown { gap: 1.5rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Animación de apertura de invitación -->
-    <div id="invitation-overlay" class="invitation-overlay">
-        <!-- Sello inicial grande -->
-        <div class="initial-seal" onclick="breakSeal()">
-            <div class="seal-content">
-                <span class="seal-initials">R & A</span>
-            </div>
-        </div>
-        <p class="invitation-text">¡Tenemos una invitación muy especial para ti!</p>
-    </div>
-
-    <nav>
-        <a href="#home" class="logo">R & A</a>
-        <div class="nav-right">
-            <ul class="nav-links">
-                <li><a href="#home">Inicio</a></li>
-                <li><a href="#rsvp">Confirmar</a></li>
-                <li><a href="#story">Historia</a></li>
-                <li class="hide-mobile"><a href="#ceremony">Ceremonia</a></li>
-                <li><a href="#locations">Lugares</a></li>
-                <li><a href="#hotels">Hoteles</a></li>
-                <li><a href="#timeline">Programa</a></li>
-                <li><a href="#gifts">Regalos</a></li>
-                <li class="hide-mobile"><a href="#guestbook">Firmas</a></li>
-            </ul>
-            <label class="theme-toggle-switch" aria-label="Cambiar tema">
-                <input type="checkbox" id="theme-checkbox" onchange="toggleTheme()">
-                <span class="slider">
-                    <span class="slider-icon sun">☀</span>
-                    <span class="slider-icon moon">☾</span>
-                </span>
-            </label>
-            <div class="menu-toggle" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+    <!-- NAV -->
+    <nav class="nav">
+        <a href="#" class="nav-brand">R <em>&</em> A</a>
+        <div class="nav-actions">
+            <a href="#rsvp" class="nav-link">Confirmar</a>
+            <a href="#story" class="nav-link">Historia</a>
+            <a href="#ceremony" class="nav-link">Ceremonia</a>
+            <a href="#venues" class="nav-link">Lugares</a>
+            <a href="#timeline" class="nav-link">Programa</a>
+            <a href="#gifts" class="nav-link">Regalos</a>
+            <button class="burger" onclick="openMenu()" aria-label="Menú"><span></span><span></span><span></span></button>
         </div>
     </nav>
 
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <img src="assets/corazon_transverberado.svg" class="sacred-heart" alt="Corazón Transverberado">
-            <h1>Raquel & Adrián</h1>
-            <p class="quote">"Y sin amor, todo es nada"</p>
-            <p class="quote-author">— Santa Teresa de Jesús</p>
-            <p class="date">12 DE JUNIO DE 2027 • ÁVILA</p>
-            <div class="countdown">
-                <div class="countdown-item"><span class="countdown-number" id="days">000</span><span class="countdown-label">Días</span></div>
-                <div class="countdown-item"><span class="countdown-number" id="hours">00</span><span class="countdown-label">Horas</span></div>
-                <div class="countdown-item"><span class="countdown-number" id="minutes">00</span><span class="countdown-label">Minutos</span></div>
+    <!-- MOBILE MENU -->
+    <div class="overlay-menu" id="overlayMenu">
+        <button class="close-btn" onclick="closeMenu()">&times;</button>
+        <a href="#rsvp" onclick="closeMenu()">Confirmar</a>
+        <a href="#story" onclick="closeMenu()">Historia</a>
+        <a href="#ceremony" onclick="closeMenu()">Ceremonia</a>
+        <a href="#venues" onclick="closeMenu()">Lugares</a>
+        <a href="#timeline" onclick="closeMenu()">Programa</a>
+        <a href="#gifts" onclick="closeMenu()">Regalos</a>
+        <a href="#guestbook" onclick="closeMenu()">Firmas</a>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="hero-top hs">
+            <div class="hero-crest">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="675 272 708 739" fill="currentColor"><path d="m0 0h32v59h61l1 4-1 28h-61v172l8-6 14-11 17-9h2l-2-10-11-21-5-15v-19l4-15 5-10 9-11 15-11 6-4h2l-1 15v16l1 4 4-14 7-13 8-10 10-11 8-11 4-11 2-11v-10l-3-17-2-7h3l12 7 14 11 9 10 8 14 4 11 1 6v16l-4 18-14 28-2 8v9l4 15 5 17v15l-3 10 1 4 1 3-7 8-7 7-9-3-16-4-8-1h-18l-17 3-15 6-14 8-11 9-7 7-13 17-11 16-3 4-4-2-13-19-9-12-9-10-13-10-14-8-15-6-17-3h-18l-19 3-15 6-15 9-10 9-11 15-8 17-4 16-1 7v26l3 18 5 17 9 21 12 23 15 24 21 28 9 11 11 13 9 10 14 15 7 8 16 16 8 7 13 12 8 7 10 9 14 11 9 7 5-2 13-11 11-9 13-12 8-7 10-9 13-12 8-8 7-8 12-12 7-8 11-13 11-14 12-15 18-27 10-17 11-21 9-24 5-22 1-8v-22l-3-17-6-16-6-11 2-4 12-12 3 1 9 16 5 12 4 14 3 26-1 17-3 18-6 21-8 20-12 24-13 21-10 14-11 16-11 14-24 28-16 17-30 30-8 7-7 7-8 7-34 28-11 8-6 1-13-9-14-12-10-8-13-11-10-9-12-11-7-7-8-7-14-14-4 2-9 9-7 8-4 2v2l-16 16-1 2 5 2 17 9 6 4-1 2-20 7-36 13-30 10-3-1 15-46 15-43 2-2 6 12 7 15v2l5-3 12-12 7-8 17-17h2l-6-8-11-13-14-17-13-18-18-27-14-25-9-20-8-22-5-23-1-10v-19l3-21 7-20 9-17 11-14 12-12h2l-1-4-20-25-8-14-4-14v-20l3-12 7-14 10-14 4-3 3 13 5 15 6 10 6 4h7l4-3-1-12-12-22-4-13-2-12v-8l3-15 8-16 6-8 12-12 15-10 5-3 3 1-4 17-1 8v11l3 13 6 12 15 16 10 14 6 14 2 9 1 1v-26l-1-9 6 2 12 8 10 9 7 11 5 13 2 9v15l-4 15-9 17-4 7-1 9 19 10 13 10 7 6 2 1-1-7v-164l-61-1v-32h61v-58zm158 89-4 10-7 14-8 10-10 11-7 10-4 11-1 5v43l-17-8-11-8-9-10-4-4v16l4 11 9 16 6 14 10-1h26l14 2h5l3-9v-8l-7-27-1-7v-12l3-14 4-10 8-14 4-11v-18l-4-11zm-286 1-4 9-1 5v10l4 13 12 25 3 12v7l-3 10-6 8-5 4-9 3h-9l-10-3-9-6-4-3h-2l3 14 6 12 8 10 10 11 6 8 9-3 16-5 12-2h29l8 1 14-28 5-12 1-16-2-1-8 11-9 8-16 8-5 2-1-40-4-15-6-10-13-15-8-9-6-12-4-11z" transform="translate(1008,316)"/><path d="m0 0h2l1 2 4 50v8l28 2 31 3 2 1-2 4-11 10-7 8-45 45-1 2h-2l-2 4-6 5-52 1-8 7-7 8-37 37-7 8-33 33-7 8-42 42-7 8-5 4-7 8 2 6 5 12 2 8v13l-4 6-2 1h-8l-5-4-2-4-3-16-5-10-4-5-10-6-11-4-11-1-5-6-1-7 3-5 5-3h12l12 3 12 6 3 1 7-8 36-36 7-8 31-31 7-8 40-40 7-8 24-24 1-2v-53zm-17 47-35 35-1 2v21l4-2 22-22 4-5 8-7 1-2-1-20zm18 35-6 5-6 7-8 7-11 12-7 7v2h22l25-25 7-8 5-6-2-1z" transform="translate(1285,419)"/></svg>
             </div>
         </div>
-        <p class="scroll-hint">Desliza para confirmar tu asistencia ↓</p>
+        <div class="hero-center hs">
+            <p class="hero-date">12 de Junio de 2027 &middot; Ávila</p>
+            <h1 class="hero-names">
+                Raquel
+                <span class="amp">&</span>
+                Adrián
+            </h1>
+        </div>
+        <div class="hero-bottom hs">
+            <p class="hero-quote">"Y sin amor, todo es nada"</p>
+            <p class="hero-author">Santa Teresa de Jesús</p>
+        </div>
+        <div class="hero-countdown">
+            <div class="cd-item"><span class="cd-num" id="days">000</span><span class="cd-label">Días</span></div>
+            <div class="cd-item"><span class="cd-num" id="hours">00</span><span class="cd-label">Horas</span></div>
+            <div class="cd-item"><span class="cd-num" id="minutes">00</span><span class="cd-label">Min</span></div>
+            <div class="cd-item"><span class="cd-num" id="seconds">00</span><span class="cd-label">Seg</span></div>
+        </div>
+        <div class="scroll-indicator"></div>
     </section>
 
-    <section id="rsvp" class="rsvp">
-        <h2 class="section-title fade-in">Confirma tu Asistencia</h2>
-        <p class="section-subtitle fade-in">Por favor, confirma antes del 1 de mayo de 2027</p>
-        <div class="rsvp-container fade-in">
+    <!-- MARQUEE -->
+    <div class="marquee-strip" aria-hidden="true">
+        <div class="marquee-track">
+            <span>12 Junio 2027</span><span>Catedral de Ávila</span><span>Raquel & Adrián</span><span>Dehesa del Pedrosillo</span><span>12 Junio 2027</span><span>Catedral de Ávila</span><span>Raquel & Adrián</span><span>Dehesa del Pedrosillo</span><span>12 Junio 2027</span><span>Catedral de Ávila</span><span>Raquel & Adrián</span><span>Dehesa del Pedrosillo</span>
+        </div>
+    </div>
+
+    <!-- RSVP -->
+    <section id="rsvp" class="bg-paper pad">
+        <div class="sec-head rv">
+            <p class="sec-tag">Confirma tu asistencia</p>
+            <h2 class="sec-title"><em>Confirmar</em></h2>
+            <p class="sec-sub">Por favor, confirma antes del 1 de mayo de 2027</p>
+        </div>
+        <div class="rsvp-box rv">
             <form id="rsvp-form" action="https://formspree.io/f/xqarovpl" method="POST">
-                <div class="form-group">
-                    <label for="attendance">¿Asistirás a nuestra boda?</label>
-                    <select id="attendance" name="asistencia" required onchange="handleAttendance()">
+                <div class="field">
+                    <label>¿Asistirás a nuestra boda?</label>
+                    <select id="attendance" name="asistencia" required onchange="handleAtt()">
                         <option value="">Selecciona una opción</option>
-                        <option value="si">¡Sí, allí estaré!</option>
+                        <option value="si">Sí, allí estaré</option>
                         <option value="solo_ceremonia">Solo a la ceremonia</option>
-                        <option value="no">Lo siento, no podré asistir</option>
+                        <option value="no">No podré asistir</option>
                     </select>
                 </div>
-                <div id="no-attendance-msg" class="form-message" style="display: none;">
-                    <p>😢 ¡Qué pena que no puedas venir! Te echaremos de menos.</p>
-                    <div class="form-group" style="margin-top: 1rem;">
-                        <label for="name-no">Tu nombre *</label>
-                        <input type="text" id="name-no" name="nombre_no_asiste" required>
-                    </div>
-                    <button type="submit" class="submit-btn">Enviar</button>
+                <div id="no-msg" class="form-msg" style="display:none;">
+                    <p>Qué pena que no puedas venir.</p>
+                    <div class="field" style="margin-top:1rem;"><label>Tu nombre</label><input type="text" id="name-no" name="nombre_no_asiste" required></div>
+                    <button type="submit" class="btn-submit">Enviar</button>
                 </div>
-                <div id="ceremony-only-msg" class="form-message" style="display: none;">
-                    <p>🙏 ¡Genial! Te esperamos en la Catedral de Ávila.</p>
-                    <div class="form-group" style="margin-top: 1rem;">
-                        <label for="name-ceremony">Tu nombre *</label>
-                        <input type="text" id="name-ceremony" name="nombre_ceremonia" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email-ceremony">Email</label>
-                        <input type="email" id="email-ceremony" name="email_ceremonia">
-                    </div>
-                    <button type="submit" class="submit-btn">Confirmar</button>
+                <div id="cer-msg" class="form-msg" style="display:none;">
+                    <p>Te esperamos en la Catedral de Ávila.</p>
+                    <div class="field" style="margin-top:1rem;"><label>Tu nombre</label><input type="text" id="name-cer" name="nombre_ceremonia" required></div>
+                    <div class="field"><label>Email</label><input type="email" id="email-cer" name="email_ceremonia"></div>
+                    <button type="submit" class="btn-submit">Confirmar</button>
                 </div>
-                <div id="full-attendance" style="display: none;">
-                    <div class="form-row">
-                        <div class="form-group"><label for="name">Tu nombre *</label><input type="text" id="name" name="nombre" required></div>
-                        <div class="form-group"><label for="email">Email *</label><input type="email" id="email" name="email" required></div>
+                <div id="full-att" style="display:none;">
+                    <div class="field-row">
+                        <div class="field"><label>Tu nombre</label><input type="text" id="name" name="nombre" required></div>
+                        <div class="field"><label>Email</label><input type="email" id="email" name="email" required></div>
                     </div>
-                    <div class="form-group"><label for="phone">Teléfono</label><input type="tel" id="phone" name="telefono"></div>
-                    <div class="menu-selection">
-                        <h4>Tu menú <span style="color: #d4a574;">*</span></h4>
-                        <p class="menu-info">Todos los menús incluyen: Entrante + Plato principal + Tarta árabe de postre</p>
-                        <div class="menu-options">
-                            <label class="menu-option"><input type="radio" name="mi_menu" value="carne" required><div class="menu-card"><span class="menu-icon">🥩</span><span class="menu-name">Carne</span></div></label>
-                            <label class="menu-option"><input type="radio" name="mi_menu" value="pescado" required><div class="menu-card"><span class="menu-icon">🐟</span><span class="menu-name">Pescado</span></div></label>
-                            <label class="menu-option"><input type="radio" name="mi_menu" value="vegano" required><div class="menu-card"><span class="menu-icon">🥗</span><span class="menu-name">Vegano</span></div></label>
+                    <div class="field"><label>Teléfono</label><input type="tel" id="phone" name="telefono"></div>
+                    <div class="menu-pick">
+                        <h4>Tu menú</h4>
+                        <div class="menu-opts">
+                            <label class="menu-opt"><input type="radio" name="mi_menu" value="carne" required><span class="menu-opt-label">Carne</span></label>
+                            <label class="menu-opt"><input type="radio" name="mi_menu" value="pescado" required><span class="menu-opt-label">Pescado</span></label>
+                            <label class="menu-opt"><input type="radio" name="mi_menu" value="vegano" required><span class="menu-opt-label">Vegano</span></label>
                         </div>
-                        <p id="menu-error" style="display: none; color: #d4a574; font-size: 0.9rem; margin-top: 0.5rem; text-align: center;">Por favor, selecciona tu menú</p>
+                        <p id="menu-error" style="display:none;">Por favor, selecciona tu menú</p>
                     </div>
-                    <div class="form-group">
-                        <label for="has-guests">¿Vienes con acompañantes?</label>
+                    <div class="field">
+                        <label>¿Vienes con acompañantes?</label>
                         <select id="has-guests" name="tiene_acompanantes" onchange="handleGuests()">
                             <option value="no">No, voy solo/a</option>
                             <option value="si">Sí, vengo con más personas</option>
                         </select>
                     </div>
-                    <div id="guests-section" style="display: none;">
-                        <div class="form-group">
-                            <label for="num-guests">¿Cuántos acompañantes?</label>
-                            <select id="num-guests" name="num_acompanantes" onchange="updateGuestFields()">
-                                <option value="1">1 acompañante</option>
-                                <option value="2">2 acompañantes</option>
-                                <option value="3">3 acompañantes</option>
-                                <option value="4">4 acompañantes</option>
-                                <option value="5">5 acompañantes</option>
+                    <div id="guests-sec" style="display:none;">
+                        <div class="field">
+                            <label>¿Cuántos acompañantes?</label>
+                            <select id="num-guests" name="num_acompanantes" onchange="updateGuests()">
+                                <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
                             </select>
                         </div>
-                        <div id="guests-details" class="guests-details"></div>
+                        <div id="guests-det" class="guests-box"></div>
                     </div>
-                    <div class="form-group"><label for="allergies">Alergias o restricciones alimentarias</label><input type="text" id="allergies" name="alergias" placeholder="Celiaquía, intolerancia a la lactosa, etc."></div>
-                    <div class="form-group">
-                        <label for="bus">¿Necesitas autobús desde la catedral al banquete?</label>
+                    <div class="field"><label>Alergias o restricciones</label><input type="text" id="allergies" name="alergias" placeholder="Celiaquía, lactosa, etc."></div>
+                    <div class="field">
+                        <label>¿Necesitas autobús catedral → finca?</label>
                         <select id="bus" name="autobus"><option value="si">Sí, por favor</option><option value="no">No, iré por mi cuenta</option></select>
                     </div>
-                    <button type="submit" class="submit-btn">Confirmar Asistencia</button>
+                    <button type="submit" class="btn-submit">Confirmar Asistencia</button>
                 </div>
             </form>
         </div>
     </section>
 
-    <section id="story" class="story">
-        <h2 class="section-title fade-in">Nuestra Historia</h2>
-        <div class="story-content">
-            <div class="story-text fade-in">
-                <h3>Cómo comenzó todo...</h3>
-                <p>Cada historia de amor es única, y la nuestra comenzó de la manera más hermosa. Desde el primer momento en que nos conocimos, supimos que había algo especial entre nosotros.</p>
-                <p>A lo largo de estos años hemos construido juntos una relación llena de amor, risas, aventuras y complicidad. Hemos crecido juntos y hemos aprendido que el amor verdadero se construye día a día.</p>
-                <p>Ahora estamos listos para dar el siguiente paso y queremos celebrarlo con todas las personas que más queremos. ¡Esperamos verte en nuestra boda!</p>
+    <!-- STORY — editorial spread -->
+    <section id="story" class="story-spread">
+        <div class="story-photo rv">
+            <img src="assets/nuestra-historia.jpeg" alt="Raquel y Adrián" loading="lazy">
+        </div>
+        <div class="story-copy bg-warm rv">
+            <p class="sec-tag">Nuestra Historia</p>
+            <h2>Cómo comenzó <em>todo</em></h2>
+            <p>Cada historia de amor es única, y la nuestra comenzó de la manera más hermosa. Desde el primer momento en que nos conocimos, supimos que había algo especial entre nosotros.</p>
+            <p>A lo largo de estos años hemos construido juntos una relación llena de amor, risas, aventuras y complicidad. Hemos crecido juntos y hemos aprendido que el amor verdadero se construye día a día.</p>
+            <p>Ahora estamos listos para dar el siguiente paso y queremos celebrarlo con todas las personas que más queremos.</p>
+        </div>
+    </section>
+
+    <!-- CEREMONY -->
+    <section id="ceremony" class="bg-dark pad">
+        <div class="sec-head rv">
+            <p class="sec-tag">El momento sagrado</p>
+            <h2 class="sec-title">La <em>Ceremonia</em></h2>
+        </div>
+        <p class="ceremony-intro rv">Oficiada por <strong>Lorenzo Santos</strong></p>
+        <div class="music-editorial rv">
+            <div class="music-piece"><div class="m-moment">Preludio</div><div class="m-info"><p class="m-title">Canon en Re Mayor</p><p class="m-composer">Johann Pachelbel</p></div></div>
+            <div class="music-piece"><div class="m-moment">Entrada novia</div><div class="m-info"><p class="m-title">Ave María</p><p class="m-composer">Franz Schubert</p></div></div>
+            <div class="music-piece"><div class="m-moment">Liturgia</div><div class="m-info"><p class="m-title">Salve Regina</p><p class="m-composer">Canto gregoriano</p></div></div>
+            <div class="music-piece"><div class="m-moment">Ofertorio</div><div class="m-info"><p class="m-title">Ave Verum Corpus</p><p class="m-composer">W. A. Mozart</p></div></div>
+            <div class="music-piece"><div class="m-moment">Ofertorio</div><div class="m-info"><p class="m-title">O Sacrum Convivium</p><p class="m-composer">Sto. Tomás de Aquino</p></div></div>
+            <div class="music-piece"><div class="m-moment">Comunión</div><div class="m-info"><p class="m-title">Pie Jesu</p><p class="m-composer">Gabriel Fauré</p></div></div>
+            <div class="music-piece"><div class="m-moment">Comunión</div><div class="m-info"><p class="m-title">Panis Angelicus</p><p class="m-composer">César Franck</p></div></div>
+            <div class="music-piece"><div class="m-moment">Salida</div><div class="m-info"><p class="m-title">Aleluya</p><p class="m-composer">G. F. Handel</p></div></div>
+        </div>
+        <div class="center rv">
+            <a href="assets/escaleta-musical.pdf" class="dl-link" download>Descargar escaleta completa</a>
+        </div>
+    </section>
+
+    <!-- VENUES -->
+    <section id="venues" class="bg-paper pad">
+        <div class="sec-head rv">
+            <p class="sec-tag">Dónde celebraremos</p>
+            <h2 class="sec-title"><em>Lugares</em></h2>
+        </div>
+        <div class="venues-grid">
+            <div class="venue rv">
+                <div class="venue-map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3027.8876543210987!2d-4.700833684254789!3d40.65666857933974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4013ed09ef5733%3A0x6dc2aded1b9tried!2sCatedral%20de%20%C3%81vila!5e0!3m2!1ses!2ses!4v1702500000000!5m2!1ses!2ses" allowfullscreen="" loading="lazy"></iframe></div>
+                <p class="venue-tag">Ceremonia religiosa</p>
+                <h3>Catedral de Ávila</h3>
+                <p>Plaza de la Catedral, s/n, 05001 Ávila</p>
+                <p class="venue-time">12:00h</p>
+                <a href="https://www.google.com/maps/dir//Catedral+de+%C3%81vila" target="_blank" class="venue-link">Cómo llegar &rarr;</a>
             </div>
-            <div class="story-image fade-in">
-                <img src="assets/nuestra-historia.jpeg" alt="Raquel y Adrián" loading="lazy">
+            <div class="venue rv">
+                <div class="venue-map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12111.543210987654!2d-4.7162!3d40.6047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4014a8b9c7d6e5f%3A0x1234567890abcdef!2sDehesa%20del%20Pedrosillo!5e0!3m2!1ses!2ses!4v1702500000001!5m2!1ses!2ses" allowfullscreen="" loading="lazy"></iframe></div>
+                <p class="venue-tag">Celebración</p>
+                <h3>Dehesa del Pedrosillo</h3>
+                <p>Finca El Pedrosillo, 05194 Ávila</p>
+                <p class="venue-time">14:30h — Cóctel y Banquete</p>
+                <a href="https://www.google.com/maps/search/Dehesa+del+Pedrosillo+Avila" target="_blank" class="venue-link">Cómo llegar &rarr;</a>
             </div>
         </div>
     </section>
 
-    <section id="padrinos" class="padrinos">
-        <h2 class="section-title fade-in">Padrinos y Testigos</h2>
-        <p class="section-subtitle fade-in">Las personas especiales que nos acompañarán</p>
-        <div class="padrinos-grid">
-            <div class="padrino-card-flip fade-in">
-                <div class="padrino-card-inner">
-                    <div class="padrino-card-front">
-                        <div class="padrino-photo-placeholder">AS</div>
-                        <h4>Antonio Sainz</h4>
-                    </div>
-                    <div class="padrino-card-back">
-                        <p class="back-role">Padrino</p>
-                        <p class="back-relation">Padre de la novia</p>
-                        <p class="back-description">Una figura fundamental que nos acompaña en este día tan especial</p>
-                    </div>
+    <!-- TIMELINE -->
+    <section id="timeline" class="bg-warm pad">
+        <div class="sec-head rv">
+            <p class="sec-tag">12 de junio de 2027</p>
+            <h2 class="sec-title">Programa del <em>Día</em></h2>
+        </div>
+        <div class="tl rv">
+            <div class="tl-item"><span class="tl-time">11:30</span><div><p class="tl-event">Llegada de Invitados</p><p class="tl-desc">Recibimiento en la Catedral</p></div></div>
+            <div class="tl-item"><span class="tl-time">12:00</span><div><p class="tl-event">Ceremonia Religiosa</p><p class="tl-desc">Intercambio de votos y anillos</p></div></div>
+            <div class="tl-item"><span class="tl-time">13:30</span><div><p class="tl-event">Traslado a la Finca</p><p class="tl-desc">Autobús disponible</p></div></div>
+            <div class="tl-item"><span class="tl-time">14:30</span><div><p class="tl-event">Cóctel de Bienvenida</p><p class="tl-desc">Aperitivos y fotos</p></div></div>
+            <div class="tl-item"><span class="tl-time">16:30</span><div><p class="tl-event">Banquete</p><p class="tl-desc">Comida y brindis</p></div></div>
+            <div class="tl-item"><span class="tl-time">20:00</span><div><p class="tl-event">Primer Baile</p><p class="tl-desc">Apertura de pista</p></div></div>
+            <div class="tl-item"><span class="tl-time">21:00</span><div><p class="tl-event">Fiesta</p><p class="tl-desc">Hasta el amanecer</p></div></div>
+        </div>
+    </section>
+
+    <!-- HOTELS -->
+    <section id="hotels" class="bg-paper pad">
+        <div class="sec-head rv">
+            <p class="sec-tag">Alojamiento en Ávila</p>
+            <h2 class="sec-title"><em>Hoteles</em></h2>
+        </div>
+        <div class="hotels-mosaic rv">
+            <div class="hotel"><div class="hotel-img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/15697043.jpg?k=d81edbd986663017c01a1d46703e235a63fa22baa5eaef66d5363e4e9fe2a8ed&o=" alt="Parador" loading="lazy"></div><div class="hotel-body"><p class="hotel-cat">Hotel de lujo</p><h3>Parador de Ávila</h3><p class="hotel-stars">&#9733;&#9733;&#9733;&#9733;</p><p class="hotel-addr">Marqués de Canales de Chozas, 2</p><a href="https://www.booking.com/hotel/es/parador-de-turismo-de-avila.es.html" target="_blank" class="hotel-go">Ver en Booking &rarr;</a></div></div>
+            <div class="hotel"><div class="hotel-img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/89809914.jpg?k=60179adcc06c8a7d6443d8c20c0ae7ef8d814b21296927bc9018afe76fd14ab8&o=" alt="Velada" loading="lazy"></div><div class="hotel-body"><p class="hotel-cat">Palacio histórico</p><h3>Palacio de los Velada</h3><p class="hotel-stars">&#9733;&#9733;&#9733;&#9733;</p><p class="hotel-addr">Plaza de la Catedral, 10</p><a href="https://www.booking.com/hotel/es/velada.es.html" target="_blank" class="hotel-go">Ver en Booking &rarr;</a></div></div>
+            <div class="hotel"><div class="hotel-img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/378909371.jpg?k=71e0611acd00ea0d8c01cea4b5d0578ee5acda6ae26f0b4c0a21c458ebd08232&o=" alt="Las Leyendas" loading="lazy"></div><div class="hotel-body"><p class="hotel-cat">Hotel boutique</p><h3>Hotel Las Leyendas</h3><p class="hotel-stars">&#9733;&#9733;&#9733;&#9733;</p><p class="hotel-addr">Francisco Gallego, 3</p><a href="https://www.booking.com/hotel/es/las-leyendas.es.html" target="_blank" class="hotel-go">Ver en Booking &rarr;</a></div></div>
+            <div class="hotel"><div class="hotel-img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/686470060.jpg?k=86302a61a55422b57835c55c019642c3b8969cc1545908274ceea534f44d0850&o=" alt="Valderrabanos" loading="lazy"></div><div class="hotel-body"><p class="hotel-cat">Palacio histórico</p><h3>Palacio de Valderrabanos</h3><p class="hotel-stars">&#9733;&#9733;&#9733;&#9733;</p><p class="hotel-addr">Plaza de la Catedral, 9</p><a href="https://www.booking.com/hotel/es/valderrabanos.es.html" target="_blank" class="hotel-go">Ver en Booking &rarr;</a></div></div>
+            <div class="hotel"><div class="hotel-img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/700612907.jpg?k=d49be8de40e8d53ef8d6a83d5c9d7cfee442053db7ac8c7250adbcd9fa6ea14c&o=" alt="Casa Presidente" loading="lazy"></div><div class="hotel-body"><p class="hotel-cat">Hotel de diseño</p><h3>La Casa del Presidente</h3><p class="hotel-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p><p class="hotel-addr">Comuneros de Castilla, 5</p><a href="https://www.booking.com/hotel/es/la-casa-del-presidente.es.html" target="_blank" class="hotel-go">Ver en Booking &rarr;</a></div></div>
+            <div class="hotel"><div class="hotel-img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/210054033.jpg?k=b2aea259d1dd21112a66df91d5dc3afe23c9faede2b104b56a8d7f401f6afb72&o=" alt="Arco San Vicente" loading="lazy"></div><div class="hotel-body"><p class="hotel-cat">Opción económica</p><h3>Hotel Arco San Vicente</h3><p class="hotel-stars">&#9733;&#9733;&#9733;</p><p class="hotel-addr">López Núñez, 6</p><a href="https://www.booking.com/hotel/es/arco-san-vicente.es.html" target="_blank" class="hotel-go">Ver en Booking &rarr;</a></div></div>
+        </div>
+        <p class="hotels-note rv"><strong>Importante:</strong> Os recomendamos reservar con antelación — junio es temporada alta en Ávila.</p>
+    </section>
+
+    <!-- DETAILS -->
+    <section id="details" class="bg-warm pad">
+        <div class="sec-head rv">
+            <p class="sec-tag">Información práctica</p>
+            <h2 class="sec-title"><em>Detalles</em></h2>
+        </div>
+        <div class="details-strips rv">
+            <div class="detail-strip"><span class="d-key">Fecha</span><span class="d-val">Sábado, 12 de Junio de 2027</span></div>
+            <div class="detail-strip"><span class="d-key">Horario</span><span class="d-val">Ceremonia 12:00h — Cóctel 14:30h</span></div>
+            <div class="detail-strip"><span class="d-key">Vestimenta</span><span class="d-val">Etiqueta. Sugerimos tonos cálidos</span></div>
+            <div class="detail-strip"><span class="d-key">Transporte</span><span class="d-val">Parking disponible. Autobús catedral → finca</span></div>
+            <div class="detail-strip"><span class="d-key">Niños</span><span class="d-val">Bienvenidos. Habrá zona infantil</span></div>
+            <div class="detail-strip"><span class="d-key">Hashtag</span><span class="d-val">#RaquelYAdrian2027</span></div>
+        </div>
+        <div class="center rv" style="margin-top:2.5rem;">
+            <button class="cal-btn" onclick="downloadCal()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+                Añadir al calendario
+            </button>
+        </div>
+    </section>
+
+    <!-- GIFTS -->
+    <section id="gifts" class="bg-paper pad">
+        <div class="sec-head rv">
+            <p class="sec-tag">Un detalle</p>
+            <h2 class="sec-title">Lista de <em>Bodas</em></h2>
+        </div>
+        <div class="gifts-content">
+            <p class="gifts-intro rv">Vuestra presencia es el mejor regalo. Pero si deseáis hacernos un obsequio, aquí tenéis algunas ideas.</p>
+            <div class="contrib-box rv">
+                <h3>Contribuciones</h3>
+                <div class="contrib-row">
+                    <div class="contrib-item"><label>IBAN</label><input type="text" value="ES00 0000 0000 0000 0000 0000" readonly onclick="this.select()"></div>
+                    <div class="contrib-item"><label>PayPal</label><input type="text" value="raquelyadrian@ejemplo.com" readonly onclick="this.select()"></div>
                 </div>
             </div>
-            <div class="padrino-card-flip fade-in">
-                <div class="padrino-card-inner">
-                    <div class="padrino-card-front">
-                        <div class="padrino-photo-placeholder">MR</div>
-                        <h4>María del Rosario Rollán</h4>
-                    </div>
-                    <div class="padrino-card-back">
-                        <p class="back-role">Madrina</p>
-                        <p class="back-relation">Madre del novio</p>
-                        <p class="back-description">Su amor y apoyo han sido esenciales en nuestro camino</p>
-                    </div>
-                </div>
-            </div>
-            <div class="padrino-card-flip fade-in">
-                <div class="padrino-card-inner">
-                    <div class="padrino-card-front">
-                        <img src="assets/padrinos/alejandro-pedrera.jpeg" alt="Alejandro Pedrera">
-                        <h4>Alejandro Pedrera</h4>
-                    </div>
-                    <div class="padrino-card-back">
-                        <p class="back-role">Testigo</p>
-                        <p class="back-relation">Amigo del novio</p>
-                        <p class="back-description">Un hermano de vida, confidente y compañero de aventuras</p>
-                    </div>
-                </div>
-            </div>
-            <div class="padrino-card-flip fade-in">
-                <div class="padrino-card-inner">
-                    <div class="padrino-card-front">
-                        <div class="padrino-photo-placeholder">JMP</div>
-                        <h4>José María Palacios</h4>
-                    </div>
-                    <div class="padrino-card-back">
-                        <p class="back-role">Testigo</p>
-                        <p class="back-relation">Amigo del novio</p>
-                        <p class="back-description">Un compañero leal que nos acompaña en este día especial</p>
-                    </div>
-                </div>
-            </div>
-            <div class="padrino-card-flip fade-in">
-                <div class="padrino-card-inner">
-                    <div class="padrino-card-front">
-                        <div class="padrino-photo-placeholder">ZC</div>
-                        <h4>Zuriñe Caballero</h4>
-                    </div>
-                    <div class="padrino-card-back">
-                        <p class="back-role">Testigo</p>
-                        <p class="back-relation">Amiga de la novia</p>
-                        <p class="back-description">Una amistad inquebrantable que nos acompaña en este momento único</p>
-                    </div>
-                </div>
-            </div>
-            <div class="padrino-card-flip fade-in">
-                <div class="padrino-card-inner">
-                    <div class="padrino-card-front">
-                        <div class="padrino-photo-placeholder">SR</div>
-                        <h4>Sara Redondo</h4>
-                    </div>
-                    <div class="padrino-card-back">
-                        <p class="back-role">Testigo</p>
-                        <p class="back-relation">Amiga de la novia</p>
-                        <p class="back-description">Una amiga especial que comparte este momento inolvidable con nosotros</p>
-                    </div>
-                </div>
+            <h3 class="gifts-sub rv">Regalos sugeridos</h3>
+            <div class="rv">
+                <div class="gift-line"><span class="gift-name">Luna de Miel en Maldivas</span><span class="gift-price">Libre</span></div>
+                <div class="gift-line"><span class="gift-name">Robot de Cocina Thermomix</span><span class="gift-price">1.299 &euro;</span></div>
+                <div class="gift-line"><span class="gift-name">Cafetera De'Longhi</span><span class="gift-price">549 &euro;</span></div>
+                <div class="gift-line"><span class="gift-name">Sofá Chester</span><span class="gift-price">1.800 &euro;</span></div>
+                <div class="gift-line"><span class="gift-name">Vinoteca Premium</span><span class="gift-price">450 &euro;</span></div>
+                <div class="gift-line"><span class="gift-name">Cuadro Personalizado</span><span class="gift-price">280 &euro;</span></div>
+                <div class="gift-line"><span class="gift-name">Juego de Maletas</span><span class="gift-price">380 &euro;</span></div>
+                <div class="gift-line"><span class="gift-name">Sábanas de Lujo</span><span class="gift-price">220 &euro;</span></div>
+                <div class="gift-line"><span class="gift-name">Batidora KitchenAid</span><span class="gift-price">599 &euro;</span></div>
+                <div class="gift-line"><span class="gift-name">Experiencia Gastronómica</span><span class="gift-price">350 &euro;</span></div>
+                <div class="gift-line"><span class="gift-name">Cuchillos Japoneses</span><span class="gift-price">425 &euro;</span></div>
+                <div class="gift-line"><span class="gift-name">Lámpara de Diseño</span><span class="gift-price">340 &euro;</span></div>
             </div>
         </div>
     </section>
 
-    <section id="ceremony" class="ceremony">
-        <h2 class="section-title fade-in">La Ceremonia</h2>
-        <p class="section-subtitle fade-in">Un momento sagrado que compartiremos con vosotros</p>
-        <div class="ceremony-content">
-            <div class="minister-card fade-in">
-                <div class="minister-icon"></div>
-                <h3>Alejandro Santos</h3>
-                <p>Ministro de la celebración</p>
-            </div>
-
-            <h3 class="section-title fade-in" style="font-size: 2rem; margin-bottom: 1rem;">Escaleta Musical</h3>
-            <p class="music-intro fade-in">La música acompañará cada momento especial de nuestra ceremonia, creando una atmósfera de solemnidad y belleza.</p>
-
-            <div class="download-section fade-in">
-                <a href="assets/escaleta-musical.pdf" class="download-pdf-link" download>[Descarga la Escaleta completa]</a>
-            </div>
-
-            <div class="music-grid">
-                <div class="music-card fade-in">
-                    <div class="music-moment-badge">Preludio</div>
-                    <h4>Canon en Re Mayor</h4>
-                    <span class="composer">Johann Pachelbel</span>
-                    <p>Mientras los invitados toman asiento, esta pieza clásica creará un ambiente de serenidad y anticipación.</p>
-                </div>
-
-                <div class="music-card fade-in">
-                    <div class="music-moment-badge">Entrada de la novia</div>
-                    <h4>Ave María</h4>
-                    <span class="composer">Franz Schubert</span>
-                    <p>El momento más esperado, acompañado por esta sublime plegaria mariana que elevará el espíritu de todos los presentes.</p>
-                </div>
-
-                <div class="music-card fade-in">
-                    <div class="music-moment-badge">Durante la liturgia</div>
-                    <h4>Salve Regina</h4>
-                    <span class="composer">Canto gregoriano</span>
-                    <p>Tras las lecturas, esta antífona mariana medieval nos invitará a la contemplación y la oración.</p>
-                </div>
-
-                <div class="music-card fade-in">
-                    <div class="music-moment-badge">Ofertorio</div>
-                    <h4>Ave Verum Corpus</h4>
-                    <span class="composer">Wolfgang Amadeus Mozart</span>
-                    <p>Durante la presentación de las ofrendas, este motete sobre el Cuerpo de Cristo nos preparará para el momento más sagrado.</p>
-                </div>
-
-                <div class="music-card fade-in">
-                    <div class="music-moment-badge">Ofertorio (cont.)</div>
-                    <h4>O Sacrum Convivium</h4>
-                    <span class="composer">Santo Tomás de Aquino</span>
-                    <p>Una segunda pieza durante el ofertorio que medita sobre el banquete sagrado de la Eucaristía.</p>
-                </div>
-
-                <div class="music-card fade-in">
-                    <div class="music-moment-badge">Comunión</div>
-                    <h4>Pie Jesu</h4>
-                    <span class="composer">Gabriel Fauré</span>
-                    <p>Durante la comunión, esta dulce súplica al Señor misericordioso nos acompañará en un momento de profunda intimidad espiritual.</p>
-                </div>
-
-                <div class="music-card fade-in">
-                    <div class="music-moment-badge">Comunión (cont.)</div>
-                    <h4>Panis Angelicus</h4>
-                    <span class="composer">César Franck</span>
-                    <p>El "Pan de los Ángeles" cierra el momento de la comunión con una melodía celestial que nos eleva.</p>
-                </div>
-
-                <div class="music-card fade-in">
-                    <div class="music-moment-badge">Salida de los novios</div>
-                    <h4>Aleluya</h4>
-                    <span class="composer">George Frideric Handel</span>
-                    <p>¡Aleluya! Con este canto de júbilo y celebración, saldremos como esposos para comenzar nuestra nueva vida juntos.</p>
-                </div>
-            </div>
+    <!-- PLAYLIST -->
+    <section id="playlist" class="bg-dark pad">
+        <div class="sec-head rv">
+            <p class="sec-tag">La banda sonora</p>
+            <h2 class="sec-title"><em>Playlist</em></h2>
         </div>
-    </section>
-
-    <section id="locations" class="locations">
-        <h2 class="section-title fade-in">Lugares del Evento</h2>
-        <div class="locations-grid">
-            <div class="location-card fade-in">
-                <div class="location-map">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3027.8876543210987!2d-4.700833684254789!3d40.65666857933974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4013ed09ef5733%3A0x6dc2aded1b9tried!2sCatedral%20de%20%C3%81vila!5e0!3m2!1ses!2ses!4v1702500000000!5m2!1ses!2ses" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-                <div class="location-info">
-                    <p class="location-type">Ceremonia Religiosa</p>
-                    <h3>Catedral de Ávila</h3>
-                    <p>Plaza de la Catedral, s/n<br>05001 Ávila</p>
-                    <p class="location-time">12:00h - Ceremonia</p>
-                    <a href="https://www.google.com/maps/dir//Catedral+de+%C3%81vila,+Plaza+de+la+Catedral,+05001+%C3%81vila" target="_blank" class="location-btn">Cómo llegar</a>
-                </div>
-            </div>
-            <div class="location-card fade-in">
-                <div class="location-map">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12111.543210987654!2d-4.7162!3d40.6047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4014a8b9c7d6e5f%3A0x1234567890abcdef!2sDehesa%20del%20Pedrosillo!5e0!3m2!1ses!2ses!4v1702500000001!5m2!1ses!2ses" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-                <div class="location-info">
-                    <p class="location-type">Celebración</p>
-                    <h3>Dehesa del Pedrosillo</h3>
-                    <p>Finca El Pedrosillo<br>05194 Ávila</p>
-                    <p class="location-time">14:30h - Cóctel y Banquete</p>
-                    <a href="https://www.google.com/maps/search/Dehesa+del+Pedrosillo+Avila" target="_blank" class="location-btn">Cómo llegar</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="hotels" class="hotels">
-        <h2 class="section-title fade-in">Hoteles Recomendados</h2>
-        <p class="section-subtitle fade-in">Alojamiento en Ávila para nuestros invitados</p>
-        <div class="hotels-grid">
-            <div class="hotel-card fade-in">
-                <a href="https://www.booking.com/hotel/es/parador-de-turismo-de-avila.es.html" target="_blank" class="hotel-image-link">
-                    <div class="hotel-image">
-                        <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/15697043.jpg?k=d81edbd986663017c01a1d46703e235a63fa22baa5eaef66d5363e4e9fe2a8ed&o=" alt="Parador de Ávila" loading="lazy">
-                        <span class="hotel-badge">Recomendado</span>
-                    </div>
-                </a>
-                <div class="hotel-info">
-                    <p class="hotel-category">Hotel de lujo</p><h3>Parador de Ávila</h3><p class="hotel-stars">★★★★</p><p class="hotel-address">Marqués de Canales de Chozas, 2</p>
-                    <div class="hotel-features"><span class="hotel-feature">Murallas</span><span class="hotel-feature">Jardín</span><span class="hotel-feature">Restaurante</span></div>
-                    <a href="https://www.booking.com/hotel/es/parador-de-turismo-de-avila.es.html" target="_blank" class="hotel-reserve-btn">Ver en Booking</a>
-                </div>
-            </div>
-            <div class="hotel-card fade-in">
-                <a href="https://www.booking.com/hotel/es/velada.es.html" target="_blank" class="hotel-image-link">
-                    <div class="hotel-image">
-                        <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/89809914.jpg?k=60179adcc06c8a7d6443d8c20c0ae7ef8d814b21296927bc9018afe76fd14ab8&o=" alt="Hotel Palacio de los Velada" loading="lazy">
-                        <span class="hotel-badge">Centro histórico</span>
-                    </div>
-                </a>
-                <div class="hotel-info">
-                    <p class="hotel-category">Palacio histórico</p><h3>Hotel Palacio de los Velada</h3><p class="hotel-stars">★★★★</p><p class="hotel-address">Plaza de la Catedral, 10</p>
-                    <div class="hotel-features"><span class="hotel-feature">Junto Catedral</span><span class="hotel-feature">Spa</span><span class="hotel-feature">Patio histórico</span></div>
-                    <a href="https://www.booking.com/hotel/es/velada.es.html" target="_blank" class="hotel-reserve-btn">Ver en Booking</a>
-                </div>
-            </div>
-            <div class="hotel-card fade-in">
-                <a href="https://www.booking.com/hotel/es/las-leyendas.es.html" target="_blank" class="hotel-image-link">
-                    <div class="hotel-image">
-                        <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/378909371.jpg?k=71e0611acd00ea0d8c01cea4b5d0578ee5acda6ae26f0b4c0a21c458ebd08232&o=" alt="Hotel Las Leyendas" loading="lazy">
-                        <span class="hotel-badge">Con encanto</span>
-                    </div>
-                </a>
-                <div class="hotel-info">
-                    <p class="hotel-category">Hotel boutique</p><h3>Hotel Las Leyendas</h3><p class="hotel-stars">★★★★</p><p class="hotel-address">Francisco Gallego, 3</p>
-                    <div class="hotel-features"><span class="hotel-feature">Intramuros</span><span class="hotel-feature">Romántico</span><span class="hotel-feature">Desayuno incluido</span></div>
-                    <a href="https://www.booking.com/hotel/es/las-leyendas.es.html" target="_blank" class="hotel-reserve-btn">Ver en Booking</a>
-                </div>
-            </div>
-            <div class="hotel-card fade-in">
-                <a href="https://www.booking.com/hotel/es/valderrabanos.es.html" target="_blank" class="hotel-image-link">
-                    <div class="hotel-image">
-                        <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/686470060.jpg?k=86302a61a55422b57835c55c019642c3b8969cc1545908274ceea534f44d0850&o=" alt="Palacio de Valderrabanos" loading="lazy">
-                        <span class="hotel-badge">Junto a Catedral</span>
-                    </div>
-                </a>
-                <div class="hotel-info">
-                    <p class="hotel-category">Palacio histórico</p><h3>Palacio de Valderrabanos</h3><p class="hotel-stars">★★★★</p><p class="hotel-address">Plaza de la Catedral, 9</p>
-                    <div class="hotel-features"><span class="hotel-feature">Vistas Catedral</span><span class="hotel-feature">Centro histórico</span><span class="hotel-feature">Restaurante</span></div>
-                    <a href="https://www.booking.com/hotel/es/valderrabanos.es.html" target="_blank" class="hotel-reserve-btn">Ver en Booking</a>
-                </div>
-            </div>
-            <div class="hotel-card fade-in">
-                <a href="https://www.booking.com/hotel/es/la-casa-del-presidente.es.html" target="_blank" class="hotel-image-link">
-                    <div class="hotel-image">
-                        <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/700612907.jpg?k=d49be8de40e8d53ef8d6a83d5c9d7cfee442053db7ac8c7250adbcd9fa6ea14c&o=" alt="La Casa del Presidente" loading="lazy">
-                        <span class="hotel-badge">Premium</span>
-                    </div>
-                </a>
-                <div class="hotel-info">
-                    <p class="hotel-category">Hotel de diseño</p><h3>La Casa del Presidente</h3><p class="hotel-stars">★★★★★</p><p class="hotel-address">Calle Comuneros de Castilla, 5</p>
-                    <div class="hotel-features"><span class="hotel-feature">Moderno</span><span class="hotel-feature">Vistas murallas</span><span class="hotel-feature">Terraza</span></div>
-                    <a href="https://www.booking.com/hotel/es/la-casa-del-presidente.es.html" target="_blank" class="hotel-reserve-btn">Ver en Booking</a>
-                </div>
-            </div>
-            <div class="hotel-card fade-in">
-                <a href="https://www.booking.com/hotel/es/arco-san-vicente.es.html" target="_blank" class="hotel-image-link">
-                    <div class="hotel-image">
-                        <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/210054033.jpg?k=b2aea259d1dd21112a66df91d5dc3afe23c9faede2b104b56a8d7f401f6afb72&o=" alt="Hotel Arco San Vicente" loading="lazy">
-                        <span class="hotel-badge">Económico</span>
-                    </div>
-                </a>
-                <div class="hotel-info">
-                    <p class="hotel-category">Opción económica</p><h3>Hotel Arco San Vicente</h3><p class="hotel-stars">★★★</p><p class="hotel-address">López Núñez, 6</p>
-                    <div class="hotel-features"><span class="hotel-feature">Céntrico</span><span class="hotel-feature">Familiar</span><span class="hotel-feature">Wifi gratis</span></div>
-                    <a href="https://www.booking.com/hotel/es/arco-san-vicente.es.html" target="_blank" class="hotel-reserve-btn">Ver en Booking</a>
-                </div>
-            </div>
-        </div>
-        <div class="hotels-note fade-in"><p><strong>Importante:</strong> Os recomendamos reservar con antelación ya que junio es temporada alta en Ávila.</p></div>
-    </section>
-
-    <section id="details" class="details">
-        <h2 class="section-title fade-in">Detalles del Evento</h2>
-        <div class="details-grid">
-            <div class="detail-card fade-in"><div class="detail-icon"></div><h3>Fecha</h3><p>Sábado, 12 de Junio<br>2027</p></div>
-            <div class="detail-card fade-in"><div class="detail-icon"></div><h3>Horario</h3><p>Ceremonia: 12:00h<br>Cóctel: 14:30h</p></div>
-            <div class="detail-card fade-in"><div class="detail-icon"></div><h3>Código de Vestimenta</h3><p>Etiqueta<br>Sugerimos tonos cálidos</p></div>
-            <div class="detail-card fade-in"><div class="detail-icon"></div><h3>Transporte</h3><p>Parking disponible en ambas ubicaciones<br>Autobús desde la catedral a la finca</p></div>
-            <div class="detail-card fade-in"><div class="detail-icon"></div><h3>Niños</h3><p>¡Los peques son bienvenidos!<br>Habrá zona infantil</p></div>
-            <div class="detail-card fade-in"><div class="detail-icon"></div><h3>Hashtag</h3><p>#RaquelYAdrian2027<br>¡Comparte tus fotos!</p></div>
-        </div>
-    </section>
-
-    <section id="timeline" class="timeline-section">
-        <h2 class="section-title fade-in">Programa del Día</h2>
-        <div class="timeline">
-            <div class="timeline-item fade-in"><div class="timeline-time">11:30h</div><div class="timeline-dot"></div><div class="timeline-content"><h4>Llegada de Invitados</h4><p>Recibimiento en la Catedral de Ávila</p></div></div>
-            <div class="timeline-item fade-in"><div class="timeline-time">12:00h</div><div class="timeline-dot"></div><div class="timeline-content"><h4>Ceremonia Religiosa</h4><p>Intercambio de votos y anillos</p></div></div>
-            <div class="timeline-item fade-in"><div class="timeline-time">13:30h</div><div class="timeline-dot"></div><div class="timeline-content"><h4>Traslado a la Finca</h4><p>Autobús disponible desde la catedral</p></div></div>
-            <div class="timeline-item fade-in"><div class="timeline-time">14:30h</div><div class="timeline-dot"></div><div class="timeline-content"><h4>Cóctel de Bienvenida</h4><p>Aperitivos y fotos con los novios</p></div></div>
-            <div class="timeline-item fade-in"><div class="timeline-time">16:30h</div><div class="timeline-dot"></div><div class="timeline-content"><h4>Banquete</h4><p>Comida y brindis especiales</p></div></div>
-            <div class="timeline-item fade-in"><div class="timeline-time">20:00h</div><div class="timeline-dot"></div><div class="timeline-content"><h4>Primer Baile</h4><p>Apertura de pista de baile</p></div></div>
-            <div class="timeline-item fade-in"><div class="timeline-time">21:00h</div><div class="timeline-dot"></div><div class="timeline-content"><h4>Fiesta</h4><p>¡A bailar hasta el amanecer!</p></div></div>
-        </div>
-    </section>
-
-    <section id="gifts" class="gifts">
-        <h2 class="section-title fade-in">Lista de Bodas</h2>
-        <p class="gifts-intro fade-in">Vuestra presencia es el mejor regalo. Pero si deseáis hacernos un obsequio, aquí tenéis algunas ideas que nos harían mucha ilusión:</p>
-
-        <div class="donations-info fade-in">
-            <h3>Contribuciones económicas</h3>
-            <div class="donation-methods">
-                <div class="donation-method">
-                    <label>IBAN</label>
-                    <input type="text" value="ES00 0000 0000 0000 0000 0000" readonly onclick="this.select()">
-                </div>
-                <div class="donation-method">
-                    <label>PayPal</label>
-                    <input type="text" value="raquelyadrian@ejemplo.com" readonly onclick="this.select()">
-                </div>
-            </div>
-        </div>
-
-        <h3 class="gifts-subtitle fade-in">Regalos sugeridos</h3>
-        <div class="carousel-container">
-            <button class="carousel-btn prev" onclick="moveCarousel(-1)">‹</button>
-            <div class="gifts-carousel">
-                <div class="gift-card"><h4>Luna de Miel en Maldivas</h4><p>Ayúdanos a hacer realidad el viaje de nuestros sueños</p><p class="gift-price">Contribución libre</p></div>
-                <div class="gift-card"><h4>Robot de Cocina Thermomix</h4><p>Para preparar deliciosas recetas juntos</p><p class="gift-price">1.299€</p></div>
-                <div class="gift-card"><h4>Cafetera De'Longhi</h4><p>Para nuestros desayunos de domingo</p><p class="gift-price">549€</p></div>
-                <div class="gift-card"><h4>Sofá Chester</h4><p>El sofá de nuestros sueños para el salón</p><p class="gift-price">1.800€</p></div>
-                <div class="gift-card"><h4>Vinoteca Premium</h4><p>Para conservar nuestros vinos favoritos</p><p class="gift-price">450€</p></div>
-                <div class="gift-card"><h4>Cuadro Personalizado</h4><p>Obra de arte con nuestra foto favorita</p><p class="gift-price">280€</p></div>
-                <div class="gift-card"><h4>Juego de Maletas</h4><p>Para todos nuestros futuros viajes juntos</p><p class="gift-price">380€</p></div>
-                <div class="gift-card"><h4>Set de Sábanas de Lujo</h4><p>Sábanas de algodón egipcio premium</p><p class="gift-price">220€</p></div>
-                <div class="gift-card"><h4>Batidora KitchenAid</h4><p>Para hornear nuestras tartas favoritas</p><p class="gift-price">599€</p></div>
-                <div class="gift-card"><h4>Experiencia Gastronómica</h4><p>Cena en restaurante con estrella Michelin</p><p class="gift-price">350€</p></div>
-                <div class="gift-card"><h4>Set de Cuchillos Japoneses</h4><p>Cuchillos profesionales para nuestra cocina</p><p class="gift-price">425€</p></div>
-                <div class="gift-card"><h4>Lámpara de Diseño</h4><p>Iluminar nuestro hogar con estilo</p><p class="gift-price">340€</p></div>
-            </div>
-            <button class="carousel-btn next" onclick="moveCarousel(1)">›</button>
-        </div>
-    </section>
-
-    <section id="playlist" class="playlist">
-        <h2 class="section-title fade-in">Nuestra Playlist</h2>
-        <p class="section-subtitle fade-in">¡Ayúdanos a crear la banda sonora perfecta para nuestra boda!</p>
-        <div class="playlist-container">
-            <div class="spotify-embed fade-in"><iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
-            <div class="song-request fade-in">
+        <div class="playlist-split">
+            <div class="rv"><iframe style="border-radius:0" src="https://open.spotify.com/embed/track/7gWXSdHTqhuBw9llOAqdHJ?utm_source=generator&theme=0" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
+            <div class="song-form-box rv">
                 <h4>Sugiere una canción</h4>
                 <form id="song-form" action="https://formspree.io/f/xeoywbav" method="POST">
                     <input type="text" name="cancion" placeholder="Nombre de la canción" required>
                     <input type="text" name="artista" placeholder="Artista">
                     <input type="text" name="nombre" placeholder="Tu nombre">
-                    <button type="submit">Sugerir</button>
+                    <button type="submit" class="song-btn">Sugerir</button>
                 </form>
             </div>
         </div>
     </section>
 
-    <section id="guestbook" class="guestbook">
-        <h2 class="section-title fade-in">Libro de Firmas</h2>
-        <p class="section-subtitle fade-in">Déjanos un mensaje especial que guardaremos para siempre</p>
-        <div class="guestbook-container">
-            <div class="guestbook-form fade-in">
+    <!-- GUESTBOOK -->
+    <section id="guestbook" class="bg-warm pad">
+        <div class="sec-head rv">
+            <p class="sec-tag">Vuestras palabras</p>
+            <h2 class="sec-title">Libro de <em>Firmas</em></h2>
+        </div>
+        <div class="gb-container">
+            <div class="gb-form rv">
                 <form id="guestbook-form" action="https://formspree.io/f/movgzoer" method="POST">
                     <textarea name="mensaje" placeholder="Escribe tu mensaje para los novios..." required></textarea>
                     <input type="text" name="nombre" placeholder="Tu nombre" required>
-                    <button type="submit" class="submit-btn">Firmar el libro</button>
+                    <button type="submit" class="btn-submit">Firmar</button>
                 </form>
             </div>
-            <div class="guestbook-messages" id="guestbook-messages">
-                <div class="guestbook-message fade-in"><p>"¡Os deseamos toda la felicidad del mundo! Que este día sea el comienzo de una vida llena de amor y aventuras juntos. ¡Os queremos!"</p><span class="author">— María y Pedro</span></div>
-                <div class="guestbook-message fade-in"><p>"Enhorabuena pareja! Hacéis un equipo increíble. Que vuestra vida juntos esté llena de risas, viajes y mucho amor. ¡Viva los novios!"</p><span class="author">— Los primos de Bilbao</span></div>
-                <div class="guestbook-message fade-in"><p>"Desde que os conocí supe que erais el uno para el otro. Me alegra tanto poder celebrar este día con vosotros. ¡Os quiero muchísimo!"</p><span class="author">— Laura</span></div>
+            <div class="gb-messages">
+                <div class="gb-msg rv"><p>"Os deseamos toda la felicidad del mundo. Que este día sea el comienzo de una vida llena de amor y aventuras."</p><span class="who">María y Pedro</span></div>
+                <div class="gb-msg rv"><p>"Enhorabuena pareja. Hacéis un equipo increíble. Que vuestra vida juntos esté llena de risas, viajes y mucho amor."</p><span class="who">Los primos de Bilbao</span></div>
+                <div class="gb-msg rv"><p>"Desde que os conocí supe que erais el uno para el otro. Me alegra tanto poder celebrar este día con vosotros."</p><span class="who">Laura</span></div>
             </div>
         </div>
     </section>
 
-    <footer>
-        <p class="footer-hashtag">#RaquelYAdrian2027</p>
-        <p class="footer-quote">"Y sin amor, todo es nada" — Santa Teresa de Jesús</p>
-        <p class="footer-names">Raquel & Adrián • 12 de Junio de 2027</p>
+    <!-- GALLERY -->
+    <section id="gallery" class="bg-paper pad">
+        <div class="sec-head rv">
+            <p class="sec-tag">La ciudad</p>
+            <h2 class="sec-title"><em>Ávila</em></h2>
+            <p class="sec-sub">La ciudad amurallada donde todo comenzará</p>
+        </div>
+        <div class="gallery-grid rv">
+            <div class="g-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Panoramica_nocturna_de_la_Ciudad_de_%C3%81vila.jpg/1920px-Panoramica_nocturna_de_la_Ciudad_de_%C3%81vila.jpg" alt="Ávila nocturna" loading="lazy"><span class="g-caption">Vista nocturna</span></div>
+            <div class="g-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Avila_with_its_11th_-_14th_cent._walls_%281%29_%2829099442820%29.jpg/1280px-Avila_with_its_11th_-_14th_cent._walls_%281%29_%2829099442820%29.jpg" alt="Murallas de Ávila" loading="lazy"><span class="g-caption">Las murallas</span></div>
+            <div class="g-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Puerta_del_Alcazar_muralla.jpg/800px-Puerta_del_Alcazar_muralla.jpg" alt="Puerta del Alcázar" loading="lazy"><span class="g-caption">Puerta del Alcázar</span></div>
+            <div class="g-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Avila_with_its_11th_-_14th_cent._walls_%283%29_%2829099248580%29.jpg/1280px-Avila_with_its_11th_-_14th_cent._walls_%283%29_%2829099248580%29.jpg" alt="Panorámica de Ávila" loading="lazy"><span class="g-caption">Panorámica</span></div>
+            <div class="g-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Avila_Cathedral_2023_-_West_fa%C3%A7ade.jpg/800px-Avila_Cathedral_2023_-_West_fa%C3%A7ade.jpg" alt="Catedral de Ávila" loading="lazy"><span class="g-caption">La Catedral</span></div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="bg-warm pad">
+        <div class="sec-head rv">
+            <p class="sec-tag">Dudas frecuentes</p>
+            <h2 class="sec-title">Preguntas <em>& Respuestas</em></h2>
+        </div>
+        <div class="faq-list rv">
+            <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Hay parking en los venues?</button><div class="faq-a"><p>Sí. La Catedral tiene parking público cercano y la Dehesa del Pedrosillo cuenta con amplio aparcamiento privado para los invitados.</p></div></div>
+            <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cómo funciona el autobús?</button><div class="faq-a"><p>Habrá un autobús que saldrá de la Catedral hacia la finca tras la ceremonia (aprox. 13:30h). Por la noche habrá servicio de vuelta a Ávila ciudad.</p></div></div>
+            <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Puedo llevar niños?</button><div class="faq-a"><p>Por supuesto. Los niños son bienvenidos. Habrá una zona infantil con monitores durante el banquete y la fiesta.</p></div></div>
+            <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuál es el dress code?</button><div class="faq-a"><p>Etiqueta formal. Sugerimos tonos cálidos y terrosos que armonicen con el entorno castellano. Evitad el blanco, por favor.</p></div></div>
+            <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Hasta qué hora dura la fiesta?</button><div class="faq-a"><p>La fiesta continuará hasta el amanecer. El último autobús de vuelta a Ávila saldrá a las 3:00h aproximadamente.</p></div></div>
+            <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Qué opciones de menú hay?</button><div class="faq-a"><p>Ofrecemos tres opciones: carne, pescado y vegano. Puedes indicar tu elección y alergias en el formulario de confirmación.</p></div></div>
+            <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuándo debo confirmar?</button><div class="faq-a"><p>Os pedimos que confirmáis antes del 1 de mayo de 2027 para poder organizar todo con tiempo.</p></div></div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="foot">
+        <div class="foot-crest">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="675 272 708 739" fill="currentColor"><path d="m0 0h32v59h61l1 4-1 28h-61v172l8-6 14-11 17-9h2l-2-10-11-21-5-15v-19l4-15 5-10 9-11 15-11 6-4h2l-1 15v16l1 4 4-14 7-13 8-10 10-11 8-11 4-11 2-11v-10l-3-17-2-7h3l12 7 14 11 9 10 8 14 4 11 1 6v16l-4 18-14 28-2 8v9l4 15 5 17v15l-3 10 1 4 1 3-7 8-7 7-9-3-16-4-8-1h-18l-17 3-15 6-14 8-11 9-7 7-13 17-11 16-3 4-4-2-13-19-9-12-9-10-13-10-14-8-15-6-17-3h-18l-19 3-15 6-15 9-10 9-11 15-8 17-4 16-1 7v26l3 18 5 17 9 21 12 23 15 24 21 28 9 11 11 13 9 10 14 15 7 8 16 16 8 7 13 12 8 7 10 9 14 11 9 7 5-2 13-11 11-9 13-12 8-7 10-9 13-12 8-8 7-8 12-12 7-8 11-13 11-14 12-15 18-27 10-17 11-21 9-24 5-22 1-8v-22l-3-17-6-16-6-11 2-4 12-12 3 1 9 16 5 12 4 14 3 26-1 17-3 18-6 21-8 20-12 24-13 21-10 14-11 16-11 14-24 28-16 17-30 30-8 7-7 7-8 7-34 28-11 8-6 1-13-9-14-12-10-8-13-11-10-9-12-11-7-7-8-7-14-14-4 2-9 9-7 8-4 2v2l-16 16-1 2 5 2 17 9 6 4-1 2-20 7-36 13-30 10-3-1 15-46 15-43 2-2 6 12 7 15v2l5-3 12-12 7-8 17-17h2l-6-8-11-13-14-17-13-18-18-27-14-25-9-20-8-22-5-23-1-10v-19l3-21 7-20 9-17 11-14 12-12h2l-1-4-20-25-8-14-4-14v-20l3-12 7-14 10-14 4-3 3 13 5 15 6 10 6 4h7l4-3-1-12-12-22-4-13-2-12v-8l3-15 8-16 6-8 12-12 15-10 5-3 3 1-4 17-1 8v11l3 13 6 12 15 16 10 14 6 14 2 9 1 1v-26l-1-9 6 2 12 8 10 9 7 11 5 13 2 9v15l-4 15-9 17-4 7-1 9 19 10 13 10 7 6 2 1-1-7v-164l-61-1v-32h61v-58zm158 89-4 10-7 14-8 10-10 11-7 10-4 11-1 5v43l-17-8-11-8-9-10-4-4v16l4 11 9 16 6 14 10-1h26l14 2h5l3-9v-8l-7-27-1-7v-12l3-14 4-10 8-14 4-11v-18l-4-11zm-286 1-4 9-1 5v10l4 13 12 25 3 12v7l-3 10-6 8-5 4-9 3h-9l-10-3-9-6-4-3h-2l3 14 6 12 8 10 10 11 6 8 9-3 16-5 12-2h29l8 1 14-28 5-12 1-16-2-1-8 11-9 8-16 8-5 2-1-40-4-15-6-10-13-15-8-9-6-12-4-11z" transform="translate(1008,316)"/><path d="m0 0h2l1 2 4 50v8l28 2 31 3 2 1-2 4-11 10-7 8-45 45-1 2h-2l-2 4-6 5-52 1-8 7-7 8-37 37-7 8-33 33-7 8-42 42-7 8-5 4-7 8 2 6 5 12 2 8v13l-4 6-2 1h-8l-5-4-2-4-3-16-5-10-4-5-10-6-11-4-11-1-5-6-1-7 3-5 5-3h12l12 3 12 6 3 1 7-8 36-36 7-8 31-31 7-8 40-40 7-8 24-24 1-2v-53zm-17 47-35 35-1 2v21l4-2 22-22 4-5 8-7 1-2-1-20zm18 35-6 5-6 7-8 7-11 12-7 7v2h22l25-25 7-8 5-6-2-1z" transform="translate(1285,419)"/></svg>
+        </div>
+        <p class="foot-names">Raquel <em>&</em> Adrián</p>
+        <p class="foot-date">12 de Junio de 2027 &middot; Ávila</p>
+        <p class="foot-hash">#RaquelYAdrian2027</p>
+        <p class="foot-quote">"Y sin amor, todo es nada"</p>
+        <p class="foot-dev">Diseñado y desarrollado por <a href="#">Adrián Zapatera</a></p>
     </footer>
 
     <script>
-        // Animación de invitación
-        function breakSeal() {
-            const seal = document.querySelector('.initial-seal');
-            const text = document.querySelector('.invitation-text');
-            const overlay = document.getElementById('invitation-overlay');
+    // Menu
+    function openMenu() { document.getElementById('overlayMenu').classList.add('open'); }
+    function closeMenu() { document.getElementById('overlayMenu').classList.remove('open'); }
 
-            // Evitar múltiples clicks
-            seal.style.pointerEvents = 'none';
+    // Hero stagger
+    requestAnimationFrame(() => document.querySelector('.hero').classList.add('loaded'));
 
-            // Desvanecer texto
-            text.classList.add('fading');
+    // Countdown
+    const secEl = document.getElementById('seconds');
+    function tick() {
+        const t = new Date('2027-06-12T12:00:00').getTime() - Date.now();
+        document.getElementById('days').textContent = String(Math.floor(t/864e5)).padStart(3,'0');
+        document.getElementById('hours').textContent = String(Math.floor((t%864e5)/36e5)).padStart(2,'0');
+        document.getElementById('minutes').textContent = String(Math.floor((t%36e5)/6e4)).padStart(2,'0');
+        secEl.textContent = String(Math.floor((t%6e4)/1e3)).padStart(2,'0');
+        secEl.classList.add('tick');
+        setTimeout(() => secEl.classList.remove('tick'), 150);
+    }
+    tick(); setInterval(tick, 1000);
 
-            // Romper sello
-            setTimeout(() => {
-                seal.classList.add('breaking');
-            }, 200);
+    // Reveal
+    const ro = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); }), { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.rv').forEach(el => ro.observe(el));
 
-            // Ocultar todo después de la animación
-            setTimeout(() => {
-                overlay.classList.add('hidden');
-            }, 1200);
-        }
+    // Timeline line
+    const tl = document.querySelector('.tl');
+    function tlLine() {
+        if(!tl) return;
+        const r = tl.getBoundingClientRect();
+        const p = Math.min(1, Math.max(0, (innerHeight - r.top) / (r.height + innerHeight*0.3)));
+        tl.style.setProperty('--line-h', (p*tl.offsetHeight)+'px');
+    }
+    addEventListener('scroll', () => requestAnimationFrame(tlLine)); tlLine();
 
-        function toggleMenu() { document.querySelector('.nav-links').classList.toggle('active'); }
-        document.querySelectorAll('.nav-links a').forEach(link => { link.addEventListener('click', () => { document.querySelector('.nav-links').classList.remove('active'); }); });
+    // RSVP
+    function handleAtt() {
+        const v = document.getElementById('attendance').value;
+        document.getElementById('no-msg').style.display = 'none';
+        document.getElementById('cer-msg').style.display = 'none';
+        document.getElementById('full-att').style.display = 'none';
+        if(v==='no') document.getElementById('no-msg').style.display = 'block';
+        else if(v==='solo_ceremonia') document.getElementById('cer-msg').style.display = 'block';
+        else if(v==='si') document.getElementById('full-att').style.display = 'block';
+    }
+    function handleGuests() {
+        const h = document.getElementById('has-guests').value;
+        const s = document.getElementById('guests-sec');
+        if(h==='si') { s.style.display='block'; updateGuests(); }
+        else { s.style.display='none'; document.getElementById('guests-det').innerHTML=''; }
+    }
+    function updateGuests() {
+        const n = parseInt(document.getElementById('num-guests').value);
+        const c = document.getElementById('guests-det');
+        let h = '<h4>Datos de acompañantes</h4>';
+        for(let i=1;i<=n;i++) h += '<div class="g-entry"><div class="g-num">Acompañante '+i+'</div><div class="g-fields"><input type="text" name="acompanante_'+i+'_nombre" placeholder="Nombre" required><select name="acompanante_'+i+'_menu" required><option value="">Menú</option><option value="carne">Carne</option><option value="pescado">Pescado</option><option value="vegano">Vegano</option></select></div></div>';
+        c.innerHTML = h;
+    }
 
-        // Dark Mode Toggle
-        function toggleTheme() {
-            const html = document.documentElement;
-            const checkbox = document.getElementById('theme-checkbox');
-            const newTheme = checkbox.checked ? 'dark' : 'light';
-
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        }
-
-        // Cargar tema guardado (por defecto: light)
-        function loadTheme() {
-            const savedTheme = localStorage.getItem('theme');
-            const theme = savedTheme || 'light';
-            const checkbox = document.getElementById('theme-checkbox');
-
-            document.documentElement.setAttribute('data-theme', theme);
-            checkbox.checked = (theme === 'dark');
-        }
-
-        // Cargar tema al inicio
-        loadTheme();
-
-        // Flip cards en móvil (click para voltear)
-        document.querySelectorAll('.padrino-card-flip').forEach(card => {
-            card.addEventListener('click', function() {
-                this.classList.toggle('flipped');
-            });
+    // Form submit
+    function setupForm(id, msg) {
+        const f = document.getElementById(id);
+        if(!f) return;
+        f.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if(id==='rsvp-form') {
+                const a = document.getElementById('attendance').value;
+                if(a==='si' && !document.querySelector('input[name="mi_menu"]:checked')) {
+                    document.getElementById('menu-error').style.display='block'; return;
+                } else { const me = document.getElementById('menu-error'); if(me) me.style.display='none'; }
+            }
+            const b = f.querySelector('button[type="submit"]');
+            const o = b.textContent; b.textContent='Enviando...'; b.disabled=true;
+            fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}})
+            .then(r => {
+                if(r.ok) { f.innerHTML = id==='rsvp-form' ? '<div class="form-ok"><h3>Gracias por confirmar</h3><p>Nos vemos en la boda.</p></div>' : '<p class="form-ok-sm">'+msg+'</p>'; }
+                else { b.textContent=o; b.disabled=false; alert('Error. Inténtalo de nuevo.'); }
+            }).catch(() => { b.textContent=o; b.disabled=false; alert('Error de conexión.'); });
         });
+    }
+    setupForm('rsvp-form','Gracias');
+    setupForm('song-form','Gracias por tu sugerencia');
+    setupForm('guestbook-form','Gracias por tu mensaje');
 
-        // Carrusel de regalos
-        let carouselPosition = 0;
-        function moveCarousel(direction) {
-            const carousel = document.querySelector('.gifts-carousel');
-            const cardWidth = 280 + 24; // width + gap
-            const visibleCards = Math.floor(carousel.offsetWidth / cardWidth);
-            const maxPosition = carousel.children.length - visibleCards;
+    // Calendar .ics download
+    function downloadCal() {
+        const ics = [
+            'BEGIN:VCALENDAR',
+            'VERSION:2.0',
+            'PRODID:-//RaquelYAdrian//Boda//ES',
+            'BEGIN:VEVENT',
+            'DTSTART:20270612T100000Z',
+            'DTEND:20270613T040000Z',
+            'SUMMARY:Boda de Raquel y Adrián',
+            'DESCRIPTION:Ceremonia 12:00h en la Catedral de Ávila. Cóctel y banquete 14:30h en Dehesa del Pedrosillo.',
+            'LOCATION:Catedral de Ávila\\, Plaza de la Catedral\\, 05001 Ávila',
+            'URL:https://raquelyadrian.com',
+            'STATUS:CONFIRMED',
+            'END:VEVENT',
+            'END:VCALENDAR'
+        ].join('\r\n');
+        const blob = new Blob([ics], {type: 'text/calendar;charset=utf-8'});
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'boda-raquel-y-adrian.ics';
+        a.click();
+        URL.revokeObjectURL(a.href);
+    }
 
-            carouselPosition += direction;
-            carouselPosition = Math.max(0, Math.min(carouselPosition, maxPosition));
+    // FAQ accordion
+    function toggleFaq(btn) {
+        const item = btn.parentElement;
+        const wasOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+        if (!wasOpen) item.classList.add('open');
+    }
 
-            carousel.scrollTo({
-                left: carouselPosition * cardWidth,
-                behavior: 'smooth'
-            });
-        }
-
-        function updateCountdown() {
-            const weddingDate = new Date('2027-06-12T12:00:00').getTime();
-            const now = new Date().getTime();
-            const distance = weddingDate - now;
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            document.getElementById('days').textContent = String(days).padStart(3, '0');
-            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-        }
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-
-        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); } }); }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-        function handleAttendance() {
-            const attendance = document.getElementById('attendance').value;
-            const noMsg = document.getElementById('no-attendance-msg');
-            const ceremonyMsg = document.getElementById('ceremony-only-msg');
-            const fullForm = document.getElementById('full-attendance');
-
-            // Ocultar todas las secciones
-            noMsg.style.display = 'none';
-            ceremonyMsg.style.display = 'none';
-            fullForm.style.display = 'none';
-
-            // Limpiar campos de los tres formularios
-            const nameNo = document.getElementById('name-no');
-            const nameCeremony = document.getElementById('name-ceremony');
-            const emailCeremony = document.getElementById('email-ceremony');
-            const name = document.getElementById('name');
-            const email = document.getElementById('email');
-            const phone = document.getElementById('phone');
-            const allergies = document.getElementById('allergies');
-
-            if (nameNo) nameNo.value = '';
-            if (nameCeremony) nameCeremony.value = '';
-            if (emailCeremony) emailCeremony.value = '';
-            if (name) name.value = '';
-            if (email) email.value = '';
-            if (phone) phone.value = '';
-            if (allergies) allergies.value = '';
-
-            // Limpiar selección de menú
-            const menuRadios = document.querySelectorAll('input[name="mi_menu"]');
-            menuRadios.forEach(radio => radio.checked = false);
-
-            // Limpiar mensaje de error del menú
-            const menuError = document.getElementById('menu-error');
-            if (menuError) menuError.style.display = 'none';
-
-            // Limpiar acompañantes
-            document.getElementById('guests-details').innerHTML = '';
-            document.getElementById('guests-section').style.display = 'none';
-            if (document.getElementById('has-guests')) document.getElementById('has-guests').value = 'no';
-
-            // Mostrar el formulario correcto
-            if (attendance === 'no') {
-                noMsg.style.display = 'block';
-                if (nameNo) nameNo.setAttribute('required', 'required');
-            }
-            else if (attendance === 'solo_ceremonia') {
-                ceremonyMsg.style.display = 'block';
-                if (nameCeremony) nameCeremony.setAttribute('required', 'required');
-            }
-            else if (attendance === 'si') {
-                fullForm.style.display = 'block';
-                if (name) name.setAttribute('required', 'required');
-                if (email) email.setAttribute('required', 'required');
-            }
-        }
-
-        function handleGuests() {
-            const hasGuests = document.getElementById('has-guests').value;
-            const guestsSection = document.getElementById('guests-section');
-            if (hasGuests === 'si') { guestsSection.style.display = 'block'; updateGuestFields(); }
-            else { guestsSection.style.display = 'none'; document.getElementById('guests-details').innerHTML = ''; }
-        }
-
-        function updateGuestFields() {
-            const numGuests = parseInt(document.getElementById('num-guests').value);
-            const container = document.getElementById('guests-details');
-            let html = '<h4>Datos de acompañantes</h4>';
-            for (let i = 1; i <= numGuests; i++) {
-                html += '<div class="guest-entry"><div class="guest-number">Acompañante +' + i + '</div><div class="guest-fields"><input type="text" name="acompanante_' + i + '_nombre" placeholder="Nombre" required><select name="acompanante_' + i + '_menu" required><option value="">Selecciona menú</option><option value="carne">🥩 Carne</option><option value="pescado">🐟 Pescado</option><option value="vegano">🥗 Vegano</option></select></div></div>';
-            }
-            container.innerHTML = html;
-        }
-
-        function setupForm(formId, successMsg) {
-            const form = document.getElementById(formId);
-            if (!form) return;
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-
-                // Validación especial para el menú si es el formulario RSVP
-                if (formId === 'rsvp-form') {
-                    const attendance = document.getElementById('attendance').value;
-                    if (attendance === 'si') {
-                        const menuSelected = document.querySelector('input[name="mi_menu"]:checked');
-                        if (!menuSelected) {
-                            document.getElementById('menu-error').style.display = 'block';
-                            return;
-                        } else {
-                            document.getElementById('menu-error').style.display = 'none';
-                        }
-                    }
-                }
-
-                const btn = form.querySelector('button[type="submit"]');
-                const origText = btn.textContent;
-                btn.textContent = 'Enviando...';
-                btn.disabled = true;
-
-                fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
-                .then(response => {
-                    if (response.ok) {
-                        if (formId === 'rsvp-form') {
-                            form.innerHTML = '<div class="form-success"><h3>¡Gracias por confirmar! 💕</h3><p>Hemos recibido tu confirmación. ¡Nos vemos en la boda!</p></div>';
-                        }
-                        else {
-                            form.innerHTML = '<p class="form-success-small">' + successMsg + '</p>';
-                        }
-                    } else {
-                        response.json().then(data => {
-                            btn.textContent = origText;
-                            btn.disabled = false;
-                            alert('Error al enviar: ' + (data.error || 'Por favor, inténtalo de nuevo.'));
-                        }).catch(() => {
-                            btn.textContent = origText;
-                            btn.disabled = false;
-                            alert('Hubo un error al enviar el formulario. Por favor, verifica los datos e inténtalo de nuevo.');
-                        });
-                    }
-                }).catch((error) => {
-                    console.error('Error:', error);
-                    btn.textContent = origText;
-                    btn.disabled = false;
-                    alert('Error de conexión. Por favor, verifica tu conexión a internet e inténtalo de nuevo.');
-                });
-            });
-        }
-        setupForm('rsvp-form', '¡Gracias!');
-        setupForm('song-form', '¡Gracias por tu sugerencia! ');
-        setupForm('guestbook-form', '¡Gracias por tu mensaje! 💕');
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-            });
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', function(e) {
+            e.preventDefault();
+            const t = document.querySelector(this.getAttribute('href'));
+            if(t) t.scrollIntoView({behavior:'smooth',block:'start'});
         });
+    });
     </script>
 </body>
 </html>
