@@ -33,6 +33,11 @@
             --fg-mute: var(--mute);
             --bg-inv: var(--dark);
             --fg-inv: var(--paper);
+            --rule-inv: rgba(245,242,236,0.06);
+            --rule-inv-md: rgba(245,242,236,0.1);
+            --rule-inv-lg: rgba(245,242,236,0.12);
+            --fg-inv-mute: rgba(245,242,236,0.5);
+            --fg-inv-faint: rgba(245,242,236,0.25);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -348,7 +353,7 @@
         .story-photo img {
             width: 100%; height: 100%; object-fit: cover;
             display: block; filter: grayscale(1);
-            transition: filter 0.6s cubic-bezier(0.16,1,0.3,1), transform 8s cubic-bezier(0.16,1,0.3,1);
+            transition: filter 0.6s cubic-bezier(0.16,1,0.3,1), transform 4s cubic-bezier(0.16,1,0.3,1);
         }
         .story-photo:hover img { filter: grayscale(0.2) sepia(0.1); transform: scale(1.05); }
         .story-copy {
@@ -369,7 +374,7 @@
         .photo-bw img {
             width: 100%; height: 100%; object-fit: cover; display: block;
             filter: grayscale(1);
-            transition: filter 0.6s cubic-bezier(0.16,1,0.3,1), transform 8s cubic-bezier(0.16,1,0.3,1);
+            transition: filter 0.6s cubic-bezier(0.16,1,0.3,1), transform 4s cubic-bezier(0.16,1,0.3,1);
         }
         .photo-bw:hover img {
             filter: grayscale(0.2) sepia(0.1);
@@ -405,7 +410,7 @@
         .full-photo img {
             width: 100%; height: 100%; object-fit: cover; display: block;
             filter: grayscale(1);
-            transition: filter 0.6s cubic-bezier(0.16,1,0.3,1), transform 8s cubic-bezier(0.16,1,0.3,1);
+            transition: filter 0.6s cubic-bezier(0.16,1,0.3,1), transform 4s cubic-bezier(0.16,1,0.3,1);
         }
         .full-photo:hover img {
             filter: grayscale(0.2) sepia(0.1);
@@ -424,7 +429,7 @@
         .music-editorial { max-width: 580px; margin: 0 auto; }
         .music-piece {
             padding: 1.8rem 0;
-            border-bottom: 1px solid rgba(245,242,236,0.06);
+            border-bottom: 1px solid var(--rule-inv);
             display: grid;
             grid-template-columns: auto 1fr;
             gap: 1.5rem;
@@ -437,7 +442,7 @@
             min-width: 100px;
             padding-top: 0.15rem;
         }
-        .m-info {}
+
         .m-title {
             font-family: 'Bodoni Moda', serif; font-weight: 500;
             font-size: 1.1rem; color: var(--fg-inv);
@@ -477,13 +482,13 @@
             display: grid; grid-template-columns: 1fr 1fr;
             gap: 3rem; max-width: 1100px; margin: 0 auto;
         }
-        .venue {}
+
         .venue-map { height: 300px; margin-bottom: 1.5rem; }
         .venue-map iframe { width: 100%; height: 100%; border: none; display: block; filter: grayscale(1) contrast(1.1); transition: filter 0.4s; }
         .venue-map:hover iframe { filter: none; }
         .venue-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.3em; font-weight: 500; color: var(--sienna-soft); margin-bottom: 0.3rem; }
         .venue h3 { font-family: 'Bodoni Moda', serif; font-size: 1.3rem; margin-bottom: 0.3rem; color: var(--fg-inv); }
-        .venue p { font-size: 0.85rem; color: rgba(245,242,236,0.5); }
+        .venue p { font-size: 0.85rem; color: var(--fg-inv-mute); }
         .venue-time { color: var(--fg-inv); font-weight: 500; font-size: 0.85rem; margin: 0.5rem 0; }
         .venue-link {
             font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em;
@@ -527,7 +532,7 @@
             transition: background 0.3s;
         }
         .hotel-img { height: 200px; overflow: hidden; }
-        .hotel-img img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1); transition: filter 0.6s cubic-bezier(0.16,1,0.3,1), transform 8s cubic-bezier(0.16,1,0.3,1); }
+        .hotel-img img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1); transition: filter 0.6s cubic-bezier(0.16,1,0.3,1), transform 4s cubic-bezier(0.16,1,0.3,1); }
         .hotel:hover .hotel-img img { filter: grayscale(0.2) sepia(0.1); transform: scale(1.03); }
         .hotel-body { padding: 1.2rem 1.5rem; }
         .hotel-cat { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.3em; color: var(--sienna); font-weight: 500; }
@@ -560,7 +565,7 @@
         .gifts-intro { text-align: center; color: var(--fg-mute); margin-bottom: 3rem; font-size: 0.95rem; }
         .contrib-box { border: 1px solid var(--rule); padding: 2rem; margin-bottom: 3rem; }
         .contrib-box h3 { font-family: 'Bodoni Moda', serif; font-size: 1.2rem; text-align: center; margin-bottom: 1.5rem; }
-        .contrib-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
         .contrib-item label { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--sienna); font-weight: 500; margin-bottom: 0.3rem; }
         .contrib-item input { width: 100%; padding: 0.5rem 0; border: none; border-bottom: 1px solid var(--rule); background: transparent; font-family: 'Jost', sans-serif; font-size: 0.85rem; color: var(--fg); text-align: center; cursor: pointer; }
         .gifts-sub { font-family: 'Bodoni Moda', serif; font-size: 1.2rem; text-align: center; margin-bottom: 2rem; }
@@ -579,18 +584,18 @@
             gap: 2.5rem; max-width: 800px; margin: 0 auto;
         }
         .song-form-box {
-            border: 1px solid rgba(245,242,236,0.1);
+            border: 1px solid var(--rule-inv-md);
             padding: 2rem;
         }
         .song-form-box h4 { font-family: 'Bodoni Moda', serif; font-size: 1.1rem; margin-bottom: 1.5rem; color: var(--fg-inv); }
         .song-form-box input {
             width: 100%; padding: 0.6rem 0; margin-bottom: 1rem;
-            border: none; border-bottom: 1px solid rgba(245,242,236,0.12);
+            border: none; border-bottom: 1px solid var(--rule-inv-lg);
             background: transparent; font-family: 'Jost', sans-serif;
             font-size: 0.9rem; font-weight: 300; color: var(--fg-inv);
             border-radius: 0;
         }
-        .song-form-box input::placeholder { color: rgba(245,242,236,0.25); }
+        .song-form-box input::placeholder { color: var(--fg-inv-faint); }
         .song-form-box input:focus { outline: none; border-bottom-color: var(--sienna-soft); }
         .song-btn {
             width: 100%; padding: 0.9rem; margin-top: 0.5rem;
@@ -625,7 +630,7 @@
         }
         .gb-form textarea:focus, .gb-form input:focus { outline: none; border-bottom-color: var(--sienna); }
         .gb-messages { display: flex; flex-direction: column; gap: 2.5rem; }
-        .gb-msg {}
+
         .gb-msg p {
             font-family: 'Bodoni Moda', serif; font-style: italic;
             font-size: 1.1rem; line-height: 1.6; margin-bottom: 0.4rem;
@@ -676,7 +681,7 @@
         .gallery-grid .g-item:first-child { grid-row: 1 / 3; }
         .gallery-grid .g-item img {
             width: 100%; height: 100%; object-fit: cover; display: block;
-            filter: grayscale(1); transition: filter 0.6s cubic-bezier(0.16,1,0.3,1), transform 8s cubic-bezier(0.16,1,0.3,1);
+            filter: grayscale(1); transition: filter 0.6s cubic-bezier(0.16,1,0.3,1), transform 4s cubic-bezier(0.16,1,0.3,1);
         }
         .gallery-grid .g-item:hover img { filter: grayscale(0.2) sepia(0.1); transform: scale(1.04); }
         .gallery-grid .g-caption {
@@ -727,9 +732,21 @@
         .foot-dev a { color: var(--sienna); text-decoration: none; transition: opacity 0.2s; }
         .foot-dev a:hover { opacity: 0.6; }
 
+        /* === SKIP LINK === */
+        .skip-link {
+            position: absolute; top: -100%; left: 50%; transform: translateX(-50%);
+            background: var(--sienna); color: white; padding: 0.5rem 1.5rem;
+            font-size: 0.8rem; font-weight: 500; text-decoration: none;
+            z-index: 300; border-radius: 0 0 4px 4px;
+            transition: top 0.2s;
+        }
+        .skip-link:focus { top: 0; }
+
         /* === REVEAL === */
         .rv { opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16,1,0.3,1); }
-        .rv.in { opacity: 1; transform: none; }
+        .rv-left { opacity: 0; transform: translateX(-20px); transition: all 0.8s cubic-bezier(0.16,1,0.3,1); }
+        .rv-scale { opacity: 0; transform: scale(0.95); transition: all 0.8s cubic-bezier(0.16,1,0.3,1); }
+        .rv.in, .rv-left.in, .rv-scale.in { opacity: 1; transform: none; }
 
         /* === RESPONSIVE === */
         @media (max-width: 768px) {
@@ -745,7 +762,7 @@
             .field-row { grid-template-columns: 1fr; }
             .menu-opts { flex-direction: column; }
             .g-fields { grid-template-columns: 1fr; }
-            .contrib-row { grid-template-columns: 1fr; }
+
             .music-piece { grid-template-columns: 1fr; gap: 0.3rem; }
             .m-moment { min-width: unset; }
             .close-btn { right: 1.5rem; }
@@ -760,6 +777,13 @@
     </style>
 </head>
 <body>
+    <a href="#rsvp" class="skip-link">Saltar al contenido</a>
+
+    <!-- SVG SYMBOLS -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
+        <symbol id="crest" viewBox="675 272 708 739"><path d="m0 0h32v59h61l1 4-1 28h-61v172l8-6 14-11 17-9h2l-2-10-11-21-5-15v-19l4-15 5-10 9-11 15-11 6-4h2l-1 15v16l1 4 4-14 7-13 8-10 10-11 8-11 4-11 2-11v-10l-3-17-2-7h3l12 7 14 11 9 10 8 14 4 11 1 6v16l-4 18-14 28-2 8v9l4 15 5 17v15l-3 10 1 4 1 3-7 8-7 7-9-3-16-4-8-1h-18l-17 3-15 6-14 8-11 9-7 7-13 17-11 16-3 4-4-2-13-19-9-12-9-10-13-10-14-8-15-6-17-3h-18l-19 3-15 6-15 9-10 9-11 15-8 17-4 16-1 7v26l3 18 5 17 9 21 12 23 15 24 21 28 9 11 11 13 9 10 14 15 7 8 16 16 8 7 13 12 8 7 10 9 14 11 9 7 5-2 13-11 11-9 13-12 8-7 10-9 13-12 8-8 7-8 12-12 7-8 11-13 11-14 12-15 18-27 10-17 11-21 9-24 5-22 1-8v-22l-3-17-6-16-6-11 2-4 12-12 3 1 9 16 5 12 4 14 3 26-1 17-3 18-6 21-8 20-12 24-13 21-10 14-11 16-11 14-24 28-16 17-30 30-8 7-7 7-8 7-34 28-11 8-6 1-13-9-14-12-10-8-13-11-10-9-12-11-7-7-8-7-14-14-4 2-9 9-7 8-4 2v2l-16 16-1 2 5 2 17 9 6 4-1 2-20 7-36 13-30 10-3-1 15-46 15-43 2-2 6 12 7 15v2l5-3 12-12 7-8 17-17h2l-6-8-11-13-14-17-13-18-18-27-14-25-9-20-8-22-5-23-1-10v-19l3-21 7-20 9-17 11-14 12-12h2l-1-4-20-25-8-14-4-14v-20l3-12 7-14 10-14 4-3 3 13 5 15 6 10 6 4h7l4-3-1-12-12-22-4-13-2-12v-8l3-15 8-16 6-8 12-12 15-10 5-3 3 1-4 17-1 8v11l3 13 6 12 15 16 10 14 6 14 2 9 1 1v-26l-1-9 6 2 12 8 10 9 7 11 5 13 2 9v15l-4 15-9 17-4 7-1 9 19 10 13 10 7 6 2 1-1-7v-164l-61-1v-32h61v-58zm158 89-4 10-7 14-8 10-10 11-7 10-4 11-1 5v43l-17-8-11-8-9-10-4-4v16l4 11 9 16 6 14 10-1h26l14 2h5l3-9v-8l-7-27-1-7v-12l3-14 4-10 8-14 4-11v-18l-4-11zm-286 1-4 9-1 5v10l4 13 12 25 3 12v7l-3 10-6 8-5 4-9 3h-9l-10-3-9-6-4-3h-2l3 14 6 12 8 10 10 11 6 8 9-3 16-5 12-2h29l8 1 14-28 5-12 1-16-2-1-8 11-9 8-16 8-5 2-1-40-4-15-6-10-13-15-8-9-6-12-4-11z" transform="translate(1008,316)"/><path d="m0 0h2l1 2 4 50v8l28 2 31 3 2 1-2 4-11 10-7 8-45 45-1 2h-2l-2 4-6 5-52 1-8 7-7 8-37 37-7 8-33 33-7 8-42 42-7 8-5 4-7 8 2 6 5 12 2 8v13l-4 6-2 1h-8l-5-4-2-4-3-16-5-10-4-5-10-6-11-4-11-1-5-6-1-7 3-5 5-3h12l12 3 12 6 3 1 7-8 36-36 7-8 31-31 7-8 40-40 7-8 24-24 1-2v-53zm-17 47-35 35-1 2v21l4-2 22-22 4-5 8-7 1-2-1-20zm18 35-6 5-6 7-8 7-11 12-7 7v2h22l25-25 7-8 5-6-2-1z" transform="translate(1285,419)"/></symbol>
+    </svg>
+
     <!-- NAV -->
     <nav class="nav">
         <a href="#" class="nav-brand">R <em>&</em> A</a>
@@ -792,7 +816,7 @@
     <section class="hero" id="home">
         <div class="hero-top hs">
             <div class="hero-crest">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="675 272 708 739" fill="currentColor"><path d="m0 0h32v59h61l1 4-1 28h-61v172l8-6 14-11 17-9h2l-2-10-11-21-5-15v-19l4-15 5-10 9-11 15-11 6-4h2l-1 15v16l1 4 4-14 7-13 8-10 10-11 8-11 4-11 2-11v-10l-3-17-2-7h3l12 7 14 11 9 10 8 14 4 11 1 6v16l-4 18-14 28-2 8v9l4 15 5 17v15l-3 10 1 4 1 3-7 8-7 7-9-3-16-4-8-1h-18l-17 3-15 6-14 8-11 9-7 7-13 17-11 16-3 4-4-2-13-19-9-12-9-10-13-10-14-8-15-6-17-3h-18l-19 3-15 6-15 9-10 9-11 15-8 17-4 16-1 7v26l3 18 5 17 9 21 12 23 15 24 21 28 9 11 11 13 9 10 14 15 7 8 16 16 8 7 13 12 8 7 10 9 14 11 9 7 5-2 13-11 11-9 13-12 8-7 10-9 13-12 8-8 7-8 12-12 7-8 11-13 11-14 12-15 18-27 10-17 11-21 9-24 5-22 1-8v-22l-3-17-6-16-6-11 2-4 12-12 3 1 9 16 5 12 4 14 3 26-1 17-3 18-6 21-8 20-12 24-13 21-10 14-11 16-11 14-24 28-16 17-30 30-8 7-7 7-8 7-34 28-11 8-6 1-13-9-14-12-10-8-13-11-10-9-12-11-7-7-8-7-14-14-4 2-9 9-7 8-4 2v2l-16 16-1 2 5 2 17 9 6 4-1 2-20 7-36 13-30 10-3-1 15-46 15-43 2-2 6 12 7 15v2l5-3 12-12 7-8 17-17h2l-6-8-11-13-14-17-13-18-18-27-14-25-9-20-8-22-5-23-1-10v-19l3-21 7-20 9-17 11-14 12-12h2l-1-4-20-25-8-14-4-14v-20l3-12 7-14 10-14 4-3 3 13 5 15 6 10 6 4h7l4-3-1-12-12-22-4-13-2-12v-8l3-15 8-16 6-8 12-12 15-10 5-3 3 1-4 17-1 8v11l3 13 6 12 15 16 10 14 6 14 2 9 1 1v-26l-1-9 6 2 12 8 10 9 7 11 5 13 2 9v15l-4 15-9 17-4 7-1 9 19 10 13 10 7 6 2 1-1-7v-164l-61-1v-32h61v-58zm158 89-4 10-7 14-8 10-10 11-7 10-4 11-1 5v43l-17-8-11-8-9-10-4-4v16l4 11 9 16 6 14 10-1h26l14 2h5l3-9v-8l-7-27-1-7v-12l3-14 4-10 8-14 4-11v-18l-4-11zm-286 1-4 9-1 5v10l4 13 12 25 3 12v7l-3 10-6 8-5 4-9 3h-9l-10-3-9-6-4-3h-2l3 14 6 12 8 10 10 11 6 8 9-3 16-5 12-2h29l8 1 14-28 5-12 1-16-2-1-8 11-9 8-16 8-5 2-1-40-4-15-6-10-13-15-8-9-6-12-4-11z" transform="translate(1008,316)"/><path d="m0 0h2l1 2 4 50v8l28 2 31 3 2 1-2 4-11 10-7 8-45 45-1 2h-2l-2 4-6 5-52 1-8 7-7 8-37 37-7 8-33 33-7 8-42 42-7 8-5 4-7 8 2 6 5 12 2 8v13l-4 6-2 1h-8l-5-4-2-4-3-16-5-10-4-5-10-6-11-4-11-1-5-6-1-7 3-5 5-3h12l12 3 12 6 3 1 7-8 36-36 7-8 31-31 7-8 40-40 7-8 24-24 1-2v-53zm-17 47-35 35-1 2v21l4-2 22-22 4-5 8-7 1-2-1-20zm18 35-6 5-6 7-8 7-11 12-7 7v2h22l25-25 7-8 5-6-2-1z" transform="translate(1285,419)"/></svg>
+                <svg fill="currentColor"><use href="#crest"/></svg>
             </div>
         </div>
         <div class="hero-center hs">
@@ -824,7 +848,7 @@
             <h2 class="sec-title"><em>RSVP</em></h2>
             <p class="sec-sub">Por favor, confirma antes del 1 de mayo de 2027</p>
         </div>
-        <div class="rsvp-box rv">
+        <div class="rsvp-box rv" aria-live="polite">
             <form id="rsvp-form" action="https://formspree.io/f/xqarovpl" method="POST">
                 <div class="field">
                     <label>¿Asistirás a nuestra boda?</label>
@@ -890,7 +914,7 @@
 
     <!-- STORY — editorial spread -->
     <section id="story" class="story-spread">
-        <div class="story-photo rv">
+        <div class="story-photo rv-left">
             <img src="assets/nuestra-historia.jpeg" alt="Raquel y Adrián" loading="lazy">
         </div>
         <div class="story-copy bg-warm rv">
@@ -935,7 +959,7 @@
             <p class="sec-tag">Información práctica</p>
             <h2 class="sec-title">Detalles <em>& Programa</em></h2>
         </div>
-        <div class="details-strips rv">
+        <div class="details-strips rv-left">
             <div class="detail-strip"><span class="d-key">Fecha</span><span class="d-val">Sábado, 12 de Junio de 2027</span></div>
             <div class="detail-strip"><span class="d-key">Horario</span><span class="d-val">Ceremonia 12:00h — Cóctel 14:30h</span></div>
             <div class="detail-strip"><span class="d-key">Vestimenta</span><span class="d-val">Etiqueta. Sugerimos tonos cálidos</span></div>
@@ -977,7 +1001,7 @@
             <p class="sec-tag">Alojamiento en Ávila</p>
             <h2 class="sec-title"><em>Hoteles</em></h2>
         </div>
-        <div class="hotels-mosaic rv">
+        <div class="hotels-mosaic rv-scale">
             <div class="hotel"><div class="hotel-img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/15697043.jpg?k=d81edbd986663017c01a1d46703e235a63fa22baa5eaef66d5363e4e9fe2a8ed&o=" alt="Parador" loading="lazy"></div><div class="hotel-body"><p class="hotel-cat">Hotel de lujo</p><h3>Parador de Ávila</h3><p class="hotel-stars">&#9733;&#9733;&#9733;&#9733;</p><p class="hotel-addr">Marqués de Canales de Chozas, 2</p><a href="https://www.booking.com/hotel/es/parador-de-turismo-de-avila.es.html" target="_blank" class="hotel-go">Ver en Booking &rarr;</a></div></div>
             <div class="hotel"><div class="hotel-img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/89809914.jpg?k=60179adcc06c8a7d6443d8c20c0ae7ef8d814b21296927bc9018afe76fd14ab8&o=" alt="Velada" loading="lazy"></div><div class="hotel-body"><p class="hotel-cat">Palacio histórico</p><h3>Palacio de los Velada</h3><p class="hotel-stars">&#9733;&#9733;&#9733;&#9733;</p><p class="hotel-addr">Plaza de la Catedral, 10</p><a href="https://www.booking.com/hotel/es/velada.es.html" target="_blank" class="hotel-go">Ver en Booking &rarr;</a></div></div>
             <div class="hotel"><div class="hotel-img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/378909371.jpg?k=71e0611acd00ea0d8c01cea4b5d0578ee5acda6ae26f0b4c0a21c458ebd08232&o=" alt="Las Leyendas" loading="lazy"></div><div class="hotel-body"><p class="hotel-cat">Hotel boutique</p><h3>Hotel Las Leyendas</h3><p class="hotel-stars">&#9733;&#9733;&#9733;&#9733;</p><p class="hotel-addr">Francisco Gallego, 3</p><a href="https://www.booking.com/hotel/es/las-leyendas.es.html" target="_blank" class="hotel-go">Ver en Booking &rarr;</a></div></div>
@@ -996,12 +1020,9 @@
         </div>
         <div class="gifts-content">
             <p class="gifts-intro rv">Vuestra presencia es el mejor regalo. Pero si deseáis hacernos un obsequio, aquí tenéis algunas ideas.</p>
-            <div class="contrib-box rv">
+            <div class="contrib-box rv-scale">
                 <h3>Contribuciones</h3>
-                <div class="contrib-row">
-                    <div class="contrib-item"><label>IBAN</label><input type="text" value="ES00 0000 0000 0000 0000 0000" readonly onclick="this.select()"></div>
-                    <div class="contrib-item"><label>PayPal</label><input type="text" value="paypal.me/raquelyadrian" readonly onclick="this.select()" style="color:var(--mute);font-style:italic;" placeholder="Próximamente"></div>
-                </div>
+                <div class="contrib-item" style="max-width:400px;margin:0 auto;"><label>IBAN</label><input type="text" value="ES00 0000 0000 0000 0000 0000" readonly onclick="this.select()"></div>
             </div>
         </div>
     </section>
@@ -1014,7 +1035,7 @@
         </div>
         <div class="playlist-split">
             <div class="rv"><iframe style="border-radius:0" src="https://open.spotify.com/embed/playlist/3rz3D0d7uN63e7VGwXi9dL?utm_source=generator&theme=0" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
-            <div class="song-form-box rv">
+            <div class="song-form-box rv" aria-live="polite">
                 <h4>Sugiere una canción</h4>
                 <form id="song-form" action="https://formspree.io/f/xeoywbav" method="POST">
                     <input type="text" name="cancion" placeholder="Nombre de la canción" required>
@@ -1033,7 +1054,7 @@
             <h2 class="sec-title">Libro de <em>Firmas</em></h2>
         </div>
         <div class="gb-container">
-            <div class="gb-form rv">
+            <div class="gb-form rv" aria-live="polite">
                 <form id="guestbook-form" action="https://formspree.io/f/movgzoer" method="POST">
                     <textarea name="mensaje" placeholder="Escribe tu mensaje para los novios..." required></textarea>
                     <input type="text" name="nombre" placeholder="Tu nombre" required>
@@ -1055,13 +1076,13 @@
             <h2 class="sec-title">Preguntas <em>& Respuestas</em></h2>
         </div>
         <div class="faq-list rv">
-            <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Hay parking en los venues?</button><div class="faq-a"><p>Sí. La Catedral tiene parking público cercano y la Dehesa del Pedrosillo cuenta con amplio aparcamiento privado para los invitados.</p></div></div>
-            <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cómo funciona el autobús?</button><div class="faq-a"><p>Habrá un autobús que saldrá de la Catedral hacia la finca tras la ceremonia (aprox. 13:30h). Por la noche habrá servicio de vuelta a Ávila ciudad.</p></div></div>
-            <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Puedo llevar niños?</button><div class="faq-a"><p>Por supuesto. Los niños son bienvenidos. Habrá una zona infantil con monitores durante el banquete y la fiesta.</p></div></div>
-            <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuál es el dress code?</button><div class="faq-a"><p>Etiqueta formal. Sugerimos tonos cálidos y terrosos que armonicen con el entorno castellano. Evitad el blanco, por favor.</p></div></div>
-            <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Hasta qué hora dura la fiesta?</button><div class="faq-a"><p>La fiesta continuará hasta el amanecer. El último autobús de vuelta a Ávila saldrá a las 3:00h aproximadamente.</p></div></div>
-            <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Qué opciones de menú hay?</button><div class="faq-a"><p>Ofrecemos tres opciones: carne, pescado y vegano. Puedes indicar tu elección y alergias en el formulario de confirmación.</p></div></div>
-            <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuándo debo confirmar?</button><div class="faq-a"><p>Os pedimos que confirmáis antes del 1 de mayo de 2027 para poder organizar todo con tiempo.</p></div></div>
+            <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="faq-1" onclick="toggleFaq(this)">¿Hay parking en los venues?</button><div class="faq-a" id="faq-1" role="region"><p>Sí. La Catedral tiene parking público cercano y la Dehesa del Pedrosillo cuenta con amplio aparcamiento privado para los invitados.</p></div></div>
+            <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="faq-2" onclick="toggleFaq(this)">¿Cómo funciona el autobús?</button><div class="faq-a" id="faq-2" role="region"><p>Habrá un autobús que saldrá de la Catedral hacia la finca tras la ceremonia (aprox. 13:30h). Por la noche habrá servicio de vuelta a Ávila ciudad.</p></div></div>
+            <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="faq-3" onclick="toggleFaq(this)">¿Puedo llevar niños?</button><div class="faq-a" id="faq-3" role="region"><p>Por supuesto. Los niños son bienvenidos. Habrá una zona infantil con monitores durante el banquete y la fiesta.</p></div></div>
+            <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="faq-4" onclick="toggleFaq(this)">¿Cuál es el dress code?</button><div class="faq-a" id="faq-4" role="region"><p>Etiqueta formal. Sugerimos tonos cálidos y terrosos que armonicen con el entorno castellano. Evitad el blanco, por favor.</p></div></div>
+            <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="faq-5" onclick="toggleFaq(this)">¿Hasta qué hora dura la fiesta?</button><div class="faq-a" id="faq-5" role="region"><p>La fiesta continuará hasta el amanecer. El último autobús de vuelta a Ávila saldrá a las 3:00h aproximadamente.</p></div></div>
+            <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="faq-6" onclick="toggleFaq(this)">¿Qué opciones de menú hay?</button><div class="faq-a" id="faq-6" role="region"><p>Ofrecemos tres opciones: carne, pescado y vegano. Puedes indicar tu elección y alergias en el formulario de confirmación.</p></div></div>
+            <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="faq-7" onclick="toggleFaq(this)">¿Cuándo debo confirmar?</button><div class="faq-a" id="faq-7" role="region"><p>Os pedimos que confirmáis antes del 1 de mayo de 2027 para poder organizar todo con tiempo.</p></div></div>
         </div>
     </section>
 
@@ -1073,7 +1094,7 @@
             <h2 class="sec-title">La <em>Ceremonia</em></h2>
         </div>
         <p class="ceremony-intro rv">Oficiada por <strong>Lorenzo Santos</strong></p>
-        <div class="music-editorial rv">
+        <div class="music-editorial rv-left">
             <div class="music-piece"><div class="m-moment">Preludio</div><div class="m-info"><p class="m-title">Canon en Re Mayor</p><p class="m-composer">Johann Pachelbel</p></div></div>
             <div class="music-piece"><div class="m-moment">Entrada novia</div><div class="m-info"><p class="m-title">Ave María</p><p class="m-composer">Franz Schubert</p></div></div>
             <div class="music-piece"><div class="m-moment">Liturgia</div><div class="m-info"><p class="m-title">Salve Regina</p><p class="m-composer">Canto gregoriano</p></div></div>
@@ -1091,7 +1112,7 @@
     <!-- FOOTER -->
     <footer class="foot">
         <div class="foot-crest">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="675 272 708 739" fill="currentColor"><path d="m0 0h32v59h61l1 4-1 28h-61v172l8-6 14-11 17-9h2l-2-10-11-21-5-15v-19l4-15 5-10 9-11 15-11 6-4h2l-1 15v16l1 4 4-14 7-13 8-10 10-11 8-11 4-11 2-11v-10l-3-17-2-7h3l12 7 14 11 9 10 8 14 4 11 1 6v16l-4 18-14 28-2 8v9l4 15 5 17v15l-3 10 1 4 1 3-7 8-7 7-9-3-16-4-8-1h-18l-17 3-15 6-14 8-11 9-7 7-13 17-11 16-3 4-4-2-13-19-9-12-9-10-13-10-14-8-15-6-17-3h-18l-19 3-15 6-15 9-10 9-11 15-8 17-4 16-1 7v26l3 18 5 17 9 21 12 23 15 24 21 28 9 11 11 13 9 10 14 15 7 8 16 16 8 7 13 12 8 7 10 9 14 11 9 7 5-2 13-11 11-9 13-12 8-7 10-9 13-12 8-8 7-8 12-12 7-8 11-13 11-14 12-15 18-27 10-17 11-21 9-24 5-22 1-8v-22l-3-17-6-16-6-11 2-4 12-12 3 1 9 16 5 12 4 14 3 26-1 17-3 18-6 21-8 20-12 24-13 21-10 14-11 16-11 14-24 28-16 17-30 30-8 7-7 7-8 7-34 28-11 8-6 1-13-9-14-12-10-8-13-11-10-9-12-11-7-7-8-7-14-14-4 2-9 9-7 8-4 2v2l-16 16-1 2 5 2 17 9 6 4-1 2-20 7-36 13-30 10-3-1 15-46 15-43 2-2 6 12 7 15v2l5-3 12-12 7-8 17-17h2l-6-8-11-13-14-17-13-18-18-27-14-25-9-20-8-22-5-23-1-10v-19l3-21 7-20 9-17 11-14 12-12h2l-1-4-20-25-8-14-4-14v-20l3-12 7-14 10-14 4-3 3 13 5 15 6 10 6 4h7l4-3-1-12-12-22-4-13-2-12v-8l3-15 8-16 6-8 12-12 15-10 5-3 3 1-4 17-1 8v11l3 13 6 12 15 16 10 14 6 14 2 9 1 1v-26l-1-9 6 2 12 8 10 9 7 11 5 13 2 9v15l-4 15-9 17-4 7-1 9 19 10 13 10 7 6 2 1-1-7v-164l-61-1v-32h61v-58zm158 89-4 10-7 14-8 10-10 11-7 10-4 11-1 5v43l-17-8-11-8-9-10-4-4v16l4 11 9 16 6 14 10-1h26l14 2h5l3-9v-8l-7-27-1-7v-12l3-14 4-10 8-14 4-11v-18l-4-11zm-286 1-4 9-1 5v10l4 13 12 25 3 12v7l-3 10-6 8-5 4-9 3h-9l-10-3-9-6-4-3h-2l3 14 6 12 8 10 10 11 6 8 9-3 16-5 12-2h29l8 1 14-28 5-12 1-16-2-1-8 11-9 8-16 8-5 2-1-40-4-15-6-10-13-15-8-9-6-12-4-11z" transform="translate(1008,316)"/><path d="m0 0h2l1 2 4 50v8l28 2 31 3 2 1-2 4-11 10-7 8-45 45-1 2h-2l-2 4-6 5-52 1-8 7-7 8-37 37-7 8-33 33-7 8-42 42-7 8-5 4-7 8 2 6 5 12 2 8v13l-4 6-2 1h-8l-5-4-2-4-3-16-5-10-4-5-10-6-11-4-11-1-5-6-1-7 3-5 5-3h12l12 3 12 6 3 1 7-8 36-36 7-8 31-31 7-8 40-40 7-8 24-24 1-2v-53zm-17 47-35 35-1 2v21l4-2 22-22 4-5 8-7 1-2-1-20zm18 35-6 5-6 7-8 7-11 12-7 7v2h22l25-25 7-8 5-6-2-1z" transform="translate(1285,419)"/></svg>
+            <svg fill="currentColor"><use href="#crest"/></svg>
         </div>
         <p class="foot-names">Raquel <em>&</em> Adrián</p>
         <p class="foot-date">12 de Junio de 2027 &middot; Ávila</p>
@@ -1134,7 +1155,7 @@
 
     // Reveal
     const ro = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); }), { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-    document.querySelectorAll('.rv').forEach(el => ro.observe(el));
+    document.querySelectorAll('.rv, .rv-left, .rv-scale').forEach(el => ro.observe(el));
 
     // Timeline line
     const tl = document.querySelector('.tl');
@@ -1144,7 +1165,7 @@
         const p = Math.min(1, Math.max(0, (innerHeight - r.top) / (r.height + innerHeight*0.3)));
         tl.style.setProperty('--line-h', (p*tl.offsetHeight)+'px');
     }
-    addEventListener('scroll', () => requestAnimationFrame(tlLine)); tlLine();
+    addEventListener('scroll', () => requestAnimationFrame(tlLine), { passive: true }); tlLine();
 
     // RSVP
     function handleAtt() {
@@ -1239,8 +1260,14 @@
     function toggleFaq(btn) {
         const item = btn.parentElement;
         const wasOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-        if (!wasOpen) item.classList.add('open');
+        document.querySelectorAll('.faq-item.open').forEach(i => {
+            i.classList.remove('open');
+            i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+        });
+        if (!wasOpen) {
+            item.classList.add('open');
+            btn.setAttribute('aria-expanded', 'true');
+        }
     }
 
     // Smooth scroll
