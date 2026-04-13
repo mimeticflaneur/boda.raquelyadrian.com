@@ -535,9 +535,8 @@
 
         /* === PROGRAMA SEPARATOR — SVG ornament === */
         .programa-sep {
-            display: block; width: 100vw; position: relative;
-            left: 50%; transform: translateX(-50%);
-            margin: clamp(3rem,6vw,5rem) 0;
+            display: block; width: 100vw;
+            margin: clamp(3rem,6vw,5rem) 0 clamp(3rem,6vw,5rem) calc(-50vw + 50%);
             opacity: 0.12; overflow: hidden;
         }
         .programa-sep img { width: 100%; height: auto; display: block; }
@@ -1042,7 +1041,7 @@
                 Añadir al calendario
             </button>
         </div>
-        <div class="programa-sep rv" aria-hidden="true"><img src="assets/fondo-programa.svg" alt=""></div>
+        <div class="programa-sep" aria-hidden="true"><img src="assets/fondo-programa.svg" alt=""></div>
         <div class="sec-head rv" style="margin-bottom:clamp(2rem,4vw,3rem);">
             <p class="sec-tag">12 de junio de 2027</p>
             <h2 class="sec-title" style="font-size:clamp(1.6rem,3.5vw,2.5rem);">Programa del <em>Día</em></h2>
