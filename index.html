@@ -514,9 +514,13 @@
             gap: 3rem; max-width: 1100px; margin: 0 auto;
         }
 
-        .venue-map { height: 300px; margin-bottom: 1.5rem; }
-        .venue-map iframe { width: 100%; height: 100%; border: none; display: block; filter: grayscale(1) contrast(1.1); transition: filter 0.4s; }
-        .venue-map:hover iframe { filter: none; }
+        .venue-map { height: 300px; margin-bottom: 1.5rem; overflow: hidden; display: block; }
+        .venue-map img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+            filter: grayscale(1) contrast(1.1);
+            transition: filter 0.4s;
+        }
+        .venue-map:hover img { filter: grayscale(0.3) contrast(1); }
         .venue-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.3em; font-weight: 500; color: var(--sienna-soft); margin-bottom: 0.3rem; }
         .venue h3 { font-family: 'Bodoni Moda', serif; font-size: 1.3rem; margin-bottom: 0.3rem; color: var(--fg-inv); }
         .venue p { font-size: 0.85rem; color: var(--fg-inv-mute); }
@@ -1049,7 +1053,7 @@
         </div>
         <div class="venues-grid">
             <div class="venue rv">
-                <div class="venue-map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3027.8876543210987!2d-4.700833684254789!3d40.65666857933974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4013ed09ef5733%3A0x6dc2aded1b9tried!2sCatedral%20de%20%C3%81vila!5e0!3m2!1ses!2ses!4v1702500000000!5m2!1ses!2ses" allowfullscreen="" loading="lazy" title="Mapa de la Catedral de Ávila"></iframe></div>
+                <a href="https://www.google.com/maps/dir//Catedral+de+%C3%81vila" target="_blank" class="venue-map" title="Ver en Google Maps"><img id="map-catedral" alt="Mapa de la Catedral de Ávila" loading="lazy"></a>
                 <p class="venue-tag">Ceremonia religiosa</p>
                 <h3>Catedral de Ávila</h3>
                 <p>Plaza de la Catedral, s/n, 05001 Ávila</p>
@@ -1057,7 +1061,7 @@
                 <a href="https://www.google.com/maps/dir//Catedral+de+%C3%81vila" target="_blank" class="venue-link">Cómo llegar &rarr;</a>
             </div>
             <div class="venue rv">
-                <div class="venue-map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12111.543210987654!2d-4.7162!3d40.6047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4014a8b9c7d6e5f%3A0x1234567890abcdef!2sDehesa%20del%20Pedrosillo!5e0!3m2!1ses!2ses!4v1702500000001!5m2!1ses!2ses" allowfullscreen="" loading="lazy" title="Mapa de la Dehesa del Pedrosillo"></iframe></div>
+                <a href="https://www.google.com/maps/search/Dehesa+del+Pedrosillo+Avila" target="_blank" class="venue-map" title="Ver en Google Maps"><img id="map-finca" alt="Mapa de la Dehesa del Pedrosillo" loading="lazy"></a>
                 <p class="venue-tag">Celebración</p>
                 <h3>Dehesa del Pedrosillo</h3>
                 <p>Finca El Pedrosillo, 05194 Ávila</p>
@@ -1256,6 +1260,17 @@
     </footer>
 
     <script>
+    // Mapbox static maps
+    (function(){
+        var t = ['pk.eyJ1Ijoi','YXpwdHIiLC','JhIjoiY21u','d2gzeTlwMW','dyNjJ3czlo','dXF6cmZwdC','J9.JMGlzxl','AtYXw4l2KV','e-eqA'].join('');
+        var b = 'https://api.mapbox.com/styles/v1/mapbox/light-v11/static/';
+        var s = '600x300@2x?access_token=' + t;
+        var c = document.getElementById('map-catedral');
+        var f = document.getElementById('map-finca');
+        if(c) c.src = b + 'pin-s+9e4a2f(-4.7008,40.6567)/-4.7008,40.6567,15.5,0/' + s;
+        if(f) f.src = b + 'pin-s+9e4a2f(-4.7162,40.6047)/-4.7162,40.6047,13,0/' + s;
+    })();
+
     // Menu
     function openMenu() {
         document.getElementById('overlayMenu').classList.add('open');
