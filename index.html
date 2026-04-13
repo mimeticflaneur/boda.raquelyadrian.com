@@ -62,23 +62,33 @@
             position: fixed; top: 0; left: 0; right: 0; z-index: 100;
             display: flex; justify-content: space-between; align-items: center;
             padding: 1.5rem 3rem;
-            mix-blend-mode: difference;
+            transition: background 0.4s, box-shadow 0.4s, padding 0.4s;
+        }
+        .nav.nav--top {
+            background: transparent;
+        }
+        .nav.nav--scrolled {
+            background: var(--paper);
+            box-shadow: 0 1px 0 var(--rule);
+            padding-top: 1rem; padding-bottom: 1rem;
         }
         .nav-brand {
             font-family: 'Bodoni Moda', serif;
-            font-size: 1.1rem; color: white;
+            font-size: 1.1rem; color: var(--ink);
             text-decoration: none; letter-spacing: 0.1em;
+            transition: color 0.4s;
         }
+        .nav.nav--top .nav-brand { color: var(--ink); }
         .nav-brand em { font-style: italic; }
         .nav-actions { display: flex; align-items: center; gap: 1.5rem; }
         .nav-link {
             font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em;
-            color: white; text-decoration: none; font-weight: 500;
-            transition: opacity 0.2s;
+            color: var(--ink); text-decoration: none; font-weight: 500;
+            transition: opacity 0.2s, color 0.4s;
         }
         .nav-link:hover { opacity: 0.5; }
-        .burger { display: none; background: none; border: none; cursor: pointer; padding: 0; }
-        .burger span { display: block; width: 20px; height: 1px; background: white; margin: 5px 0; }
+        .burger { display: none; background: none; border: none; cursor: pointer; padding: 12px; min-width: 44px; min-height: 44px; }
+        .burger span { display: block; width: 22px; height: 1.5px; background: var(--ink); margin: 5px 0; transition: background 0.4s; }
 
         /* Mobile overlay */
         .overlay-menu {
@@ -127,6 +137,14 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute; inset: 0; z-index: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%239e4a2f' stroke-width='0.5'%3E%3Cpath d='M40 0 L80 40 L40 80 L0 40Z'/%3E%3Ccircle cx='40' cy='40' r='16'/%3E%3Cpath d='M40 24 L56 40 L40 56 L24 40Z'/%3E%3Cpath d='M20 0 L40 20 M60 0 L40 20 M80 20 L60 40 M80 60 L60 40 M60 80 L40 60 M20 80 L40 60 M0 60 L20 40 M0 20 L20 40'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: 80px 80px;
+            opacity: 0.04;
+            pointer-events: none;
         }
         .hero-top {
             align-self: end;
@@ -193,11 +211,24 @@
             letter-spacing: 0.2em; color: var(--mute);
         }
         .scroll-indicator {
-            position: absolute; bottom: 1.2rem; left: 50%;
-            width: 1px; height: 30px; background: rgba(0,0,0,0.12);
-            animation: pulse 3s ease-in-out infinite;
+            position: absolute; bottom: 2rem; left: 50%;
+            transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 0;
+            animation: chevron-bounce 2.5s cubic-bezier(0.16,1,0.3,1) infinite;
         }
-        @keyframes pulse { 0%,100% { opacity: 0.1; } 50% { opacity: 0.4; } }
+        .scroll-indicator::before,
+        .scroll-indicator::after {
+            content: '';
+            width: 12px; height: 12px;
+            border-right: 1px solid var(--mute);
+            border-bottom: 1px solid var(--mute);
+            transform: rotate(45deg);
+        }
+        .scroll-indicator::after { opacity: 0.35; margin-top: -6px; }
+        @keyframes chevron-bounce {
+            0%, 100% { opacity: 0.4; transform: translateX(-50%) translateY(0); }
+            50% { opacity: 0.8; transform: translateX(-50%) translateY(6px); }
+        }
 
         /* Hero stagger */
         .hs { opacity: 0; transform: translateY(12px); }
@@ -560,23 +591,76 @@
         }
         .d-val { text-align: right; font-size: 0.95rem; }
 
-        /* === GIFTS — editorial list === */
-        .gifts-content { max-width: 640px; margin: 0 auto; }
+        /* === GIFTS — gamified honeymoon fund === */
+        .gifts-content { max-width: 800px; margin: 0 auto; }
         .gifts-intro { text-align: center; color: var(--fg-mute); margin-bottom: 3rem; font-size: 0.95rem; }
-        .contrib-box { border: 1px solid var(--rule); padding: 2rem; margin-bottom: 3rem; }
-        .contrib-box h3 { font-family: 'Bodoni Moda', serif; font-size: 1.2rem; text-align: center; margin-bottom: 1.5rem; }
-
-        .contrib-item label { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--sienna); font-weight: 500; margin-bottom: 0.3rem; }
-        .contrib-item input { width: 100%; padding: 0.5rem 0; border: none; border-bottom: 1px solid var(--rule); background: transparent; font-family: 'Jost', sans-serif; font-size: 0.85rem; color: var(--fg); text-align: center; cursor: pointer; }
-        .gifts-sub { font-family: 'Bodoni Moda', serif; font-size: 1.2rem; text-align: center; margin-bottom: 2rem; }
-        .gift-line {
-            display: flex; justify-content: space-between; align-items: baseline;
-            padding: 0.8rem 0;
-            border-bottom: 1px solid var(--rule);
+        .gift-cards {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 1px; background: var(--rule);
+            margin-bottom: 3rem;
         }
-        .gift-line:last-child { border-bottom: none; }
-        .gift-name { font-size: 0.95rem; }
-        .gift-price { font-weight: 500; color: var(--sienna); font-size: 0.9rem; white-space: nowrap; }
+        .gift-card {
+            background: var(--bg);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            cursor: default;
+            transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+            position: relative;
+            overflow: hidden;
+        }
+        .gift-card:hover {
+            background: var(--warm);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+        }
+        .gift-card:hover .gift-icon { transform: scale(1.15); }
+        .gift-icon {
+            font-size: 2rem;
+            display: block; margin-bottom: 1rem;
+            transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+        }
+        .gift-card h4 {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 1rem; font-weight: 400;
+            margin-bottom: 0.3rem;
+        }
+        .gift-card .gift-amount {
+            font-size: 0.7rem; text-transform: uppercase;
+            letter-spacing: 0.2em; color: var(--sienna);
+            font-weight: 500;
+        }
+        .pay-methods {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 2rem; max-width: 640px; margin: 0 auto;
+        }
+        .pay-box {
+            border: 1px solid var(--rule);
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .pay-box h4 {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 1rem; margin-bottom: 1rem;
+        }
+        .pay-value {
+            font-family: 'Jost', sans-serif; font-size: 0.8rem;
+            color: var(--fg-mute); word-break: break-all;
+            padding: 0.6rem; background: var(--warm);
+            margin-bottom: 0.8rem; line-height: 1.5;
+        }
+        .copy-btn {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            padding: 0.6rem 1.5rem;
+            border: 1px solid var(--sienna);
+            background: transparent; color: var(--sienna);
+            font-family: 'Jost', sans-serif; font-size: 0.7rem;
+            font-weight: 500; text-transform: uppercase;
+            letter-spacing: 0.15em; cursor: pointer;
+            transition: all 0.3s;
+        }
+        .copy-btn:hover { background: var(--sienna); color: white; }
+        .copy-btn.copied { background: var(--sienna); color: white; }
+        .copy-btn svg { width: 14px; height: 14px; }
 
         /* === PLAYLIST — dark split === */
         .playlist-split {
@@ -742,6 +826,34 @@
         }
         .skip-link:focus { top: 0; }
 
+        /* === SECTION TRANSITIONS === */
+        .sec-fade-in {
+            position: relative;
+        }
+        .sec-fade-in::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0;
+            height: clamp(40px, 6vw, 80px);
+            z-index: 2; pointer-events: none;
+        }
+        .venues-bg::before { background: linear-gradient(var(--paper), transparent); }
+        .ceremony-bg::before { background: linear-gradient(var(--warm), transparent); }
+        section#playlist::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0;
+            height: clamp(40px, 6vw, 80px);
+            background: linear-gradient(var(--warm), transparent);
+            z-index: 2; pointer-events: none;
+        }
+        section#guestbook::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0;
+            height: clamp(40px, 6vw, 80px);
+            background: linear-gradient(var(--dark), transparent);
+            z-index: 2; pointer-events: none;
+        }
+        section#playlist, section#guestbook { position: relative; }
+
         /* === REVEAL === */
         .rv { opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16,1,0.3,1); }
         .rv-left { opacity: 0; transform: translateX(-20px); transition: all 0.8s cubic-bezier(0.16,1,0.3,1); }
@@ -758,6 +870,8 @@
             .venues-grid { grid-template-columns: 1fr; gap: 2rem; }
             .venue-map { height: 220px; }
             .hotels-mosaic { grid-template-columns: 1fr; }
+            .gift-cards { grid-template-columns: repeat(2, 1fr); }
+            .pay-methods { grid-template-columns: 1fr; }
             .playlist-split { grid-template-columns: 1fr; }
             .field-row { grid-template-columns: 1fr; }
             .menu-opts { flex-direction: column; }
@@ -927,7 +1041,7 @@
     </section>
 
     <!-- VENUES -->
-    <section id="venues" class="venues-bg pad">
+    <section id="venues" class="venues-bg sec-fade-in pad">
         <div class="venues-bg-img"><img src="assets/retablo.jpeg" alt="" loading="lazy"></div>
         <div class="sec-head rv">
             <p class="sec-tag">Dónde celebraremos</p>
@@ -1015,14 +1129,36 @@
     <!-- GIFTS -->
     <section id="gifts" class="bg-warm pad">
         <div class="sec-head rv">
-            <p class="sec-tag">Un detalle</p>
-            <h2 class="sec-title">Lista de <em>Bodas</em></h2>
+            <p class="sec-tag">Luna de miel</p>
+            <h2 class="sec-title">Fondo de <em>Viaje</em></h2>
         </div>
         <div class="gifts-content">
-            <p class="gifts-intro rv">Vuestra presencia es el mejor regalo. Pero si deseáis hacernos un obsequio, aquí tenéis algunas ideas.</p>
-            <div class="contrib-box rv-scale">
-                <h3>Contribuciones</h3>
-                <div class="contrib-item" style="max-width:400px;margin:0 auto;"><label>IBAN</label><input type="text" value="ES00 0000 0000 0000 0000 0000" readonly onclick="this.select()"></div>
+            <p class="gifts-intro rv">Nuestro mayor regalo es teneros ahí. Pero si queréis contribuir a nuestra luna de miel, aquí tenéis las experiencias que soñamos vivir.</p>
+            <div class="gift-cards rv-scale">
+                <div class="gift-card"><span class="gift-icon">&#9992;</span><h4>Vuelos</h4><p class="gift-amount">Desde 50 &euro;</p></div>
+                <div class="gift-card"><span class="gift-icon">&#127960;</span><h4>Hotel</h4><p class="gift-amount">Desde 80 &euro;</p></div>
+                <div class="gift-card"><span class="gift-icon">&#127860;</span><h4>Cena romántica</h4><p class="gift-amount">Desde 60 &euro;</p></div>
+                <div class="gift-card"><span class="gift-icon">&#9973;</span><h4>Excursión</h4><p class="gift-amount">Desde 40 &euro;</p></div>
+                <div class="gift-card"><span class="gift-icon">&#127754;</span><h4>Día de playa</h4><p class="gift-amount">Desde 30 &euro;</p></div>
+                <div class="gift-card"><span class="gift-icon">&#127909;</span><h4>Recuerdo especial</h4><p class="gift-amount">Lo que quieras</p></div>
+            </div>
+            <div class="pay-methods rv">
+                <div class="pay-box">
+                    <h4>Transferencia</h4>
+                    <div class="pay-value" id="iban-val">ES00 0000 0000 0000 0000 0000</div>
+                    <button class="copy-btn" onclick="copyText('iban-val', this)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        Copiar IBAN
+                    </button>
+                </div>
+                <div class="pay-box">
+                    <h4>Bitcoin</h4>
+                    <div class="pay-value" id="btc-val">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</div>
+                    <button class="copy-btn" onclick="copyText('btc-val', this)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        Copiar dirección
+                    </button>
+                </div>
             </div>
         </div>
     </section>
@@ -1061,10 +1197,8 @@
                     <button type="submit" class="btn-submit">Firmar</button>
                 </form>
             </div>
-            <div class="gb-messages">
-                <div class="gb-msg rv"><p>"Os deseamos toda la felicidad del mundo. Que este día sea el comienzo de una vida llena de amor y aventuras."</p><span class="who">María y Pedro</span></div>
-                <div class="gb-msg rv"><p>"Enhorabuena pareja. Hacéis un equipo increíble. Que vuestra vida juntos esté llena de risas, viajes y mucho amor."</p><span class="who">Los primos de Bilbao</span></div>
-                <div class="gb-msg rv"><p>"Desde que os conocí supe que erais el uno para el otro. Me alegra tanto poder celebrar este día con vosotros."</p><span class="who">Laura</span></div>
+            <div class="gb-messages" id="gb-messages">
+                <p class="gb-empty rv" style="text-align:center;color:var(--fg-mute);font-family:'Bodoni Moda',serif;font-style:italic;font-size:1.05rem;">Sé el primero en dejar unas palabras para los novios.</p>
             </div>
         </div>
     </section>
@@ -1087,7 +1221,7 @@
     </section>
 
     <!-- CEREMONY -->
-    <section id="ceremony" class="ceremony-bg pad">
+    <section id="ceremony" class="ceremony-bg sec-fade-in pad">
         <div class="ceremony-bg-img"><img src="assets/vidriera.jpeg" alt="" loading="lazy"></div>
         <div class="sec-head rv">
             <p class="sec-tag">El momento sagrado</p>
@@ -1139,6 +1273,16 @@
 
     // Hero stagger
     requestAnimationFrame(() => document.querySelector('.hero').classList.add('loaded'));
+
+    // Nav scroll
+    const nav = document.querySelector('.nav');
+    const heroEl = document.getElementById('home');
+    nav.classList.add('nav--top');
+    const navObs = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) { nav.classList.add('nav--top'); nav.classList.remove('nav--scrolled'); }
+        else { nav.classList.remove('nav--top'); nav.classList.add('nav--scrolled'); }
+    }, { threshold: 0.05 });
+    navObs.observe(heroEl);
 
     // Countdown
     const secEl = document.getElementById('seconds');
@@ -1215,6 +1359,17 @@
     setupForm('rsvp-form','Gracias');
     setupForm('song-form','Gracias por tu sugerencia');
     setupForm('guestbook-form','Gracias por tu mensaje');
+
+    // Copy to clipboard
+    function copyText(id, btn) {
+        const text = document.getElementById(id).textContent.trim();
+        navigator.clipboard.writeText(text).then(() => {
+            const orig = btn.innerHTML;
+            btn.classList.add('copied');
+            btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copiado';
+            setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('copied'); }, 2000);
+        });
+    }
 
     // Calendar .ics download
     function downloadCal() {
