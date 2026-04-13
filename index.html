@@ -6,6 +6,15 @@
     <title>R&A — Ávila, 12.06.27</title>
     <link rel="icon" type="image/svg+xml" href="assets/corazon_transverberado.svg">
     <meta name="description" content="Boda de Raquel y Adrián | 12 Junio 2027 | Ávila">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Boda de Raquel & Adrián — 12 Junio 2027">
+    <meta property="og:description" content="Ceremonia en la Catedral de Ávila · Celebración en la Dehesa del Pedrosillo">
+    <meta property="og:image" content="https://mimeticflaneur.github.io/boda.raquelyadrian.com/assets/nuestra-historia.jpeg">
+    <meta property="og:url" content="https://mimeticflaneur.github.io/boda.raquelyadrian.com/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Boda de Raquel & Adrián — 12 Junio 2027">
+    <meta name="twitter:description" content="Ceremonia en la Catedral de Ávila · Celebración en la Dehesa del Pedrosillo">
+    <meta name="twitter:image" content="https://mimeticflaneur.github.io/boda.raquelyadrian.com/assets/nuestra-historia.jpeg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400;1,6..96,500&family=Jost:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
@@ -17,7 +26,7 @@
             --dark: #161413;
             --sienna: #9e4a2f;
             --sienna-soft: #c17a5a;
-            --mute: #8a8580;
+            --mute: #6b6661;
             --rule: rgba(0,0,0,0.08);
             --bg: var(--paper);
             --fg: var(--ink);
@@ -40,7 +49,7 @@
         /* === TYPO === */
         .serif { font-family: 'Bodoni Moda', serif; }
         .upper { text-transform: uppercase; letter-spacing: 0.18em; font-weight: 500; }
-        .micro { font-size: 0.65rem; }
+        .micro { font-size: 0.7rem; }
         .small { font-size: 0.8rem; }
 
         /* === NAV === */
@@ -122,7 +131,7 @@
         .hero-crest svg { width: 100%; height: 100%; }
         .hero-center { z-index: 1; position: relative; }
         .hero-date {
-            font-size: 0.6rem; color: var(--mute);
+            font-size: 0.7rem; color: var(--mute);
             letter-spacing: 0.3em; text-transform: uppercase;
             margin-bottom: 2rem;
         }
@@ -159,12 +168,12 @@
             margin-bottom: 0.3rem;
         }
         .hero-author {
-            font-size: 0.6rem; color: var(--mute);
+            font-size: 0.7rem; color: var(--mute);
             letter-spacing: 0.15em; text-transform: uppercase;
         }
         .hero-countdown {
-            position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%);
             display: flex; gap: 2.5rem;
+            justify-content: center;
         }
         .cd-item { text-align: center; }
         .cd-num {
@@ -175,7 +184,7 @@
         }
         .cd-num.tick { opacity: 0.5; }
         .cd-label {
-            font-size: 0.55rem; text-transform: uppercase;
+            font-size: 0.7rem; text-transform: uppercase;
             letter-spacing: 0.2em; color: var(--mute);
         }
         .scroll-indicator {
@@ -229,7 +238,7 @@
             margin-bottom: clamp(3rem, 6vw, 5rem);
         }
         .sec-tag {
-            font-size: 0.55rem; letter-spacing: 0.35em; text-transform: uppercase;
+            font-size: 0.7rem; letter-spacing: 0.35em; text-transform: uppercase;
             font-weight: 500; color: var(--sienna); margin-bottom: 0.8rem;
         }
         .sec-title {
@@ -261,7 +270,7 @@
         .rsvp-box { max-width: 520px; margin: 0 auto; }
         .field { margin-bottom: 2rem; }
         .field label {
-            display: block; font-size: 0.6rem; font-weight: 500;
+            display: block; font-size: 0.7rem; font-weight: 500;
             text-transform: uppercase; letter-spacing: 0.2em;
             color: var(--fg-mute); margin-bottom: 0.5rem;
         }
@@ -302,7 +311,7 @@
         .guests-box { margin: 1.5rem 0; padding: 1.5rem; border: 1px solid var(--rule); }
         .guests-box h4 { font-family: 'Bodoni Moda', serif; font-size: 1rem; margin-bottom: 1rem; }
         .g-entry { margin-bottom: 1rem; }
-        .g-num { font-size: 0.6rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.15em; color: var(--sienna); margin-bottom: 0.4rem; }
+        .g-num { font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.15em; color: var(--sienna); margin-bottom: 0.4rem; }
         .g-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
         .g-fields input, .g-fields select {
             padding: 0.5rem 0; border: none; border-bottom: 1px solid var(--rule);
@@ -423,7 +432,7 @@
         }
         .music-piece:last-child { border-bottom: none; }
         .m-moment {
-            font-size: 0.5rem; text-transform: uppercase; letter-spacing: 0.3em;
+            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.3em;
             font-weight: 500; color: var(--sienna-soft);
             min-width: 100px;
             padding-top: 0.15rem;
@@ -472,12 +481,12 @@
         .venue-map { height: 300px; margin-bottom: 1.5rem; }
         .venue-map iframe { width: 100%; height: 100%; border: none; display: block; filter: grayscale(1) contrast(1.1); transition: filter 0.4s; }
         .venue-map:hover iframe { filter: none; }
-        .venue-tag { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.3em; font-weight: 500; color: var(--sienna-soft); margin-bottom: 0.3rem; }
+        .venue-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.3em; font-weight: 500; color: var(--sienna-soft); margin-bottom: 0.3rem; }
         .venue h3 { font-family: 'Bodoni Moda', serif; font-size: 1.3rem; margin-bottom: 0.3rem; color: var(--fg-inv); }
         .venue p { font-size: 0.85rem; color: rgba(245,242,236,0.5); }
         .venue-time { color: var(--fg-inv); font-weight: 500; font-size: 0.85rem; margin: 0.5rem 0; }
         .venue-link {
-            font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.2em;
+            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em;
             color: var(--sienna-soft); text-decoration: none; font-weight: 500;
             border-bottom: 1px solid var(--sienna-soft);
             padding-bottom: 1px; transition: opacity 0.2s;
@@ -521,12 +530,12 @@
         .hotel-img img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1); transition: filter 0.6s cubic-bezier(0.16,1,0.3,1), transform 8s cubic-bezier(0.16,1,0.3,1); }
         .hotel:hover .hotel-img img { filter: grayscale(0.2) sepia(0.1); transform: scale(1.03); }
         .hotel-body { padding: 1.2rem 1.5rem; }
-        .hotel-cat { font-size: 0.5rem; text-transform: uppercase; letter-spacing: 0.3em; color: var(--sienna); font-weight: 500; }
+        .hotel-cat { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.3em; color: var(--sienna); font-weight: 500; }
         .hotel h3 { font-family: 'Bodoni Moda', serif; font-size: 1.05rem; margin: 0.2rem 0; }
         .hotel-stars { font-size: 0.75rem; color: var(--sienna); }
         .hotel-addr { font-size: 0.75rem; color: var(--fg-mute); margin-bottom: 0.8rem; }
         .hotel-go {
-            font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.2em;
+            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em;
             color: var(--sienna); text-decoration: none; font-weight: 500;
             transition: opacity 0.2s;
         }
@@ -541,7 +550,7 @@
         }
         .detail-strip:last-child { border-bottom: none; }
         .d-key {
-            font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.3em;
+            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.3em;
             font-weight: 500; color: var(--sienna); min-width: 140px;
         }
         .d-val { text-align: right; font-size: 0.95rem; }
@@ -552,7 +561,7 @@
         .contrib-box { border: 1px solid var(--rule); padding: 2rem; margin-bottom: 3rem; }
         .contrib-box h3 { font-family: 'Bodoni Moda', serif; font-size: 1.2rem; text-align: center; margin-bottom: 1.5rem; }
         .contrib-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-        .contrib-item label { display: block; font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--sienna); font-weight: 500; margin-bottom: 0.3rem; }
+        .contrib-item label { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--sienna); font-weight: 500; margin-bottom: 0.3rem; }
         .contrib-item input { width: 100%; padding: 0.5rem 0; border: none; border-bottom: 1px solid var(--rule); background: transparent; font-family: 'Jost', sans-serif; font-size: 0.85rem; color: var(--fg); text-align: center; cursor: pointer; }
         .gifts-sub { font-family: 'Bodoni Moda', serif; font-size: 1.2rem; text-align: center; margin-bottom: 2rem; }
         .gift-line {
@@ -587,7 +596,7 @@
             width: 100%; padding: 0.9rem; margin-top: 0.5rem;
             background: var(--sienna); color: white; border: none;
             font-family: 'Jost', sans-serif; font-weight: 500;
-            font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.25em;
+            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.25em;
             cursor: pointer; transition: opacity 0.2s;
         }
         .song-btn:hover { opacity: 0.8; }
@@ -633,7 +642,7 @@
         .foot-crest svg { width: 100%; height: 100%; }
         .foot-names { font-family: 'Bodoni Moda', serif; font-size: 1.4rem; margin-bottom: 0.3rem; color: var(--ink); }
         .foot-names em { font-style: italic; }
-        .foot-date { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.3em; color: var(--mute); margin-bottom: 0.3rem; }
+        .foot-date { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.3em; color: var(--mute); margin-bottom: 0.3rem; }
         .foot-hash { font-size: 0.75rem; color: var(--mute); opacity: 0.5; margin-bottom: 2rem; }
         .foot-quote { font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 0.85rem; color: var(--sienna); opacity: 0.5; max-width: 350px; margin: 0 auto; }
 
@@ -647,7 +656,7 @@
             padding: 0.9rem 2rem;
             border: 1px solid var(--sienna); background: transparent;
             color: var(--sienna); font-family: 'Jost', sans-serif;
-            font-size: 0.6rem; font-weight: 500;
+            font-size: 0.7rem; font-weight: 500;
             text-transform: uppercase; letter-spacing: 0.2em;
             cursor: pointer; transition: all 0.3s;
             text-decoration: none;
@@ -674,7 +683,7 @@
             position: absolute; bottom: 0; left: 0; right: 0;
             padding: 1.5rem;
             background: linear-gradient(transparent, rgba(0,0,0,0.5));
-            color: white; font-size: 0.55rem; text-transform: uppercase;
+            color: white; font-size: 0.7rem; text-transform: uppercase;
             letter-spacing: 0.25em; font-weight: 500;
             opacity: 0; transition: opacity 0.4s;
         }
@@ -712,7 +721,7 @@
         .foot-dev {
             margin-top: 3rem; padding-top: 1.5rem;
             border-top: 1px solid var(--rule);
-            font-size: 0.55rem; text-transform: uppercase;
+            font-size: 0.7rem; text-transform: uppercase;
             letter-spacing: 0.2em; color: var(--mute); opacity: 0.6;
         }
         .foot-dev a { color: var(--sienna); text-decoration: none; transition: opacity 0.2s; }
@@ -797,12 +806,6 @@
         <div class="hero-bottom hs">
             <p class="hero-quote">"Y sin amor, todo es nada"</p>
             <p class="hero-author">Santa Teresa de Jesús</p>
-        </div>
-        <div class="hero-countdown">
-            <div class="cd-item"><span class="cd-num" id="days">000</span><span class="cd-label">Días</span></div>
-            <div class="cd-item"><span class="cd-num" id="hours">00</span><span class="cd-label">Horas</span></div>
-            <div class="cd-item"><span class="cd-num" id="minutes">00</span><span class="cd-label">Min</span></div>
-            <div class="cd-item"><span class="cd-num" id="seconds">00</span><span class="cd-label">Seg</span></div>
         </div>
         <div class="scroll-indicator"></div>
     </section>
@@ -939,6 +942,12 @@
             <div class="detail-strip"><span class="d-key">Transporte</span><span class="d-val">Parking disponible. Autobús catedral → finca</span></div>
             <div class="detail-strip"><span class="d-key">Niños</span><span class="d-val">Bienvenidos. Habrá zona infantil</span></div>
             <div class="detail-strip"><span class="d-key">Hashtag</span><span class="d-val">#RaquelYAdrian2027</span></div>
+        </div>
+        <div class="hero-countdown rv" style="margin-top:2.5rem;">
+            <div class="cd-item"><span class="cd-num" id="days">000</span><span class="cd-label">Días</span></div>
+            <div class="cd-item"><span class="cd-num" id="hours">00</span><span class="cd-label">Horas</span></div>
+            <div class="cd-item"><span class="cd-num" id="minutes">00</span><span class="cd-label">Min</span></div>
+            <div class="cd-item"><span class="cd-num" id="seconds">00</span><span class="cd-label">Seg</span></div>
         </div>
         <div class="center rv" style="margin-top:2.5rem;">
             <button class="cal-btn" onclick="downloadCal()">
