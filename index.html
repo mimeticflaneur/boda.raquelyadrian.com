@@ -595,47 +595,12 @@
         }
         .d-val { text-align: right; font-size: 0.95rem; }
 
-        /* === GIFTS — gamified honeymoon fund === */
+        /* === GIFTS === */
         .gifts-content { max-width: 800px; margin: 0 auto; }
         .gifts-intro { text-align: center; color: var(--fg-mute); margin-bottom: 3rem; font-size: 0.95rem; }
-        .gift-cards {
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            gap: 1px; background: var(--rule);
-            margin-bottom: 3rem;
-        }
-        .gift-card {
-            background: var(--bg);
-            padding: 2rem 1.5rem;
-            text-align: center;
-            cursor: default;
-            transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
-            position: relative;
-            overflow: hidden;
-        }
-        .gift-card:hover {
-            background: var(--warm);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
-        }
-        .gift-card:hover .gift-icon { transform: scale(1.15); }
-        .gift-icon {
-            font-size: 2rem;
-            display: block; margin-bottom: 1rem;
-            transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
-        }
-        .gift-card h4 {
-            font-family: 'Bodoni Moda', serif;
-            font-size: 1rem; font-weight: 400;
-            margin-bottom: 0.3rem;
-        }
-        .gift-card .gift-amount {
-            font-size: 0.7rem; text-transform: uppercase;
-            letter-spacing: 0.2em; color: var(--sienna);
-            font-weight: 500;
-        }
         .pay-methods {
-            display: grid; grid-template-columns: 1fr 1fr;
-            gap: 2rem; max-width: 640px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem; max-width: 800px; margin: 0 auto;
         }
         .pay-box {
             border: 1px solid var(--rule);
@@ -736,7 +701,7 @@
         .foot-names { font-family: 'Bodoni Moda', serif; font-size: 1.4rem; margin-bottom: 0.3rem; color: var(--ink); }
         .foot-names em { font-style: italic; }
         .foot-date { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.3em; color: var(--mute); margin-bottom: 0.3rem; }
-        .foot-hash { font-size: 0.75rem; color: var(--mute); opacity: 0.5; margin-bottom: 2rem; }
+
         .foot-quote { font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 0.85rem; color: var(--sienna); opacity: 0.5; max-width: 350px; margin: 0 auto; }
 
         .hotels-note { text-align: center; margin-top: 2.5rem; font-size: 0.85rem; color: var(--fg-mute); }
@@ -830,33 +795,6 @@
         }
         .skip-link:focus { top: 0; }
 
-        /* === SECTION TRANSITIONS === */
-        .sec-fade-in {
-            position: relative;
-        }
-        .sec-fade-in::before {
-            content: '';
-            position: absolute; top: 0; left: 0; right: 0;
-            height: clamp(40px, 6vw, 80px);
-            z-index: 2; pointer-events: none;
-        }
-        .venues-bg::before { background: linear-gradient(var(--paper), transparent); }
-        .ceremony-bg::before { background: linear-gradient(var(--warm), transparent); }
-        section#playlist::before {
-            content: '';
-            position: absolute; top: 0; left: 0; right: 0;
-            height: clamp(40px, 6vw, 80px);
-            background: linear-gradient(var(--warm), transparent);
-            z-index: 2; pointer-events: none;
-        }
-        section#guestbook::before {
-            content: '';
-            position: absolute; top: 0; left: 0; right: 0;
-            height: clamp(40px, 6vw, 80px);
-            background: linear-gradient(var(--dark), transparent);
-            z-index: 2; pointer-events: none;
-        }
-        section#playlist, section#guestbook { position: relative; }
 
         /* === REVEAL === */
         .rv { opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16,1,0.3,1); }
@@ -874,7 +812,6 @@
             .venues-grid { grid-template-columns: 1fr; gap: 2rem; }
             .venue-map { height: 220px; }
             .hotels-mosaic { grid-template-columns: 1fr; }
-            .gift-cards { grid-template-columns: repeat(2, 1fr); }
             .pay-methods { grid-template-columns: 1fr; }
             .playlist-split { grid-template-columns: 1fr; }
             .field-row { grid-template-columns: 1fr; }
@@ -1045,7 +982,7 @@
     </section>
 
     <!-- VENUES -->
-    <section id="venues" class="venues-bg sec-fade-in pad">
+    <section id="venues" class="venues-bg pad">
         <div class="venues-bg-img"><img src="assets/retablo.jpeg" alt="" loading="lazy"></div>
         <div class="sec-head rv">
             <p class="sec-tag">Dónde celebraremos</p>
@@ -1083,7 +1020,6 @@
             <div class="detail-strip"><span class="d-key">Vestimenta</span><span class="d-val">Etiqueta. Sugerimos tonos cálidos</span></div>
             <div class="detail-strip"><span class="d-key">Transporte</span><span class="d-val">Parking disponible. Autobús catedral → finca</span></div>
             <div class="detail-strip"><span class="d-key">Niños</span><span class="d-val">Bienvenidos. Habrá zona infantil</span></div>
-            <div class="detail-strip"><span class="d-key">Hashtag</span><span class="d-val">#RaquelYAdrian2027</span></div>
         </div>
         <div class="hero-countdown rv" style="margin-top:2.5rem;">
             <div class="cd-item"><span class="cd-num" id="days">000</span><span class="cd-label">Días</span></div>
@@ -1133,19 +1069,11 @@
     <!-- GIFTS -->
     <section id="gifts" class="bg-warm pad">
         <div class="sec-head rv">
-            <p class="sec-tag">Luna de miel</p>
-            <h2 class="sec-title">Fondo de <em>Viaje</em></h2>
+            <p class="sec-tag">Un detalle</p>
+            <h2 class="sec-title">Lista de <em>Bodas</em></h2>
         </div>
         <div class="gifts-content">
-            <p class="gifts-intro rv">Nuestro mayor regalo es teneros ahí. Pero si queréis contribuir a nuestra luna de miel, aquí tenéis las experiencias que soñamos vivir.</p>
-            <div class="gift-cards rv-scale">
-                <div class="gift-card"><span class="gift-icon">&#9992;</span><h4>Vuelos</h4><p class="gift-amount">Desde 50 &euro;</p></div>
-                <div class="gift-card"><span class="gift-icon">&#127960;</span><h4>Hotel</h4><p class="gift-amount">Desde 80 &euro;</p></div>
-                <div class="gift-card"><span class="gift-icon">&#127860;</span><h4>Cena romántica</h4><p class="gift-amount">Desde 60 &euro;</p></div>
-                <div class="gift-card"><span class="gift-icon">&#9973;</span><h4>Excursión</h4><p class="gift-amount">Desde 40 &euro;</p></div>
-                <div class="gift-card"><span class="gift-icon">&#127754;</span><h4>Día de playa</h4><p class="gift-amount">Desde 30 &euro;</p></div>
-                <div class="gift-card"><span class="gift-icon">&#127909;</span><h4>Recuerdo especial</h4><p class="gift-amount">Lo que quieras</p></div>
-            </div>
+            <p class="gifts-intro rv">Vuestra presencia es el mejor regalo. Pero si deseáis hacernos un obsequio, aquí tenéis algunas opciones.</p>
             <div class="pay-methods rv">
                 <div class="pay-box">
                     <h4>Transferencia</h4>
@@ -1156,11 +1084,15 @@
                     </button>
                 </div>
                 <div class="pay-box">
+                    <h4>PayPal</h4>
+                    <div class="pay-value" id="paypal-val" style="color:var(--fg-mute);font-style:italic;">Próximamente</div>
+                </div>
+                <div class="pay-box">
                     <h4>Bitcoin</h4>
                     <div class="pay-value" id="btc-val">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</div>
                     <button class="copy-btn" onclick="copyText('btc-val', this)">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-                        Copiar dirección
+                        Copiar direccion
                     </button>
                 </div>
             </div>
@@ -1225,7 +1157,7 @@
     </section>
 
     <!-- CEREMONY -->
-    <section id="ceremony" class="ceremony-bg sec-fade-in pad">
+    <section id="ceremony" class="ceremony-bg pad">
         <div class="ceremony-bg-img"><img src="assets/vidriera.jpeg" alt="" loading="lazy"></div>
         <div class="sec-head rv">
             <p class="sec-tag">El momento sagrado</p>
@@ -1254,7 +1186,6 @@
         </div>
         <p class="foot-names">Raquel <em>&</em> Adrián</p>
         <p class="foot-date">12 de Junio de 2027 &middot; Ávila</p>
-        <p class="foot-hash">#RaquelYAdrian2027</p>
         <p class="foot-quote">"Y sin amor, todo es nada"</p>
         <p class="foot-dev">&copy; 2027 Raquel &amp; Adrián. Todos los derechos reservados.<br>Diseñado y desarrollado por <a href="#">Adrián Zapatera</a></p>
     </footer>
