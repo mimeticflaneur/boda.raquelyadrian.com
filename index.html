@@ -143,7 +143,7 @@
             position: absolute; inset: 0; z-index: 0;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%239e4a2f' stroke-width='0.5'%3E%3Cpath d='M40 0 L80 40 L40 80 L0 40Z'/%3E%3Ccircle cx='40' cy='40' r='16'/%3E%3Cpath d='M40 24 L56 40 L40 56 L24 40Z'/%3E%3Cpath d='M20 0 L40 20 M60 0 L40 20 M80 20 L60 40 M80 60 L60 40 M60 80 L40 60 M20 80 L40 60 M0 60 L20 40 M0 20 L20 40'/%3E%3C/g%3E%3C/svg%3E");
             background-size: 80px 80px;
-            opacity: 0.12;
+            opacity: 0.07;
             pointer-events: none;
         }
         .hero-top {
@@ -599,8 +599,8 @@
         .gifts-content { max-width: 800px; margin: 0 auto; }
         .gifts-intro { text-align: center; color: var(--fg-mute); margin-bottom: 3rem; font-size: 0.95rem; }
         .pay-methods {
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem; max-width: 800px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 2rem; max-width: 640px; margin: 0 auto;
         }
         .pay-box {
             border: 1px solid var(--rule);
@@ -1085,14 +1085,10 @@
                 </div>
                 <div class="pay-box">
                     <h4>PayPal</h4>
-                    <div class="pay-value" id="paypal-val" style="color:var(--fg-mute);font-style:italic;">Próximamente</div>
-                </div>
-                <div class="pay-box">
-                    <h4>Bitcoin</h4>
-                    <div class="pay-value" id="btc-val">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</div>
-                    <button class="copy-btn" onclick="copyText('btc-val', this)">
+                    <div class="pay-value" id="paypal-val">paypal.me/raquelyadrian</div>
+                    <button class="copy-btn" onclick="copyText('paypal-val', this)">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-                        Copiar direccion
+                        Copiar PayPal
                     </button>
                 </div>
             </div>
