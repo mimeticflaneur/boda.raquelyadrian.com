@@ -3,18 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>R&A — Ávila, 12.06.27</title>
+    <title>Raquel & Adrián — 12 de junio de 2027 · Catedral de Ávila</title>
     <link rel="icon" type="image/svg+xml" href="assets/corazon_transverberado.svg">
-    <meta name="description" content="Boda de Raquel y Adrián | 12 Junio 2027 | Ávila">
+    <meta name="description" content="Acompáñanos el sábado 12 de junio de 2027 en la boda de Raquel y Adrián. Ceremonia a las 12:00h en la Catedral de Ávila y banquete en la Dehesa del Pedrosillo. Confirma tu asistencia y descubre todos los detalles del día.">
+    <meta name="author" content="Raquel y Adrián">
+    <meta name="theme-color" content="#9e4a2f">
+    <link rel="canonical" href="https://mimeticflaneur.github.io/boda.raquelyadrian.com/">
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Boda de Raquel & Adrián — 12 Junio 2027">
-    <meta property="og:description" content="Ceremonia en la Catedral de Ávila · Celebración en la Dehesa del Pedrosillo">
+    <meta property="og:site_name" content="Boda Raquel & Adrián">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:title" content="Raquel & Adrián — 12 de junio de 2027 en Ávila">
+    <meta property="og:description" content="Tenemos el placer de invitarte a nuestra boda. Ceremonia en la Catedral de Ávila a las 12:00h · Cóctel y banquete en la Dehesa del Pedrosillo. Confirma tu asistencia y descubre todos los detalles.">
     <meta property="og:image" content="https://mimeticflaneur.github.io/boda.raquelyadrian.com/assets/nuestra-historia.jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Raquel y Adrián — Boda el 12 de junio de 2027 en Ávila">
     <meta property="og:url" content="https://mimeticflaneur.github.io/boda.raquelyadrian.com/">
+
+    <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Boda de Raquel & Adrián — 12 Junio 2027">
-    <meta name="twitter:description" content="Ceremonia en la Catedral de Ávila · Celebración en la Dehesa del Pedrosillo">
+    <meta name="twitter:title" content="Raquel & Adrián — 12 de junio de 2027 en Ávila">
+    <meta name="twitter:description" content="Tenemos el placer de invitarte a nuestra boda. Ceremonia en la Catedral de Ávila · Banquete en la Dehesa del Pedrosillo.">
     <meta name="twitter:image" content="https://mimeticflaneur.github.io/boda.raquelyadrian.com/assets/nuestra-historia.jpeg">
+    <meta name="twitter:image:alt" content="Raquel y Adrián">
+
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "Boda de Raquel y Adrián",
+      "description": "Ceremonia religiosa en la Catedral de Ávila seguida de cóctel y banquete en la Dehesa del Pedrosillo.",
+      "startDate": "2027-06-12T12:00:00+02:00",
+      "endDate": "2027-06-13T06:00:00+02:00",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "image": "https://mimeticflaneur.github.io/boda.raquelyadrian.com/assets/nuestra-historia.jpeg",
+      "location": [
+        {
+          "@type": "Place",
+          "name": "Catedral de Ávila",
+          "address": {"@type": "PostalAddress", "streetAddress": "Plaza de la Catedral, s/n", "postalCode": "05001", "addressLocality": "Ávila", "addressCountry": "ES"}
+        },
+        {
+          "@type": "Place",
+          "name": "Dehesa del Pedrosillo",
+          "address": {"@type": "PostalAddress", "streetAddress": "Finca El Pedrosillo", "postalCode": "05194", "addressLocality": "Ávila", "addressCountry": "ES"}
+        }
+      ],
+      "organizer": {"@type": "Person", "name": "Raquel y Adrián"}
+    }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400;1,6..96,500&family=Jost:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
@@ -810,6 +851,373 @@
         .rv-scale { opacity: 0; transform: scale(0.95); transition: all 0.8s cubic-bezier(0.16,1,0.3,1); }
         .rv.in, .rv-left.in, .rv-scale.in { opacity: 1; transform: none; }
 
+        /* === PROGRESSIVE RSVP FORM === */
+        .rsvp-progress {
+            display: flex; align-items: center; justify-content: center;
+            gap: 0.6rem; margin-bottom: 3rem;
+        }
+        .rsvp-step-dot {
+            width: 28px; height: 28px;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid var(--rule);
+            border-radius: 50%;
+            font-family: 'Bodoni Moda', serif;
+            font-size: 0.75rem; color: var(--fg-mute);
+            background: transparent;
+            transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+        }
+        .rsvp-step-dot.active {
+            background: var(--sienna); color: white; border-color: var(--sienna);
+            transform: scale(1.08);
+        }
+        .rsvp-step-dot.done {
+            background: var(--ink); color: var(--paper); border-color: var(--ink);
+        }
+        .rsvp-step-line {
+            flex: 0 1 32px; height: 1px; background: var(--rule);
+            transition: background 0.35s;
+        }
+        .rsvp-step-line.done { background: var(--ink); }
+
+        .rsvp-pane { display: none; animation: panefade 0.5s cubic-bezier(0.16,1,0.3,1); }
+        .rsvp-pane.active { display: block; }
+        @keyframes panefade {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: none; }
+        }
+        .pane-head { text-align: center; margin-bottom: 2rem; }
+        .pane-head h3 {
+            font-family: 'Bodoni Moda', serif; font-weight: 400;
+            font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+            letter-spacing: -0.01em; line-height: 1.1;
+        }
+        .pane-head h3 em { font-style: italic; }
+        .pane-head p { color: var(--fg-mute); font-size: 0.85rem; margin-top: 0.5rem; }
+
+        .big-choices {
+            display: flex; flex-direction: column; gap: 0.8rem;
+            margin: 2rem 0;
+        }
+        .big-choice {
+            position: relative;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1.4rem 1.6rem;
+            border: 1px solid var(--rule);
+            background: transparent;
+            font-family: 'Bodoni Moda', serif;
+            font-size: 1.1rem; color: var(--fg);
+            cursor: pointer; text-align: left;
+            transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+        }
+        .big-choice::after {
+            content: '→';
+            font-family: 'Jost', sans-serif; font-weight: 300;
+            color: var(--sienna); transition: transform 0.3s;
+        }
+        .big-choice:hover { border-color: var(--sienna); transform: translateX(4px); }
+        .big-choice:hover::after { transform: translateX(4px); }
+        .big-choice.selected {
+            border-color: var(--sienna); background: var(--warm);
+        }
+        .big-choice em { font-style: italic; color: var(--sienna); }
+        .big-choice-sub {
+            display: block; font-family: 'Jost', sans-serif;
+            font-weight: 300; font-size: 0.75rem;
+            color: var(--fg-mute); margin-top: 0.2rem;
+            letter-spacing: 0.05em;
+        }
+
+        .rsvp-nav {
+            display: flex; justify-content: space-between; gap: 1rem;
+            margin-top: 2.5rem;
+        }
+        .btn-back, .btn-next {
+            padding: 0.95rem 2rem;
+            font-family: 'Jost', sans-serif; font-weight: 500;
+            font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.25em;
+            cursor: pointer; transition: all 0.3s;
+            border: 1px solid var(--ink); background: transparent;
+            color: var(--ink);
+        }
+        .btn-back:hover { background: var(--ink); color: var(--paper); }
+        .btn-next { background: var(--ink); color: var(--paper); flex: 1; }
+        .btn-next:hover { background: var(--sienna); border-color: var(--sienna); color: white; }
+        .btn-next:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        /* === FEATURED HOTEL (recommended) === */
+        .hotels-featured {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            background: var(--bg);
+            border: 1px solid var(--rule);
+            max-width: 1100px;
+            margin: 0 auto 1rem;
+            overflow: hidden;
+            position: relative;
+        }
+        .hotels-featured .hf-img {
+            overflow: hidden; min-height: 360px;
+        }
+        .hotels-featured .hf-img img {
+            width: 100%; height: 100%; object-fit: cover;
+            display: block; filter: grayscale(1);
+            transition: filter 0.6s cubic-bezier(0.16,1,0.3,1), transform 4s cubic-bezier(0.16,1,0.3,1);
+        }
+        .hotels-featured:hover .hf-img img { filter: grayscale(0.1) sepia(0.1); transform: scale(1.04); }
+        .hotels-featured .hf-body {
+            padding: clamp(2rem, 4vw, 3.5rem);
+            display: flex; flex-direction: column; justify-content: center;
+        }
+        .hf-ribbon {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.3em;
+            font-weight: 500; color: white;
+            background: var(--sienna);
+            padding: 0.4rem 0.9rem;
+            align-self: flex-start;
+            margin-bottom: 1.2rem;
+        }
+        .hf-ribbon::before {
+            content: '★'; font-size: 0.7rem;
+        }
+        .hf-cat {
+            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.3em;
+            color: var(--sienna); font-weight: 500; margin-bottom: 0.3rem;
+        }
+        .hf-name {
+            font-family: 'Bodoni Moda', serif; font-weight: 400;
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            line-height: 1.05; letter-spacing: -0.01em;
+            margin-bottom: 0.4rem;
+        }
+        .hf-name em { font-style: italic; }
+        .hf-stars { font-size: 0.9rem; color: var(--sienna); margin-bottom: 0.6rem; }
+        .hf-addr { font-size: 0.85rem; color: var(--fg-mute); margin-bottom: 1rem; }
+        .hf-quote {
+            font-family: 'Bodoni Moda', serif; font-style: italic;
+            font-size: 0.95rem; color: var(--fg);
+            border-left: 2px solid var(--sienna);
+            padding-left: 1rem; margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        .hf-go {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.85rem 1.8rem;
+            background: var(--ink); color: var(--paper);
+            font-family: 'Jost', sans-serif; font-weight: 500;
+            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.22em;
+            text-decoration: none;
+            align-self: flex-start;
+            transition: all 0.3s;
+        }
+        .hf-go:hover { background: var(--sienna); }
+
+        .hotels-others-label {
+            text-align: center;
+            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.3em;
+            color: var(--fg-mute); font-weight: 500;
+            margin: 3rem 0 1.5rem;
+            display: flex; align-items: center; justify-content: center; gap: 1.5rem;
+        }
+        .hotels-others-label::before, .hotels-others-label::after {
+            content: ''; height: 1px; background: var(--rule); flex: 0 1 80px;
+        }
+        .hotels-mosaic { grid-template-columns: repeat(3, 1fr); }
+
+        /* === CINEMATIC COUNTDOWN === */
+        .cinematic-countdown {
+            position: relative; overflow: hidden;
+            min-height: clamp(380px, 60vh, 560px);
+            display: flex; align-items: center; justify-content: center;
+            background: var(--dark);
+            text-align: center;
+            padding: clamp(3rem, 8vw, 6rem) 1.5rem;
+        }
+        .cc-bg {
+            position: absolute; inset: 0; z-index: 0; overflow: hidden;
+        }
+        .cc-bg img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+            filter: grayscale(1); opacity: 0.32;
+            animation: cc-pan 28s ease-in-out infinite alternate;
+        }
+        .cc-bg::after {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(ellipse at center, transparent 30%, rgba(22,20,19,0.6) 100%);
+        }
+        @keyframes cc-pan {
+            from { transform: scale(1.08) translateX(-1.5%); }
+            to { transform: scale(1.15) translateX(1.5%); }
+        }
+        .cc-inner { position: relative; z-index: 1; max-width: 760px; }
+        .cc-tag {
+            font-size: 0.7rem; letter-spacing: 0.35em; text-transform: uppercase;
+            font-weight: 500; color: var(--sienna-soft);
+            margin-bottom: 1rem;
+        }
+        .cc-title {
+            font-family: 'Bodoni Moda', serif; font-weight: 400;
+            font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+            color: var(--paper); line-height: 1.15;
+            margin-bottom: 2.5rem; letter-spacing: -0.01em;
+        }
+        .cc-title em { font-style: italic; color: var(--sienna-soft); }
+        .cc-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem; max-width: 580px; margin: 0 auto;
+        }
+        .cc-cell {
+            padding: 1.2rem 0.5rem;
+            border: 1px solid rgba(245,242,236,0.12);
+            background: rgba(22,20,19,0.35);
+            backdrop-filter: blur(2px);
+        }
+        .cc-num {
+            font-family: 'Bodoni Moda', serif;
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            color: var(--paper); display: block; line-height: 1;
+            font-feature-settings: "tnum"; font-variant-numeric: tabular-nums;
+            transition: opacity 0.25s;
+        }
+        .cc-num.tick { opacity: 0.55; }
+        .cc-label {
+            display: block; margin-top: 0.6rem;
+            font-size: 0.65rem; text-transform: uppercase;
+            letter-spacing: 0.25em; color: rgba(245,242,236,0.55);
+        }
+        .cc-foot {
+            margin-top: 2.2rem;
+            font-family: 'Bodoni Moda', serif; font-style: italic;
+            font-size: 0.85rem; color: rgba(245,242,236,0.5);
+        }
+
+        /* === DRESS CODE PALETTE === */
+        .dress-section { max-width: 880px; margin: 0 auto; }
+        .dress-head { text-align: center; margin-bottom: 2.5rem; }
+        .dress-tag {
+            font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
+            color: var(--sienna); font-weight: 500; margin-bottom: 0.4rem;
+        }
+        .dress-title {
+            font-family: 'Bodoni Moda', serif; font-weight: 400;
+            font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+            line-height: 1.1; letter-spacing: -0.01em;
+        }
+        .dress-title em { font-style: italic; }
+        .dress-sub { font-size: 0.85rem; color: var(--fg-mute); margin-top: 0.6rem; }
+        .palette {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 0.75rem;
+            margin: 2rem 0 1.5rem;
+        }
+        .swatch {
+            display: flex; flex-direction: column;
+            align-items: center; text-align: center;
+        }
+        .swatch-chip {
+            width: 100%; aspect-ratio: 1 / 1.15;
+            border: 1px solid var(--rule);
+            transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+            position: relative;
+        }
+        .swatch:hover .swatch-chip { transform: translateY(-4px); }
+        .swatch-name {
+            margin-top: 0.7rem;
+            font-family: 'Bodoni Moda', serif; font-size: 0.85rem;
+            color: var(--fg);
+        }
+        .swatch-hex {
+            margin-top: 0.15rem;
+            font-size: 0.65rem; letter-spacing: 0.15em;
+            text-transform: uppercase; color: var(--fg-mute);
+            font-feature-settings: "tnum";
+        }
+        .dress-do {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 2rem; margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--rule);
+        }
+        .dress-col h5 {
+            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.25em;
+            font-weight: 500; margin-bottom: 0.8rem;
+        }
+        .dress-col.do h5 { color: var(--sienna); }
+        .dress-col.dont h5 { color: var(--fg-mute); }
+        .dress-col ul {
+            list-style: none; padding: 0; margin: 0;
+            font-size: 0.9rem; color: var(--fg);
+        }
+        .dress-col li {
+            padding: 0.35rem 0 0.35rem 1.4rem;
+            position: relative;
+        }
+        .dress-col.do li::before {
+            content: '✓'; position: absolute; left: 0; top: 0.35rem;
+            color: var(--sienna); font-size: 0.85rem;
+        }
+        .dress-col.dont li::before {
+            content: '×'; position: absolute; left: 0; top: 0.3rem;
+            color: var(--fg-mute); font-size: 1rem;
+        }
+
+        /* === ILLUSTRATED ÁVILA MAP === */
+        .avila-map-wrap {
+            max-width: 1100px; margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+        .avila-map {
+            position: relative;
+            aspect-ratio: 4 / 3;
+            background: var(--warm);
+            overflow: hidden;
+        }
+        .avila-map img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+            filter: grayscale(1) sepia(0.18) contrast(1.05);
+        }
+        .avila-map-frame {
+            position: absolute; inset: 12px;
+            border: 1px solid rgba(158,74,47,0.35);
+            pointer-events: none;
+        }
+        .avila-legend {
+            padding: 0;
+        }
+        .avila-legend h4 {
+            font-family: 'Bodoni Moda', serif; font-weight: 400;
+            font-size: 1.2rem; margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+        }
+        .avila-legend h4 em { font-style: italic; }
+        .legend-group { margin-bottom: 1.3rem; }
+        .legend-group-title {
+            font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.3em;
+            font-weight: 500; color: var(--fg-mute); margin-bottom: 0.5rem;
+        }
+        .legend-item {
+            display: grid; grid-template-columns: 22px 1fr;
+            align-items: baseline; gap: 0.7rem;
+            padding: 0.35rem 0;
+            font-size: 0.85rem;
+        }
+        .legend-pin {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 22px; height: 22px;
+            font-size: 0.7rem; font-weight: 500;
+            color: white; border-radius: 50%;
+            font-family: 'Jost', sans-serif;
+        }
+        .legend-pin.pin-cer { background: var(--sienna); }
+        .legend-pin.pin-fin { background: var(--ink); }
+        .legend-pin.pin-htl { background: var(--sienna-soft); color: white; font-size: 0.65rem; }
+        .legend-item .l-name { color: var(--fg); }
+        .legend-item .l-sub { color: var(--fg-mute); font-size: 0.75rem; }
+
         /* === RESPONSIVE === */
         @media (max-width: 768px) {
             .nav { padding: 1.2rem 1.5rem; }
@@ -832,6 +1240,13 @@
             .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
             .gallery-grid .g-item { height: 250px; }
             .gallery-grid .g-item:first-child { grid-row: auto; }
+            .hotels-featured { grid-template-columns: 1fr; }
+            .hotels-featured .hf-img { min-height: 240px; }
+            .avila-map-wrap { grid-template-columns: 1fr; }
+            .palette { grid-template-columns: repeat(3, 1fr); }
+            .dress-do { grid-template-columns: 1fr; gap: 1.2rem; }
+            .cc-grid { gap: 0.4rem; }
+            .cc-cell { padding: 0.9rem 0.3rem; }
         }
         @media (max-width: 480px) {
             .hero-names { font-size: clamp(3rem, 15vw, 5rem); }
@@ -912,43 +1327,39 @@
             <p class="sec-sub">Por favor, confirma antes del 1 de mayo de 2027</p>
         </div>
         <div class="rsvp-box rv" aria-live="polite">
-            <form id="rsvp-form" action="https://formspree.io/f/xqarovpl" method="POST">
-                <div class="field">
-                    <label>¿Asistirás a nuestra boda?</label>
-                    <select id="attendance" name="asistencia" required onchange="handleAtt()">
-                        <option value="">Selecciona una opción</option>
-                        <option value="si">Sí, allí estaré</option>
-                        <option value="solo_ceremonia">Solo a la ceremonia</option>
-                        <option value="no">No podré asistir</option>
-                    </select>
-                </div>
-                <div id="no-msg" class="form-msg" style="display:none;">
-                    <p>Qué pena que no puedas venir.</p>
-                    <div class="field" style="margin-top:1rem;"><label>Tu nombre</label><input type="text" id="name-no" name="nombre_no_asiste" required></div>
-                    <button type="submit" class="btn-submit">Enviar</button>
-                </div>
-                <div id="cer-msg" class="form-msg" style="display:none;">
-                    <p>Te esperamos en la Catedral de Ávila.</p>
-                    <div class="field" style="margin-top:1rem;"><label>Tu nombre</label><input type="text" id="name-cer" name="nombre_ceremonia" required></div>
-                    <div class="field"><label>Email</label><input type="email" id="email-cer" name="email_ceremonia"></div>
-                    <button type="submit" class="btn-submit">Confirmar</button>
-                </div>
-                <div id="full-att" style="display:none;">
-                    <div class="field-row">
-                        <div class="field"><label>Tu nombre</label><input type="text" id="name" name="nombre" required></div>
-                        <div class="field"><label>Email</label><input type="email" id="email" name="email" required></div>
+            <div class="rsvp-progress" id="rsvp-progress" aria-hidden="true"></div>
+            <form id="rsvp-form" action="https://formspree.io/f/xqarovpl" method="POST" novalidate>
+                <input type="hidden" name="asistencia" id="attendance" value="">
+
+                <!-- STEP 1 — ¿Vienes? -->
+                <div class="rsvp-pane active" data-pane="1">
+                    <div class="pane-head">
+                        <h3>¿Vienes a nuestra <em>boda</em>?</h3>
+                        <p>Elige la opción que mejor te describa</p>
                     </div>
-                    <div class="field"><label>Teléfono</label><input type="tel" id="phone" name="telefono"></div>
-                    <div class="menu-pick">
-                        <h4>Tu menú</h4>
-                        <div class="menu-opts">
-                            <label class="menu-opt"><input type="radio" name="mi_menu" value="carne" required><span class="menu-opt-label">Carne</span></label>
-                            <label class="menu-opt"><input type="radio" name="mi_menu" value="pescado" required><span class="menu-opt-label">Pescado</span></label>
-                            <label class="menu-opt"><input type="radio" name="mi_menu" value="vegano" required><span class="menu-opt-label">Vegano</span></label>
-                        </div>
-                        <p id="menu-error" style="display:none;">Por favor, selecciona tu menú</p>
+                    <div class="big-choices">
+                        <button type="button" class="big-choice" data-choice="si" onclick="pickAtt('si')">
+                            <span>Sí, <em>allí estaré</em><span class="big-choice-sub">Ceremonia + cóctel + banquete</span></span>
+                        </button>
+                        <button type="button" class="big-choice" data-choice="solo_ceremonia" onclick="pickAtt('solo_ceremonia')">
+                            <span>Solo a la <em>ceremonia</em><span class="big-choice-sub">Únicamente la Catedral</span></span>
+                        </button>
+                        <button type="button" class="big-choice" data-choice="no" onclick="pickAtt('no')">
+                            <span>No podré <em>asistir</em><span class="big-choice-sub">Estaremos con vosotros en el corazón</span></span>
+                        </button>
                     </div>
-                    <div class="field">
+                </div>
+
+                <!-- STEP 2 — Nombre + Email -->
+                <div class="rsvp-pane" data-pane="2">
+                    <div class="pane-head">
+                        <h3>¿Cómo te <em>llamamos</em>?</h3>
+                        <p id="step2-sub">Para personalizar tu sitio en la mesa</p>
+                    </div>
+                    <div class="field"><label>Tu nombre completo</label><input type="text" id="name" name="nombre" autocomplete="name"></div>
+                    <div class="field" id="field-email"><label>Email</label><input type="email" id="email" name="email" autocomplete="email"></div>
+                    <div class="field" id="field-phone"><label>Teléfono <span style="text-transform:none;letter-spacing:normal;color:var(--fg-mute);">(opcional)</span></label><input type="tel" id="phone" name="telefono" autocomplete="tel"></div>
+                    <div class="field" id="field-has-guests">
                         <label>¿Vienes con acompañantes?</label>
                         <select id="has-guests" name="tiene_acompanantes" onchange="handleGuests()">
                             <option value="no">No, voy solo/a</option>
@@ -962,15 +1373,58 @@
                                 <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
                             </select>
                         </div>
-                        <div id="guests-det" class="guests-box"></div>
+                        <div id="guests-names" class="guests-box"></div>
                     </div>
-                    <div class="field"><label>Alergias o restricciones</label><input type="text" id="allergies" name="alergias" placeholder="Celiaquía, lactosa, etc."></div>
-                    <div class="field">
-                        <label>¿Necesitas autobús catedral → finca?</label>
-                        <select id="bus" name="autobus"><option value="si">Sí, por favor</option><option value="no">No, iré por mi cuenta</option></select>
+                    <div class="rsvp-nav">
+                        <button type="button" class="btn-back" onclick="goStep(1)">Atrás</button>
+                        <button type="button" class="btn-next" id="btn-next-2" onclick="nextFrom(2)">Siguiente</button>
                     </div>
-                    <button type="submit" class="btn-submit">Confirmar Asistencia</button>
                 </div>
+
+                <!-- STEP 3 — Menú + Alergias -->
+                <div class="rsvp-pane" data-pane="3">
+                    <div class="pane-head">
+                        <h3>Tu <em>menú</em></h3>
+                        <p>Para que el banquete sea perfecto</p>
+                    </div>
+                    <div class="menu-pick">
+                        <h4>Elige tu menú</h4>
+                        <div class="menu-opts">
+                            <label class="menu-opt"><input type="radio" name="mi_menu" value="carne"><span class="menu-opt-label">Carne</span></label>
+                            <label class="menu-opt"><input type="radio" name="mi_menu" value="pescado"><span class="menu-opt-label">Pescado</span></label>
+                            <label class="menu-opt"><input type="radio" name="mi_menu" value="vegano"><span class="menu-opt-label">Vegano</span></label>
+                        </div>
+                        <p id="menu-error" style="display:none;">Por favor, selecciona tu menú</p>
+                    </div>
+                    <div id="guests-menus" class="guests-box" style="display:none;"></div>
+                    <div class="field"><label>Alergias o restricciones</label><input type="text" id="allergies" name="alergias" placeholder="Celiaquía, lactosa, frutos secos…"></div>
+                    <div class="rsvp-nav">
+                        <button type="button" class="btn-back" onclick="goStep(2)">Atrás</button>
+                        <button type="button" class="btn-next" onclick="nextFrom(3)">Siguiente</button>
+                    </div>
+                </div>
+
+                <!-- STEP 4 — Transporte -->
+                <div class="rsvp-pane" data-pane="4">
+                    <div class="pane-head">
+                        <h3>¿Necesitas <em>transporte</em>?</h3>
+                        <p>Pondremos autobús de la Catedral a la finca y de vuelta</p>
+                    </div>
+                    <div class="big-choices">
+                        <button type="button" class="big-choice" data-bus="si" onclick="pickBus('si')">
+                            <span>Sí, <em>cuento con el autobús</em><span class="big-choice-sub">Catedral → Finca → Ávila ciudad</span></span>
+                        </button>
+                        <button type="button" class="big-choice" data-bus="no" onclick="pickBus('no')">
+                            <span>No, <em>iré por mi cuenta</em><span class="big-choice-sub">Tengo coche o transporte propio</span></span>
+                        </button>
+                    </div>
+                    <input type="hidden" name="autobus" id="bus" value="">
+                    <div class="rsvp-nav">
+                        <button type="button" class="btn-back" onclick="goStep(3)">Atrás</button>
+                        <button type="submit" class="btn-next" id="btn-submit-final" disabled>Confirmar asistencia</button>
+                    </div>
+                </div>
+
             </form>
         </div>
     </section>
@@ -1016,6 +1470,22 @@
         </div>
     </section>
 
+    <!-- CINEMATIC COUNTDOWN -->
+    <section class="cinematic-countdown" aria-label="Cuenta atrás para la boda">
+        <div class="cc-bg"><img src="assets/retablo.jpeg" alt="" loading="lazy"></div>
+        <div class="cc-inner rv">
+            <p class="cc-tag">12 de junio de 2027 · 12:00h</p>
+            <h2 class="cc-title">El día se <em>acerca</em></h2>
+            <div class="cc-grid">
+                <div class="cc-cell"><span class="cc-num" id="days">000</span><span class="cc-label">Días</span></div>
+                <div class="cc-cell"><span class="cc-num" id="hours">00</span><span class="cc-label">Horas</span></div>
+                <div class="cc-cell"><span class="cc-num" id="minutes">00</span><span class="cc-label">Min</span></div>
+                <div class="cc-cell"><span class="cc-num" id="seconds">00</span><span class="cc-label">Seg</span></div>
+            </div>
+            <p class="cc-foot">Catedral de Ávila · Dehesa del Pedrosillo</p>
+        </div>
+    </section>
+
     <!-- DETAILS & PROGRAM -->
     <section id="details" class="bg-warm pad">
         <div class="sec-head rv">
@@ -1025,15 +1495,8 @@
         <div class="details-strips rv-left">
             <div class="detail-strip"><span class="d-key">Fecha</span><span class="d-val">Sábado, 12 de Junio de 2027</span></div>
             <div class="detail-strip"><span class="d-key">Horario</span><span class="d-val">Ceremonia 12:00h — Cóctel 14:30h</span></div>
-            <div class="detail-strip"><span class="d-key">Vestimenta</span><span class="d-val">Etiqueta. Sugerimos tonos cálidos</span></div>
             <div class="detail-strip"><span class="d-key">Transporte</span><span class="d-val">Parking disponible. Autobús catedral → finca</span></div>
             <div class="detail-strip"><span class="d-key">Niños</span><span class="d-val">Bienvenidos. Habrá zona infantil</span></div>
-        </div>
-        <div class="hero-countdown rv" style="margin-top:2.5rem;">
-            <div class="cd-item"><span class="cd-num" id="days">000</span><span class="cd-label">Días</span></div>
-            <div class="cd-item"><span class="cd-num" id="hours">00</span><span class="cd-label">Horas</span></div>
-            <div class="cd-item"><span class="cd-num" id="minutes">00</span><span class="cd-label">Min</span></div>
-            <div class="cd-item"><span class="cd-num" id="seconds">00</span><span class="cd-label">Seg</span></div>
         </div>
         <div class="center rv" style="margin-top:2.5rem;">
             <button class="cal-btn" onclick="downloadCal()">
@@ -1057,14 +1520,134 @@
         </div>
     </section>
 
+    <!-- DRESS CODE -->
+    <section id="dresscode" class="bg-warm pad-sm">
+        <div class="dress-section rv">
+            <div class="dress-head">
+                <p class="dress-tag">Código de vestimenta</p>
+                <h3 class="dress-title">Etiqueta en <em>tonos cálidos</em></h3>
+                <p class="dress-sub">Inspirados en la piedra dorada de Ávila al atardecer. Sentid la calidez del paisaje castellano.</p>
+            </div>
+            <div class="palette" role="list" aria-label="Paleta cromática sugerida">
+                <div class="swatch" role="listitem">
+                    <div class="swatch-chip" style="background:#9e4a2f;"></div>
+                    <div class="swatch-name">Sienna</div>
+                    <div class="swatch-hex">#9E4A2F</div>
+                </div>
+                <div class="swatch" role="listitem">
+                    <div class="swatch-chip" style="background:#c17a5a;"></div>
+                    <div class="swatch-name">Terracota</div>
+                    <div class="swatch-hex">#C17A5A</div>
+                </div>
+                <div class="swatch" role="listitem">
+                    <div class="swatch-chip" style="background:#d9b48a;"></div>
+                    <div class="swatch-name">Arena</div>
+                    <div class="swatch-hex">#D9B48A</div>
+                </div>
+                <div class="swatch" role="listitem">
+                    <div class="swatch-chip" style="background:#7d6b4f;"></div>
+                    <div class="swatch-name">Oliva</div>
+                    <div class="swatch-hex">#7D6B4F</div>
+                </div>
+                <div class="swatch" role="listitem">
+                    <div class="swatch-chip" style="background:#4a3a2c;"></div>
+                    <div class="swatch-name">Tabaco</div>
+                    <div class="swatch-hex">#4A3A2C</div>
+                </div>
+                <div class="swatch" role="listitem">
+                    <div class="swatch-chip" style="background:#161413;"></div>
+                    <div class="swatch-name">Tinta</div>
+                    <div class="swatch-hex">#161413</div>
+                </div>
+            </div>
+            <div class="dress-do">
+                <div class="dress-col do">
+                    <h5>Sí</h5>
+                    <ul>
+                        <li>Etiqueta formal — traje largo, esmoquin o traje oscuro</li>
+                        <li>Tonos tierra, ocres, granates y azules profundos</li>
+                        <li>Tejidos nobles: lino, seda, lana fría</li>
+                        <li>Tocados y pamelas (es ceremonia de día)</li>
+                    </ul>
+                </div>
+                <div class="dress-col dont">
+                    <h5>Mejor evitar</h5>
+                    <ul>
+                        <li>Blanco, marfil y beige muy claro (reservados a la novia)</li>
+                        <li>Negro absoluto en ceremonia de mañana</li>
+                        <li>Tonos flúor o estampados muy llamativos</li>
+                        <li>Tacones de aguja muy finos — hay tramo empedrado</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- HOTELS -->
     <section id="hotels" class="bg-paper pad">
         <div class="sec-head rv">
-            <p class="sec-tag">Alojamiento en Ávila</p>
+            <p class="sec-tag">Alojamiento y plano</p>
             <h2 class="sec-title"><em>Hoteles</em></h2>
+            <p class="sec-sub">Ávila en un vistazo: ceremonia, banquete, alojamientos y autobús de enlace.</p>
         </div>
+
+        <!-- AVILA ILLUSTRATED MAP -->
+        <div class="avila-map-wrap rv">
+            <div class="avila-map">
+                <img id="map-avila" alt="Mapa ilustrado de Ávila con la Catedral, los hoteles recomendados y la Dehesa del Pedrosillo" loading="lazy">
+                <div class="avila-map-frame"></div>
+            </div>
+            <div class="avila-legend">
+                <h4>Plano del <em>día</em></h4>
+                <div class="legend-group">
+                    <p class="legend-group-title">Lugares de la boda</p>
+                    <div class="legend-item">
+                        <span class="legend-pin pin-cer">A</span>
+                        <div><div class="l-name">Catedral de Ávila</div><div class="l-sub">Ceremonia — 12:00h</div></div>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-pin pin-fin">B</span>
+                        <div><div class="l-name">Dehesa del Pedrosillo</div><div class="l-sub">Cóctel y banquete — 14:30h</div></div>
+                    </div>
+                </div>
+                <div class="legend-group">
+                    <p class="legend-group-title">Hoteles recomendados</p>
+                    <div class="legend-item"><span class="legend-pin pin-htl">1</span><div class="l-name">Parador de Ávila <span class="l-sub">· Recomendado</span></div></div>
+                    <div class="legend-item"><span class="legend-pin pin-htl">2</span><div class="l-name">Palacio de los Velada</div></div>
+                    <div class="legend-item"><span class="legend-pin pin-htl">3</span><div class="l-name">Hotel Las Leyendas</div></div>
+                    <div class="legend-item"><span class="legend-pin pin-htl">4</span><div class="l-name">Palacio de Valderrabanos</div></div>
+                    <div class="legend-item"><span class="legend-pin pin-htl">5</span><div class="l-name">La Casa del Presidente</div></div>
+                    <div class="legend-item"><span class="legend-pin pin-htl">6</span><div class="l-name">Hotel Arco San Vicente</div></div>
+                </div>
+                <div class="legend-group">
+                    <p class="legend-group-title">Transporte</p>
+                    <div class="legend-item">
+                        <span class="legend-pin" style="background:transparent;border:1px dashed var(--sienna);color:var(--sienna);">B</span>
+                        <div><div class="l-name">Autobús de enlace</div><div class="l-sub">Catedral → Finca → Ávila ciudad</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FEATURED HOTEL -->
+        <div class="hotels-featured rv">
+            <div class="hf-img">
+                <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/15697043.jpg?k=d81edbd986663017c01a1d46703e235a63fa22baa5eaef66d5363e4e9fe2a8ed&o=" alt="Parador de Ávila" loading="lazy">
+            </div>
+            <div class="hf-body">
+                <span class="hf-ribbon">Recomendado por los novios</span>
+                <p class="hf-cat">Palacio del s.XVI · Hotel de lujo</p>
+                <h3 class="hf-name">Parador <em>de Ávila</em></h3>
+                <p class="hf-stars">★★★★</p>
+                <p class="hf-addr">Marqués de Canales de Chozas, 2 · A 5 min de la Catedral</p>
+                <p class="hf-quote">Nos enamoró su patio renacentista y las vistas a la muralla al atardecer. Es donde nos alojaremos nosotros.</p>
+                <a href="https://www.booking.com/hotel/es/parador-de-turismo-de-avila.es.html" target="_blank" class="hf-go">Ver en Booking →</a>
+            </div>
+        </div>
+
+        <p class="hotels-others-label rv">Otras opciones</p>
+
         <div class="hotels-mosaic rv-scale">
-            <div class="hotel"><div class="hotel-img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/15697043.jpg?k=d81edbd986663017c01a1d46703e235a63fa22baa5eaef66d5363e4e9fe2a8ed&o=" alt="Parador" loading="lazy"></div><div class="hotel-body"><p class="hotel-cat">Hotel de lujo</p><h3>Parador de Ávila</h3><p class="hotel-stars">&#9733;&#9733;&#9733;&#9733;</p><p class="hotel-addr">Marqués de Canales de Chozas, 2</p><a href="https://www.booking.com/hotel/es/parador-de-turismo-de-avila.es.html" target="_blank" class="hotel-go">Ver en Booking &rarr;</a></div></div>
             <div class="hotel"><div class="hotel-img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/89809914.jpg?k=60179adcc06c8a7d6443d8c20c0ae7ef8d814b21296927bc9018afe76fd14ab8&o=" alt="Velada" loading="lazy"></div><div class="hotel-body"><p class="hotel-cat">Palacio histórico</p><h3>Palacio de los Velada</h3><p class="hotel-stars">&#9733;&#9733;&#9733;&#9733;</p><p class="hotel-addr">Plaza de la Catedral, 10</p><a href="https://www.booking.com/hotel/es/velada.es.html" target="_blank" class="hotel-go">Ver en Booking &rarr;</a></div></div>
             <div class="hotel"><div class="hotel-img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/378909371.jpg?k=71e0611acd00ea0d8c01cea4b5d0578ee5acda6ae26f0b4c0a21c458ebd08232&o=" alt="Las Leyendas" loading="lazy"></div><div class="hotel-body"><p class="hotel-cat">Hotel boutique</p><h3>Hotel Las Leyendas</h3><p class="hotel-stars">&#9733;&#9733;&#9733;&#9733;</p><p class="hotel-addr">Francisco Gallego, 3</p><a href="https://www.booking.com/hotel/es/las-leyendas.es.html" target="_blank" class="hotel-go">Ver en Booking &rarr;</a></div></div>
             <div class="hotel"><div class="hotel-img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/686470060.jpg?k=86302a61a55422b57835c55c019642c3b8969cc1545908274ceea534f44d0850&o=" alt="Valderrabanos" loading="lazy"></div><div class="hotel-body"><p class="hotel-cat">Palacio histórico</p><h3>Palacio de Valderrabanos</h3><p class="hotel-stars">&#9733;&#9733;&#9733;&#9733;</p><p class="hotel-addr">Plaza de la Catedral, 9</p><a href="https://www.booking.com/hotel/es/valderrabanos.es.html" target="_blank" class="hotel-go">Ver en Booking &rarr;</a></div></div>
@@ -1204,6 +1787,22 @@
         var f = document.getElementById('map-finca');
         if(c) c.src = b + 'pin-s+9e4a2f(-4.7008,40.6567)/-4.7008,40.6567,15.5,0/' + s;
         if(f) f.src = b + 'pin-s+9e4a2f(-4.7162,40.6047)/-4.7162,40.6047,13,0/' + s;
+
+        // Ávila overview map (cathedral + finca + hotels + bus)
+        var avila = document.getElementById('map-avila');
+        if(avila) {
+            var pins = [
+                'pin-l-a+9e4a2f(-4.7008,40.6567)',     // Catedral
+                'pin-l-b+161413(-4.7162,40.6047)',     // Finca
+                'pin-s-1+c17a5a(-4.7032,40.6573)',     // Parador
+                'pin-s-2+c17a5a(-4.7005,40.6570)',     // Velada
+                'pin-s-3+c17a5a(-4.7022,40.6555)',     // Las Leyendas
+                'pin-s-4+c17a5a(-4.7007,40.6571)',     // Valderrabanos
+                'pin-s-5+c17a5a(-4.6995,40.6601)',     // Casa del Presidente
+                'pin-s-6+c17a5a(-4.7000,40.6586)'      // Arco San Vicente
+            ].join('/');
+            avila.src = b + pins + '/auto/720x540@2x?padding=60&access_token=' + t;
+        }
     })();
 
     // Menu
@@ -1261,49 +1860,177 @@
     }
     addEventListener('scroll', () => requestAnimationFrame(tlLine), { passive: true }); tlLine();
 
-    // RSVP
-    function handleAtt() {
-        const v = document.getElementById('attendance').value;
-        document.getElementById('no-msg').style.display = 'none';
-        document.getElementById('cer-msg').style.display = 'none';
-        document.getElementById('full-att').style.display = 'none';
-        if(v==='no') document.getElementById('no-msg').style.display = 'block';
-        else if(v==='solo_ceremonia') document.getElementById('cer-msg').style.display = 'block';
-        else if(v==='si') document.getElementById('full-att').style.display = 'block';
+    // === PROGRESSIVE RSVP ===
+    const STEP_PANES = { si: [1,2,3,4], solo_ceremonia: [1,2], no: [1,2] };
+    let currentPath = null;
+    let currentStep = 1;
+
+    function renderProgress() {
+        const p = document.getElementById('rsvp-progress');
+        if(!p) return;
+        const total = currentPath ? STEP_PANES[currentPath].length : 4;
+        let html = '';
+        for(let i=0; i<total; i++) {
+            const n = i+1;
+            let cls = 'rsvp-step-dot';
+            if(currentPath && n < currentStep) cls += ' done';
+            else if(n === currentStep) cls += ' active';
+            html += '<div class="'+cls+'">'+n+'</div>';
+            if(i < total-1) {
+                let lcls = 'rsvp-step-line';
+                if(currentPath && n < currentStep) lcls += ' done';
+                html += '<div class="'+lcls+'"></div>';
+            }
+        }
+        p.innerHTML = html;
     }
+
+    function showPane(n) {
+        document.querySelectorAll('.rsvp-pane').forEach(p => p.classList.remove('active'));
+        const target = document.querySelector('.rsvp-pane[data-pane="'+n+'"]');
+        if(target) target.classList.add('active');
+        currentStep = n;
+        renderProgress();
+        // Smooth scroll inside the box
+        const box = document.querySelector('.rsvp-box');
+        if(box) {
+            const top = box.getBoundingClientRect().top + window.scrollY - 80;
+            window.scrollTo({top: top, behavior: 'smooth'});
+        }
+    }
+
+    function pickAtt(choice) {
+        document.getElementById('attendance').value = choice;
+        currentPath = choice;
+        document.querySelectorAll('.rsvp-pane[data-pane="1"] .big-choice').forEach(b => b.classList.remove('selected'));
+        const btn = document.querySelector('.big-choice[data-choice="'+choice+'"]');
+        if(btn) btn.classList.add('selected');
+
+        const fieldEmail = document.getElementById('field-email');
+        const fieldPhone = document.getElementById('field-phone');
+        const fieldHasGuests = document.getElementById('field-has-guests');
+        const guestsSec = document.getElementById('guests-sec');
+        const step2Sub = document.getElementById('step2-sub');
+        const btnNext2 = document.getElementById('btn-next-2');
+
+        if(choice === 'no') {
+            fieldEmail.style.display = 'none';
+            fieldPhone.style.display = 'none';
+            fieldHasGuests.style.display = 'none';
+            guestsSec.style.display = 'none';
+            step2Sub.textContent = 'Te echaremos de menos';
+            btnNext2.textContent = 'Enviar';
+            btnNext2.dataset.action = 'submit';
+        } else if(choice === 'solo_ceremonia') {
+            fieldEmail.style.display = '';
+            fieldPhone.style.display = '';
+            fieldHasGuests.style.display = 'none';
+            guestsSec.style.display = 'none';
+            step2Sub.textContent = 'Te esperamos en la Catedral de Ávila';
+            btnNext2.textContent = 'Confirmar';
+            btnNext2.dataset.action = 'submit';
+        } else {
+            fieldEmail.style.display = '';
+            fieldPhone.style.display = '';
+            fieldHasGuests.style.display = '';
+            step2Sub.textContent = 'Para personalizar tu sitio en la mesa';
+            btnNext2.textContent = 'Siguiente';
+            btnNext2.dataset.action = 'next';
+            handleGuests();
+        }
+        setTimeout(() => showPane(2), 280);
+    }
+
+    function nextFrom(n) {
+        if(n === 2) {
+            const name = document.getElementById('name').value.trim();
+            if(!name) { document.getElementById('name').focus(); return; }
+            if(currentPath !== 'no') {
+                const email = document.getElementById('email');
+                if(!email.value.trim() || !email.checkValidity()) { email.focus(); return; }
+            }
+            const btn = document.getElementById('btn-next-2');
+            if(btn.dataset.action === 'submit') {
+                document.getElementById('rsvp-form').requestSubmit();
+                return;
+            }
+            showPane(3);
+        } else if(n === 3) {
+            if(!document.querySelector('input[name="mi_menu"]:checked')) {
+                document.getElementById('menu-error').style.display = 'block';
+                return;
+            }
+            document.getElementById('menu-error').style.display = 'none';
+            const guestMenus = document.querySelectorAll('#guests-menus select');
+            for(const sel of guestMenus) {
+                if(!sel.value) { sel.focus(); return; }
+            }
+            showPane(4);
+        }
+    }
+
+    function goStep(n) { showPane(n); }
+
+    function pickBus(choice) {
+        document.getElementById('bus').value = choice;
+        document.querySelectorAll('.rsvp-pane[data-pane="4"] .big-choice').forEach(b => b.classList.remove('selected'));
+        const btn = document.querySelector('.big-choice[data-bus="'+choice+'"]');
+        if(btn) btn.classList.add('selected');
+        document.getElementById('btn-submit-final').disabled = false;
+    }
+
     function handleGuests() {
         const h = document.getElementById('has-guests').value;
         const s = document.getElementById('guests-sec');
-        if(h==='si') { s.style.display='block'; updateGuests(); }
-        else { s.style.display='none'; document.getElementById('guests-det').innerHTML=''; }
-    }
-    function updateGuests() {
-        const n = parseInt(document.getElementById('num-guests').value);
-        const c = document.getElementById('guests-det');
-        let h = '<h4>Datos de acompañantes</h4>';
-        for(let i=1;i<=n;i++) h += '<div class="g-entry"><div class="g-num">Acompañante '+i+'</div><div class="g-fields"><input type="text" name="acompanante_'+i+'_nombre" placeholder="Nombre" required><select name="acompanante_'+i+'_menu" required><option value="">Menú</option><option value="carne">Carne</option><option value="pescado">Pescado</option><option value="vegano">Vegano</option></select></div></div>';
-        c.innerHTML = h;
+        if(h === 'si') { s.style.display = 'block'; updateGuests(); }
+        else {
+            s.style.display = 'none';
+            document.getElementById('guests-names').innerHTML = '';
+            const gm = document.getElementById('guests-menus');
+            gm.innerHTML = ''; gm.style.display = 'none';
+        }
     }
 
-    // Form submit
+    function updateGuests() {
+        const n = parseInt(document.getElementById('num-guests').value);
+        const names = document.getElementById('guests-names');
+        const menus = document.getElementById('guests-menus');
+        let h = '<h4>Nombres de acompañantes</h4>';
+        for(let i=1; i<=n; i++) {
+            h += '<div class="g-entry"><div class="g-num">Acompañante '+i+'</div><div class="g-fields"><input type="text" name="acompanante_'+i+'_nombre" placeholder="Nombre completo" required></div></div>';
+        }
+        names.innerHTML = h;
+
+        let m = '<h4>Menú de cada acompañante</h4>';
+        for(let i=1; i<=n; i++) {
+            m += '<div class="g-entry"><div class="g-num">Acompañante '+i+'</div><div class="g-fields"><select name="acompanante_'+i+'_menu" required><option value="">Selecciona menú</option><option value="carne">Carne</option><option value="pescado">Pescado</option><option value="vegano">Vegano</option></select></div></div>';
+        }
+        menus.innerHTML = m;
+        menus.style.display = 'block';
+    }
+
+    renderProgress();
+
+    // === Form submit ===
     function setupForm(id, msg) {
         const f = document.getElementById(id);
         if(!f) return;
         f.addEventListener('submit', function(e) {
             e.preventDefault();
-            if(id==='rsvp-form') {
-                const a = document.getElementById('attendance').value;
-                if(a==='si' && !document.querySelector('input[name="mi_menu"]:checked')) {
-                    document.getElementById('menu-error').style.display='block'; return;
-                } else { const me = document.getElementById('menu-error'); if(me) me.style.display='none'; }
-            }
             const b = f.querySelector('button[type="submit"]');
-            const o = b.textContent; b.textContent='Enviando...'; b.disabled=true;
-            fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}})
+            const o = b.textContent; b.textContent = 'Enviando…'; b.disabled = true;
+            fetch(f.action, {method:'POST', body:new FormData(f), headers:{'Accept':'application/json'}})
             .then(r => {
-                if(r.ok) { f.innerHTML = id==='rsvp-form' ? '<div class="form-ok"><h3>Gracias por confirmar</h3><p>Nos vemos en la boda.</p></div>' : '<p class="form-ok-sm">'+msg+'</p>'; }
-                else { b.textContent=o; b.disabled=false; alert('Error. Inténtalo de nuevo.'); }
-            }).catch(() => { b.textContent=o; b.disabled=false; alert('Error de conexión.'); });
+                if(r.ok) {
+                    if(id === 'rsvp-form') {
+                        f.innerHTML = '<div class="form-ok"><h3>Gracias por confirmar</h3><p>Nos vemos en la boda.</p></div>';
+                        const prog = document.getElementById('rsvp-progress');
+                        if(prog) prog.style.display = 'none';
+                    } else {
+                        f.innerHTML = '<p class="form-ok-sm">'+msg+'</p>';
+                    }
+                } else { b.textContent = o; b.disabled = false; alert('Error. Inténtalo de nuevo.'); }
+            }).catch(() => { b.textContent = o; b.disabled = false; alert('Error de conexión.'); });
         });
     }
     setupForm('rsvp-form','Gracias');

@@ -5,7 +5,28 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
-## [1.3.0] - 2024-12-30
+## [1.4.0] - 2026-06-06
+
+### Añadido
+- **SEO enriquecido**: descripción específica de la boda, etiquetas Open Graph completas (locale, site_name, image dimensions, alt), Twitter Cards mejoradas y datos estructurados Schema.org (`Event`) para que las tarjetas compartidas en WhatsApp y redes sean atractivas.
+- **Mapa ilustrado de Ávila**: vista única con Catedral, Dehesa del Pedrosillo, los 6 hoteles recomendados y leyenda con autobús de enlace.
+- **Cuenta atrás cinematográfica**: sección a pantalla completa con fotografía de fondo (retablo), gradiente vignette y animación de pan/zoom sutil.
+- **Código de vestimenta visual**: paleta cromática con 6 swatches (Sienna, Terracota, Arena, Oliva, Tabaco, Tinta) y guía Sí / Mejor evitar.
+- **Hotel destacado**: tarjeta "Recomendado por los novios" para el Parador de Ávila con cita personal y diseño editorial sobredimensionado.
+- Etiqueta `<link rel="canonical">` y `theme-color`.
+
+### Cambiado
+- **Formulario RSVP progresivo en 4 pasos**: ¿Vienes? → Datos → Menú + Alergias → Transporte. Reduce la sensación de carga y previene abandono.
+  - Paso 1: tres opciones grandes con tarjetas tipográficas (sí / solo ceremonia / no).
+  - Bifurcación inteligente: las rutas "no" y "solo ceremonia" sólo muestran los campos imprescindibles y finalizan en el paso 2.
+  - Indicador de progreso dinámico que se adapta a la ruta del invitado.
+  - Acompañantes con nombres y menús individuales.
+- Eliminada la fila "Vestimenta" en Detalles (reemplazada por la nueva sección visual de código de vestimenta).
+- Cuenta atrás trasladada de la sección Detalles a un bloque cinematográfico independiente entre Lugares y Detalles.
+
+### Técnico
+- Mapbox Static API ahora también genera el mapa global de Ávila con 8 marcadores (2 lugares + 6 hoteles).
+- Datos estructurados JSON-LD con `Event`, `Place` y `PostalAddress`.
 
 ### Añadido
 - Botón de descarga para PDF de escaleta musical generado en LaTeX
