@@ -179,14 +179,6 @@
             position: relative;
             overflow: hidden;
         }
-        .hero::before {
-            content: '';
-            position: absolute; inset: 0; z-index: 0;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%239e4a2f' stroke-width='0.5'%3E%3Cpath d='M40 0 L80 40 L40 80 L0 40Z'/%3E%3Ccircle cx='40' cy='40' r='16'/%3E%3Cpath d='M40 24 L56 40 L40 56 L24 40Z'/%3E%3Cpath d='M20 0 L40 20 M60 0 L40 20 M80 20 L60 40 M80 60 L60 40 M60 80 L40 60 M20 80 L40 60 M0 60 L20 40 M0 20 L20 40'/%3E%3C/g%3E%3C/svg%3E");
-            background-size: 80px 80px;
-            opacity: 0.07;
-            pointer-events: none;
-        }
         .hero-top {
             align-self: end;
             padding-bottom: 1rem;
@@ -235,22 +227,6 @@
             font-size: 0.7rem; color: var(--mute);
             letter-spacing: 0.15em; text-transform: uppercase;
         }
-        .hero-countdown {
-            display: flex; gap: 2.5rem;
-            justify-content: center;
-        }
-        .cd-item { text-align: center; }
-        .cd-num {
-            font-family: 'Bodoni Moda', serif;
-            font-size: clamp(1.8rem, 3vw, 2.5rem);
-            color: var(--ink); display: block; line-height: 1;
-            transition: opacity 0.3s ease;
-        }
-        .cd-num.tick { opacity: 0.5; }
-        .cd-label {
-            font-size: 0.7rem; text-transform: uppercase;
-            letter-spacing: 0.2em; color: var(--mute);
-        }
         .scroll-indicator {
             position: absolute; bottom: 2rem; left: 50%;
             transform: translateX(-50%);
@@ -277,27 +253,6 @@
         .hero.loaded .hs:nth-child(1) { transition-delay: 0.2s; }
         .hero.loaded .hs:nth-child(2) { transition-delay: 0.5s; }
         .hero.loaded .hs:nth-child(3) { transition-delay: 0.8s; }
-
-        /* === MARQUEE STRIP === */
-        .marquee-strip {
-            background: var(--sienna);
-            padding: 0.6rem 0;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-        .marquee-track {
-            display: inline-flex;
-            animation: scroll-marquee 30s linear infinite;
-        }
-        .marquee-track span {
-            font-family: 'Bodoni Moda', serif;
-            font-style: italic;
-            font-size: 0.75rem;
-            color: white;
-            padding: 0 3rem;
-            letter-spacing: 0.1em;
-        }
-        @keyframes scroll-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         /* === LAYOUT === */
         .pad { padding: clamp(5rem, 12vw, 10rem) clamp(1.5rem, 5vw, 6rem); }
@@ -1024,144 +979,6 @@
         }
         .hotels-mosaic { grid-template-columns: repeat(3, 1fr); }
 
-        /* === CINEMATIC COUNTDOWN === */
-        .cinematic-countdown {
-            position: relative; overflow: hidden;
-            min-height: clamp(380px, 60vh, 560px);
-            display: flex; align-items: center; justify-content: center;
-            background: var(--dark);
-            text-align: center;
-            padding: clamp(3rem, 8vw, 6rem) 1.5rem;
-        }
-        .cc-bg {
-            position: absolute; inset: 0; z-index: 0; overflow: hidden;
-        }
-        .cc-bg img {
-            width: 100%; height: 100%; object-fit: cover; display: block;
-            filter: grayscale(1); opacity: 0.32;
-            animation: cc-pan 28s ease-in-out infinite alternate;
-        }
-        .cc-bg::after {
-            content: ''; position: absolute; inset: 0;
-            background: radial-gradient(ellipse at center, transparent 30%, rgba(22,20,19,0.6) 100%);
-        }
-        @keyframes cc-pan {
-            from { transform: scale(1.08) translateX(-1.5%); }
-            to { transform: scale(1.15) translateX(1.5%); }
-        }
-        .cc-inner { position: relative; z-index: 1; max-width: 760px; }
-        .cc-tag {
-            font-size: 0.7rem; letter-spacing: 0.35em; text-transform: uppercase;
-            font-weight: 500; color: var(--sienna-soft);
-            margin-bottom: 1rem;
-        }
-        .cc-title {
-            font-family: 'Bodoni Moda', serif; font-weight: 400;
-            font-size: clamp(1.6rem, 3.5vw, 2.6rem);
-            color: var(--paper); line-height: 1.15;
-            margin-bottom: 2.5rem; letter-spacing: -0.01em;
-        }
-        .cc-title em { font-style: italic; color: var(--sienna-soft); }
-        .cc-grid {
-            display: grid; grid-template-columns: repeat(4, 1fr);
-            gap: 0.5rem; max-width: 580px; margin: 0 auto;
-        }
-        .cc-cell {
-            padding: 1.2rem 0.5rem;
-            border: 1px solid rgba(245,242,236,0.12);
-            background: rgba(22,20,19,0.35);
-            backdrop-filter: blur(2px);
-        }
-        .cc-num {
-            font-family: 'Bodoni Moda', serif;
-            font-size: clamp(2rem, 4.5vw, 3rem);
-            color: var(--paper); display: block; line-height: 1;
-            font-feature-settings: "tnum"; font-variant-numeric: tabular-nums;
-            transition: opacity 0.25s;
-        }
-        .cc-num.tick { opacity: 0.55; }
-        .cc-label {
-            display: block; margin-top: 0.6rem;
-            font-size: 0.65rem; text-transform: uppercase;
-            letter-spacing: 0.25em; color: rgba(245,242,236,0.55);
-        }
-        .cc-foot {
-            margin-top: 2.2rem;
-            font-family: 'Bodoni Moda', serif; font-style: italic;
-            font-size: 0.85rem; color: rgba(245,242,236,0.5);
-        }
-
-        /* === DRESS CODE PALETTE === */
-        .dress-section { max-width: 880px; margin: 0 auto; }
-        .dress-head { text-align: center; margin-bottom: 2.5rem; }
-        .dress-tag {
-            font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
-            color: var(--sienna); font-weight: 500; margin-bottom: 0.4rem;
-        }
-        .dress-title {
-            font-family: 'Bodoni Moda', serif; font-weight: 400;
-            font-size: clamp(1.4rem, 2.8vw, 1.9rem);
-            line-height: 1.1; letter-spacing: -0.01em;
-        }
-        .dress-title em { font-style: italic; }
-        .dress-sub { font-size: 0.85rem; color: var(--fg-mute); margin-top: 0.6rem; }
-        .palette {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 0.75rem;
-            margin: 2rem 0 1.5rem;
-        }
-        .swatch {
-            display: flex; flex-direction: column;
-            align-items: center; text-align: center;
-        }
-        .swatch-chip {
-            width: 100%; aspect-ratio: 1 / 1.15;
-            border: 1px solid var(--rule);
-            transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
-            position: relative;
-        }
-        .swatch:hover .swatch-chip { transform: translateY(-4px); }
-        .swatch-name {
-            margin-top: 0.7rem;
-            font-family: 'Bodoni Moda', serif; font-size: 0.85rem;
-            color: var(--fg);
-        }
-        .swatch-hex {
-            margin-top: 0.15rem;
-            font-size: 0.65rem; letter-spacing: 0.15em;
-            text-transform: uppercase; color: var(--fg-mute);
-            font-feature-settings: "tnum";
-        }
-        .dress-do {
-            display: grid; grid-template-columns: 1fr 1fr;
-            gap: 2rem; margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--rule);
-        }
-        .dress-col h5 {
-            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.25em;
-            font-weight: 500; margin-bottom: 0.8rem;
-        }
-        .dress-col.do h5 { color: var(--sienna); }
-        .dress-col.dont h5 { color: var(--fg-mute); }
-        .dress-col ul {
-            list-style: none; padding: 0; margin: 0;
-            font-size: 0.9rem; color: var(--fg);
-        }
-        .dress-col li {
-            padding: 0.35rem 0 0.35rem 1.4rem;
-            position: relative;
-        }
-        .dress-col.do li::before {
-            content: '✓'; position: absolute; left: 0; top: 0.35rem;
-            color: var(--sienna); font-size: 0.85rem;
-        }
-        .dress-col.dont li::before {
-            content: '×'; position: absolute; left: 0; top: 0.3rem;
-            color: var(--fg-mute); font-size: 1rem;
-        }
-
         /* === ILLUSTRATED ÁVILA MAP === */
         .avila-map-wrap {
             max-width: 1100px; margin: 0 auto;
@@ -1243,10 +1060,6 @@
             .hotels-featured { grid-template-columns: 1fr; }
             .hotels-featured .hf-img { min-height: 240px; }
             .avila-map-wrap { grid-template-columns: 1fr; }
-            .palette { grid-template-columns: repeat(3, 1fr); }
-            .dress-do { grid-template-columns: 1fr; gap: 1.2rem; }
-            .cc-grid { gap: 0.4rem; }
-            .cc-cell { padding: 0.9rem 0.3rem; }
         }
         @media (max-width: 480px) {
             .hero-names { font-size: clamp(3rem, 15vw, 5rem); }
@@ -1311,13 +1124,6 @@
         </div>
         <div class="scroll-indicator"></div>
     </section>
-
-    <!-- MARQUEE -->
-    <div class="marquee-strip" aria-hidden="true">
-        <div class="marquee-track">
-            <span>12 Junio 2027</span><span>Catedral de Ávila</span><span>Raquel & Adrián</span><span>Dehesa del Pedrosillo</span><span>12 Junio 2027</span><span>Catedral de Ávila</span><span>Raquel & Adrián</span><span>Dehesa del Pedrosillo</span><span>12 Junio 2027</span><span>Catedral de Ávila</span><span>Raquel & Adrián</span><span>Dehesa del Pedrosillo</span>
-        </div>
-    </div>
 
     <!-- RSVP -->
     <section id="rsvp" class="bg-paper pad">
@@ -1470,22 +1276,6 @@
         </div>
     </section>
 
-    <!-- CINEMATIC COUNTDOWN -->
-    <section class="cinematic-countdown" aria-label="Cuenta atrás para la boda">
-        <div class="cc-bg"><img src="assets/retablo.jpeg" alt="" loading="lazy"></div>
-        <div class="cc-inner rv">
-            <p class="cc-tag">12 de junio de 2027 · 12:00h</p>
-            <h2 class="cc-title">El día se <em>acerca</em></h2>
-            <div class="cc-grid">
-                <div class="cc-cell"><span class="cc-num" id="days">000</span><span class="cc-label">Días</span></div>
-                <div class="cc-cell"><span class="cc-num" id="hours">00</span><span class="cc-label">Horas</span></div>
-                <div class="cc-cell"><span class="cc-num" id="minutes">00</span><span class="cc-label">Min</span></div>
-                <div class="cc-cell"><span class="cc-num" id="seconds">00</span><span class="cc-label">Seg</span></div>
-            </div>
-            <p class="cc-foot">Catedral de Ávila · Dehesa del Pedrosillo</p>
-        </div>
-    </section>
-
     <!-- DETAILS & PROGRAM -->
     <section id="details" class="bg-warm pad">
         <div class="sec-head rv">
@@ -1517,69 +1307,6 @@
             <div class="tl-item"><span class="tl-time">16:30</span><div><p class="tl-event">Banquete</p><p class="tl-desc">Comida y brindis</p></div></div>
             <div class="tl-item"><span class="tl-time">20:00</span><div><p class="tl-event">Primer Baile</p><p class="tl-desc">Apertura de pista</p></div></div>
             <div class="tl-item"><span class="tl-time">21:00</span><div><p class="tl-event">Fiesta</p><p class="tl-desc">Hasta el amanecer</p></div></div>
-        </div>
-    </section>
-
-    <!-- DRESS CODE -->
-    <section id="dresscode" class="bg-warm pad-sm">
-        <div class="dress-section rv">
-            <div class="dress-head">
-                <p class="dress-tag">Código de vestimenta</p>
-                <h3 class="dress-title">Etiqueta en <em>tonos cálidos</em></h3>
-                <p class="dress-sub">Inspirados en la piedra dorada de Ávila al atardecer. Sentid la calidez del paisaje castellano.</p>
-            </div>
-            <div class="palette" role="list" aria-label="Paleta cromática sugerida">
-                <div class="swatch" role="listitem">
-                    <div class="swatch-chip" style="background:#9e4a2f;"></div>
-                    <div class="swatch-name">Sienna</div>
-                    <div class="swatch-hex">#9E4A2F</div>
-                </div>
-                <div class="swatch" role="listitem">
-                    <div class="swatch-chip" style="background:#c17a5a;"></div>
-                    <div class="swatch-name">Terracota</div>
-                    <div class="swatch-hex">#C17A5A</div>
-                </div>
-                <div class="swatch" role="listitem">
-                    <div class="swatch-chip" style="background:#d9b48a;"></div>
-                    <div class="swatch-name">Arena</div>
-                    <div class="swatch-hex">#D9B48A</div>
-                </div>
-                <div class="swatch" role="listitem">
-                    <div class="swatch-chip" style="background:#7d6b4f;"></div>
-                    <div class="swatch-name">Oliva</div>
-                    <div class="swatch-hex">#7D6B4F</div>
-                </div>
-                <div class="swatch" role="listitem">
-                    <div class="swatch-chip" style="background:#4a3a2c;"></div>
-                    <div class="swatch-name">Tabaco</div>
-                    <div class="swatch-hex">#4A3A2C</div>
-                </div>
-                <div class="swatch" role="listitem">
-                    <div class="swatch-chip" style="background:#161413;"></div>
-                    <div class="swatch-name">Tinta</div>
-                    <div class="swatch-hex">#161413</div>
-                </div>
-            </div>
-            <div class="dress-do">
-                <div class="dress-col do">
-                    <h5>Sí</h5>
-                    <ul>
-                        <li>Etiqueta formal — traje largo, esmoquin o traje oscuro</li>
-                        <li>Tonos tierra, ocres, granates y azules profundos</li>
-                        <li>Tejidos nobles: lino, seda, lana fría</li>
-                        <li>Tocados y pamelas (es ceremonia de día)</li>
-                    </ul>
-                </div>
-                <div class="dress-col dont">
-                    <h5>Mejor evitar</h5>
-                    <ul>
-                        <li>Blanco, marfil y beige muy claro (reservados a la novia)</li>
-                        <li>Negro absoluto en ceremonia de mañana</li>
-                        <li>Tonos flúor o estampados muy llamativos</li>
-                        <li>Tacones de aguja muy finos — hay tramo empedrado</li>
-                    </ul>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -1832,19 +1559,6 @@
         else { nav.classList.remove('nav--top'); nav.classList.add('nav--scrolled'); }
     }, { threshold: 0.05 });
     navObs.observe(heroEl);
-
-    // Countdown
-    const secEl = document.getElementById('seconds');
-    function tick() {
-        const t = new Date('2027-06-12T12:00:00').getTime() - Date.now();
-        document.getElementById('days').textContent = String(Math.floor(t/864e5)).padStart(3,'0');
-        document.getElementById('hours').textContent = String(Math.floor((t%864e5)/36e5)).padStart(2,'0');
-        document.getElementById('minutes').textContent = String(Math.floor((t%36e5)/6e4)).padStart(2,'0');
-        secEl.textContent = String(Math.floor((t%6e4)/1e3)).padStart(2,'0');
-        secEl.classList.add('tick');
-        setTimeout(() => secEl.classList.remove('tick'), 150);
-    }
-    tick(); setInterval(tick, 1000);
 
     // Reveal
     const ro = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); }), { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
