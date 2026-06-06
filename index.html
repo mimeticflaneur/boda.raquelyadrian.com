@@ -1134,7 +1134,8 @@
         </div>
         <div class="rsvp-box rv" aria-live="polite">
             <div class="rsvp-progress" id="rsvp-progress" aria-hidden="true"></div>
-            <form id="rsvp-form" action="https://formspree.io/f/xqarovpl" method="POST" novalidate>
+            <form id="rsvp-form" action="/api/rsvp" method="POST" novalidate>
+                <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
                 <input type="hidden" name="asistencia" id="attendance" value="">
 
                 <!-- STEP 1 — ¿Vienes? -->
@@ -1423,7 +1424,8 @@
             <div class="rv"><iframe style="border-radius:0" src="https://open.spotify.com/embed/playlist/3rz3D0d7uN63e7VGwXi9dL?utm_source=generator&theme=0" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
             <div class="song-form-box rv" aria-live="polite">
                 <h4>Sugiere una canción</h4>
-                <form id="song-form" action="https://formspree.io/f/xeoywbav" method="POST">
+                <form id="song-form" action="/api/song" method="POST">
+                    <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
                     <input type="text" name="cancion" placeholder="Nombre de la canción" required>
                     <input type="text" name="artista" placeholder="Artista">
                     <input type="text" name="nombre" placeholder="Tu nombre">
@@ -1441,7 +1443,8 @@
         </div>
         <div class="gb-container">
             <div class="gb-form rv" aria-live="polite">
-                <form id="guestbook-form" action="https://formspree.io/f/movgzoer" method="POST">
+                <form id="guestbook-form" action="/api/guestbook" method="POST">
+                    <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
                     <textarea name="mensaje" placeholder="Escribe tu mensaje para los novios..." required></textarea>
                     <input type="text" name="nombre" placeholder="Tu nombre" required>
                     <button type="submit" class="btn-submit">Firmar</button>
@@ -1729,12 +1732,18 @@
     function setupForm(id, msg) {
         const f = document.getElementById(id);
         if(!f) return;
-        f.addEventListener('submit', function(e) {
+        f.addEventListener('submit', async function(e) {
             e.preventDefault();
             const b = f.querySelector('button[type="submit"]');
             const o = b.textContent; b.textContent = 'Enviando…'; b.disabled = true;
-            fetch(f.action, {method:'POST', body:new FormData(f), headers:{'Accept':'application/json'}})
-            .then(r => {
+            const payload = {};
+            new FormData(f).forEach((v, k) => { payload[k] = v; });
+            try {
+                const r = await fetch(f.action, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+                    body: JSON.stringify(payload)
+                });
                 if(r.ok) {
                     if(id === 'rsvp-form') {
                         f.innerHTML = '<div class="form-ok"><h3>Gracias por confirmar</h3><p>Nos vemos en la boda.</p></div>';
@@ -1743,8 +1752,15 @@
                     } else {
                         f.innerHTML = '<p class="form-ok-sm">'+msg+'</p>';
                     }
-                } else { b.textContent = o; b.disabled = false; alert('Error. Inténtalo de nuevo.'); }
-            }).catch(() => { b.textContent = o; b.disabled = false; alert('Error de conexión.'); });
+                } else {
+                    const err = await r.json().catch(() => ({}));
+                    b.textContent = o; b.disabled = false;
+                    alert(err.error || 'Error. Inténtalo de nuevo.');
+                }
+            } catch (_) {
+                b.textContent = o; b.disabled = false;
+                alert('Error de conexión.');
+            }
         });
     }
     setupForm('rsvp-form','Gracias');

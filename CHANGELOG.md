@@ -5,6 +5,27 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
+## [2.0.0] - 2026-06-06
+
+### Añadido
+- **Backend serverless en Vercel** que reemplaza Formspree:
+  - `/api/rsvp`, `/api/song`, `/api/guestbook` — endpoints públicos POST con validación, honeypot y rate limit por IP.
+  - Almacenamiento en Vercel KV (Redis) — sin esquema, sin migraciones, gratis hasta 30k comandos/mes.
+  - Email automático en cada envío vía Resend (3000 emails/mes gratis con dominio verificado).
+- **Panel de administración `/admin`** protegido con HTTP Basic Auth (Edge middleware):
+  - Estadísticas en vivo (asistentes, menús por tipo, autobús, alergias).
+  - Tablas filtrables con todos los envíos.
+  - Exportación a CSV (con BOM para Excel).
+- `package.json` con dependencias `@vercel/kv` y `resend`.
+- `vercel.json` con `cleanUrls`.
+- `middleware.js` Edge para auth en `/admin` y `/api/admin/*`.
+- `.env.example` con todas las variables necesarias.
+- `SETUP-VERCEL.md` con guía paso a paso de configuración.
+
+### Cambiado
+- Los formularios envían JSON a endpoints relativos (`/api/*`) en lugar de a Formspree.
+- Añadido campo honeypot oculto (`website`) a los tres formularios.
+
 ## [1.4.0] - 2026-06-06
 
 ### Añadido

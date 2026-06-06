@@ -1,0 +1,9 @@
+{
+  "name": "boda-raquelyadrian",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@vercel/kv": "^3.0.0",
+    "resend": "^4.0.1"
+  }
+}
