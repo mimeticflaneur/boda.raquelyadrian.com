@@ -5,6 +5,20 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
+## [1.6.0] - 2026-06-10
+
+### Cambiado
+- **Ceremonia en el Real Monasterio de Santo Tomás** (Plaza de Granada, 1) en lugar de la Catedral: actualizado en metadatos, datos estructurados, tarjeta de lugar, mapas, RSVP, FAQ y archivo de calendario.
+- **Nuevo horario**: llegada de invitados 12:30h, ceremonia 13:00h, traslado 14:30h, cóctel 15:30h, banquete 17:30h, primer baile 21:00h y fiesta 22:00h.
+- **Hoteles recomendados reducidos a tres**: Palacio de los Velada, Palacio Sofraga (nuevo) y Hotel Las Leyendas.
+
+### Añadido
+- **Pop-up de tarifa especial del Palacio de los Velada**: 105€/noche con IVA incluido escribiendo a reservas.avila@hotelesvelada.com o llamando al +34 920 255 100 presentándose como invitado de la boda, con enlace a las habitaciones de su web oficial.
+- **Código de descuento del Palacio Sofraga**: chip copiable «R&A15» (−15%) con enlace a sofragapalacio.com.
+
+### Eliminado
+- Parador de Ávila (tarjeta destacada), Palacio de Valderrabanos, La Casa del Presidente y Hotel Arco San Vicente de la lista de hoteles y del mapa.
+
 ## [1.5.0] - 2026-06-10
 
 ### Añadido
