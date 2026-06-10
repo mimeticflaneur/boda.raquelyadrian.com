@@ -5,6 +5,27 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
+## [1.5.0] - 2026-06-10
+
+### Añadido
+- **Hero cinematográfico**: el corazón transverberado se dibuja con animación de trazo al cargar y después se rellena; líneas ornamentales que se trazan a ambos lados de la fecha; textura de grano de película sutil sobre el hero; el ampersand gigante "respira" con un zoom muy lento.
+- **Cuenta atrás compacta**: línea tipográfica única bajo los nombres (`días · h · min`) con números en Bodoni Moda, actualizada cada 30 segundos.
+- **Barra de progreso de lectura**: línea fija de 2px en siena en la parte superior que avanza con el scroll.
+- **Parallax sutil** en los fondos del retablo (Lugares) y la vidriera (Ceremonia), solo en escritorio.
+- Bloque `prefers-reduced-motion` que desactiva las animaciones decorativas para quien lo prefiera.
+
+### Cambiado
+- **Imágenes en WebP con fallback JPEG** mediante `<picture>`: retablo y vidriera reescaladas y en escala de grises (el CSS ya las desatura), y foto de Nuestra Historia con `srcset` en dos tamaños.
+- `fondo-programa.svg` reoptimizado con SVGO.
+
+### Eliminado
+- **Libro de Firmas**: sección, enlace del menú, formulario de Formspree y estilos asociados (los mensajes nunca se mostraban públicamente).
+- `assets/Gemini_Generated_Image_*.svg` (578 KB, duplicado sin uso de `fondo-programa.svg`).
+
+### Técnico
+- Peso de las imágenes servidas en navegadores modernos reducido de ~1,5 MB a ~460 KB.
+- Listener de scroll unificado (timeline, barra de progreso y parallax) con un solo `requestAnimationFrame`.
+
 ## [1.4.0] - 2026-06-06
 
 ### Añadido
