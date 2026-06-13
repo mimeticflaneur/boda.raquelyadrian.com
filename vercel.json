@@ -1,0 +1,8 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/admin", "destination": "/api/admin" },
+    { "source": "/export/rsvp.csv", "destination": "/api/export?type=rsvp" },
+    { "source": "/export/canciones.csv", "destination": "/api/export?type=canciones" }
+  ]
+}

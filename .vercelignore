@@ -1,0 +1,5 @@
+# El backend autoalojado (Node + ficheros) no se usa en Vercel: alli van las
+# funciones de api/ + lib/. Se excluye para no servirlo como estatico.
+server/
+CHANGELOG
+CHANGELOG.md

@@ -5,6 +5,24 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
+## [1.8.0] - 2026-06-13
+
+### Añadido
+- **Despliegue en Vercel con base de datos** (gratis y persistente): funciones
+  serverless en `api/` (`rsvp`, `cancion`, `admin`, `stats`, `export`, `health`)
+  que guardan los datos en **Upstash Redis** mediante su API REST con `fetch`
+  nativo (sin dependencias npm). `vercel.json` mapea `/admin` y `/export/*.csv`
+  a las funciones; el sitio y la API quedan en el mismo origen (sin CORS).
+- **`lib/core.js`**: lógica compartida (validación, estadísticas, CSV y panel)
+  como única fuente de verdad entre el backend autoalojado y las funciones de
+  Vercel. Nuevos `lib/store.js` (Upstash) y `lib/api.js` (CORS, auth, body).
+- **Guía `DEPLOY-VERCEL.md`**: pasos para dejar la web y el formulario
+  funcionando en Vercel + Upstash, conectar el dominio y exportar los datos.
+
+### Cambiado
+- **`server/server.js` refactorizado** para reutilizar `lib/core.js` en lugar de
+  duplicar la lógica; el comportamiento (RSVP, panel, CSV) es idéntico.
+
 ## [1.7.0] - 2026-06-13
 
 ### Añadido
