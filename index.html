@@ -1178,21 +1178,23 @@
         </div>
         <div class="rsvp-box rv" aria-live="polite">
             <div class="rsvp-progress" id="rsvp-progress" aria-hidden="true"></div>
-            <form id="rsvp-form" action="https://formspree.io/f/xqarovpl" method="POST" novalidate>
+            <form id="rsvp-form" novalidate>
                 <input type="hidden" name="asistencia" id="attendance" value="">
+                <!-- Honeypot anti-bots: invisible para personas -->
+                <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;">
+                    <label>No rellenes esto</label>
+                    <input type="text" id="hp-website" name="website" tabindex="-1" autocomplete="off">
+                </div>
 
-                <!-- STEP 1 — ¿Vienes? -->
+                <!-- PASO 1 — ¿Asistirás? -->
                 <div class="rsvp-pane active" data-pane="1">
                     <div class="pane-head">
-                        <h3>¿Vienes a nuestra <em>boda</em>?</h3>
-                        <p>Elige la opción que mejor te describa</p>
+                        <h3>¿Nos <em>acompañarás</em>?</h3>
+                        <p>Nos encantaría celebrarlo contigo</p>
                     </div>
                     <div class="big-choices">
                         <button type="button" class="big-choice" data-choice="si" onclick="pickAtt('si')">
-                            <span>Sí, <em>allí estaré</em><span class="big-choice-sub">Ceremonia + cóctel + banquete</span></span>
-                        </button>
-                        <button type="button" class="big-choice" data-choice="solo_ceremonia" onclick="pickAtt('solo_ceremonia')">
-                            <span>Solo a la <em>ceremonia</em><span class="big-choice-sub">Únicamente el Monasterio de Santo Tomás</span></span>
+                            <span>Sí, <em>asistiré</em><span class="big-choice-sub">Ceremonia · cóctel · banquete</span></span>
                         </button>
                         <button type="button" class="big-choice" data-choice="no" onclick="pickAtt('no')">
                             <span>No podré <em>asistir</em><span class="big-choice-sub">Estaremos con vosotros en el corazón</span></span>
@@ -1200,45 +1202,50 @@
                     </div>
                 </div>
 
-                <!-- STEP 2 — Nombre + Email -->
+                <!-- PASO 2 — Datos de contacto -->
                 <div class="rsvp-pane" data-pane="2">
                     <div class="pane-head">
-                        <h3>¿Cómo te <em>llamamos</em>?</h3>
-                        <p id="step2-sub">Para personalizar tu sitio en la mesa</p>
+                        <h3>Tus <em>datos</em></h3>
+                        <p id="step2-sub">Para tenerte en cuenta en cada detalle</p>
                     </div>
-                    <div class="field"><label>Tu nombre completo</label><input type="text" id="name" name="nombre" autocomplete="name"></div>
-                    <div class="field" id="field-email"><label>Email</label><input type="email" id="email" name="email" autocomplete="email"></div>
-                    <div class="field" id="field-phone"><label>Teléfono <span style="text-transform:none;letter-spacing:normal;color:var(--fg-mute);">(opcional)</span></label><input type="tel" id="phone" name="telefono" autocomplete="tel"></div>
-                    <div class="field" id="field-has-guests">
-                        <label>¿Vienes con acompañantes?</label>
-                        <select id="has-guests" name="tiene_acompanantes" onchange="handleGuests()">
-                            <option value="no">No, voy solo/a</option>
-                            <option value="si">Sí, vengo con más personas</option>
-                        </select>
-                    </div>
-                    <div id="guests-sec" style="display:none;">
-                        <div class="field">
-                            <label>¿Cuántos acompañantes?</label>
-                            <select id="num-guests" name="num_acompanantes" onchange="updateGuests()">
-                                <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
-                            </select>
-                        </div>
-                        <div id="guests-names" class="guests-box"></div>
-                    </div>
+                    <div class="field"><label>Nombre completo</label><input type="text" id="name" name="nombre" autocomplete="name"></div>
+                    <div class="field"><label>Email</label><input type="email" id="email" name="email" autocomplete="email"></div>
+                    <div class="field" id="field-phone"><label>Teléfono</label><input type="tel" id="phone" name="telefono" autocomplete="tel"></div>
                     <div class="rsvp-nav">
                         <button type="button" class="btn-back" onclick="goStep(1)">Atrás</button>
                         <button type="button" class="btn-next" id="btn-next-2" onclick="nextFrom(2)">Siguiente</button>
                     </div>
                 </div>
 
-                <!-- STEP 3 — Menú + Alergias -->
+                <!-- PASO 3 — Preboda -->
                 <div class="rsvp-pane" data-pane="3">
                     <div class="pane-head">
-                        <h3>Tu <em>menú</em></h3>
+                        <h3>¿Te unes a la <em>preboda</em>?</h3>
+                        <p>La celebraremos el <strong>viernes 11 de junio</strong>, la víspera de la boda</p>
+                    </div>
+                    <div class="big-choices">
+                        <button type="button" class="big-choice" data-preboda="si" onclick="pickPreboda('si')">
+                            <span>Sí, <em>cuenta conmigo</em><span class="big-choice-sub">Nos vemos el viernes 11</span></span>
+                        </button>
+                        <button type="button" class="big-choice" data-preboda="no" onclick="pickPreboda('no')">
+                            <span>No, <em>solo a la boda</em><span class="big-choice-sub">Allí estaré el sábado 12</span></span>
+                        </button>
+                    </div>
+                    <input type="hidden" name="preboda" id="preboda" value="">
+                    <div class="rsvp-nav">
+                        <button type="button" class="btn-back" onclick="goStep(2)">Atrás</button>
+                        <button type="button" class="btn-next" id="btn-next-3" onclick="nextFrom(3)" disabled>Siguiente</button>
+                    </div>
+                </div>
+
+                <!-- PASO 4 — Menú + acompañantes -->
+                <div class="rsvp-pane" data-pane="4">
+                    <div class="pane-head">
+                        <h3>El <em>menú</em> de la boda</h3>
                         <p>Para que el banquete sea perfecto</p>
                     </div>
                     <div class="menu-pick">
-                        <h4>Elige tu menú</h4>
+                        <h4>Tu menú</h4>
                         <div class="menu-opts">
                             <label class="menu-opt"><input type="radio" name="mi_menu" value="carne"><span class="menu-opt-label">Carne</span></label>
                             <label class="menu-opt"><input type="radio" name="mi_menu" value="pescado"><span class="menu-opt-label">Pescado</span></label>
@@ -1246,32 +1253,48 @@
                         </div>
                         <p id="menu-error" style="display:none;">Por favor, selecciona tu menú</p>
                     </div>
-                    <div id="guests-menus" class="guests-box" style="display:none;"></div>
-                    <div class="field"><label>Alergias o restricciones</label><input type="text" id="allergies" name="alergias" placeholder="Celiaquía, lactosa, frutos secos…"></div>
+                    <div class="field"><label>Alergias o restricciones <span style="text-transform:none;letter-spacing:normal;color:var(--fg-mute);">(opcional)</span></label><input type="text" id="allergies" name="alergias" placeholder="Celiaquía, lactosa, frutos secos…"></div>
+                    <div class="field">
+                        <label>¿Vendrás acompañado?</label>
+                        <select id="num-guests" name="num_acompanantes" onchange="updateGuests()">
+                            <option value="0">No, iré solo/a</option>
+                            <option value="1">1 acompañante</option>
+                            <option value="2">2 acompañantes</option>
+                            <option value="3">3 acompañantes</option>
+                            <option value="4">4 acompañantes</option>
+                            <option value="5">5 acompañantes</option>
+                        </select>
+                    </div>
+                    <div id="guests-box" class="guests-box" style="display:none;"></div>
                     <div class="rsvp-nav">
-                        <button type="button" class="btn-back" onclick="goStep(2)">Atrás</button>
-                        <button type="button" class="btn-next" onclick="nextFrom(3)">Siguiente</button>
+                        <button type="button" class="btn-back" onclick="goStep(3)">Atrás</button>
+                        <button type="button" class="btn-next" onclick="nextFrom(4)">Siguiente</button>
                     </div>
                 </div>
 
-                <!-- STEP 4 — Transporte -->
-                <div class="rsvp-pane" data-pane="4">
+                <!-- PASO 5 — Transporte ida y vuelta a la finca -->
+                <div class="rsvp-pane" data-pane="5">
                     <div class="pane-head">
-                        <h3>¿Necesitas <em>transporte</em>?</h3>
-                        <p>Pondremos autobús de Santo Tomás a la finca y de vuelta</p>
+                        <h3>¿Necesitas <em>autobús</em>?</h3>
+                        <p>Habrá servicio entre Santo Tomás, la finca y Ávila ciudad</p>
                     </div>
-                    <div class="big-choices">
-                        <button type="button" class="big-choice" data-bus="si" onclick="pickBus('si')">
-                            <span>Sí, <em>cuento con el autobús</em><span class="big-choice-sub">Santo Tomás → Finca → Ávila ciudad</span></span>
-                        </button>
-                        <button type="button" class="big-choice" data-bus="no" onclick="pickBus('no')">
-                            <span>No, <em>iré por mi cuenta</em><span class="big-choice-sub">Tengo coche o transporte propio</span></span>
-                        </button>
+                    <div class="field">
+                        <label>Ida · Santo Tomás → Dehesa del Pedrosillo</label>
+                        <select id="bus-ida" name="transporte_ida">
+                            <option value="si">Sí, usaré el autobús de ida</option>
+                            <option value="no">No, iré por mi cuenta</option>
+                        </select>
                     </div>
-                    <input type="hidden" name="autobus" id="bus" value="">
+                    <div class="field">
+                        <label>Vuelta · Finca → Ávila ciudad</label>
+                        <select id="bus-vuelta" name="transporte_vuelta">
+                            <option value="si">Sí, usaré el autobús de vuelta</option>
+                            <option value="no">No, volveré por mi cuenta</option>
+                        </select>
+                    </div>
                     <div class="rsvp-nav">
-                        <button type="button" class="btn-back" onclick="goStep(3)">Atrás</button>
-                        <button type="submit" class="btn-next" id="btn-submit-final" disabled>Confirmar asistencia</button>
+                        <button type="button" class="btn-back" onclick="goStep(4)">Atrás</button>
+                        <button type="submit" class="btn-next" id="btn-submit-final">Confirmar asistencia</button>
                     </div>
                 </div>
 
@@ -1464,10 +1487,11 @@
             <div class="rv"><iframe style="border-radius:0" src="https://open.spotify.com/embed/playlist/3rz3D0d7uN63e7VGwXi9dL?utm_source=generator&theme=0" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
             <div class="song-form-box rv" aria-live="polite">
                 <h4>Sugiere una canción</h4>
-                <form id="song-form" action="https://formspree.io/f/xeoywbav" method="POST">
+                <form id="song-form" novalidate>
                     <input type="text" name="cancion" placeholder="Nombre de la canción" required>
                     <input type="text" name="artista" placeholder="Artista">
                     <input type="text" name="nombre" placeholder="Tu nombre">
+                    <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;">
                     <button type="submit" class="song-btn">Sugerir</button>
                 </form>
             </div>
@@ -1526,6 +1550,13 @@
     </footer>
 
     <script>
+    // ===== CONFIGURACIÓN DEL BACKEND =====
+    // Los formularios envían los datos a nuestro backend (carpeta /server),
+    // no a Formspree. Si sirves la web desde ese mismo backend, deja esto vacío.
+    // Si la web está en GitHub Pages u otro dominio, define la URL del backend
+    // añadiendo antes de este <script>:  <script>window.BODA_API_BASE='https://tu-backend'<\/script>
+    const API_BASE = (window.BODA_API_BASE || '').replace(/\/+$/, '');
+
     // Mapbox static maps
     (function(){
         var t = ['pk.eyJ1Ijoi','YXpwdHIiLC','JhIjoiY21u','d2gzeTlwMW','dyNjJ3czlo','dXF6cmZwdC','J9.JMGlzxl','AtYXw4l2KV','e-eqA'].join('');
@@ -1678,15 +1709,17 @@
     addEventListener('resize', () => requestAnimationFrame(onScroll), { passive: true });
     onScroll();
 
-    // === PROGRESSIVE RSVP ===
-    const STEP_PANES = { si: [1,2,3,4], solo_ceremonia: [1,2], no: [1,2] };
+    // === RSVP PROGRESIVO ===
+    // Rama 1 (no asistiré): nombre + email.
+    // Rama 2 (asistiré): contacto -> preboda -> menú + acompañantes -> transporte.
+    const STEP_PANES = { si: [1,2,3,4,5], no: [1,2] };
     let currentPath = null;
     let currentStep = 1;
 
     function renderProgress() {
         const p = document.getElementById('rsvp-progress');
         if(!p) return;
-        const total = currentPath ? STEP_PANES[currentPath].length : 4;
+        const total = currentPath ? STEP_PANES[currentPath].length : 2;
         let html = '';
         for(let i=0; i<total; i++) {
             const n = i+1;
@@ -1724,37 +1757,20 @@
         const btn = document.querySelector('.big-choice[data-choice="'+choice+'"]');
         if(btn) btn.classList.add('selected');
 
-        const fieldEmail = document.getElementById('field-email');
         const fieldPhone = document.getElementById('field-phone');
-        const fieldHasGuests = document.getElementById('field-has-guests');
-        const guestsSec = document.getElementById('guests-sec');
         const step2Sub = document.getElementById('step2-sub');
         const btnNext2 = document.getElementById('btn-next-2');
 
         if(choice === 'no') {
-            fieldEmail.style.display = 'none';
             fieldPhone.style.display = 'none';
-            fieldHasGuests.style.display = 'none';
-            guestsSec.style.display = 'none';
             step2Sub.textContent = 'Te echaremos de menos';
-            btnNext2.textContent = 'Enviar';
-            btnNext2.dataset.action = 'submit';
-        } else if(choice === 'solo_ceremonia') {
-            fieldEmail.style.display = '';
-            fieldPhone.style.display = '';
-            fieldHasGuests.style.display = 'none';
-            guestsSec.style.display = 'none';
-            step2Sub.textContent = 'Te esperamos en el Monasterio de Santo Tomás';
-            btnNext2.textContent = 'Confirmar';
+            btnNext2.textContent = 'Enviar confirmación';
             btnNext2.dataset.action = 'submit';
         } else {
-            fieldEmail.style.display = '';
             fieldPhone.style.display = '';
-            fieldHasGuests.style.display = '';
-            step2Sub.textContent = 'Para personalizar tu sitio en la mesa';
+            step2Sub.textContent = 'Para tenerte en cuenta en cada detalle';
             btnNext2.textContent = 'Siguiente';
             btnNext2.dataset.action = 'next';
-            handleGuests();
         }
         setTimeout(() => showPane(2), 280);
     }
@@ -1763,10 +1779,8 @@
         if(n === 2) {
             const name = document.getElementById('name').value.trim();
             if(!name) { document.getElementById('name').focus(); return; }
-            if(currentPath !== 'no') {
-                const email = document.getElementById('email');
-                if(!email.value.trim() || !email.checkValidity()) { email.focus(); return; }
-            }
+            const email = document.getElementById('email');
+            if(!email.value.trim() || !email.checkValidity()) { email.focus(); return; }
             const btn = document.getElementById('btn-next-2');
             if(btn.dataset.action === 'submit') {
                 document.getElementById('rsvp-form').requestSubmit();
@@ -1774,85 +1788,147 @@
             }
             showPane(3);
         } else if(n === 3) {
+            if(!document.getElementById('preboda').value) { return; }
+            showPane(4);
+        } else if(n === 4) {
             if(!document.querySelector('input[name="mi_menu"]:checked')) {
                 document.getElementById('menu-error').style.display = 'block';
                 return;
             }
             document.getElementById('menu-error').style.display = 'none';
-            const guestMenus = document.querySelectorAll('#guests-menus select');
-            for(const sel of guestMenus) {
-                if(!sel.value) { sel.focus(); return; }
+            const ng = parseInt(document.getElementById('num-guests').value, 10) || 0;
+            for(let i=1; i<=ng; i++) {
+                const nm = document.querySelector('[name="acomp_'+i+'_nombre"]');
+                if(nm && !nm.value.trim()) { nm.focus(); return; }
+                const mn = document.querySelector('[name="acomp_'+i+'_menu"]');
+                if(mn && !mn.value) { mn.focus(); return; }
             }
-            showPane(4);
+            showPane(5);
         }
     }
 
     function goStep(n) { showPane(n); }
 
-    function pickBus(choice) {
-        document.getElementById('bus').value = choice;
-        document.querySelectorAll('.rsvp-pane[data-pane="4"] .big-choice').forEach(b => b.classList.remove('selected'));
-        const btn = document.querySelector('.big-choice[data-bus="'+choice+'"]');
+    function pickPreboda(choice) {
+        document.getElementById('preboda').value = choice;
+        document.querySelectorAll('.rsvp-pane[data-pane="3"] .big-choice').forEach(b => b.classList.remove('selected'));
+        const btn = document.querySelector('.big-choice[data-preboda="'+choice+'"]');
         if(btn) btn.classList.add('selected');
-        document.getElementById('btn-submit-final').disabled = false;
-    }
-
-    function handleGuests() {
-        const h = document.getElementById('has-guests').value;
-        const s = document.getElementById('guests-sec');
-        if(h === 'si') { s.style.display = 'block'; updateGuests(); }
-        else {
-            s.style.display = 'none';
-            document.getElementById('guests-names').innerHTML = '';
-            const gm = document.getElementById('guests-menus');
-            gm.innerHTML = ''; gm.style.display = 'none';
-        }
+        document.getElementById('btn-next-3').disabled = false;
     }
 
     function updateGuests() {
-        const n = parseInt(document.getElementById('num-guests').value);
-        const names = document.getElementById('guests-names');
-        const menus = document.getElementById('guests-menus');
-        let h = '<h4>Nombres de acompañantes</h4>';
+        const n = parseInt(document.getElementById('num-guests').value, 10) || 0;
+        const box = document.getElementById('guests-box');
+        if(n <= 0) { box.innerHTML = ''; box.style.display = 'none'; return; }
+        let h = '<h4>Datos de tus acompañantes</h4>';
         for(let i=1; i<=n; i++) {
-            h += '<div class="g-entry"><div class="g-num">Acompañante '+i+'</div><div class="g-fields"><input type="text" name="acompanante_'+i+'_nombre" placeholder="Nombre completo" required></div></div>';
+            h += '<div class="g-entry">'
+              + '<div class="g-num">Acompañante '+i+'</div>'
+              + '<div class="g-fields">'
+              +   '<input type="text" name="acomp_'+i+'_nombre" placeholder="Nombre completo">'
+              +   '<input type="text" name="acomp_'+i+'_contacto" placeholder="Teléfono o email (opcional)">'
+              + '</div>'
+              + '<div class="g-fields" style="grid-template-columns:1fr;margin-top:0.8rem;">'
+              +   '<select name="acomp_'+i+'_menu"><option value="">Su menú…</option><option value="carne">Carne</option><option value="pescado">Pescado</option><option value="vegano">Vegano</option></select>'
+              + '</div>'
+              + '</div>';
         }
-        names.innerHTML = h;
-
-        let m = '<h4>Menú de cada acompañante</h4>';
-        for(let i=1; i<=n; i++) {
-            m += '<div class="g-entry"><div class="g-num">Acompañante '+i+'</div><div class="g-fields"><select name="acompanante_'+i+'_menu" required><option value="">Selecciona menú</option><option value="carne">Carne</option><option value="pescado">Pescado</option><option value="vegano">Vegano</option></select></div></div>';
-        }
-        menus.innerHTML = m;
-        menus.style.display = 'block';
+        box.innerHTML = h;
+        box.style.display = 'block';
     }
 
     renderProgress();
 
-    // === Form submit ===
-    function setupForm(id, msg) {
-        const f = document.getElementById(id);
-        if(!f) return;
-        f.addEventListener('submit', function(e) {
+    // === Envío de los formularios al backend (carpeta /server) ===
+    function gv(name) { const el = document.querySelector('[name="'+name+'"]'); return el ? el.value.trim() : ''; }
+
+    function buildRsvpPayload() {
+        const p = {
+            asistencia: currentPath,
+            nombre: document.getElementById('name').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            website: document.getElementById('hp-website').value
+        };
+        if(currentPath === 'si') {
+            p.telefono = document.getElementById('phone').value.trim();
+            p.preboda = document.getElementById('preboda').value || 'no';
+            const menu = document.querySelector('input[name="mi_menu"]:checked');
+            p.menu = menu ? menu.value : '';
+            p.alergias = document.getElementById('allergies').value.trim();
+            const ng = parseInt(document.getElementById('num-guests').value, 10) || 0;
+            p.num_acompanantes = ng;
+            p.acompanantes = [];
+            for(let i=1; i<=ng; i++) {
+                p.acompanantes.push({
+                    nombre: gv('acomp_'+i+'_nombre'),
+                    contacto: gv('acomp_'+i+'_contacto'),
+                    menu: gv('acomp_'+i+'_menu')
+                });
+            }
+            p.transporte_ida = document.getElementById('bus-ida').value;
+            p.transporte_vuelta = document.getElementById('bus-vuelta').value;
+        }
+        return p;
+    }
+
+    async function postJson(path, payload) {
+        const res = await fetch(API_BASE + path, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        let data = {};
+        try { data = await res.json(); } catch(e) {}
+        return { ok: res.ok && data.ok !== false, data };
+    }
+
+    const rsvpForm = document.getElementById('rsvp-form');
+    rsvpForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const btn = currentPath === 'no'
+            ? document.getElementById('btn-next-2')
+            : document.getElementById('btn-submit-final');
+        const orig = btn.textContent;
+        btn.textContent = 'Enviando…'; btn.disabled = true;
+        try {
+            const { ok } = await postJson('/api/rsvp', buildRsvpPayload());
+            if(ok) {
+                rsvpForm.innerHTML = currentPath === 'no'
+                    ? '<div class="form-ok"><h3>Gracias por avisar</h3><p>Os echaremos de menos. Un abrazo enorme.</p></div>'
+                    : '<div class="form-ok"><h3>¡Confirmación recibida!</h3><p>Nos vemos en Ávila. Gracias por acompañarnos.</p></div>';
+                const prog = document.getElementById('rsvp-progress');
+                if(prog) prog.style.display = 'none';
+            } else {
+                btn.textContent = orig; btn.disabled = false;
+                alert('No se pudo enviar. Revisa los datos e inténtalo de nuevo.');
+            }
+        } catch(err) {
+            btn.textContent = orig; btn.disabled = false;
+            alert('Error de conexión. Inténtalo de nuevo en un momento.');
+        }
+    });
+
+    const songForm = document.getElementById('song-form');
+    if(songForm) {
+        songForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            const b = f.querySelector('button[type="submit"]');
+            const b = songForm.querySelector('button[type="submit"]');
             const o = b.textContent; b.textContent = 'Enviando…'; b.disabled = true;
-            fetch(f.action, {method:'POST', body:new FormData(f), headers:{'Accept':'application/json'}})
-            .then(r => {
-                if(r.ok) {
-                    if(id === 'rsvp-form') {
-                        f.innerHTML = '<div class="form-ok"><h3>Gracias por confirmar</h3><p>Nos vemos en la boda.</p></div>';
-                        const prog = document.getElementById('rsvp-progress');
-                        if(prog) prog.style.display = 'none';
-                    } else {
-                        f.innerHTML = '<p class="form-ok-sm">'+msg+'</p>';
-                    }
-                } else { b.textContent = o; b.disabled = false; alert('Error. Inténtalo de nuevo.'); }
-            }).catch(() => { b.textContent = o; b.disabled = false; alert('Error de conexión.'); });
+            const payload = {
+                cancion: songForm.cancion.value.trim(),
+                artista: songForm.artista.value.trim(),
+                nombre: songForm.nombre.value.trim(),
+                website: songForm.website.value
+            };
+            if(!payload.cancion) { b.textContent = o; b.disabled = false; songForm.cancion.focus(); return; }
+            try {
+                const { ok } = await postJson('/api/cancion', payload);
+                if(ok) { songForm.innerHTML = '<p class="form-ok-sm">¡Gracias por tu sugerencia!</p>'; }
+                else { b.textContent = o; b.disabled = false; alert('No se pudo enviar. Inténtalo de nuevo.'); }
+            } catch(err) { b.textContent = o; b.disabled = false; alert('Error de conexión.'); }
         });
     }
-    setupForm('rsvp-form','Gracias');
-    setupForm('song-form','Gracias por tu sugerencia');
 
     // Copy to clipboard
     function copyText(id, btn) {

@@ -1,0 +1,26 @@
+# Levanta el backend (y el sitio) con un solo comando:
+#
+#     cd server && docker compose up -d
+#
+# Los datos quedan en el volumen `boda-data`, fuera del contenedor, asi que
+# sobreviven a reinicios y actualizaciones. Para llevartelos a otra maquina,
+# basta con copiar ese volumen (o usar el panel /admin -> exportar CSV).
+
+services:
+  boda:
+    build:
+      context: ..                 # raiz del repo (para servir la web tambien)
+      dockerfile: server/Dockerfile
+    image: boda-backend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      ADMIN_TOKEN: "${ADMIN_TOKEN:-cambia-este-token}"
+      ALLOW_ORIGIN: "${ALLOW_ORIGIN:-*}"
+      DATA_DIR: "/data"
+    volumes:
+      - boda-data:/data
+
+volumes:
+  boda-data:
