@@ -5,6 +5,38 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
+## [1.7.0] - 2026-06-13
+
+### Añadido
+- **Backend propio y portable** en `server/`: servidor Node **sin dependencias**
+  (solo módulos nativos) que recoge los RSVP y las sugerencias de canciones y los
+  guarda en ficheros **NDJSON** (texto plano, fáciles de copiar, mover o importar
+  a Excel/Sheets). Incluye `Dockerfile`, `docker-compose.yml`, `.env.example` y
+  documentación de despliegue.
+- **Panel de administración** `/admin` protegido por token: resumen de comensales,
+  menús, preboda y autobús, con tablas de confirmaciones y canciones y
+  **exportación a CSV** (`/export/rsvp.csv`, `/export/canciones.csv`).
+- **Protección anti-bots** (honeypot) en los formularios de RSVP y canciones.
+- El backend **también sirve el sitio estático**: con `node server/server.js` se
+  levanta la web entera (frontend + API) en un solo comando.
+
+### Cambiado
+- **RSVP rediseñado en dos ramas** según el recorrido del invitado:
+  - *No asistiré* → solo nombre y correo.
+  - *Asistiré* → datos de contacto (nombre, teléfono, correo) → confirmación de la
+    **preboda** del viernes 11 de junio → **menú** (carne / pescado / vegano) y
+    **acompañantes** (desplegable numérico con nombre, contacto y menú de cada
+    uno) → **transporte de ida y vuelta** a la finca (autobús).
+- Los formularios ahora envían **JSON** al backend mediante `fetch`; la URL de la
+  API se configura en una sola línea (`window.BODA_API_BASE`).
+
+### Eliminado
+- **Formspree**: se sustituye por completo (RSVP y sugerencias musicales) por el
+  backend propio. Se elimina la dependencia de un tercero y las limitaciones de su
+  plan gratuito.
+- Opción «solo a la ceremonia» del RSVP, simplificando el flujo a las dos ramas
+  anteriores.
+
 ## [1.6.0] - 2026-06-10
 
 ### Cambiado

@@ -1,0 +1,9 @@
+# Datos de invitados: NUNCA se versionan
+data/
+*.ndjson
+
+# Variables de entorno locales
+.env
+
+# Dependencias (el backend no usa ninguna, pero por si acaso)
+node_modules/

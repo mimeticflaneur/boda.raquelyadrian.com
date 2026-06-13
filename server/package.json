@@ -1,0 +1,15 @@
+{
+  "name": "boda-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Backend portable (sin dependencias) para el RSVP de la boda de Raquel & Adrian",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "UNLICENSED"
+}
