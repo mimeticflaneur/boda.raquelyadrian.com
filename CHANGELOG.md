@@ -5,6 +5,39 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
+## [1.9.0] - 2026-06-13
+
+### Añadido
+- **Alergias e intolerancias por acompañante**: además de las del titular, cada
+  acompañante tiene su propio campo de alergias/intolerancias en el menú. Se
+  guarda, se muestra en el panel y se incluye en el CSV.
+
+### Cambiado
+- **Transporte simplificado**: una sola pregunta «¿Necesitas autobús?» con dos
+  opciones — *Sí, necesitaré transporte* (y entonces *¿para cuántas personas?*,
+  acotado al tamaño de tu grupo) o *No necesitaré transporte*. Sustituye a los
+  antiguos campos separados de ida y vuelta.
+- El panel y las estadísticas muestran ahora el **total de personas en autobús**
+  (en lugar de los conteos de ida/vuelta).
+
+## [1.8.0] - 2026-06-13
+
+### Añadido
+- **Despliegue en Vercel con base de datos** (gratis y persistente): funciones
+  serverless en `api/` (`rsvp`, `cancion`, `admin`, `stats`, `export`, `health`)
+  que guardan los datos en **Upstash Redis** mediante su API REST con `fetch`
+  nativo (sin dependencias npm). `vercel.json` mapea `/admin` y `/export/*.csv`
+  a las funciones; el sitio y la API quedan en el mismo origen (sin CORS).
+- **`lib/core.js`**: lógica compartida (validación, estadísticas, CSV y panel)
+  como única fuente de verdad entre el backend autoalojado y las funciones de
+  Vercel. Nuevos `lib/store.js` (Upstash) y `lib/api.js` (CORS, auth, body).
+- **Guía `DEPLOY-VERCEL.md`**: pasos para dejar la web y el formulario
+  funcionando en Vercel + Upstash, conectar el dominio y exportar los datos.
+
+### Cambiado
+- **`server/server.js` refactorizado** para reutilizar `lib/core.js` en lugar de
+  duplicar la lógica; el comportamiento (RSVP, panel, CSV) es idéntico.
+
 ## [1.7.0] - 2026-06-13
 
 ### Añadido

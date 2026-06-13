@@ -40,9 +40,18 @@ El RSVP guia al invitado por dos ramas:
   -> menu (carne / pescado / vegano) + acompanantes (nombre, contacto y menu de
   cada uno) -> autobus de ida y vuelta a la finca.
 
-Esos datos los recoge el backend de `server/`, que los guarda en ficheros NDJSON
-(texto plano, portables) y ofrece un panel `/admin` con resumen y exportacion a
-CSV. No usamos Formspree. Detalles en [`server/README.md`](server/README.md).
+Esos datos los recoge un backend propio. Hay dos formas de desplegarlo, según
+prefieras:
+
+- **Vercel + Upstash Redis (gratis, recomendado)**: la web y la API en el mismo
+  sitio, sin servidores que mantener. Las funciones están en `api/` y la lógica
+  común en `lib/`. Guía paso a paso en [`DEPLOY-VERCEL.md`](DEPLOY-VERCEL.md).
+- **Autoalojado (Node, sin dependencias)**: el servidor de `server/` guarda todo
+  en ficheros NDJSON (texto plano, portables). Ideal para una VPS o local. Ver
+  [`server/README.md`](server/README.md).
+
+Ambas comparten la misma validación, panel `/admin` y exportación a CSV. No
+usamos Formspree.
 
 ## Desarrollo local
 
@@ -63,11 +72,14 @@ ADMIN_TOKEN=mi-token node server.js   # http://localhost:3000
 
 ## Despliegue
 
-- **Frontend**: GitHub Pages desde la rama `main`. Si el backend esta en otro
+- **Todo en Vercel (recomendado)**: web estatica + funciones `api/` + base de
+  datos Upstash Redis. Mismo origen, sin CORS, gratis. Guia:
+  [`DEPLOY-VERCEL.md`](DEPLOY-VERCEL.md).
+- **Frontend en GitHub Pages**: desde la rama `main`. Si el backend esta en otro
   dominio, define su URL en `index.html` con
   `window.BODA_API_BASE = 'https://tu-backend'`.
-- **Backend**: cualquier host con Node o Docker (VPS, Render, Railway, Fly.io).
-  Ver [`server/README.md`](server/README.md).
+- **Backend autoalojado**: cualquier host con Node o Docker (VPS, Render,
+  Railway, Fly.io). Ver [`server/README.md`](server/README.md).
 
 ## Licencia
 

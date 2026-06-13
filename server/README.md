@@ -80,10 +80,10 @@ Los datos persisten en el volumen `boda-data`, fuera del contenedor.
   "alergias": "frutos secos",
   "num_acompanantes": 1,
   "acompanantes": [
-    { "nombre": "Charles Babbage", "contacto": "611222333", "menu": "carne" }
+    { "nombre": "Charles Babbage", "contacto": "611222333", "menu": "carne", "alergias": "lactosa" }
   ],
-  "transporte_ida": "si",
-  "transporte_vuelta": "no"
+  "transporte": "si",
+  "transporte_personas": 2
 }
 ```
 

@@ -1,0 +1,9 @@
+{
+  "name": "boda-raquel-adrian",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Web de la boda de Raquel & Adrian + funciones serverless (Vercel) con almacenamiento en Upstash Redis",
+  "engines": {
+    "node": "20.x"
+  }
+}
