@@ -1253,7 +1253,7 @@
                         </div>
                         <p id="menu-error" style="display:none;">Por favor, selecciona tu menú</p>
                     </div>
-                    <div class="field"><label>Alergias o restricciones <span style="text-transform:none;letter-spacing:normal;color:var(--fg-mute);">(opcional)</span></label><input type="text" id="allergies" name="alergias" placeholder="Celiaquía, lactosa, frutos secos…"></div>
+                    <div class="field"><label>Tus alergias e intolerancias <span style="text-transform:none;letter-spacing:normal;color:var(--fg-mute);">(opcional)</span></label><input type="text" id="allergies" name="alergias" placeholder="Celiaquía, lactosa, frutos secos…"></div>
                     <div class="field">
                         <label>¿Vendrás acompañado?</label>
                         <select id="num-guests" name="num_acompanantes" onchange="updateGuests()">
@@ -1276,25 +1276,24 @@
                 <div class="rsvp-pane" data-pane="5">
                     <div class="pane-head">
                         <h3>¿Necesitas <em>autobús</em>?</h3>
-                        <p>Habrá servicio entre Santo Tomás, la finca y Ávila ciudad</p>
+                        <p>Habrá servicio de ida y vuelta entre Santo Tomás, la finca y Ávila ciudad</p>
                     </div>
-                    <div class="field">
-                        <label>Ida · Santo Tomás → Dehesa del Pedrosillo</label>
-                        <select id="bus-ida" name="transporte_ida">
-                            <option value="si">Sí, usaré el autobús de ida</option>
-                            <option value="no">No, iré por mi cuenta</option>
-                        </select>
+                    <div class="big-choices">
+                        <button type="button" class="big-choice" data-bus="si" onclick="pickBus('si')">
+                            <span>Sí, <em>necesitaré transporte</em><span class="big-choice-sub">Ida y vuelta a la finca</span></span>
+                        </button>
+                        <button type="button" class="big-choice" data-bus="no" onclick="pickBus('no')">
+                            <span>No, <em>iré por mi cuenta</em><span class="big-choice-sub">Tengo transporte propio</span></span>
+                        </button>
                     </div>
-                    <div class="field">
-                        <label>Vuelta · Finca → Ávila ciudad</label>
-                        <select id="bus-vuelta" name="transporte_vuelta">
-                            <option value="si">Sí, usaré el autobús de vuelta</option>
-                            <option value="no">No, volveré por mi cuenta</option>
-                        </select>
+                    <input type="hidden" name="transporte" id="bus" value="">
+                    <div class="field" id="field-bus-num" style="display:none;">
+                        <label>¿Para cuántas personas?</label>
+                        <select id="bus-num" name="transporte_personas"></select>
                     </div>
                     <div class="rsvp-nav">
                         <button type="button" class="btn-back" onclick="goStep(4)">Atrás</button>
-                        <button type="submit" class="btn-next" id="btn-submit-final">Confirmar asistencia</button>
+                        <button type="submit" class="btn-next" id="btn-submit-final" disabled>Confirmar asistencia</button>
                     </div>
                 </div>
 
@@ -1817,6 +1816,27 @@
         document.getElementById('btn-next-3').disabled = false;
     }
 
+    function pickBus(choice) {
+        document.getElementById('bus').value = choice;
+        document.querySelectorAll('.rsvp-pane[data-pane="5"] .big-choice').forEach(b => b.classList.remove('selected'));
+        const btn = document.querySelector('.big-choice[data-bus="'+choice+'"]');
+        if(btn) btn.classList.add('selected');
+        const field = document.getElementById('field-bus-num');
+        if(choice === 'si') {
+            const party = 1 + (parseInt(document.getElementById('num-guests').value, 10) || 0);
+            const sel = document.getElementById('bus-num');
+            let opts = '';
+            for(let i=1; i<=party; i++) {
+                opts += '<option value="'+i+'"'+(i===party?' selected':'')+'>'+i+(i===1?' persona':' personas')+'</option>';
+            }
+            sel.innerHTML = opts;
+            field.style.display = '';
+        } else {
+            field.style.display = 'none';
+        }
+        document.getElementById('btn-submit-final').disabled = false;
+    }
+
     function updateGuests() {
         const n = parseInt(document.getElementById('num-guests').value, 10) || 0;
         const box = document.getElementById('guests-box');
@@ -1829,8 +1849,9 @@
               +   '<input type="text" name="acomp_'+i+'_nombre" placeholder="Nombre completo">'
               +   '<input type="text" name="acomp_'+i+'_contacto" placeholder="Teléfono o email (opcional)">'
               + '</div>'
-              + '<div class="g-fields" style="grid-template-columns:1fr;margin-top:0.8rem;">'
+              + '<div class="g-fields" style="margin-top:0.8rem;">'
               +   '<select name="acomp_'+i+'_menu"><option value="">Su menú…</option><option value="carne">Carne</option><option value="pescado">Pescado</option><option value="vegano">Vegano</option></select>'
+              +   '<input type="text" name="acomp_'+i+'_alergias" placeholder="Alergias e intolerancias (opcional)">'
               + '</div>'
               + '</div>';
         }
@@ -1863,11 +1884,14 @@
                 p.acompanantes.push({
                     nombre: gv('acomp_'+i+'_nombre'),
                     contacto: gv('acomp_'+i+'_contacto'),
-                    menu: gv('acomp_'+i+'_menu')
+                    menu: gv('acomp_'+i+'_menu'),
+                    alergias: gv('acomp_'+i+'_alergias')
                 });
             }
-            p.transporte_ida = document.getElementById('bus-ida').value;
-            p.transporte_vuelta = document.getElementById('bus-vuelta').value;
+            p.transporte = document.getElementById('bus').value || 'no';
+            p.transporte_personas = p.transporte === 'si'
+                ? (parseInt(document.getElementById('bus-num').value, 10) || 1)
+                : 0;
         }
         return p;
     }
