@@ -5,6 +5,20 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
+## [2.2.0] - 2026-07-04
+
+### Corregido
+- **Mapas con las ubicaciones reales**: la Dehesa de Pedrosillo estaba pinchada
+  ~10 km al sur; en realidad está en la **N-403 km 144, ~4 km al norte de
+  Ávila**, junto al embalse de Las Cogotas (dirección verificada). Corregidos
+  también los pines de los hoteles (Velada en Plaza de la Catedral, Sofraga en
+  López Núñez y Las Leyendas junto al lienzo sur) y afinado el del Monasterio
+  de Santo Tomás. Actualizados la dirección visible de la finca, los datos
+  estructurados (SEO) y los enlaces de Google Maps.
+
+### Eliminado
+- Fleuron ❦ bajo las cabeceras de sección (introducido en 2.1.0).
+
 ## [2.1.0] - 2026-07-04
 
 ### Añadido
