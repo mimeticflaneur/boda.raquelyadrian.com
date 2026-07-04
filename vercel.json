@@ -3,6 +3,7 @@
   "rewrites": [
     { "source": "/admin", "destination": "/api/admin" },
     { "source": "/export/rsvp.csv", "destination": "/api/export?type=rsvp" },
+    { "source": "/export/personas.csv", "destination": "/api/export?type=personas" },
     { "source": "/export/canciones.csv", "destination": "/api/export?type=canciones" }
   ]
 }

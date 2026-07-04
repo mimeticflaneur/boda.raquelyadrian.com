@@ -60,10 +60,13 @@ Los datos persisten en el volumen `boda-data`, fuera del contenedor.
 | ------ | ------------------------- | ---------------------------------------------------- |
 | `POST` | `/api/rsvp`               | Recibe una confirmación (JSON). Público.             |
 | `POST` | `/api/cancion`            | Recibe una sugerencia de canción (JSON). Público.    |
+| `POST` | `/api/update`             | Edita una respuesta desde el panel. Protegido.       |
+| `POST` | `/api/delete`             | Borra una respuesta o canción. Protegido.            |
 | `GET`  | `/api/health`             | Estado del servicio.                                 |
 | `GET`  | `/api/stats?token=…`      | Estadísticas en JSON. Protegido.                     |
-| `GET`  | `/admin?token=…`          | Panel HTML con tablas y resumen. Protegido.          |
-| `GET`  | `/export/rsvp.csv?token=…`| Descarga las confirmaciones en CSV. Protegido.       |
+| `GET`  | `/admin?token=…`          | Panel editable: una fila por persona. Protegido.     |
+| `GET`  | `/export/personas.csv?…`  | CSV con una línea por persona (dependencias). Prot.  |
+| `GET`  | `/export/rsvp.csv?token=…`| CSV de respuestas completas. Protegido.              |
 | `GET`  | `/export/canciones.csv?…` | Descarga las sugerencias en CSV. Protegido.          |
 | `GET`  | `/*`                      | Sirve el sitio estático (`index.html`, `assets/…`).  |
 
