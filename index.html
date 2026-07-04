@@ -16,7 +16,7 @@
     <meta property="og:locale" content="es_ES">
     <meta property="og:title" content="Raquel & Adrián — 12 de junio de 2027 en Ávila">
     <meta property="og:description" content="Tenemos el placer de invitarte a nuestra boda. Ceremonia en el Real Monasterio de Santo Tomás de Ávila a las 13:00h · Cóctel y banquete en la Dehesa del Pedrosillo. Confirma tu asistencia y descubre todos los detalles.">
-    <meta property="og:image" content="https://mimeticflaneur.github.io/boda.raquelyadrian.com/assets/nuestra-historia.jpeg">
+    <meta property="og:image" content="https://mimeticflaneur.github.io/boda.raquelyadrian.com/assets/og.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Raquel y Adrián — Boda el 12 de junio de 2027 en Ávila">
@@ -26,7 +26,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Raquel & Adrián — 12 de junio de 2027 en Ávila">
     <meta name="twitter:description" content="Tenemos el placer de invitarte a nuestra boda. Ceremonia en el Real Monasterio de Santo Tomás de Ávila · Banquete en la Dehesa del Pedrosillo.">
-    <meta name="twitter:image" content="https://mimeticflaneur.github.io/boda.raquelyadrian.com/assets/nuestra-historia.jpeg">
+    <meta name="twitter:image" content="https://mimeticflaneur.github.io/boda.raquelyadrian.com/assets/og.png">
     <meta name="twitter:image:alt" content="Raquel y Adrián">
 
     <!-- Schema.org structured data -->
@@ -67,7 +67,7 @@
             --dark: #161413;
             --sienna: #9e4a2f;
             --sienna-soft: #c17a5a;
-            --mute: #6b6661;
+            --mute: #615c56;
             --rule: rgba(0,0,0,0.08);
             --bg: var(--paper);
             --fg: var(--ink);
@@ -89,8 +89,14 @@
             line-height: 1.8;
             transition: background 0.5s, color 0.5s;
             -webkit-font-smoothing: antialiased;
+            counter-reset: sec;
         }
         ::selection { background: var(--sienna); color: white; }
+        /* Foco visible para teclado (los campos de texto ya marcan foco con su borde inferior) */
+        :focus-visible { outline: 2px solid var(--sienna); outline-offset: 3px; }
+        .field input:focus-visible, .field select:focus-visible,
+        .g-fields input:focus-visible, .g-fields select:focus-visible { outline: none; }
+        .menu-opt input:focus-visible + .menu-opt-label { border-color: var(--sienna); color: var(--sienna); }
 
         /* === TYPO === */
         .serif { font-family: 'Bodoni Moda', serif; }
@@ -264,6 +270,17 @@
             letter-spacing: 0;
         }
         .hero-countdown .cd-sep { color: var(--sienna-soft); opacity: 0.6; margin: 0 0.5rem; }
+        .hero-cta {
+            display: inline-block; margin-top: 2.4rem;
+            font-size: 0.68rem; font-weight: 500;
+            letter-spacing: 0.28em; text-transform: uppercase;
+            color: var(--ink); text-decoration: none;
+            padding-bottom: 0.5rem; border-bottom: 1px solid var(--sienna);
+            transition: color 0.3s, border-color 0.3s;
+        }
+        .hero-cta .arr { display: inline-block; margin-left: 0.6rem; color: var(--sienna); transition: transform 0.3s; }
+        .hero-cta:hover { color: var(--sienna); }
+        .hero-cta:hover .arr { transform: translateX(5px); }
         .hero-bottom {
             align-self: start;
             padding-top: 2rem;
@@ -271,9 +288,9 @@
         }
         .hero-quote {
             font-family: 'Bodoni Moda', serif;
-            font-style: italic; font-size: 0.95rem;
+            font-style: italic; font-size: 1.15rem;
             color: var(--sienna);
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.4rem;
         }
         .hero-author {
             font-size: 0.7rem; color: var(--mute);
@@ -341,6 +358,21 @@
         .sec-tag {
             font-size: 0.7rem; letter-spacing: 0.35em; text-transform: uppercase;
             font-weight: 500; color: var(--sienna); margin-bottom: 0.8rem;
+        }
+        /* Numeracion editorial automatica de secciones (se excluyen los modales) */
+        .sec-tag::before {
+            counter-increment: sec;
+            content: counter(sec, decimal-leading-zero) " · ";
+            color: var(--sienna-soft);
+            font-variant-numeric: tabular-nums;
+        }
+        .modal-box .sec-tag::before { counter-increment: none; content: none; }
+        /* Fleuron de firma bajo cada cabecera centrada */
+        .sec-head::after {
+            content: '❦'; display: block;
+            margin-top: 1.4rem;
+            font-family: 'Bodoni Moda', serif;
+            font-size: 0.95rem; color: var(--sienna-soft);
         }
         .sec-title {
             font-family: 'Bodoni Moda', serif; font-weight: 400;
@@ -462,6 +494,17 @@
             padding: clamp(3rem, 6vw, 6rem);
         }
         .story-copy .sec-tag { text-align: left; margin-bottom: 1rem; }
+        /* Letra capitular editorial en el primer parrafo de la historia */
+        .story-copy h2 + p::first-letter {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 3.4em; line-height: 0.8;
+            float: left; padding: 0.06em 0.14em 0 0;
+            color: var(--sienna);
+        }
+        /* En tactil no hay hover: la foto se muestra con un virado suave siempre */
+        @media (hover: none) {
+            .story-photo img { filter: grayscale(0.25) sepia(0.08); }
+        }
         .story-copy h2 {
             font-family: 'Bodoni Moda', serif;
             font-size: clamp(2rem, 4vw, 3.5rem);
@@ -590,10 +633,10 @@
         .venue-map { height: 300px; margin-bottom: 1.5rem; overflow: hidden; display: block; }
         .venue-map img {
             width: 100%; height: 100%; object-fit: cover; display: block;
-            filter: grayscale(1) contrast(1.1);
+            filter: grayscale(1) sepia(0.18) contrast(1.05);
             transition: filter 0.4s;
         }
-        .venue-map:hover img { filter: grayscale(0.3) contrast(1); }
+        .venue-map:hover img { filter: grayscale(0.25) sepia(0.1) contrast(1); }
         .venue-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.3em; font-weight: 500; color: var(--sienna-soft); margin-bottom: 0.3rem; }
         .venue h3 { font-family: 'Bodoni Moda', serif; font-size: 1.3rem; margin-bottom: 0.3rem; color: var(--fg-inv); }
         .venue p { font-size: 0.85rem; color: var(--fg-inv-mute); }
@@ -680,7 +723,7 @@
         .gifts-content { max-width: 800px; margin: 0 auto; }
         .gifts-intro { text-align: center; color: var(--fg-mute); margin-bottom: 3rem; font-size: 0.95rem; }
         .pay-methods {
-            display: grid; grid-template-columns: 1fr 1fr;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 2rem; max-width: 640px; margin: 0 auto;
         }
         .pay-box {
@@ -1166,9 +1209,10 @@
                 Adrián
             </h1>
             <p class="hero-countdown" id="hero-countdown"></p>
+            <a class="hero-cta" href="#rsvp">Confirma tu asistencia<span class="arr">→</span></a>
         </div>
         <div class="hero-bottom hs">
-            <p class="hero-quote">"Y sin amor, todo es nada"</p>
+            <p class="hero-quote">“Y sin amor, todo es nada”</p>
             <p class="hero-author">Santa Teresa de Jesús</p>
         </div>
         <div class="scroll-indicator"></div>
@@ -1461,6 +1505,7 @@
         <div class="gifts-content">
             <p class="gifts-intro rv">Vuestra presencia es el mejor regalo. Pero si deseáis hacernos un obsequio, aquí tenéis algunas opciones.</p>
             <div class="pay-methods rv">
+                <!-- IBAN pendiente: descomentar esta caja y poner el numero real cuando lo tengais.
                 <div class="pay-box">
                     <h4>Transferencia</h4>
                     <div class="pay-value" id="iban-val">ES00 0000 0000 0000 0000 0000</div>
@@ -1469,6 +1514,7 @@
                         Copiar IBAN
                     </button>
                 </div>
+                -->
                 <div class="pay-box">
                     <h4>PayPal</h4>
                     <div class="pay-value" id="paypal-val">paypal.me/raquelyadrian</div>
@@ -1549,8 +1595,8 @@
         </div>
         <p class="foot-names">Raquel <em>&</em> Adrián</p>
         <p class="foot-date">12 de Junio de 2027 &middot; Ávila</p>
-        <p class="foot-quote">"Y sin amor, todo es nada"</p>
-        <p class="foot-dev">&copy; 2027 Raquel &amp; Adrián. Todos los derechos reservados.<br>Diseñado y desarrollado por <a href="#">Adrián Zapatera</a></p>
+        <p class="foot-quote">“Y sin amor, todo es nada”</p>
+        <p class="foot-dev">&copy; 2027 Raquel &amp; Adrián. Todos los derechos reservados.<br>Diseñado y desarrollado por Adrián Zapatera</p>
     </footer>
 
     <script>

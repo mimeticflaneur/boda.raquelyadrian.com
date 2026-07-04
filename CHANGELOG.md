@@ -5,6 +5,32 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
+## [2.1.0] - 2026-07-04
+
+### Añadido
+- **Llamada a la acción en el hero**: enlace «Confirma tu asistencia →» bajo la
+  cuenta atrás, con subrayado sienna — el RSVP ya tiene puerta de entrada.
+- **Tarjeta para WhatsApp** (`assets/og.png`): imagen Open Graph 1200×630
+  generada con el escudo, los nombres y la fecha sobre papel; el enlace de la
+  web se previsualiza como una invitación. Metas `og:image`/`twitter:image`
+  actualizadas.
+- **Detalles editoriales**: numeración automática de secciones («01 · …») con
+  contadores CSS (los modales quedan excluidos), fleuron ❦ bajo cada cabecera,
+  letra capitular en el primer párrafo de la historia y comillas tipográficas
+  con más cuerpo en la cita de Santa Teresa.
+- **Accesibilidad**: `:focus-visible` con contorno sienna en toda la web y
+  contraste del texto atenuado mejorado (`--mute` más oscuro).
+
+### Cambiado
+- La foto de «Nuestra historia» se muestra con un virado suave en pantallas
+  táctiles (antes solo se coloreaba con hover, inexistente en móvil).
+- Mapas de los lugares entonados en sepia para integrarse con la paleta.
+- La cuadrícula de regalos se adapta al número de cajas visibles.
+
+### Eliminado
+- Caja de transferencia con IBAN de relleno (comentada en el HTML hasta tener
+  el número real) y enlace muerto del pie de página.
+
 ## [2.0.0] - 2026-07-04
 
 ### Añadido
