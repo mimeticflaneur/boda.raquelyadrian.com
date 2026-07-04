@@ -50,7 +50,7 @@
         {
           "@type": "Place",
           "name": "Dehesa del Pedrosillo",
-          "address": {"@type": "PostalAddress", "streetAddress": "Finca El Pedrosillo", "postalCode": "05194", "addressLocality": "Ávila", "addressCountry": "ES"}
+          "address": {"@type": "PostalAddress", "streetAddress": "N-403, km 144", "postalCode": "05004", "addressLocality": "Ávila", "addressCountry": "ES"}
         }
       ],
       "organizer": {"@type": "Person", "name": "Raquel y Adrián"}
@@ -367,13 +367,6 @@
             font-variant-numeric: tabular-nums;
         }
         .modal-box .sec-tag::before { counter-increment: none; content: none; }
-        /* Fleuron de firma bajo cada cabecera centrada */
-        .sec-head::after {
-            content: '❦'; display: block;
-            margin-top: 1.4rem;
-            font-family: 'Bodoni Moda', serif;
-            font-size: 0.95rem; color: var(--sienna-soft);
-        }
         .sec-title {
             font-family: 'Bodoni Moda', serif; font-weight: 400;
             font-size: clamp(2.2rem, 5vw, 4rem);
@@ -1384,12 +1377,12 @@
                 <a href="https://www.google.com/maps/dir//Real+Monasterio+de+Santo+Tom%C3%A1s+%C3%81vila" target="_blank" class="venue-link">Cómo llegar &rarr;</a>
             </div>
             <div class="venue rv">
-                <a href="https://www.google.com/maps/search/Dehesa+del+Pedrosillo+Avila" target="_blank" class="venue-map" title="Ver en Google Maps"><img id="map-finca" alt="Mapa de la Dehesa del Pedrosillo" loading="lazy"></a>
+                <a href="https://www.google.com/maps/search/Dehesa+de+Pedrosillo+%C3%81vila" target="_blank" class="venue-map" title="Ver en Google Maps"><img id="map-finca" alt="Mapa de la Dehesa del Pedrosillo" loading="lazy"></a>
                 <p class="venue-tag">Celebración</p>
                 <h3>Dehesa del Pedrosillo</h3>
-                <p>Finca El Pedrosillo, 05194 Ávila</p>
+                <p>N-403, km 144 · 05004 Ávila</p>
                 <p class="venue-time">15:30h — Cóctel y Banquete</p>
-                <a href="https://www.google.com/maps/search/Dehesa+del+Pedrosillo+Avila" target="_blank" class="venue-link">Cómo llegar &rarr;</a>
+                <a href="https://www.google.com/maps/search/Dehesa+de+Pedrosillo+%C3%81vila" target="_blank" class="venue-link">Cómo llegar &rarr;</a>
             </div>
         </div>
     </section>
@@ -1612,22 +1605,30 @@
         var t = ['pk.eyJ1Ijoi','YXpwdHIiLC','JhIjoiY21u','d2gzeTlwMW','dyNjJ3czlo','dXF6cmZwdC','J9.JMGlzxl','AtYXw4l2KV','e-eqA'].join('');
         var b = 'https://api.mapbox.com/styles/v1/mapbox/light-v11/static/';
         var s = '600x300@2x?access_token=' + t;
+        // Coordenadas verificadas:
+        //  - Monasterio de Santo Tomás: Plaza de Granada 1 (SE del casco antiguo)
+        //  - Dehesa de Pedrosillo: N-403 km 144, ~4 km al NORTE de Ávila,
+        //    junto al embalse de Las Cogotas (antes estaba mal, al sur)
+        //  - Hoteles: Velada (Pza. Catedral 10), Sofraga (López Núñez 1),
+        //    Las Leyendas (Francisco Gallego 3, junto al lienzo sur)
+        var SANTO_TOMAS = '-4.6893,40.6506';
+        var FINCA = '-4.6875,40.6925';
         var c = document.getElementById('map-ceremonia');
         var f = document.getElementById('map-finca');
-        if(c) c.src = b + 'pin-s+9e4a2f(-4.6889,40.6503)/-4.6889,40.6503,15.5,0/' + s;
-        if(f) f.src = b + 'pin-s+9e4a2f(-4.7162,40.6047)/-4.7162,40.6047,13,0/' + s;
+        if(c) c.src = b + 'pin-s+9e4a2f(' + SANTO_TOMAS + ')/' + SANTO_TOMAS + ',15.5,0/' + s;
+        if(f) f.src = b + 'pin-s+9e4a2f(' + FINCA + ')/' + FINCA + ',13.5,0/' + s;
 
         // Ávila overview map (monastery + finca + hotels + bus)
         var avila = document.getElementById('map-avila');
         if(avila) {
             var pins = [
-                'pin-l-a+9e4a2f(-4.6889,40.6503)',     // Santo Tomás
-                'pin-l-b+161413(-4.7162,40.6047)',     // Finca
-                'pin-s-1+c17a5a(-4.7005,40.6570)',     // Velada
-                'pin-s-2+c17a5a(-4.6996,40.6581)',     // Sofraga
-                'pin-s-3+c17a5a(-4.7022,40.6555)'      // Las Leyendas
+                'pin-l-a+9e4a2f(' + SANTO_TOMAS + ')',  // Santo Tomás
+                'pin-l-b+161413(' + FINCA + ')',        // Finca (N-403 km 144)
+                'pin-s-1+c17a5a(-4.6982,40.6567)',      // Velada (Pza. Catedral)
+                'pin-s-2+c17a5a(-4.6957,40.6583)',      // Sofraga (López Núñez)
+                'pin-s-3+c17a5a(-4.6990,40.6540)'       // Las Leyendas (Rastro)
             ].join('/');
-            avila.src = b + pins + '/auto/720x540@2x?padding=60&access_token=' + t;
+            avila.src = b + pins + '/auto/720x540@2x?padding=70&access_token=' + t;
         }
     })();
 
