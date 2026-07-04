@@ -5,6 +5,18 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
+## [2.3.0] - 2026-07-04
+
+### Añadido
+- **Mapa ilustrado propio (SVG inline)** en la sección de alojamiento,
+  sustituyendo al plano genérico de Mapbox: muralla de Ávila con sus torreones
+  y la catedral en el lienzo este, río Adaja, embalse de Las Cogotas, N-403
+  rotulada, ruta del autobús a trazos sienna con el bus dibujado, encinas y
+  caserío de la Dehesa, rosa de los vientos, Sierra de Gredos y dirección
+  Madrid. Marcadores A/B y 1·2·3 idénticos a la leyenda, rótulos en Bodoni
+  itálica y el escudo como marca de agua. Geografía fiel a las ubicaciones
+  verificadas y sin dependencia de Mapbox en esta sección.
+
 ## [2.2.0] - 2026-07-04
 
 ### Corregido
