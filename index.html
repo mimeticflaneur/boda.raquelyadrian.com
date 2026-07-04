@@ -409,7 +409,7 @@
         }
         .menu-opt-label:hover { border-color: var(--sienna); }
 
-        .guests-box { margin: 1.5rem 0; padding: 1.5rem; border: 1px solid var(--rule); }
+        .guests-box { margin: 1.5rem 0; padding: 1.5rem; border: 1px solid var(--rule); background: rgba(234,229,219,0.4); }
         .guests-box h4 { font-family: 'Bodoni Moda', serif; font-size: 1rem; margin-bottom: 1rem; }
         .g-entry { margin-bottom: 1rem; }
         .g-num { font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.15em; color: var(--sienna); margin-bottom: 0.4rem; }
@@ -433,9 +433,14 @@
         .btn-submit:hover { background: var(--sienna); color: white; }
         .btn-submit:disabled { opacity: 0.3; cursor: not-allowed; }
         .form-msg { text-align: center; padding: 1.5rem; border: 1px solid var(--rule); margin-top: 1rem; }
-        .form-ok { text-align: center; padding: 2rem; }
-        .form-ok h3 { font-family: 'Bodoni Moda', serif; font-size: 1.3rem; margin-bottom: 0.3rem; }
-        .form-ok p { color: var(--fg-mute); font-size: 0.9rem; }
+        .form-ok { text-align: center; padding: 3rem 2rem; animation: panefade 0.6s cubic-bezier(0.16,1,0.3,1); }
+        .form-ok::before {
+            content: '❦'; display: block;
+            font-family: 'Bodoni Moda', serif; font-size: 1.5rem;
+            color: var(--sienna); margin-bottom: 1.2rem;
+        }
+        .form-ok h3 { font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: 1.7rem; margin-bottom: 0.5rem; }
+        .form-ok p { color: var(--fg-mute); font-size: 0.95rem; font-style: italic; }
         .form-ok-sm { text-align: center; padding: 1rem; font-weight: 500; font-size: 0.9rem; }
         #menu-error { color: var(--sienna); font-size: 0.8rem; margin-top: 0.5rem; text-align: center; }
 

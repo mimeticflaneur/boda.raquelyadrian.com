@@ -5,6 +5,26 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
+## [2.0.0] - 2026-07-04
+
+### Añadido
+- **Panel editable**: cada respuesta se puede **editar** desde `/admin` (modal
+  con todos los campos: asistencia, contacto, preboda, menú, alergias, autobús
+  y acompañantes, con añadir/quitar) y **eliminar** (respuestas y canciones).
+  Nuevos endpoints protegidos `POST /api/update` y `POST /api/delete` en las
+  dos vías (autoalojada y Vercel). Las ediciones quedan marcadas con la fecha.
+- **Vista «una fila por persona»**: el panel lista al titular y, debajo, cada
+  acompañante como *«Dependiente de [titular]»*, con su menú y alergias.
+  Nueva exportación `personas.csv` con columnas `tipo` y `dependiente_de`.
+- Tarjeta de resumen «Con alergias» en las estadísticas.
+
+### Cambiado
+- **Rediseño completo del panel** con la estética editorial de la web: papel
+  cálido, sienna, Bodoni Moda + Jost, tarjetas en retícula, chips de estado,
+  pantalla de acceso a juego y modal de edición con doble marco.
+- Pulido del RSVP público: mensaje de confirmación con ornamento y serifas, y
+  caja de acompañantes diferenciada sobre fondo cálido.
+
 ## [1.9.0] - 2026-06-13
 
 ### Añadido

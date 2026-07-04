@@ -30,8 +30,8 @@ const fs = require('fs');
 const path = require('path');
 
 const {
-  clean, normalizeRsvp, normalizeSong,
-  buildStats, rsvpCsv, songsCsv, adminLogin, renderAdmin
+  clean, normalizeRsvp, normalizeSong, applyRsvpEdit,
+  buildStats, rsvpCsv, personasCsv, songsCsv, adminLogin, renderAdmin
 } = require('../lib/core');
 
 // ---------------------------------------------------------------------------
@@ -62,6 +62,16 @@ function readNdjson(file) {
     .filter(Boolean)
     .map(line => { try { return JSON.parse(line); } catch { return null; } })
     .filter(Boolean);
+}
+// Reescribe el fichero completo de forma atomica (tmp + rename). Se usa al
+// editar o borrar desde el panel; a escala de una boda es instantaneo.
+function rewriteNdjson(file, rows) {
+  const tmp = file + '.tmp';
+  fs.writeFileSync(tmp, rows.map(r => JSON.stringify(r)).join('\n') + (rows.length ? '\n' : ''));
+  fs.renameSync(tmp, file);
+}
+function fileFor(tipo) {
+  return tipo === 'canciones' ? SONGS_FILE : (tipo === 'rsvp' ? RSVP_FILE : null);
 }
 
 // ---------------------------------------------------------------------------
@@ -198,6 +208,46 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
+    // --- Edicion desde el panel (protegido) ---
+    if (pathname === '/api/update') {
+      if (req.method !== 'POST') { sendJson(res, 405, { ok: false, error: 'Metodo no permitido' }); return; }
+      if (!authed(req, u)) { sendJson(res, 401, { ok: false, error: 'No autorizado' }); return; }
+      const raw = await readBody(req);
+      let body;
+      try { body = JSON.parse(raw || '{}'); } catch { sendJson(res, 400, { ok: false, error: 'JSON invalido' }); return; }
+      if (body.tipo !== 'rsvp') { sendJson(res, 422, { ok: false, error: 'Solo se pueden editar respuestas de RSVP.' }); return; }
+      const id = String(body.id || '');
+      const rows = readNdjson(RSVP_FILE);
+      const idx = rows.findIndex(r => r.id === id);
+      if (idx < 0) { sendJson(res, 404, { ok: false, error: 'Registro no encontrado.' }); return; }
+      const { rec, error } = applyRsvpEdit(rows[idx], body.datos || {});
+      if (error) { sendJson(res, 422, { ok: false, error }); return; }
+      rows[idx] = rec;
+      rewriteNdjson(RSVP_FILE, rows);
+      console.log(`[EDIT] ${rec.nombre} <${rec.email}>`);
+      sendJson(res, 200, { ok: true });
+      return;
+    }
+
+    // --- Borrado desde el panel (protegido) ---
+    if (pathname === '/api/delete') {
+      if (req.method !== 'POST') { sendJson(res, 405, { ok: false, error: 'Metodo no permitido' }); return; }
+      if (!authed(req, u)) { sendJson(res, 401, { ok: false, error: 'No autorizado' }); return; }
+      const raw = await readBody(req);
+      let body;
+      try { body = JSON.parse(raw || '{}'); } catch { sendJson(res, 400, { ok: false, error: 'JSON invalido' }); return; }
+      const file = fileFor(body.tipo);
+      const id = String(body.id || '');
+      if (!file || !id) { sendJson(res, 422, { ok: false, error: 'Faltan tipo o id.' }); return; }
+      const rows = readNdjson(file);
+      const rest = rows.filter(r => r.id !== id);
+      if (rest.length === rows.length) { sendJson(res, 404, { ok: false, error: 'Registro no encontrado.' }); return; }
+      rewriteNdjson(file, rest);
+      console.log(`[DELETE] ${body.tipo} ${id}`);
+      sendJson(res, 200, { ok: true });
+      return;
+    }
+
     // --- Estadisticas (protegido) ---
     if (pathname === '/api/stats') {
       if (!authed(req, u)) { sendJson(res, 401, { ok: false, error: 'No autorizado' }); return; }
@@ -219,6 +269,12 @@ const server = http.createServer(async (req, res) => {
       if (!authed(req, u)) { send(res, 401, 'No autorizado'); return; }
       send(res, 200, rsvpCsv(readNdjson(RSVP_FILE)),
         { 'Content-Type': 'text/csv; charset=utf-8', 'Content-Disposition': 'attachment; filename="rsvp.csv"' });
+      return;
+    }
+    if (pathname === '/export/personas.csv') {
+      if (!authed(req, u)) { send(res, 401, 'No autorizado'); return; }
+      send(res, 200, personasCsv(readNdjson(RSVP_FILE)),
+        { 'Content-Type': 'text/csv; charset=utf-8', 'Content-Disposition': 'attachment; filename="personas.csv"' });
       return;
     }
     if (pathname === '/export/canciones.csv') {
