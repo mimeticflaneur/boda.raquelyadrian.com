@@ -470,43 +470,6 @@
         .form-ok-sm { text-align: center; padding: 1rem; font-weight: 500; font-size: 0.9rem; }
         #menu-error { color: var(--sienna); font-size: 0.8rem; margin-top: 0.5rem; text-align: center; }
 
-        /* === STORY — editorial spread === */
-        .story-spread {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: 80vh;
-        }
-        .story-photo { position: relative; overflow: hidden; }
-        .story-photo img {
-            width: 100%; height: 100%; object-fit: cover;
-            display: block; filter: grayscale(1);
-            transition: filter 0.6s cubic-bezier(0.16,1,0.3,1), transform 4s cubic-bezier(0.16,1,0.3,1);
-        }
-        .story-photo:hover img { filter: grayscale(0.2) sepia(0.1); transform: scale(1.05); }
-        .story-copy {
-            display: flex; flex-direction: column; justify-content: center;
-            padding: clamp(3rem, 6vw, 6rem);
-        }
-        .story-copy .sec-tag { text-align: left; margin-bottom: 1rem; }
-        /* Letra capitular editorial en el primer parrafo de la historia */
-        .story-copy h2 + p::first-letter {
-            font-family: 'Bodoni Moda', serif;
-            font-size: 3.4em; line-height: 0.8;
-            float: left; padding: 0.06em 0.14em 0 0;
-            color: var(--sienna);
-        }
-        /* En tactil no hay hover: la foto se muestra con un virado suave siempre */
-        @media (hover: none) {
-            .story-photo img { filter: grayscale(0.25) sepia(0.08); }
-        }
-        .story-copy h2 {
-            font-family: 'Bodoni Moda', serif;
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            line-height: 1.05; margin-bottom: 2rem;
-            letter-spacing: -0.02em;
-        }
-        .story-copy p { color: var(--fg-mute); margin-bottom: 1.2rem; font-size: 0.95rem; }
-
         /* === PHOTO TREATMENT GLOBAL === */
         .photo-bw { overflow: hidden; }
         .photo-bw img {
@@ -1127,8 +1090,6 @@
             .nav { padding: 1.2rem 1.5rem; }
             .nav-actions .nav-link { display: none; }
             .burger { display: block; }
-            .story-spread { grid-template-columns: 1fr; }
-            .story-photo { height: 60vh; }
             .venues-grid { grid-template-columns: 1fr; gap: 2rem; }
             .venue-map { height: 220px; }
             .hotels-mosaic { grid-template-columns: 1fr; }
@@ -1166,7 +1127,6 @@
         <a href="#" class="nav-brand">R <em>&</em> A</a>
         <div class="nav-actions">
             <a href="#rsvp" class="nav-link">RSVP</a>
-            <a href="#story" class="nav-link">Historia</a>
             <a href="#venues" class="nav-link">Lugares</a>
             <a href="#hotels" class="nav-link">Hoteles</a>
             <a href="#ceremony" class="nav-link">Ceremonia</a>
@@ -1180,7 +1140,6 @@
     <div class="overlay-menu" id="overlayMenu" onclick="if(event.target===this)closeMenu()">
         <button class="close-btn" onclick="closeMenu()" aria-label="Cerrar menú">&times;</button>
         <a href="#rsvp" onclick="closeMenu()">RSVP</a>
-        <a href="#story" onclick="closeMenu()">Historia</a>
         <a href="#venues" onclick="closeMenu()">Lugares</a>
         <a href="#hotels" onclick="closeMenu()">Hoteles</a>
         <a href="#ceremony" onclick="closeMenu()">Ceremonia</a>
@@ -1341,23 +1300,6 @@
                 </div>
 
             </form>
-        </div>
-    </section>
-
-    <!-- STORY — editorial spread -->
-    <section id="story" class="story-spread">
-        <div class="story-photo rv-left">
-            <picture>
-                <source type="image/webp" srcset="assets/nuestra-historia-800.webp 800w, assets/nuestra-historia.webp 1206w" sizes="(max-width: 768px) 100vw, 50vw">
-                <img src="assets/nuestra-historia.jpeg" alt="Raquel y Adrián" loading="lazy">
-            </picture>
-        </div>
-        <div class="story-copy bg-warm rv">
-            <p class="sec-tag">Nuestra Historia</p>
-            <h2>Cómo comenzó <em>todo</em></h2>
-            <p>Cada historia de amor es única, y la nuestra comenzó de la manera más hermosa. Desde el primer momento en que nos conocimos, supimos que había algo especial entre nosotros.</p>
-            <p>A lo largo de estos años hemos construido juntos una relación llena de amor, risas, aventuras y complicidad. Hemos crecido juntos y hemos aprendido que el amor verdadero se construye día a día.</p>
-            <p>Ahora estamos listos para dar el siguiente paso y queremos celebrarlo con todas las personas que más queremos.</p>
         </div>
     </section>
 
