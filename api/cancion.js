@@ -1,8 +1,8 @@
 'use strict';
 
 const { normalizeSong, clean } = require('../lib/core');
-const { append, isConfigured } = require('../lib/store');
-const { cors, getBody } = require('../lib/api');
+const { append, isConfigured, overLimit } = require('../lib/store');
+const { cors, getBody, clientIp } = require('../lib/api');
 
 module.exports = async (req, res) => {
   cors(res);
@@ -19,6 +19,10 @@ module.exports = async (req, res) => {
 
   if (!isConfigured()) {
     return res.status(503).json({ ok: false, error: 'Base de datos no configurada. Conecta Upstash Redis en Vercel.' });
+  }
+
+  if (await overLimit('cancion', clientIp(req), 30, 3600)) {
+    return res.status(429).json({ ok: false, error: 'Has sugerido muchas canciones seguidas. Prueba otra vez dentro de un rato.' });
   }
 
   try {
