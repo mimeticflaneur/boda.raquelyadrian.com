@@ -606,14 +606,6 @@
         }
         .venue-link:hover { opacity: 0.5; }
 
-        /* === PROGRAMA SEPARATOR — SVG ornament === */
-        .programa-sep {
-            display: block; width: 100vw;
-            margin: clamp(3rem,6vw,5rem) 0 clamp(3rem,6vw,5rem) calc(-50vw + 50%);
-            opacity: 0.12; overflow: hidden;
-        }
-        .programa-sep img { width: 100%; height: auto; display: block; }
-
         /* === TIMELINE — minimal === */
         .tl { max-width: 520px; margin: 0 auto; position: relative; }
         .tl::before {
@@ -1112,6 +1104,12 @@
             .hero-countdown { letter-spacing: 0.15em; }
         }
     </style>
+    <!-- Sin JavaScript las secciones se quedarían invisibles (empiezan con
+         opacity:0 y las revela el observador de scroll). -->
+    <noscript><style>
+        .rv, .rv-left, .rv-scale, .hs { opacity: 1 !important; transform: none !important; }
+        .scroll-indicator { display: none; }
+    </style></noscript>
 </head>
 <body>
     <a href="#rsvp" class="skip-link">Saltar al contenido</a>
@@ -1127,7 +1125,7 @@
         <a href="#" class="nav-brand">R <em>&</em> A</a>
         <div class="nav-actions">
             <a href="#rsvp" class="nav-link">RSVP</a>
-            <a href="#venues" class="nav-link">Lugares</a>
+            <a href="#lugares" class="nav-link">Lugares</a>
             <a href="#hotels" class="nav-link">Hoteles</a>
             <a href="#ceremony" class="nav-link">Ceremonia</a>
             <a href="#gifts" class="nav-link">Regalos</a>
@@ -1140,7 +1138,7 @@
     <div class="overlay-menu" id="overlayMenu" onclick="if(event.target===this)closeMenu()">
         <button class="close-btn" onclick="closeMenu()" aria-label="Cerrar menú">&times;</button>
         <a href="#rsvp" onclick="closeMenu()">RSVP</a>
-        <a href="#venues" onclick="closeMenu()">Lugares</a>
+        <a href="#lugares" onclick="closeMenu()">Lugares</a>
         <a href="#hotels" onclick="closeMenu()">Hoteles</a>
         <a href="#ceremony" onclick="closeMenu()">Ceremonia</a>
         <a href="#gifts" onclick="closeMenu()">Regalos</a>
@@ -1304,7 +1302,7 @@
     </section>
 
     <!-- VENUES -->
-    <section id="venues" class="venues-bg pad">
+    <section id="lugares" class="venues-bg pad">
         <div class="venues-bg-img"><picture><source type="image/webp" srcset="assets/retablo.webp"><img src="assets/retablo.jpeg" alt="" loading="lazy"></picture></div>
         <div class="sec-head rv">
             <p class="sec-tag">Dónde celebraremos</p>
@@ -1339,7 +1337,7 @@
         <div class="details-strips rv-left">
             <div class="detail-strip"><span class="d-key">Fecha</span><span class="d-val">Sábado, 12 de Junio de 2027</span></div>
             <div class="detail-strip"><span class="d-key">Horario</span><span class="d-val">Ceremonia 13:00h — Cóctel 15:30h</span></div>
-            <div class="detail-strip"><span class="d-key">Transporte</span><span class="d-val">Parking disponible. Autobús Santo Tomás → finca</span></div>
+            <div class="detail-strip"><span class="d-key">Transporte</span><span class="d-val">Aparcamiento disponible. Autobús Santo Tomás → finca</span></div>
             <div class="detail-strip"><span class="d-key">Niños</span><span class="d-val">Bienvenidos. Habrá zona infantil</span></div>
         </div>
         <div class="center rv" style="margin-top:2.5rem;">
@@ -1348,8 +1346,7 @@
                 Añadir al calendario
             </button>
         </div>
-        <div class="programa-sep" aria-hidden="true"><img src="assets/fondo-programa.svg" alt=""></div>
-        <div class="sec-head rv" style="margin-bottom:clamp(2rem,4vw,3rem);">
+        <div class="sec-head rv" style="margin-top:clamp(4rem,8vw,6rem);margin-bottom:clamp(2rem,4vw,3rem);">
             <p class="sec-tag">12 de junio de 2027</p>
             <h2 class="sec-title" style="font-size:clamp(1.6rem,3.5vw,2.5rem);">Programa del <em>Día</em></h2>
         </div>
@@ -1564,16 +1561,14 @@
         <div class="gifts-content">
             <p class="gifts-intro rv">Vuestra presencia es el mejor regalo. Pero si deseáis hacernos un obsequio, aquí tenéis algunas opciones.</p>
             <div class="pay-methods rv">
-                <!-- IBAN pendiente: descomentar esta caja y poner el numero real cuando lo tengais.
                 <div class="pay-box">
                     <h4>Transferencia</h4>
-                    <div class="pay-value" id="iban-val">ES00 0000 0000 0000 0000 0000</div>
+                    <div class="pay-value" id="iban-val" data-copy="ES6515830001119104703557">ES65 1583 0001 1191 0470 3557</div>
                     <button class="copy-btn" onclick="copyText('iban-val', this)">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
                         Copiar IBAN
                     </button>
                 </div>
-                -->
                 <div class="pay-box">
                     <h4>PayPal</h4>
                     <div class="pay-value" id="paypal-val">paypal.me/raquelyadrian</div>
@@ -1614,13 +1609,13 @@
             <h2 class="sec-title">Preguntas <em>& Respuestas</em></h2>
         </div>
         <div class="faq-list rv">
-            <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="faq-1" onclick="toggleFaq(this)">¿Hay parking en los venues?</button><div class="faq-a" id="faq-1" role="region"><p>Sí. El Monasterio de Santo Tomás cuenta con aparcamiento público cercano y la Dehesa del Pedrosillo dispone de amplio aparcamiento privado para los invitados.</p></div></div>
+            <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="faq-1" onclick="toggleFaq(this)">¿Hay aparcamiento?</button><div class="faq-a" id="faq-1" role="region"><p>Sí, en los dos sitios. El Monasterio de Santo Tomás cuenta con aparcamiento público cercano y la Dehesa del Pedrosillo dispone de amplio aparcamiento privado para los invitados.</p></div></div>
             <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="faq-2" onclick="toggleFaq(this)">¿Cómo funciona el autobús?</button><div class="faq-a" id="faq-2" role="region"><p>Habrá un autobús que saldrá de Santo Tomás hacia la finca tras la ceremonia (aprox. 14:30h). Por la noche habrá servicio de vuelta a Ávila ciudad.</p></div></div>
             <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="faq-3" onclick="toggleFaq(this)">¿Puedo llevar niños?</button><div class="faq-a" id="faq-3" role="region"><p>Por supuesto. Los niños son bienvenidos. Habrá una zona infantil con monitores durante el banquete y la fiesta.</p></div></div>
-            <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="faq-4" onclick="toggleFaq(this)">¿Cuál es el dress code?</button><div class="faq-a" id="faq-4" role="region"><p>Etiqueta formal. Sugerimos tonos cálidos y terrosos que armonicen con el entorno castellano. Evitad el blanco, por favor.</p></div></div>
+            <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="faq-4" onclick="toggleFaq(this)">¿Cómo hay que vestir?</button><div class="faq-a" id="faq-4" role="region"><p>Etiqueta formal. Sugerimos tonos cálidos y terrosos que armonicen con el entorno castellano. Evitad el blanco, por favor.</p></div></div>
             <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="faq-5" onclick="toggleFaq(this)">¿Hasta qué hora dura la fiesta?</button><div class="faq-a" id="faq-5" role="region"><p>La fiesta continuará hasta el amanecer. El último autobús de vuelta a Ávila saldrá a las 3:00h aproximadamente.</p></div></div>
             <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="faq-6" onclick="toggleFaq(this)">¿Qué opciones de menú hay?</button><div class="faq-a" id="faq-6" role="region"><p>Ofrecemos tres opciones: carne, pescado y vegano. Puedes indicar tu elección y alergias en el formulario de confirmación.</p></div></div>
-            <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="faq-7" onclick="toggleFaq(this)">¿Cuándo debo confirmar?</button><div class="faq-a" id="faq-7" role="region"><p>Os pedimos que confirmáis antes del 1 de mayo de 2027 para poder organizar todo con tiempo.</p></div></div>
+            <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="faq-7" onclick="toggleFaq(this)">¿Cuándo debo confirmar?</button><div class="faq-a" id="faq-7" role="region"><p>Os pedimos que confirméis antes del 1 de mayo de 2027 para poder organizar todo con tiempo.</p></div></div>
         </div>
     </section>
 
@@ -1716,22 +1711,38 @@
         document.body.style.overflow = '';
     }
 
+    // Copia al portapapeles. navigator.clipboard solo existe en contextos
+    // seguros y puede estar bloqueado, así que hay alternativa para todos los
+    // navegadores.
+    function copyToClipboard(text) {
+        if(navigator.clipboard && window.isSecureContext) {
+            return navigator.clipboard.writeText(text).catch(() => legacyCopy(text));
+        }
+        return legacyCopy(text);
+    }
+    function legacyCopy(text) {
+        return new Promise((resolve, reject) => {
+            try {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.setAttribute('readonly', '');
+                ta.style.cssText = 'position:absolute;left:-9999px;top:0';
+                document.body.appendChild(ta);
+                ta.select();
+                const ok = document.execCommand('copy');
+                ta.remove();
+                ok ? resolve() : reject(new Error('sin portapapeles'));
+            } catch(e) { reject(e); }
+        });
+    }
+
     // Sofraga discount code
     function copyCode(btn) {
-        const ok = () => {
-            const o = btn.textContent;
-            btn.textContent = 'Copiado';
-            setTimeout(() => { btn.textContent = o; }, 1600);
-        };
-        navigator.clipboard.writeText('R&A15').then(ok).catch(() => {
-            const i = document.createElement('input');
-            i.value = 'R&A15';
-            document.body.appendChild(i);
-            i.select();
-            document.execCommand('copy');
-            i.remove();
-            ok();
-        });
+        const o = btn.textContent;
+        copyToClipboard('R&A15')
+            .then(() => { btn.textContent = 'Copiado'; })
+            .catch(() => { btn.textContent = 'R&A15'; })
+            .finally(() => setTimeout(() => { btn.textContent = o; }, 1600));
     }
 
     // Crest stroke length (for the draw-on animation)
@@ -1903,7 +1914,7 @@
                 return;
             }
             document.getElementById('menu-error').style.display = 'none';
-            const ng = parseInt(document.getElementById('num-guests').value, 10) || 0;
+            const ng = partySize();
             for(let i=1; i<=ng; i++) {
                 const nm = document.querySelector('[name="acomp_'+i+'_nombre"]');
                 if(nm && !nm.value.trim()) { nm.focus(); return; }
@@ -1931,13 +1942,7 @@
         if(btn) btn.classList.add('selected');
         const field = document.getElementById('field-bus-num');
         if(choice === 'si') {
-            const party = 1 + (parseInt(document.getElementById('num-guests').value, 10) || 0);
-            const sel = document.getElementById('bus-num');
-            let opts = '';
-            for(let i=1; i<=party; i++) {
-                opts += '<option value="'+i+'"'+(i===party?' selected':'')+'>'+i+(i===1?' persona':' personas')+'</option>';
-            }
-            sel.innerHTML = opts;
+            syncBusOptions();
             field.style.display = '';
         } else {
             field.style.display = 'none';
@@ -1945,27 +1950,108 @@
         document.getElementById('btn-submit-final').disabled = false;
     }
 
-    function updateGuests() {
-        const n = parseInt(document.getElementById('num-guests').value, 10) || 0;
-        const box = document.getElementById('guests-box');
-        if(n <= 0) { box.innerHTML = ''; box.style.display = 'none'; return; }
-        let h = '<h4>Datos de tus acompañantes</h4>';
-        for(let i=1; i<=n; i++) {
-            h += '<div class="g-entry">'
-              + '<div class="g-num">Acompañante '+i+'</div>'
-              + '<div class="g-fields">'
-              +   '<input type="text" name="acomp_'+i+'_nombre" placeholder="Nombre completo">'
-              +   '<input type="text" name="acomp_'+i+'_contacto" placeholder="Teléfono o email (opcional)">'
-              + '</div>'
-              + '<div class="g-fields" style="margin-top:0.8rem;">'
-              +   '<select name="acomp_'+i+'_menu"><option value="">Su menú…</option><option value="carne">Carne</option><option value="pescado">Pescado</option><option value="vegano">Vegano</option></select>'
-              +   '<input type="text" name="acomp_'+i+'_alergias" placeholder="Alergias e intolerancias (opcional)">'
-              + '</div>'
-              + '</div>';
+    // Las plazas del autobús dependen del tamaño del grupo, así que se
+    // recalculan cada vez que este cambia.
+    //
+    // Por defecto van TODOS los del grupo: si el invitado no ha tocado este
+    // selector, sigue al grupo aunque este crezca o mengüe. Solo si lo ha
+    // elegido a mano se respeta su número (recortado si ya no cabe). Sin esto,
+    // un grupo que crece de 3 a 6 se quedaría con las 3 plazas que el
+    // formulario habia puesto solo, y viajaria media familia de pie.
+    let busElegidoAMano = false;
+
+    function syncBusOptions() {
+        const sel = document.getElementById('bus-num');
+        if(!sel) return;
+        const party = 1 + partySize();
+        const prev = parseInt(sel.value, 10);
+        const want = (busElegidoAMano && Number.isFinite(prev) && prev > 0)
+            ? Math.min(prev, party)
+            : party;
+        let opts = '';
+        for(let i=1; i<=party; i++) {
+            opts += '<option value="'+i+'"'+(i===want?' selected':'')+'>'+i+(i===1?' persona':' personas')+'</option>';
         }
-        box.innerHTML = h;
-        box.style.display = 'block';
+        sel.innerHTML = opts;
     }
+
+    function partySize() {
+        const n = parseInt(document.getElementById('num-guests').value, 10);
+        return Number.isFinite(n) && n > 0 ? n : 0;
+    }
+
+    // Lo que ya está escrito de cada acompañante. Se conserva aunque se suba o
+    // se baje el número de acompañantes.
+    const guestCache = [];
+
+    function escAttr(v) {
+        return String(v == null ? '' : v)
+            .replace(/&/g, '&amp;').replace(/"/g, '&quot;')
+            .replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function guestEntry(i, g) {
+        g = g || {};
+        const opt = (v, label) => '<option value="'+v+'"'+((g.menu || '') === v ? ' selected' : '')+'>'+label+'</option>';
+        return '<div class="g-entry">'
+          + '<div class="g-num">Acompañante '+i+'</div>'
+          + '<div class="g-fields">'
+          +   '<input type="text" name="acomp_'+i+'_nombre" placeholder="Nombre completo" value="'+escAttr(g.nombre)+'">'
+          +   '<input type="text" name="acomp_'+i+'_contacto" placeholder="Teléfono o email (opcional)" value="'+escAttr(g.contacto)+'">'
+          + '</div>'
+          + '<div class="g-fields" style="margin-top:0.8rem;">'
+          +   '<select name="acomp_'+i+'_menu">'
+          +     opt('', 'Su menú…') + opt('carne', 'Carne') + opt('pescado', 'Pescado') + opt('vegano', 'Vegano')
+          +   '</select>'
+          +   '<input type="text" name="acomp_'+i+'_alergias" placeholder="Alergias e intolerancias (opcional)" value="'+escAttr(g.alergias)+'">'
+          + '</div>'
+          + '</div>';
+    }
+
+    function cacheGuests() {
+        document.querySelectorAll('#guests-box .g-entry').forEach((entry, idx) => {
+            const val = sel => { const el = entry.querySelector(sel); return el ? el.value.trim() : ''; };
+            guestCache[idx] = {
+                nombre: val('[name$="_nombre"]'),
+                contacto: val('[name$="_contacto"]'),
+                menu: val('[name$="_menu"]'),
+                alergias: val('[name$="_alergias"]')
+            };
+        });
+    }
+
+    function updateGuests() {
+        const n = partySize();
+        const box = document.getElementById('guests-box');
+        cacheGuests();
+        if(n <= 0) {
+            box.innerHTML = '';
+            box.style.display = 'none';
+            syncBusOptions();
+            return;
+        }
+        // Solo se quitan las casillas sobrantes y se añaden las que faltan: las
+        // que ya estaban siguen en el DOM, así que no se pierde lo tecleado.
+        const entries = box.querySelectorAll('.g-entry');
+        if(!entries.length) box.innerHTML = '<h4>Datos de tus acompañantes</h4>';
+        for(let i = entries.length; i > n; i--) entries[i-1].remove();
+        for(let i = entries.length + 1; i <= n; i++) {
+            box.insertAdjacentHTML('beforeend', guestEntry(i, guestCache[i-1]));
+        }
+        box.style.display = 'block';
+        syncBusOptions();
+    }
+
+    const busNumSel = document.getElementById('bus-num');
+    if(busNumSel) busNumSel.addEventListener('change', () => { busElegidoAMano = true; });
+
+    // El aviso del menú desaparece en cuanto se elige uno.
+    document.querySelectorAll('input[name="mi_menu"]').forEach(r => {
+        r.addEventListener('change', () => {
+            const err = document.getElementById('menu-error');
+            if(err) err.style.display = 'none';
+        });
+    });
 
     renderProgress();
 
@@ -1985,7 +2071,7 @@
             const menu = document.querySelector('input[name="mi_menu"]:checked');
             p.menu = menu ? menu.value : '';
             p.alergias = document.getElementById('allergies').value.trim();
-            const ng = parseInt(document.getElementById('num-guests').value, 10) || 0;
+            const ng = partySize();
             p.num_acompanantes = ng;
             p.acompanantes = [];
             for(let i=1; i<=ng; i++) {
@@ -1997,8 +2083,10 @@
                 });
             }
             p.transporte = document.getElementById('bus').value || 'no';
+            // Nunca se pueden pedir más plazas que personas hay en el grupo.
+            const plazas = parseInt(document.getElementById('bus-num').value, 10);
             p.transporte_personas = p.transporte === 'si'
-                ? (parseInt(document.getElementById('bus-num').value, 10) || 1)
+                ? Math.min(Number.isFinite(plazas) && plazas > 0 ? plazas : 1, 1 + ng)
                 : 0;
         }
         return p;
@@ -2062,14 +2150,29 @@
         });
     }
 
-    // Copy to clipboard
+    // Copiar IBAN / PayPal. El valor real va en data-copy (el IBAN se muestra
+    // en grupos de cuatro, pero se copia sin espacios).
     function copyText(id, btn) {
-        const text = document.getElementById(id).textContent.trim();
-        navigator.clipboard.writeText(text).then(() => {
-            const orig = btn.innerHTML;
+        const el = document.getElementById(id);
+        if(!el) return;
+        const text = (el.dataset.copy || el.textContent).trim();
+        const orig = btn.innerHTML;
+        const restore = () => setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('copied'); }, 2000);
+        copyToClipboard(text).then(() => {
             btn.classList.add('copied');
             btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copiado';
-            setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('copied'); }, 2000);
+            restore();
+        }).catch(() => {
+            // Sin portapapeles: se selecciona el texto para copiarlo a mano.
+            try {
+                const r = document.createRange();
+                r.selectNodeContents(el);
+                const s = window.getSelection();
+                s.removeAllRanges();
+                s.addRange(r);
+            } catch(e) {}
+            btn.innerHTML = 'Cópialo a mano';
+            restore();
         });
     }
 
@@ -2095,6 +2198,10 @@
             'END:STANDARD',
             'END:VTIMEZONE',
             'BEGIN:VEVENT',
+            // UID y DTSTAMP son obligatorios (RFC 5545): sin ellos Outlook
+            // llega a rechazar el archivo.
+            'UID:boda-raquel-adrian-20270612@raquelyadrian.com',
+            'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+/, ''),
             'DTSTART;TZID=Europe/Madrid:20270612T130000',
             'DTEND;TZID=Europe/Madrid:20270613T060000',
             'SUMMARY:Boda de Raquel y Adrián',

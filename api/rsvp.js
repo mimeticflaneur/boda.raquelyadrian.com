@@ -1,7 +1,7 @@
 'use strict';
 
 const { normalizeRsvp, clean } = require('../lib/core');
-const { append, isConfigured } = require('../lib/store');
+const { append, isConfigured, overLimit } = require('../lib/store');
 const { cors, getBody, clientIp } = require('../lib/api');
 
 module.exports = async (req, res) => {
@@ -23,6 +23,12 @@ module.exports = async (req, res) => {
 
   rec.ip = clientIp(req);
   rec.ua = clean(req.headers['user-agent'], 200);
+
+  // Tope generoso: una familia entera desde el mismo wifi cabe de sobra.
+  if (await overLimit('rsvp', rec.ip, 20, 3600)) {
+    return res.status(429).json({ ok: false, error: 'Has enviado muchas confirmaciones seguidas. Prueba otra vez dentro de un rato.' });
+  }
+
   try {
     await append('rsvp', rec);
   } catch (e) {

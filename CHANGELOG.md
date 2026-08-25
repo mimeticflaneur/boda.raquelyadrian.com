@@ -5,6 +5,62 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
+## [2.4.0] - 2026-08-25
+
+### Añadido
+- **Cuenta para transferencia**: la caja de «Transferencia» de la lista de
+  bodas deja de estar comentada y muestra el IBAN real, agrupado de cuatro en
+  cuatro para leerlo bien; al copiarlo va sin espacios (`data-copy`).
+- **Pruebas de estrés del ingest** (`npm test`, `test/ingest.test.js`, sin
+  dependencias): 20.000 confirmaciones basura, 5.000 ediciones desde el panel y
+  lotes de 2.000 registros contra el CSV, las estadísticas y el panel. Verifica
+  que nunca se lanza una excepción, que los registros guardados cumplen siempre
+  las mismas reglas y que no se puede colar HTML en el panel ni fórmulas en el
+  CSV.
+- **Límite de envíos por IP** (20 confirmaciones y 30 canciones por hora) con
+  `INCR`/`EXPIRE` en Redis. Si el contador falla no bloquea a nadie: antes un
+  duplicado que perder una confirmación de verdad.
+
+### Corregido
+- **Cambiar el número de acompañantes ya no borra lo escrito**: las casillas
+  dejan de reconstruirse enteras; solo se quitan las sobrantes y se añaden las
+  que faltan, y lo tecleado se recuerda aunque se baje y se vuelva a subir.
+- **Plazas del autobús descuadradas**: el selector se quedaba con las opciones
+  del grupo anterior si se volvía atrás a cambiar los acompañantes, y se
+  llegaban a registrar menos plazas que personas —media familia se habría
+  quedado sin sitio—. Ahora se recalcula con cada cambio: por defecto van todos
+  los del grupo y solo se respeta otro número si el invitado lo elige a mano
+  (recortado si deja de caber). El envío, además, nunca pide más plazas que
+  miembros tiene el grupo.
+- El aviso «selecciona tu menú» desaparece al elegir uno, sin esperar a pulsar
+  «Siguiente».
+- **Copiar al portapapeles** con alternativa para navegadores sin
+  `navigator.clipboard`; si no hay manera, se selecciona el texto para copiarlo
+  a mano.
+- El archivo de calendario incluye `UID` y `DTSTAMP`, obligatorios en la
+  RFC 5545 (Outlook llegaba a rechazarlo).
+- **Fórmulas de Excel neutralizadas en los CSV**: una celda que empiece por
+  `=`, `+`, `-` o `@` se exporta como texto (también arregla los teléfonos
+  `+34…`).
+- Fusión segura al editar desde el panel: `__proto__` y compañía ya no pueden
+  envenenar el prototipo del registro.
+- Sin JavaScript la web ya no se ve en blanco: un `<noscript>` revela las
+  secciones que esperan a la animación de entrada.
+- «Os pedimos que confirmáis» → «que **confirméis**».
+
+### Cambiado
+- Lenguaje comprensible para todo el mundo: «¿Hay parking en los venues?» →
+  «¿Hay aparcamiento?», «¿Cuál es el dress code?» → «¿Cómo hay que vestir?»,
+  «Parking disponible» → «Aparcamiento disponible». El ancla de la sección pasa
+  de `#venues` a `#lugares`, que es lo que se ve al compartir el enlace.
+
+### Eliminado
+- **Separador ornamental** del rosetón entre «Detalles» y «Programa del día»:
+  a ancho completo abría casi una pantalla de vacío y parecía el final de la
+  página. Con él se va `assets/fondo-programa.svg` (580 KB), ya sin uso.
+- Sección «Nuestra Historia — Cómo comenzó todo», con sus enlaces de navegación
+  y sus estilos.
+
 ## [2.3.0] - 2026-07-04
 
 ### Añadido
