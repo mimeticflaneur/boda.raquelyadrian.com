@@ -26,6 +26,7 @@
  */
 
 const http = require('http');
+const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 
@@ -39,7 +40,7 @@ const {
 // ---------------------------------------------------------------------------
 const PORT = parseInt(process.env.PORT || '3000', 10);
 const HOST = process.env.HOST || '0.0.0.0';
-const ADMIN_TOKEN = process.env.ADMIN_TOKEN || 'cambia-este-token';
+const ADMIN_TOKEN = process.env.ADMIN_TOKEN || '';
 const ALLOW_ORIGIN = process.env.ALLOW_ORIGIN || '*';
 const ROOT_DIR = path.resolve(__dirname, '..'); // sitio estatico (raiz del repo)
 const DATA_DIR = path.resolve(process.env.DATA_DIR || path.join(__dirname, 'data'));
@@ -111,9 +112,32 @@ function clientIp(req) {
   if (xf) return String(xf).split(',')[0].trim();
   return req.socket.remoteAddress || '';
 }
+const COOKIE = 'boda_admin';
+
+function tokenOk(t) {
+  if (!t || !ADMIN_TOKEN) return false;
+  const a = Buffer.from(String(t));
+  const b = Buffer.from(ADMIN_TOKEN);
+  if (a.length !== b.length) { crypto.timingSafeEqual(b, b); return false; }
+  return crypto.timingSafeEqual(a, b);
+}
+function readCookie(req, name) {
+  const raw = req.headers.cookie;
+  if (!raw) return '';
+  for (const trozo of String(raw).split(';')) {
+    const i = trozo.indexOf('=');
+    if (i < 0) continue;
+    if (trozo.slice(0, i).trim() === name) {
+      try { return decodeURIComponent(trozo.slice(i + 1).trim()); } catch { return ''; }
+    }
+  }
+  return '';
+}
+// La sesion del panel va en cookie HttpOnly: el token deja de viajar en la URL.
 function authed(req, u) {
-  const t = u.searchParams.get('token') || req.headers['x-admin-token'] || '';
-  return Boolean(t) && t === ADMIN_TOKEN;
+  return tokenOk(readCookie(req, COOKIE)) ||
+         tokenOk(req.headers['x-admin-token']) ||
+         tokenOk(u.searchParams.get('token'));
 }
 
 // ---------------------------------------------------------------------------
@@ -257,10 +281,35 @@ const server = http.createServer(async (req, res) => {
 
     // --- Panel de administracion ---
     if (pathname === '/admin') {
-      if (!authed(req, u)) { send(res, 401, adminLogin(), { 'Content-Type': 'text/html; charset=utf-8' }); return; }
-      const rsvps = readNdjson(RSVP_FILE).reverse();
-      const songs = readNdjson(SONGS_FILE).reverse();
-      send(res, 200, renderAdmin(rsvps, songs, u.searchParams.get('token')), { 'Content-Type': 'text/html; charset=utf-8' });
+      const HTML = { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'Referrer-Policy': 'no-referrer' };
+      const galleta = t => `${COOKIE}=${encodeURIComponent(t)}; Path=/; HttpOnly; SameSite=Strict; Max-Age=604800`;
+      const panel = () => send(res, 200,
+        renderAdmin(readNdjson(RSVP_FILE).reverse(), readNdjson(SONGS_FILE).reverse()), HTML);
+
+      // Sin token configurado no entra nadie: hay que decirlo, no dar vueltas.
+      if (!ADMIN_TOKEN) { send(res, 503, adminLogin('sin-configurar'), HTML); return; }
+
+      if (u.searchParams.get('logout')) {
+        send(res, 200, adminLogin(), Object.assign({ 'Set-Cookie': `${COOKIE}=; Path=/; HttpOnly; SameSite=Strict; Max-Age=0` }, HTML));
+        return;
+      }
+      if (req.method === 'POST') {
+        const raw = await readBody(req);
+        const enviado = new URLSearchParams(raw).get('token') || '';
+        if (!tokenOk(enviado)) { send(res, 401, adminLogin('incorrecto'), HTML); return; }
+        send(res, 200, renderAdmin(readNdjson(RSVP_FILE).reverse(), readNdjson(SONGS_FILE).reverse()),
+          Object.assign({ 'Set-Cookie': galleta(enviado) }, HTML));
+        return;
+      }
+      // Enlace antiguo con ?token=...: se canjea por cookie y se limpia la URL.
+      const enUrl = u.searchParams.get('token');
+      if (enUrl) {
+        if (!tokenOk(enUrl)) { send(res, 401, adminLogin('incorrecto'), HTML); return; }
+        send(res, 303, '', Object.assign({ 'Set-Cookie': galleta(enUrl), 'Location': '/admin' }, HTML));
+        return;
+      }
+      if (!authed(req, u)) { send(res, 401, adminLogin(), HTML); return; }
+      panel();
       return;
     }
 
@@ -301,10 +350,11 @@ const server = http.createServer(async (req, res) => {
 server.listen(PORT, HOST, () => {
   console.log('\n  Backend de la boda en marcha');
   console.log(`  -> Web:    http://localhost:${PORT}/`);
-  console.log(`  -> Panel:  http://localhost:${PORT}/admin?token=${ADMIN_TOKEN}`);
+  console.log(`  -> Panel:  http://localhost:${PORT}/admin`);
   console.log(`  -> Datos:  ${DATA_DIR}`);
-  if (ADMIN_TOKEN === 'cambia-este-token') {
-    console.log('  (!) Usa un ADMIN_TOKEN propio en produccion (variable de entorno).');
+  if (!ADMIN_TOKEN) {
+    console.log('  (!) Sin ADMIN_TOKEN no se puede entrar al panel.');
+    console.log('      Arrancalo asi:  ADMIN_TOKEN=tu-contrasena npm start');
   }
   console.log('');
 });

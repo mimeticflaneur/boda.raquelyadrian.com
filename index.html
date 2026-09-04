@@ -41,7 +41,7 @@
       "endDate": "2027-06-13T06:00:00+02:00",
       "eventStatus": "https://schema.org/EventScheduled",
       "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-      "image": "https://raquelyadrian.com/assets/nuestra-historia.jpeg",
+      "image": "https://raquelyadrian.com/assets/og.png",
       "location": [
         {
           "@type": "Place",
@@ -59,12 +59,12 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400;1,6..96,500&family=Jost:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=Jost:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
     <style>
         :root {
             --ink: #111;
             --paper: #f5f2ec;
-            --warm: #eae5db;
+            --warm: #e6dfd1;
             --dark: #161413;
             --sienna: #9e4a2f;
             --sienna-soft: #c17a5a;
@@ -79,13 +79,13 @@
             --rule-inv-md: rgba(245,242,236,0.1);
             --rule-inv-lg: rgba(245,242,236,0.12);
             --fg-inv-mute: rgba(245,242,236,0.5);
-            --fg-inv-faint: rgba(245,242,236,0.25);
+            --fg-inv-faint: rgba(245,242,236,0.5);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body {
-            font-family: 'Jost', sans-serif; font-weight: 300;
+            font-family: 'Jost', sans-serif; font-weight: 400;
             background: var(--bg); color: var(--fg);
             line-height: 1.8;
             transition: background 0.5s, color 0.5s;
@@ -109,7 +109,7 @@
         .nav {
             position: fixed; top: 0; left: 0; right: 0; z-index: 100;
             display: flex; justify-content: space-between; align-items: center;
-            padding: 1.5rem 3rem;
+            padding: 1.5rem clamp(1.5rem, 5vw, 6rem);
             transition: background 0.4s, box-shadow 0.4s, padding 0.4s;
         }
         .nav.nav--top {
@@ -364,10 +364,16 @@
         .sec-tag::before {
             counter-increment: sec;
             content: counter(sec, decimal-leading-zero) " · ";
-            color: var(--sienna-soft);
+            color: var(--sienna);
+            font-weight: 400;
             font-variant-numeric: tabular-nums;
         }
+        /* El tono claro solo tiene contraste suficiente sobre plano oscuro. */
+        .venues-bg .sec-tag::before, .ceremony-bg .sec-tag::before,
+        .bg-dark .sec-tag::before { color: var(--sienna-soft); }
         .modal-box .sec-tag::before { counter-increment: none; content: none; }
+        /* Una cabecera secundaria dentro de una seccion no es una seccion mas. */
+        .sec-tag--sub::before { counter-increment: none; content: none; }
         .sec-title {
             font-family: 'Bodoni Moda', serif; font-weight: 400;
             font-size: clamp(2.2rem, 5vw, 4rem);
@@ -377,20 +383,6 @@
         .sec-sub {
             font-size: 0.85rem; color: var(--fg-mute);
             margin-top: 1rem; max-width: 480px; margin-left: auto; margin-right: auto;
-        }
-
-        /* === EDITORIAL DIVIDER === */
-        .divider {
-            display: flex; align-items: center; justify-content: center;
-            gap: 1.5rem; padding: 0.5rem 0;
-        }
-        .divider::before, .divider::after {
-            content: ''; flex: 1; max-width: 120px;
-            height: 1px; background: var(--rule);
-        }
-        .divider-dot {
-            width: 4px; height: 4px; background: var(--sienna);
-            border-radius: 50%;
         }
 
         /* === RSVP === */
@@ -419,7 +411,7 @@
         .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
 
         .menu-pick { margin: 2.5rem 0; }
-        .menu-pick h4 { font-family: 'Bodoni Moda', serif; font-size: 1.1rem; margin-bottom: 1rem; }
+        .menu-pick h4 { font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: 1.2rem; margin-bottom: 1rem; }
         .menu-opts { display: flex; gap: 0.8rem; }
         .menu-opt { position: relative; flex: 1; }
         .menu-opt input { position: absolute; opacity: 0; }
@@ -436,7 +428,7 @@
         .menu-opt-label:hover { border-color: var(--sienna); }
 
         .guests-box { margin: 1.5rem 0; padding: 1.5rem; border: 1px solid var(--rule); background: rgba(234,229,219,0.4); }
-        .guests-box h4 { font-family: 'Bodoni Moda', serif; font-size: 1rem; margin-bottom: 1rem; }
+        .guests-box h4 { font-family: 'Bodoni Moda', serif; font-weight: 500; font-size: 1.1rem; margin-bottom: 1rem; }
         .g-entry { margin-bottom: 1rem; }
         .g-num { font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.15em; color: var(--sienna); margin-bottom: 0.4rem; }
         .g-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
@@ -460,32 +452,10 @@
         .btn-submit:disabled { opacity: 0.3; cursor: not-allowed; }
         .form-msg { text-align: center; padding: 1.5rem; border: 1px solid var(--rule); margin-top: 1rem; }
         .form-ok { text-align: center; padding: 3rem 2rem; animation: panefade 0.6s cubic-bezier(0.16,1,0.3,1); }
-        .form-ok::before {
-            content: '❦'; display: block;
-            font-family: 'Bodoni Moda', serif; font-size: 1.5rem;
-            color: var(--sienna); margin-bottom: 1.2rem;
-        }
         .form-ok h3 { font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: 1.7rem; margin-bottom: 0.5rem; }
         .form-ok p { color: var(--fg-mute); font-size: 0.95rem; font-style: italic; }
         .form-ok-sm { text-align: center; padding: 1rem; font-weight: 500; font-size: 0.9rem; }
         #menu-error { color: var(--sienna); font-size: 0.8rem; margin-top: 0.5rem; text-align: center; }
-
-        /* === PHOTO TREATMENT GLOBAL === */
-        .photo-bw { overflow: hidden; }
-        .photo-bw img {
-            width: 100%; height: 100%; object-fit: cover; display: block;
-            filter: grayscale(1);
-            transition: filter 0.6s cubic-bezier(0.16,1,0.3,1), transform 4s cubic-bezier(0.16,1,0.3,1);
-        }
-        .photo-bw:hover img {
-            filter: grayscale(0.2) sepia(0.1);
-        }
-        .photo-bw.ken-burns:hover img { transform: scale(1.05); }
-        .photo-caption {
-            font-family: 'Jost', sans-serif; font-weight: 300; font-style: italic;
-            font-size: 0.75rem; color: var(--mute);
-            text-align: center; margin-top: 0.8rem;
-        }
 
         /* === CEREMONY — dark cinematic with bg image === */
         .ceremony-bg {
@@ -505,21 +475,6 @@
         .ceremony-bg .sec-title { color: var(--paper); }
         .ceremony-bg .sec-tag { color: var(--sienna-soft); }
 
-        /* === FULL-WIDTH PHOTO SECTION === */
-        .full-photo {
-            position: relative; overflow: hidden;
-            height: clamp(300px, 50vh, 500px);
-        }
-        .full-photo img {
-            width: 100%; height: 100%; object-fit: cover; display: block;
-            filter: grayscale(1);
-            transition: filter 0.6s cubic-bezier(0.16,1,0.3,1), transform 4s cubic-bezier(0.16,1,0.3,1);
-        }
-        .full-photo:hover img {
-            filter: grayscale(0.2) sepia(0.1);
-            transform: scale(1.05);
-        }
-
         /* === CEREMONY — dark cinematic === */
         .ceremony-intro {
             font-size: 0.9rem; color: var(--fg-inv);
@@ -534,7 +489,7 @@
             padding: 1.8rem 0;
             border-bottom: 1px solid var(--rule-inv);
             display: grid;
-            grid-template-columns: auto 1fr;
+            grid-template-columns: 8.5rem 1fr;
             gap: 1.5rem;
             align-items: baseline;
         }
@@ -542,7 +497,7 @@
         .m-moment {
             font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.3em;
             font-weight: 500; color: var(--sienna-soft);
-            min-width: 100px;
+            min-width: 0;
             padding-top: 0.15rem;
         }
 
@@ -553,7 +508,7 @@
         .m-composer {
             font-family: 'Jost', sans-serif; font-weight: 300;
             font-style: italic; font-size: 0.8rem;
-            color: var(--fg-inv); opacity: 0.35;
+            color: var(--fg-inv); opacity: 0.6;
         }
         .dl-link {
             display: inline-block; margin-top: 2.5rem;
@@ -595,7 +550,7 @@
         }
         .venue-map:hover img { filter: grayscale(0.25) sepia(0.1) contrast(1); }
         .venue-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.3em; font-weight: 500; color: var(--sienna-soft); margin-bottom: 0.3rem; }
-        .venue h3 { font-family: 'Bodoni Moda', serif; font-size: 1.3rem; margin-bottom: 0.3rem; color: var(--fg-inv); }
+        .venue h3 { font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: 1.45rem; margin-bottom: 0.3rem; color: var(--fg-inv); }
         .venue p { font-size: 0.85rem; color: var(--fg-inv-mute); }
         .venue-time { color: var(--fg-inv); font-weight: 500; font-size: 0.85rem; margin: 0.5rem 0; }
         .venue-link {
@@ -644,7 +599,7 @@
         .hotel:hover .hotel-img img { filter: grayscale(0.2) sepia(0.1); transform: scale(1.03); }
         .hotel-body { padding: 1.2rem 1.5rem; }
         .hotel-cat { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.3em; color: var(--sienna); font-weight: 500; }
-        .hotel h3 { font-family: 'Bodoni Moda', serif; font-size: 1.05rem; margin: 0.2rem 0; }
+        .hotel h3 { font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: 1.2rem; margin: 0.2rem 0; }
         .hotel-stars { font-size: 0.75rem; color: var(--sienna); }
         .hotel-addr { font-size: 0.75rem; color: var(--fg-mute); margin-bottom: 0.8rem; }
         .hotel-go {
@@ -657,16 +612,17 @@
         /* === DETAILS — key/value strips === */
         .details-strips { max-width: 700px; margin: 0 auto; }
         .detail-strip {
-            display: flex; justify-content: space-between; align-items: baseline;
+            display: grid; grid-template-columns: 9rem 1fr;
+            gap: 1.5rem; align-items: baseline;
             padding: 1.2rem 0;
             border-bottom: 1px solid var(--rule);
         }
         .detail-strip:last-child { border-bottom: none; }
         .d-key {
             font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.3em;
-            font-weight: 500; color: var(--sienna); min-width: 140px;
+            font-weight: 500; color: var(--sienna); min-width: 0;
         }
-        .d-val { text-align: right; font-size: 0.95rem; }
+        .d-val { text-align: left; font-size: 0.95rem; }
 
         /* === GIFTS === */
         .gifts-content { max-width: 800px; margin: 0 auto; }
@@ -681,14 +637,19 @@
             text-align: center;
         }
         .pay-box h4 {
-            font-family: 'Bodoni Moda', serif;
-            font-size: 1rem; margin-bottom: 1rem;
+            font-family: 'Bodoni Moda', serif; font-weight: 500;
+            font-size: 1.1rem; margin-bottom: 1rem;
         }
+        /* El IBAN lo va a copiar gente a mano: caja visible, cifra grande y
+           numeros de ancho fijo para leerlos de cuatro en cuatro. */
         .pay-value {
-            font-family: 'Jost', sans-serif; font-size: 0.8rem;
-            color: var(--fg-mute); word-break: break-all;
-            padding: 0.6rem; background: var(--warm);
-            margin-bottom: 0.8rem; line-height: 1.5;
+            font-family: 'Jost', sans-serif; font-size: 1rem;
+            color: var(--fg); letter-spacing: 0.04em;
+            font-variant-numeric: tabular-nums;
+            word-break: normal; overflow-wrap: anywhere;
+            padding: 0.8rem; background: var(--paper);
+            border: 1px solid var(--rule);
+            margin-bottom: 0.9rem; line-height: 1.6;
         }
         .copy-btn {
             display: inline-flex; align-items: center; gap: 0.4rem;
@@ -713,7 +674,7 @@
             border: 1px solid var(--rule-inv-md);
             padding: 2rem;
         }
-        .song-form-box h4 { font-family: 'Bodoni Moda', serif; font-size: 1.1rem; margin-bottom: 1.5rem; color: var(--fg-inv); }
+        .song-form-box h4 { font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: 1.2rem; margin-bottom: 1.5rem; color: var(--fg-inv); }
         .song-form-box input {
             width: 100%; padding: 0.6rem 0; margin-bottom: 1rem;
             border: none; border-bottom: 1px solid var(--rule-inv-lg);
@@ -745,7 +706,7 @@
         .foot-names em { font-style: italic; }
         .foot-date { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.3em; color: var(--mute); margin-bottom: 0.3rem; }
 
-        .foot-quote { font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 0.85rem; color: var(--sienna); opacity: 0.5; max-width: 350px; margin: 0 auto; }
+        .foot-quote { font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 0.9rem; color: var(--sienna); max-width: 350px; margin: 0 auto; }
 
         .hotels-note { text-align: center; margin-top: 2.5rem; font-size: 0.85rem; color: var(--fg-mute); }
         .hotels-note strong { color: var(--sienna); }
@@ -764,31 +725,6 @@
         }
         .cal-btn:hover { background: var(--sienna); color: white; }
         .cal-btn svg { width: 14px; height: 14px; }
-
-        /* === GALLERY — editorial lookbook === */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 320px 280px;
-            gap: 3px;
-            max-width: 1200px; margin: 0 auto;
-        }
-        .gallery-grid .g-item { overflow: hidden; position: relative; }
-        .gallery-grid .g-item:first-child { grid-row: 1 / 3; }
-        .gallery-grid .g-item img {
-            width: 100%; height: 100%; object-fit: cover; display: block;
-            filter: grayscale(1); transition: filter 0.6s cubic-bezier(0.16,1,0.3,1), transform 4s cubic-bezier(0.16,1,0.3,1);
-        }
-        .gallery-grid .g-item:hover img { filter: grayscale(0.2) sepia(0.1); transform: scale(1.04); }
-        .gallery-grid .g-caption {
-            position: absolute; bottom: 0; left: 0; right: 0;
-            padding: 1.5rem;
-            background: linear-gradient(transparent, rgba(0,0,0,0.5));
-            color: white; font-size: 0.7rem; text-transform: uppercase;
-            letter-spacing: 0.25em; font-weight: 500;
-            opacity: 0; transition: opacity 0.4s;
-        }
-        .gallery-grid .g-item:hover .g-caption { opacity: 1; }
 
         /* === FAQ — accordion === */
         .faq-list { max-width: 700px; margin: 0 auto; }
@@ -822,8 +758,7 @@
         .foot-dev {
             margin-top: 3rem; padding-top: 1.5rem;
             border-top: 1px solid var(--rule);
-            font-size: 0.7rem; text-transform: uppercase;
-            letter-spacing: 0.2em; color: var(--mute); opacity: 0.6;
+            font-size: 0.75rem; letter-spacing: 0.06em; color: var(--mute);
         }
         .foot-dev a { color: var(--sienna); text-decoration: none; transition: opacity 0.2s; }
         .foot-dev a:hover { opacity: 0.6; }
@@ -937,8 +872,6 @@
         .btn-next { background: var(--ink); color: var(--paper); flex: 1; }
         .btn-next:hover { background: var(--sienna); border-color: var(--sienna); color: white; }
         .btn-next:disabled { opacity: 0.3; cursor: not-allowed; }
-
-        .hotels-mosaic { grid-template-columns: repeat(3, 1fr); }
 
         /* === HOTEL DEALS + MODAL === */
         .hotel-deal {
@@ -1073,13 +1006,70 @@
         }
         .legend-pin.pin-cer { background: var(--sienna); }
         .legend-pin.pin-fin { background: var(--ink); }
-        .legend-pin.pin-htl { background: var(--sienna-soft); color: white; font-size: 0.65rem; }
+        .legend-pin.pin-htl { background: transparent; border: 1px solid var(--sienna); color: var(--sienna); font-size: 0.7rem; }
         .legend-item .l-name { color: var(--fg); }
         .legend-item .l-sub { color: var(--fg-mute); font-size: 0.75rem; }
+
+        /* === MOTIVOS DEL MONASTERIO === */
+        /* Filete de bolas isabelinas: la pausa que buscaba el rosetón, en
+           12 px de alto y sin una sola imagen. */
+        .rule-bolas {
+            width: min(220px, 60%); height: 12px;
+            margin: clamp(2.5rem, 5vw, 4rem) auto;
+            color: var(--sienna); opacity: 0.6;
+            background:
+                radial-gradient(circle at 6px 8.5px, currentColor 2.4px, transparent 3px) 0 0 / 12px 12px repeat-x,
+                linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
+            -webkit-mask: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+                    mask: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+        }
+        .bg-dark .rule-bolas, .ceremony-bg .rule-bolas, .venues-bg .rule-bolas { color: var(--sienna-soft); }
+        .foot .rule-bolas { margin: 2.5rem auto 1.5rem; }
+        .foot-dev { border-top: none; padding-top: 0; }
+
+        .sec-arco {
+            display: block; width: 120px; height: 72px;
+            margin: 0 auto 1.2rem; color: var(--sienna-soft); opacity: 0.85;
+        }
+        .venue-head { display: flex; gap: 1rem; align-items: flex-start; }
+        .venue-icon { width: 44px; height: 50px; flex: none; color: var(--sienna-soft); margin-top: 0.2rem; }
+        .ok-granada { display: block; width: 32px; height: 37px; margin: 0 auto 1.2rem; color: var(--sienna); }
+        @media (max-width: 768px) { .sec-arco { width: 96px; height: 58px; } }
+
+        /* Zonas de toque de al menos 44 px sin mover la maqueta: el relleno
+           crece y el margen negativo lo compensa. */
+        .venue-link, .hotel-go, .dl-link {
+            display: inline-block; padding: 0.7rem 0; margin: -0.7rem 0;
+            border-bottom: none;
+            text-decoration: underline; text-underline-offset: 0.4em;
+            text-decoration-thickness: 1px;
+        }
+        .code-chip { padding: 0.45rem 0.7rem; }
+        button.hotel-go { padding: 0.7rem 0; margin: -0.7rem 0; }
+
+        /* === LEGIBILIDAD ===
+           El publico es una familia de todas las edades, mayoria en movil y
+           con bastantes mayores: ningun texto de interfaz baja de 12 px, y el
+           secundario no baja de 14. */
+        .nav-link, .btn-back, .btn-next, .dl-link, .hero-countdown,
+        .legend-group-title, .modal-price-sub, .song-btn, .modal-go { font-size: 0.75rem; }
+        .sec-tag, .field label, .d-key, .m-moment, .hotel-cat, .venue-tag,
+        .hero-cta, .cal-btn, .copy-btn, .venue-link, .hotel-go, .g-num { font-size: 0.78rem; }
+        .tl-desc, .hotel-addr, .big-choice-sub, .legend-item .l-sub, .m-composer,
+        .sec-sub, .pane-head p, .hotels-note, .venue p, .faq-a p,
+        .gifts-intro, .hotel-deal, .tl-time { font-size: 0.9rem; }
+        .field input, .field select, .field textarea,
+        .g-fields input, .g-fields select, .song-form-box input { font-weight: 400; }
+
+        /* Anchos de linea: el optimo esta entre 55 y 75 caracteres */
+        .gifts-intro, .hotels-note, .ceremony-intro { max-width: 520px; margin-left: auto; margin-right: auto; }
+        .faq-a p { max-width: 60ch; }
 
         /* === RESPONSIVE === */
         @media (max-width: 768px) {
             .nav { padding: 1.2rem 1.5rem; }
+            .detail-strip { grid-template-columns: 1fr; gap: 0.2rem; padding: 1rem 0; }
+            .hotel-img { height: 160px; }
             .nav-actions .nav-link { display: none; }
             .burger { display: block; }
             .venues-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -1094,13 +1084,16 @@
             .music-piece { grid-template-columns: 1fr; gap: 0.3rem; }
             .m-moment { min-width: unset; }
             .close-btn { right: 1.5rem; }
-            .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
-            .gallery-grid .g-item { height: 250px; }
-            .gallery-grid .g-item:first-child { grid-row: auto; }
             .avila-map-wrap { grid-template-columns: 1fr; }
+            /* A 342 px de ancho los rotulos secundarios bajaban a 4 px: se
+               podan y el mapa se recorta. La leyenda ya lleva esa informacion. */
+            #map-avila .lbl-minor { display: none; }
+            #map-avila .lbl-main { font-size: 20px; }
+            .avila-map { aspect-ratio: 8 / 7; }
         }
         @media (max-width: 480px) {
             .hero-names { font-size: clamp(3rem, 15vw, 5rem); }
+            .hero-names .amp { opacity: 0.32; }
             .hero-countdown { letter-spacing: 0.15em; }
         }
     </style>
@@ -1118,18 +1111,64 @@
     <!-- SVG SYMBOLS -->
     <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
         <symbol id="crest" viewBox="675 272 708 739"><path d="m0 0h32v59h61l1 4-1 28h-61v172l8-6 14-11 17-9h2l-2-10-11-21-5-15v-19l4-15 5-10 9-11 15-11 6-4h2l-1 15v16l1 4 4-14 7-13 8-10 10-11 8-11 4-11 2-11v-10l-3-17-2-7h3l12 7 14 11 9 10 8 14 4 11 1 6v16l-4 18-14 28-2 8v9l4 15 5 17v15l-3 10 1 4 1 3-7 8-7 7-9-3-16-4-8-1h-18l-17 3-15 6-14 8-11 9-7 7-13 17-11 16-3 4-4-2-13-19-9-12-9-10-13-10-14-8-15-6-17-3h-18l-19 3-15 6-15 9-10 9-11 15-8 17-4 16-1 7v26l3 18 5 17 9 21 12 23 15 24 21 28 9 11 11 13 9 10 14 15 7 8 16 16 8 7 13 12 8 7 10 9 14 11 9 7 5-2 13-11 11-9 13-12 8-7 10-9 13-12 8-8 7-8 12-12 7-8 11-13 11-14 12-15 18-27 10-17 11-21 9-24 5-22 1-8v-22l-3-17-6-16-6-11 2-4 12-12 3 1 9 16 5 12 4 14 3 26-1 17-3 18-6 21-8 20-12 24-13 21-10 14-11 16-11 14-24 28-16 17-30 30-8 7-7 7-8 7-34 28-11 8-6 1-13-9-14-12-10-8-13-11-10-9-12-11-7-7-8-7-14-14-4 2-9 9-7 8-4 2v2l-16 16-1 2 5 2 17 9 6 4-1 2-20 7-36 13-30 10-3-1 15-46 15-43 2-2 6 12 7 15v2l5-3 12-12 7-8 17-17h2l-6-8-11-13-14-17-13-18-18-27-14-25-9-20-8-22-5-23-1-10v-19l3-21 7-20 9-17 11-14 12-12h2l-1-4-20-25-8-14-4-14v-20l3-12 7-14 10-14 4-3 3 13 5 15 6 10 6 4h7l4-3-1-12-12-22-4-13-2-12v-8l3-15 8-16 6-8 12-12 15-10 5-3 3 1-4 17-1 8v11l3 13 6 12 15 16 10 14 6 14 2 9 1 1v-26l-1-9 6 2 12 8 10 9 7 11 5 13 2 9v15l-4 15-9 17-4 7-1 9 19 10 13 10 7 6 2 1-1-7v-164l-61-1v-32h61v-58zm158 89-4 10-7 14-8 10-10 11-7 10-4 11-1 5v43l-17-8-11-8-9-10-4-4v16l4 11 9 16 6 14 10-1h26l14 2h5l3-9v-8l-7-27-1-7v-12l3-14 4-10 8-14 4-11v-18l-4-11zm-286 1-4 9-1 5v10l4 13 12 25 3 12v7l-3 10-6 8-5 4-9 3h-9l-10-3-9-6-4-3h-2l3 14 6 12 8 10 10 11 6 8 9-3 16-5 12-2h29l8 1 14-28 5-12 1-16-2-1-8 11-9 8-16 8-5 2-1-40-4-15-6-10-13-15-8-9-6-12-4-11z" transform="translate(1008,316)"/><path d="m0 0h2l1 2 4 50v8l28 2 31 3 2 1-2 4-11 10-7 8-45 45-1 2h-2l-2 4-6 5-52 1-8 7-7 8-37 37-7 8-33 33-7 8-42 42-7 8-5 4-7 8 2 6 5 12 2 8v13l-4 6-2 1h-8l-5-4-2-4-3-16-5-10-4-5-10-6-11-4-11-1-5-6-1-7 3-5 5-3h12l12 3 12 6 3 1 7-8 36-36 7-8 31-31 7-8 40-40 7-8 24-24 1-2v-53zm-17 47-35 35-1 2v21l4-2 22-22 4-5 8-7 1-2-1-20zm18 35-6 5-6 7-8 7-11 12-7 7v2h22l25-25 7-8 5-6-2-1z" transform="translate(1285,419)"/></symbol>
+
+        <!-- Motivos del Real Monasterio de Santo Tomas (1482-1493, gotico
+             isabelino). Dibujados a mano y a proposito escuetos: el rosetón
+             grande ya enseñó lo que pasa con un ornamento sin altura acotada. -->
+
+        <!-- Arco conopial con bolas isabelinas rematando el trasdós -->
+        <symbol id="arco" viewBox="0 0 200 120">
+            <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22,120 V72 C22,48 40,32 60,28 C76,26 92,24 100,10 C108,24 124,26 140,28 C160,32 178,48 178,72 V120"/>
+                <path d="M32,120 V74 C32,54 46,42 62,38 C78,36 94,36 100,24 C106,36 122,36 138,38 C154,42 168,54 168,74 V120"/>
+                <path d="M100,10 V0"/>
+            </g>
+            <path d="M14,120 V70 C14,42 36,24 58,20 C76,18 92,16 100,0 C108,16 124,18 142,20 C164,24 186,42 186,70 V120"
+                  fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-dasharray="0 10"/>
+        </symbol>
+
+        <!-- Fachada: piñón con bolas, arco abocinado y rosetón pequeño -->
+        <symbol id="fachada" viewBox="0 0 56 64">
+            <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8,62 V26 L28,8 L48,26 V62"/>
+                <path d="M8,26 V18 M48,26 V18"/>
+                <path d="M15,62 V38 C15,28 21,24 28,22 C35,24 41,28 41,38 V62"/>
+                <path d="M20,62 V40 C20,33 24,30 28,28 C32,30 36,33 36,40 V62"/>
+                <circle cx="28" cy="36" r="3.6"/>
+                <path d="M24,62 V50 C24,46 32,46 32,50 V62"/>
+                <path d="M28,8 V2 M25.5,4.5 h5"/>
+            </g>
+            <path d="M6,26 L28,6 L50,26" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-dasharray="0 6"/>
+            <circle cx="8" cy="16" r="1.6" fill="currentColor"/><circle cx="48" cy="16" r="1.6" fill="currentColor"/>
+        </symbol>
+
+        <!-- Granada: del escudo y de la sillería del coro, y guiño a la
+             Plaza de Granada, donde está el monasterio -->
+        <symbol id="granada" viewBox="0 0 24 28">
+            <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="17.5" r="8.3"/>
+                <path d="M8.6,10.2 L10.2,5.4 L12,8.4 L13.8,5.4 L15.4,10.2"/>
+                <path d="M12,5.2 C12.8,3.2 14.6,2.4 16.8,2.8"/>
+                <path d="M7.6,17.5 a4.4,4.4 0 0 0 8.8,0"/>
+            </g>
+            <g fill="currentColor">
+                <circle cx="9.9" cy="19.6" r="1"/><circle cx="12.1" cy="20.8" r="1"/><circle cx="14.2" cy="19.5" r="1"/>
+            </g>
+        </symbol>
     </svg>
 
     <!-- NAV -->
     <nav class="nav">
         <a href="#" class="nav-brand">R <em>&</em> A</a>
         <div class="nav-actions">
-            <a href="#rsvp" class="nav-link">RSVP</a>
+            <a href="#rsvp" class="nav-link">Confirmar</a>
             <a href="#lugares" class="nav-link">Lugares</a>
+            <a href="#details" class="nav-link">Programa</a>
             <a href="#hotels" class="nav-link">Hoteles</a>
-            <a href="#ceremony" class="nav-link">Ceremonia</a>
             <a href="#gifts" class="nav-link">Regalos</a>
-            <a href="#faq" class="nav-link">FAQ</a>
+            <a href="#faq" class="nav-link">Dudas</a>
+            <a href="#ceremony" class="nav-link">Ceremonia</a>
             <button class="burger" onclick="openMenu()" aria-label="Menú" aria-expanded="false" id="burger-btn"><span></span><span></span><span></span></button>
         </div>
     </nav>
@@ -1137,12 +1176,13 @@
     <!-- MOBILE MENU -->
     <div class="overlay-menu" id="overlayMenu" onclick="if(event.target===this)closeMenu()">
         <button class="close-btn" onclick="closeMenu()" aria-label="Cerrar menú">&times;</button>
-        <a href="#rsvp" onclick="closeMenu()">RSVP</a>
+        <a href="#rsvp" onclick="closeMenu()">Confirmar</a>
         <a href="#lugares" onclick="closeMenu()">Lugares</a>
+        <a href="#details" onclick="closeMenu()">Programa</a>
         <a href="#hotels" onclick="closeMenu()">Hoteles</a>
-        <a href="#ceremony" onclick="closeMenu()">Ceremonia</a>
         <a href="#gifts" onclick="closeMenu()">Regalos</a>
-        <a href="#faq" onclick="closeMenu()">FAQ</a>
+        <a href="#faq" onclick="closeMenu()">Dudas</a>
+        <a href="#ceremony" onclick="closeMenu()">Ceremonia</a>
     </div>
 
     <!-- HERO -->
@@ -1153,7 +1193,7 @@
             </div>
         </div>
         <div class="hero-center hs">
-            <p class="hero-date">12 de Junio de 2027 &middot; Ávila</p>
+            <p class="hero-date">12 de junio de 2027 &middot; Ávila</p>
             <h1 class="hero-names">
                 Raquel
                 <span class="amp">&</span>
@@ -1163,17 +1203,17 @@
             <a class="hero-cta" href="#rsvp">Confirma tu asistencia<span class="arr">→</span></a>
         </div>
         <div class="hero-bottom hs">
-            <p class="hero-quote">“Y sin amor, todo es nada”</p>
+            <p class="hero-quote">«Y sin amor, todo es nada»</p>
             <p class="hero-author">Santa Teresa de Jesús</p>
         </div>
         <div class="scroll-indicator"></div>
     </section>
 
     <!-- RSVP -->
-    <section id="rsvp" class="bg-paper pad">
+    <section id="rsvp" class="bg-warm pad">
         <div class="sec-head rv">
-            <p class="sec-tag">Confirma tu asistencia</p>
-            <h2 class="sec-title"><em>RSVP</em></h2>
+            <p class="sec-tag">Te esperamos</p>
+            <h2 class="sec-title">Confirma tu <em>asistencia</em></h2>
             <p class="sec-sub">Por favor, confirma antes del 1 de mayo de 2027</p>
         </div>
         <div class="rsvp-box rv" aria-live="polite">
@@ -1208,9 +1248,9 @@
                         <h3>Tus <em>datos</em></h3>
                         <p id="step2-sub">Para tenerte en cuenta en cada detalle</p>
                     </div>
-                    <div class="field"><label>Nombre completo</label><input type="text" id="name" name="nombre" autocomplete="name"></div>
-                    <div class="field"><label>Email</label><input type="email" id="email" name="email" autocomplete="email"></div>
-                    <div class="field" id="field-phone"><label>Teléfono</label><input type="tel" id="phone" name="telefono" autocomplete="tel"></div>
+                    <div class="field"><label for="name">Nombre completo</label><input type="text" id="name" name="nombre" autocomplete="name"></div>
+                    <div class="field"><label for="email">Email</label><input type="email" id="email" name="email" autocomplete="email"></div>
+                    <div class="field" id="field-phone"><label for="phone">Teléfono</label><input type="tel" id="phone" name="telefono" autocomplete="tel"></div>
                     <div class="rsvp-nav">
                         <button type="button" class="btn-back" onclick="goStep(1)">Atrás</button>
                         <button type="button" class="btn-next" id="btn-next-2" onclick="nextFrom(2)">Siguiente</button>
@@ -1253,9 +1293,9 @@
                         </div>
                         <p id="menu-error" style="display:none;">Por favor, selecciona tu menú</p>
                     </div>
-                    <div class="field"><label>Tus alergias e intolerancias <span style="text-transform:none;letter-spacing:normal;color:var(--fg-mute);">(opcional)</span></label><input type="text" id="allergies" name="alergias" placeholder="Celiaquía, lactosa, frutos secos…"></div>
+                    <div class="field"><label for="allergies">Tus alergias e intolerancias <span style="text-transform:none;letter-spacing:normal;color:var(--fg-mute);">(opcional)</span></label><input type="text" id="allergies" name="alergias" placeholder="Celiaquía, lactosa, frutos secos…"></div>
                     <div class="field">
-                        <label>¿Vendrás acompañado?</label>
+                        <label for="num-guests">¿Vendrás acompañado?</label>
                         <select id="num-guests" name="num_acompanantes" onchange="updateGuests()">
                             <option value="0">No, iré solo/a</option>
                             <option value="1">1 acompañante</option>
@@ -1288,7 +1328,7 @@
                     </div>
                     <input type="hidden" name="transporte" id="bus" value="">
                     <div class="field" id="field-bus-num" style="display:none;">
-                        <label>¿Para cuántas personas?</label>
+                        <label for="bus-num">¿Para cuántas personas?</label>
                         <select id="bus-num" name="transporte_personas"></select>
                     </div>
                     <div class="rsvp-nav">
@@ -1310,20 +1350,25 @@
         </div>
         <div class="venues-grid">
             <div class="venue rv">
-                <a href="https://www.google.com/maps/dir//Real+Monasterio+de+Santo+Tom%C3%A1s+%C3%81vila" target="_blank" class="venue-map" title="Ver en Google Maps"><img id="map-ceremonia" alt="Mapa del Real Monasterio de Santo Tomás" loading="lazy"></a>
-                <p class="venue-tag">Ceremonia religiosa</p>
-                <h3>Real Monasterio de Santo Tomás</h3>
+                <a href="https://www.google.com/maps/dir//Real+Monasterio+de+Santo+Tom%C3%A1s+%C3%81vila" target="_blank" rel="noopener" class="venue-map" title="Ver en Google Maps"><img id="map-ceremonia" alt="Mapa del Real Monasterio de Santo Tomás" loading="lazy"></a>
+                <div class="venue-head">
+                    <svg class="venue-icon" aria-hidden="true"><use href="#fachada"/></svg>
+                    <div>
+                        <p class="venue-tag">Ceremonia religiosa</p>
+                        <h3>Real Monasterio de Santo Tomás</h3>
+                    </div>
+                </div>
                 <p>Plaza de Granada, 1, 05003 Ávila</p>
                 <p class="venue-time">13:00h</p>
-                <a href="https://www.google.com/maps/dir//Real+Monasterio+de+Santo+Tom%C3%A1s+%C3%81vila" target="_blank" class="venue-link">Cómo llegar &rarr;</a>
+                <a href="https://www.google.com/maps/dir//Real+Monasterio+de+Santo+Tom%C3%A1s+%C3%81vila" target="_blank" rel="noopener" class="venue-link">Cómo llegar &rarr;</a>
             </div>
             <div class="venue rv">
-                <a href="https://www.google.com/maps/search/Dehesa+de+Pedrosillo+%C3%81vila" target="_blank" class="venue-map" title="Ver en Google Maps"><img id="map-finca" alt="Mapa de la Dehesa del Pedrosillo" loading="lazy"></a>
+                <a href="https://www.google.com/maps/search/Dehesa+de+Pedrosillo+%C3%81vila" target="_blank" rel="noopener" class="venue-map" title="Ver en Google Maps"><img id="map-finca" alt="Mapa de la Dehesa del Pedrosillo" loading="lazy"></a>
                 <p class="venue-tag">Celebración</p>
                 <h3>Dehesa del Pedrosillo</h3>
                 <p>N-403, km 144 · 05004 Ávila</p>
-                <p class="venue-time">15:30h — Cóctel y Banquete</p>
-                <a href="https://www.google.com/maps/search/Dehesa+de+Pedrosillo+%C3%81vila" target="_blank" class="venue-link">Cómo llegar &rarr;</a>
+                <p class="venue-time">15:30h — Cóctel y banquete</p>
+                <a href="https://www.google.com/maps/search/Dehesa+de+Pedrosillo+%C3%81vila" target="_blank" rel="noopener" class="venue-link">Cómo llegar &rarr;</a>
             </div>
         </div>
     </section>
@@ -1335,7 +1380,7 @@
             <h2 class="sec-title">Detalles <em>& Programa</em></h2>
         </div>
         <div class="details-strips rv-left">
-            <div class="detail-strip"><span class="d-key">Fecha</span><span class="d-val">Sábado, 12 de Junio de 2027</span></div>
+            <div class="detail-strip"><span class="d-key">Fecha</span><span class="d-val">Sábado, 12 de junio de 2027</span></div>
             <div class="detail-strip"><span class="d-key">Horario</span><span class="d-val">Ceremonia 13:00h — Cóctel 15:30h</span></div>
             <div class="detail-strip"><span class="d-key">Transporte</span><span class="d-val">Aparcamiento disponible. Autobús Santo Tomás → finca</span></div>
             <div class="detail-strip"><span class="d-key">Niños</span><span class="d-val">Bienvenidos. Habrá zona infantil</span></div>
@@ -1346,17 +1391,18 @@
                 Añadir al calendario
             </button>
         </div>
-        <div class="sec-head rv" style="margin-top:clamp(4rem,8vw,6rem);margin-bottom:clamp(2rem,4vw,3rem);">
-            <p class="sec-tag">12 de junio de 2027</p>
-            <h2 class="sec-title" style="font-size:clamp(1.6rem,3.5vw,2.5rem);">Programa del <em>Día</em></h2>
+        <div class="rule-bolas rv" aria-hidden="true"></div>
+        <div class="sec-head rv" style="margin-bottom:clamp(2rem,4vw,3rem);">
+            <p class="sec-tag sec-tag--sub">12 de junio de 2027</p>
+            <h2 class="sec-title" style="font-size:clamp(1.6rem,3.5vw,2.5rem);">Programa del <em>día</em></h2>
         </div>
         <div class="tl rv">
-            <div class="tl-item"><span class="tl-time">12:30</span><div><p class="tl-event">Llegada de Invitados</p><p class="tl-desc">Recibimiento en Santo Tomás</p></div></div>
-            <div class="tl-item"><span class="tl-time">13:00</span><div><p class="tl-event">Ceremonia Religiosa</p><p class="tl-desc">Intercambio de votos y anillos</p></div></div>
-            <div class="tl-item"><span class="tl-time">14:30</span><div><p class="tl-event">Traslado a la Finca</p><p class="tl-desc">Autobús disponible</p></div></div>
-            <div class="tl-item"><span class="tl-time">15:30</span><div><p class="tl-event">Cóctel de Bienvenida</p><p class="tl-desc">Aperitivos y fotos</p></div></div>
+            <div class="tl-item"><span class="tl-time">12:30</span><div><p class="tl-event">Llegada de invitados</p><p class="tl-desc">Recibimiento en Santo Tomás</p></div></div>
+            <div class="tl-item"><span class="tl-time">13:00</span><div><p class="tl-event">Ceremonia religiosa</p><p class="tl-desc">Intercambio de votos y anillos</p></div></div>
+            <div class="tl-item"><span class="tl-time">14:30</span><div><p class="tl-event">Traslado a la finca</p><p class="tl-desc">Autobús disponible</p></div></div>
+            <div class="tl-item"><span class="tl-time">15:30</span><div><p class="tl-event">Cóctel de bienvenida</p><p class="tl-desc">Aperitivos y fotos</p></div></div>
             <div class="tl-item"><span class="tl-time">17:30</span><div><p class="tl-event">Banquete</p><p class="tl-desc">Comida y brindis</p></div></div>
-            <div class="tl-item"><span class="tl-time">21:00</span><div><p class="tl-event">Primer Baile</p><p class="tl-desc">Apertura de pista</p></div></div>
+            <div class="tl-item"><span class="tl-time">21:00</span><div><p class="tl-event">Primer baile</p><p class="tl-desc">Apertura de pista</p></div></div>
             <div class="tl-item"><span class="tl-time">22:00</span><div><p class="tl-event">Fiesta</p><p class="tl-desc">Hasta el amanecer</p></div></div>
         </div>
     </section>
@@ -1374,14 +1420,14 @@
             <div class="avila-map">
                 <svg id="map-avila" viewBox="0 0 720 540" role="img" aria-label="Mapa ilustrado de Ávila: el Monasterio de Santo Tomás al sureste de la muralla, los hoteles en el casco antiguo y la Dehesa de Pedrosillo al norte por la N-403, junto al embalse de Las Cogotas">
                     <!-- Marca de agua: escudo -->
-                    <use href="#crest" x="565" y="240" width="120" height="125" fill="var(--ink)" opacity="0.05"/>
+                    <use href="#crest" class="lbl-minor" x="565" y="240" width="120" height="125" fill="var(--ink)" opacity="0.05"/>
 
                     <!-- Río Adaja: sube por el oeste hacia el embalse -->
                     <path d="M 70,540 C 90,480 92,430 100,380 C 108,330 104,290 116,245 C 128,200 160,170 215,150 C 275,128 330,130 385,118"
                           fill="none" stroke="var(--ink)" stroke-opacity="0.35" stroke-width="2.2" stroke-linecap="round"/>
                     <path d="M 80,538 C 98,482 100,432 108,382 C 116,334 112,292 124,250"
                           fill="none" stroke="var(--ink)" stroke-opacity="0.16" stroke-width="1.4" stroke-linecap="round"/>
-                    <text x="96" y="330" transform="rotate(-80 96 330)" font-family="Bodoni Moda, serif" font-style="italic" font-size="12" fill="var(--ink)" fill-opacity="0.5">río Adaja</text>
+                    <text class="lbl-minor" x="96" y="330" transform="rotate(-80 96 330)" font-family="Bodoni Moda, serif" font-style="italic" font-size="12" fill="var(--ink)" fill-opacity="0.5">río Adaja</text>
 
                     <!-- Embalse de Las Cogotas -->
                     <path d="M 342,122 C 350,98 382,80 418,82 C 448,84 478,74 494,84 C 510,94 500,110 478,116 C 454,123 434,114 408,126 C 382,138 364,142 352,136 C 342,132 339,128 342,122 Z"
@@ -1389,12 +1435,12 @@
                     <path d="M 378,102 q 10,-5 20,0 q 10,5 20,0" fill="none" stroke="var(--ink)" stroke-opacity="0.35" stroke-width="1.2" stroke-linecap="round"/>
                     <path d="M 406,116 q 10,-5 20,0 q 10,5 20,0" fill="none" stroke="var(--ink)" stroke-opacity="0.3" stroke-width="1.2" stroke-linecap="round"/>
                     <path d="M 438,94 q 10,-5 20,0" fill="none" stroke="var(--ink)" stroke-opacity="0.3" stroke-width="1.2" stroke-linecap="round"/>
-                    <text x="400" y="62" text-anchor="middle" font-family="Bodoni Moda, serif" font-style="italic" font-size="12" fill="var(--ink)" fill-opacity="0.55">embalse de Las Cogotas</text>
+                    <text class="lbl-minor" x="400" y="62" text-anchor="middle" font-family="Bodoni Moda, serif" font-style="italic" font-size="12" fill="var(--ink)" fill-opacity="0.55">embalse de Las Cogotas</text>
 
                     <!-- N-403 hacia Valladolid -->
                     <path id="n403" d="M 252,338 C 280,300 316,268 352,238 C 392,205 448,172 496,142 C 512,132 528,126 544,122"
                           fill="none" stroke="var(--ink)" stroke-opacity="0.55" stroke-width="2.4" stroke-linecap="round"/>
-                    <g transform="translate(330,262) rotate(-38)">
+                    <g class="lbl-minor" transform="translate(330,262) rotate(-38)">
                         <rect x="-24" y="-9" width="48" height="18" rx="2" fill="var(--paper)" stroke="var(--ink)" stroke-opacity="0.4" stroke-width="1"/>
                         <text x="0" y="4" text-anchor="middle" font-family="Jost, sans-serif" font-size="10" letter-spacing="1.5" fill="var(--ink)" fill-opacity="0.75">N-403</text>
                     </g>
@@ -1431,28 +1477,24 @@
                             <line x1="0" y1="-14" x2="0" y2="-20" stroke="var(--sienna)" stroke-width="1.5"/>
                             <line x1="-3" y1="-17.5" x2="3" y2="-17.5" stroke="var(--sienna)" stroke-width="1.5"/>
                         </g>
-                        <text x="208" y="480" text-anchor="middle" font-family="Bodoni Moda, serif" font-style="italic" font-size="19" fill="var(--ink)">Ávila</text>
+                        <text class="lbl-main" x="208" y="480" text-anchor="middle" font-family="Bodoni Moda, serif" font-style="italic" font-size="19" fill="var(--ink)">Ávila</text>
                     </g>
 
                     <!-- Hoteles 1·2·3 -->
+                    <!-- Hoteles en contorno, igual que en la leyenda: se distinguen
+                         de los lugares de la boda por forma y no solo por tono. -->
                     <g font-family="Jost, sans-serif" font-size="11" font-weight="500">
-                        <circle cx="252" cy="384" r="10" fill="var(--sienna-soft)"/><text x="252" y="388" text-anchor="middle" fill="var(--paper)">1</text>
-                        <circle cx="240" cy="358" r="10" fill="var(--sienna-soft)"/><text x="240" y="362" text-anchor="middle" fill="var(--paper)">2</text>
-                        <circle cx="196" cy="452" r="10" fill="var(--sienna-soft)"/><text x="196" y="456" text-anchor="middle" fill="var(--paper)">3</text>
+                        <circle cx="252" cy="384" r="10" fill="var(--paper)" stroke="var(--sienna)" stroke-width="1.4"/><text x="252" y="388" text-anchor="middle" fill="var(--sienna)">1</text>
+                        <circle cx="240" cy="358" r="10" fill="var(--paper)" stroke="var(--sienna)" stroke-width="1.4"/><text x="240" y="362" text-anchor="middle" fill="var(--sienna)">2</text>
+                        <circle cx="196" cy="452" r="10" fill="var(--paper)" stroke="var(--sienna)" stroke-width="1.4"/><text x="196" y="456" text-anchor="middle" fill="var(--sienna)">3</text>
                     </g>
 
                     <!-- A · Monasterio de Santo Tomás -->
                     <g transform="translate(360,462)">
-                        <g stroke="var(--ink)" stroke-width="1.6" fill="var(--paper)">
-                            <rect x="-13" y="-6" width="26" height="16"/>
-                            <path d="M -13,-6 L 0,-18 L 13,-6" stroke-linejoin="round"/>
-                        </g>
-                        <circle cx="0" cy="-1" r="2.6" fill="none" stroke="var(--sienna)" stroke-width="1.2"/>
-                        <line x1="0" y1="-18" x2="0" y2="-24" stroke="var(--sienna)" stroke-width="1.5"/>
-                        <line x1="-3" y1="-21.5" x2="3" y2="-21.5" stroke="var(--sienna)" stroke-width="1.5"/>
+                        <use href="#fachada" x="-14" y="-34" width="28" height="32" style="color:var(--ink)"/>
                         <circle cx="-24" cy="-14" r="11" fill="var(--sienna)"/>
                         <text x="-24" y="-10" text-anchor="middle" font-family="Jost, sans-serif" font-size="12" font-weight="500" fill="var(--paper)">A</text>
-                        <text x="24" y="8" font-family="Bodoni Moda, serif" font-style="italic" font-size="14" fill="var(--ink)">Monasterio de Santo Tomás</text>
+                        <text class="lbl-main" x="24" y="8" font-family="Bodoni Moda, serif" font-style="italic" font-size="14" fill="var(--ink)">Monasterio de Santo Tomás</text>
                     </g>
 
                     <!-- B · Dehesa de Pedrosillo -->
@@ -1472,8 +1514,8 @@
                         </g>
                         <circle cx="0" cy="-36" r="11" fill="var(--ink)"/>
                         <text x="0" y="-32" text-anchor="middle" font-family="Jost, sans-serif" font-size="12" font-weight="500" fill="var(--paper)">B</text>
-                        <text x="0" y="40" text-anchor="middle" font-family="Bodoni Moda, serif" font-style="italic" font-size="17" fill="var(--ink)">Dehesa de Pedrosillo</text>
-                        <text x="0" y="57" text-anchor="middle" font-family="Jost, sans-serif" font-size="9" letter-spacing="2.5" fill="var(--ink)" fill-opacity="0.55">N-403 · KM 144</text>
+                        <text class="lbl-main" x="0" y="40" text-anchor="middle" font-family="Bodoni Moda, serif" font-style="italic" font-size="17" fill="var(--ink)">Dehesa de Pedrosillo</text>
+                        <text class="lbl-minor" x="0" y="57" text-anchor="middle" font-family="Jost, sans-serif" font-size="9" letter-spacing="2.5" fill="var(--ink)" fill-opacity="0.55">N-403 · KM 144</text>
                     </g>
 
                     <!-- Rosa de los vientos -->
@@ -1484,16 +1526,16 @@
                     </g>
 
                     <!-- Sierra de Gredos, al suroeste -->
-                    <g stroke="var(--ink)" stroke-opacity="0.35" stroke-width="1.5" fill="none" stroke-linejoin="round">
+                    <g class="lbl-minor" stroke="var(--ink)" stroke-opacity="0.35" stroke-width="1.5" fill="none" stroke-linejoin="round">
                         <path d="M 40,512 L 62,490 L 80,506 L 96,486 L 116,510"/>
                     </g>
-                    <text x="78" y="530" text-anchor="middle" font-family="Bodoni Moda, serif" font-style="italic" font-size="11" fill="var(--ink)" fill-opacity="0.5">Sierra de Gredos</text>
+                    <text class="lbl-minor" x="78" y="530" text-anchor="middle" font-family="Bodoni Moda, serif" font-style="italic" font-size="11" fill="var(--ink)" fill-opacity="0.5">Sierra de Gredos</text>
 
                     <!-- Dirección Madrid -->
-                    <g transform="translate(636,502)">
+                    <g class="lbl-minor" transform="translate(636,502)">
                         <line x1="-26" y1="0" x2="18" y2="0" stroke="var(--ink)" stroke-opacity="0.45" stroke-width="1.3"/>
                         <path d="M 18,0 l -7,-4 v 8 Z" fill="var(--ink)" fill-opacity="0.45"/>
-                        <text x="-4" y="-8" text-anchor="middle" font-family="Jost, sans-serif" font-size="9" letter-spacing="2.5" fill="var(--ink)" fill-opacity="0.55">A MADRID</text>
+                        <text class="lbl-minor" x="-4" y="-8" text-anchor="middle" font-family="Jost, sans-serif" font-size="9" letter-spacing="2.5" fill="var(--ink)" fill-opacity="0.55">A MADRID</text>
                     </g>
                 </svg>
                 <div class="avila-map-frame"></div>
@@ -1530,7 +1572,7 @@
         <div class="hotels-mosaic rv-scale">
             <div class="hotel"><div class="hotel-img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/89809914.jpg?k=60179adcc06c8a7d6443d8c20c0ae7ef8d814b21296927bc9018afe76fd14ab8&o=" alt="Palacio de los Velada" loading="lazy"></div><div class="hotel-body"><p class="hotel-cat">Palacio histórico</p><h3>Palacio de los Velada</h3><p class="hotel-stars">&#9733;&#9733;&#9733;&#9733;</p><p class="hotel-addr">Plaza de la Catedral, 10</p><p class="hotel-deal">105€/noche · IVA incluido</p><button type="button" class="hotel-go" onclick="openVeladaModal()">Tarifa especial invitados &rarr;</button></div></div>
             <div class="hotel"><div class="hotel-img"><img src="https://images.trvl-media.com/lodging/67000000/66500000/66495900/66495828/cd18a41b.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill" alt="Palacio Sofraga" loading="lazy"></div><div class="hotel-body"><p class="hotel-cat">Palacio del s.XVI</p><h3>Palacio Sofraga</h3><p class="hotel-stars">&#9733;&#9733;&#9733;&#9733;</p><p class="hotel-addr">López Núñez, 1</p><p class="hotel-deal">−15% con el código <button type="button" class="code-chip" onclick="copyCode(this)" aria-label="Copiar código R&amp;A15">R&amp;A15</button></p><a href="https://www.sofragapalacio.com/" target="_blank" rel="noopener" class="hotel-go">Reservar en su web &rarr;</a></div></div>
-            <div class="hotel"><div class="hotel-img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/378909371.jpg?k=71e0611acd00ea0d8c01cea4b5d0578ee5acda6ae26f0b4c0a21c458ebd08232&o=" alt="Las Leyendas" loading="lazy"></div><div class="hotel-body"><p class="hotel-cat">Hotel boutique</p><h3>Hotel Las Leyendas</h3><p class="hotel-stars">&#9733;&#9733;&#9733;&#9733;</p><p class="hotel-addr">Francisco Gallego, 3</p><a href="https://www.booking.com/hotel/es/las-leyendas.es.html" target="_blank" class="hotel-go">Ver en Booking &rarr;</a></div></div>
+            <div class="hotel"><div class="hotel-img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/378909371.jpg?k=71e0611acd00ea0d8c01cea4b5d0578ee5acda6ae26f0b4c0a21c458ebd08232&o=" alt="Las Leyendas" loading="lazy"></div><div class="hotel-body"><p class="hotel-cat">Hotel boutique</p><h3>Hotel Las Leyendas</h3><p class="hotel-stars">&#9733;&#9733;&#9733;&#9733;</p><p class="hotel-addr">Francisco Gallego, 3</p><a href="https://www.booking.com/hotel/es/las-leyendas.es.html" target="_blank" rel="noopener" class="hotel-go">Ver en Booking &rarr;</a></div></div>
         </div>
         <p class="hotels-note rv"><strong>Importante:</strong> Os recomendamos reservar con antelación — junio es temporada alta en Ávila.</p>
     </section>
@@ -1592,9 +1634,9 @@
             <div class="song-form-box rv" aria-live="polite">
                 <h4>Sugiere una canción</h4>
                 <form id="song-form" novalidate>
-                    <input type="text" name="cancion" placeholder="Nombre de la canción" required>
-                    <input type="text" name="artista" placeholder="Artista">
-                    <input type="text" name="nombre" placeholder="Tu nombre">
+                    <input type="text" name="cancion" placeholder="Nombre de la canción" aria-label="Nombre de la canción" required>
+                    <input type="text" name="artista" placeholder="Artista" aria-label="Artista">
+                    <input type="text" name="nombre" placeholder="Tu nombre" aria-label="Tu nombre">
                     <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;">
                     <button type="submit" class="song-btn">Sugerir</button>
                 </form>
@@ -1603,10 +1645,10 @@
     </section>
 
     <!-- FAQ -->
-    <section id="faq" class="bg-warm pad">
+    <section id="faq" class="bg-paper pad">
         <div class="sec-head rv">
             <p class="sec-tag">Dudas frecuentes</p>
-            <h2 class="sec-title">Preguntas <em>& Respuestas</em></h2>
+            <h2 class="sec-title">Preguntas <em>&amp; respuestas</em></h2>
         </div>
         <div class="faq-list rv">
             <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="faq-1" onclick="toggleFaq(this)">¿Hay aparcamiento?</button><div class="faq-a" id="faq-1" role="region"><p>Sí, en los dos sitios. El Monasterio de Santo Tomás cuenta con aparcamiento público cercano y la Dehesa del Pedrosillo dispone de amplio aparcamiento privado para los invitados.</p></div></div>
@@ -1623,10 +1665,13 @@
     <section id="ceremony" class="ceremony-bg pad">
         <div class="ceremony-bg-img"><picture><source type="image/webp" srcset="assets/vidriera.webp"><img src="assets/vidriera.jpeg" alt="" loading="lazy"></picture></div>
         <div class="sec-head rv">
+            <svg class="sec-arco" aria-hidden="true"><use href="#arco"/></svg>
             <p class="sec-tag">El momento sagrado</p>
             <h2 class="sec-title">La <em>Ceremonia</em></h2>
         </div>
-        <p class="ceremony-intro rv">Oficiada por <strong>Lorenzo Santos</strong></p>
+        <p class="ceremony-intro rv">Oficiada por <strong>Lorenzo Santos</strong><br>
+        En el Real Monasterio de Santo Tomás, levantado entre 1482 y 1493 bajo los Reyes
+        Católicos, ante el retablo que pintó Pedro Berruguete.</p>
         <div class="music-editorial rv-left">
             <div class="music-piece"><div class="m-moment">Preludio</div><div class="m-info"><p class="m-title">Canon en Re Mayor</p><p class="m-composer">Johann Pachelbel</p></div></div>
             <div class="music-piece"><div class="m-moment">Entrada novia</div><div class="m-info"><p class="m-title">Ave María</p><p class="m-composer">Franz Schubert</p></div></div>
@@ -1648,8 +1693,9 @@
             <svg fill="currentColor"><use href="#crest"/></svg>
         </div>
         <p class="foot-names">Raquel <em>&</em> Adrián</p>
-        <p class="foot-date">12 de Junio de 2027 &middot; Ávila</p>
-        <p class="foot-quote">“Y sin amor, todo es nada”</p>
+        <p class="foot-date">12 de junio de 2027 &middot; Ávila</p>
+        <p class="foot-quote">«Y sin amor, todo es nada»</p>
+        <div class="rule-bolas" aria-hidden="true"></div>
         <p class="foot-dev">&copy; 2027 Raquel &amp; Adrián. Todos los derechos reservados.<br>Diseñado y desarrollado por Adrián Zapatera</p>
     </footer>
 
@@ -1683,6 +1729,17 @@
         // dibujado con las ubicaciones verificadas; ya no usa Mapbox.
     })();
 
+    // El mapa ilustrado se recorta en movil para que los rotulos que quedan
+    // se lean; en escritorio se ve entero.
+    (function(){
+        const mapa = document.getElementById('map-avila');
+        if(!mapa) return;
+        const movil = matchMedia('(max-width: 768px)');
+        const ajusta = () => mapa.setAttribute('viewBox', movil.matches ? '100 40 540 470' : '0 0 720 540');
+        ajusta();
+        movil.addEventListener('change', ajusta);
+    })();
+
     // Menu
     function openMenu() {
         document.getElementById('overlayMenu').classList.add('open');
@@ -1702,13 +1759,20 @@
     });
 
     // Velada special-rate modal
+    let focoPrevio = null;
     function openVeladaModal() {
-        document.getElementById('velada-modal').classList.add('open');
+        focoPrevio = document.activeElement;
+        const m = document.getElementById('velada-modal');
+        m.classList.add('open');
         document.body.style.overflow = 'hidden';
+        const cerrar = m.querySelector('.modal-close');
+        if(cerrar) cerrar.focus();
     }
     function closeVeladaModal() {
         document.getElementById('velada-modal').classList.remove('open');
         document.body.style.overflow = '';
+        if(focoPrevio && focoPrevio.focus) focoPrevio.focus();
+        focoPrevio = null;
     }
 
     // Copia al portapapeles. navigator.clipboard solo existe en contextos
@@ -1766,7 +1830,10 @@
         const d = Math.floor(diff / 86400000);
         const h = Math.floor(diff % 86400000 / 3600000);
         const m = Math.floor(diff % 3600000 / 60000);
-        cdEl.innerHTML = '<span class="cd-n">' + d + '</span> días<span class="cd-sep">·</span><span class="cd-n">' + pad2(h) + '</span> h<span class="cd-sep">·</span><span class="cd-n">' + pad2(m) + '</span> min';
+        // Hasta la ultima semana solo tiene sentido contar dias.
+        cdEl.innerHTML = d > 7
+            ? '<span class="cd-n">' + d + '</span> días'
+            : '<span class="cd-n">' + d + '</span> días<span class="cd-sep">·</span><span class="cd-n">' + pad2(h) + '</span> h<span class="cd-sep">·</span><span class="cd-n">' + pad2(m) + '</span> min';
     }
     tickCountdown();
     setInterval(tickCountdown, 30000);
@@ -1871,9 +1938,12 @@
     function pickAtt(choice) {
         document.getElementById('attendance').value = choice;
         currentPath = choice;
-        document.querySelectorAll('.rsvp-pane[data-pane="1"] .big-choice').forEach(b => b.classList.remove('selected'));
+        document.querySelectorAll('.rsvp-pane[data-pane="1"] .big-choice').forEach(b => {
+            b.classList.remove('selected');
+            b.setAttribute('aria-pressed', 'false');
+        });
         const btn = document.querySelector('.big-choice[data-choice="'+choice+'"]');
-        if(btn) btn.classList.add('selected');
+        if(btn) { btn.classList.add('selected'); btn.setAttribute('aria-pressed', 'true'); }
 
         const fieldPhone = document.getElementById('field-phone');
         const step2Sub = document.getElementById('step2-sub');
@@ -1929,17 +1999,23 @@
 
     function pickPreboda(choice) {
         document.getElementById('preboda').value = choice;
-        document.querySelectorAll('.rsvp-pane[data-pane="3"] .big-choice').forEach(b => b.classList.remove('selected'));
+        document.querySelectorAll('.rsvp-pane[data-pane="3"] .big-choice').forEach(b => {
+            b.classList.remove('selected');
+            b.setAttribute('aria-pressed', 'false');
+        });
         const btn = document.querySelector('.big-choice[data-preboda="'+choice+'"]');
-        if(btn) btn.classList.add('selected');
+        if(btn) { btn.classList.add('selected'); btn.setAttribute('aria-pressed', 'true'); }
         document.getElementById('btn-next-3').disabled = false;
     }
 
     function pickBus(choice) {
         document.getElementById('bus').value = choice;
-        document.querySelectorAll('.rsvp-pane[data-pane="5"] .big-choice').forEach(b => b.classList.remove('selected'));
+        document.querySelectorAll('.rsvp-pane[data-pane="5"] .big-choice').forEach(b => {
+            b.classList.remove('selected');
+            b.setAttribute('aria-pressed', 'false');
+        });
         const btn = document.querySelector('.big-choice[data-bus="'+choice+'"]');
-        if(btn) btn.classList.add('selected');
+        if(btn) { btn.classList.add('selected'); btn.setAttribute('aria-pressed', 'true'); }
         const field = document.getElementById('field-bus-num');
         if(choice === 'si') {
             syncBusOptions();
@@ -1996,14 +2072,14 @@
         return '<div class="g-entry">'
           + '<div class="g-num">Acompañante '+i+'</div>'
           + '<div class="g-fields">'
-          +   '<input type="text" name="acomp_'+i+'_nombre" placeholder="Nombre completo" value="'+escAttr(g.nombre)+'">'
-          +   '<input type="text" name="acomp_'+i+'_contacto" placeholder="Teléfono o email (opcional)" value="'+escAttr(g.contacto)+'">'
+          +   '<input type="text" name="acomp_'+i+'_nombre" placeholder="Nombre completo" aria-label="Nombre del acompañante '+i+'" value="'+escAttr(g.nombre)+'">'
+          +   '<input type="text" name="acomp_'+i+'_contacto" placeholder="Teléfono o email (opcional)" aria-label="Contacto del acompañante '+i+' (opcional)" value="'+escAttr(g.contacto)+'">'
           + '</div>'
           + '<div class="g-fields" style="margin-top:0.8rem;">'
-          +   '<select name="acomp_'+i+'_menu">'
+          +   '<select name="acomp_'+i+'_menu" aria-label="Menú del acompañante '+i+'">'
           +     opt('', 'Su menú…') + opt('carne', 'Carne') + opt('pescado', 'Pescado') + opt('vegano', 'Vegano')
           +   '</select>'
-          +   '<input type="text" name="acomp_'+i+'_alergias" placeholder="Alergias e intolerancias (opcional)" value="'+escAttr(g.alergias)+'">'
+          +   '<input type="text" name="acomp_'+i+'_alergias" placeholder="Alergias e intolerancias (opcional)" aria-label="Alergias del acompañante '+i+' (opcional)" value="'+escAttr(g.alergias)+'">'
           + '</div>'
           + '</div>';
     }
@@ -2115,8 +2191,8 @@
             const { ok } = await postJson('/api/rsvp', buildRsvpPayload());
             if(ok) {
                 rsvpForm.innerHTML = currentPath === 'no'
-                    ? '<div class="form-ok"><h3>Gracias por avisar</h3><p>Os echaremos de menos. Un abrazo enorme.</p></div>'
-                    : '<div class="form-ok"><h3>¡Confirmación recibida!</h3><p>Nos vemos en Ávila. Gracias por acompañarnos.</p></div>';
+                    ? '<div class="form-ok"><svg class="ok-granada" aria-hidden="true"><use href="#granada"/></svg><h3>Gracias por avisar</h3><p>Os echaremos de menos. Un abrazo enorme.</p></div>'
+                    : '<div class="form-ok"><svg class="ok-granada" aria-hidden="true"><use href="#granada"/></svg><h3>¡Confirmación recibida!</h3><p>Nos vemos en Ávila. Gracias por acompañarnos.</p></div>';
                 const prog = document.getElementById('rsvp-progress');
                 if(prog) prog.style.display = 'none';
             } else {

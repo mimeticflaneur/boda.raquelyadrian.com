@@ -5,6 +5,96 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
+## [2.5.0] - 2026-08-25
+
+### Añadido
+- **Elementos del Real Monasterio de Santo Tomás**, donde se celebra la
+  ceremonia. Cuatro motivos dibujados a mano, menos de 3 KB en total:
+  - **Arco conopial** con bolas isabelinas presidiendo «La Ceremonia»: era la
+    única sección que hablaba del monasterio sin enseñarlo.
+  - **Filete de bolas isabelinas** entre «Detalles» y «Programa del día», y en
+    el pie. Es la pausa que buscaba el rosetón retirado, en 12 px de alto y sin
+    una sola imagen (CSS puro).
+  - **Fachada** (piñón con bolas, arco abocinado y rosetón pequeño) junto al
+    nombre del monasterio en «Lugares» y como icono del mismo en el mapa de
+    Ávila, para que un solo dibujo lo identifique en toda la web.
+  - **Granada** —del escudo, de la sillería del coro y guiño a la Plaza de
+    Granada, donde está el monasterio— sellando las confirmaciones. Sustituye
+    al ❦, que no existe en Bodoni Moda y cada sistema pintaba con una fuente
+    distinta.
+  - Una línea sobre el edificio en la sección de la ceremonia.
+- Se descartan a propósito los **yugos y flechas** y el **águila de san Juan**:
+  son emblemas auténticos de la fundación (1482-1493), pero su apropiación por
+  la Falange hace que parte de los invitados los lea hoy como símbolo político.
+
+### Corregido
+- **La caja del IBAN era invisible**: pintaba fondo `--warm` dentro de una
+  sección `--warm`. Ahora tiene fondo papel, borde, y la cifra pasa de 12,8 px
+  en gris claro a 16 px en negro con cifras de ancho fijo — lo va a copiar
+  gente a mano.
+- **Legibilidad para el público real** (familia de todas las edades, mayoría en
+  móvil): el cuerpo pasa de Jost 300 a 400, ningún texto de interfaz baja de
+  12 px y el secundario no baja de 14. Antes había media interfaz entre 10,4 y
+  11,2 px en versalitas espaciadas.
+- **Seis títulos salían en Bodoni negrita 700 sin querer** (no declaraban peso
+  y heredaban el de los encabezados): «Real Monasterio de Santo Tomás»,
+  «Palacio de los Velada», «Transferencia», «Sugiere una canción», «Tu menú» y
+  «Datos de tus acompañantes». Era el único sitio con negrita en toda la web.
+  De paso se deja de pedir ese peso a Google Fonts.
+- **Contrastes que no llegaban a AA**: el nombre del compositor en la escaleta
+  (3,02), los campos del formulario de canciones (2,15), y la cita y el crédito
+  del pie (2,05 y 2,43).
+- **La numeración editorial contaba «Programa del día» como sección 04**,
+  cuando es una cabecera dentro de «Detalles».
+- **`--sienna-soft` solo tiene contraste suficiente sobre plano oscuro** (5,42);
+  sobre papel se quedaba en 3,03. Ahora es regla del sistema, y los pines de
+  hotel van en contorno, distinguibles por forma y no solo por tono.
+- **Los datos del día se leían en zigzag**: la clave a la izquierda y el valor
+  pegado al margen derecho, con 500 px de por medio en escritorio y dos o tres
+  líneas rotas en móvil. Ahora van en rejilla con columna fija.
+- «Ave María» quedaba sangrada respecto a los demás títulos de la escaleta.
+- **El mapa ilustrado en móvil** encogía sus rótulos hasta 4 px. Ahora se
+  recorta el encuadre y se podan los secundarios, que ya están en la leyenda.
+- **Accesibilidad**: las siete etiquetas del formulario no estaban asociadas a
+  su campo, y los campos de acompañantes y de canciones solo tenían texto de
+  ejemplo, que desaparece al escribir. Añadidas zonas de toque de 36-45 px
+  (algunas medían 14), `aria-pressed` en los botones de elección, gestión del
+  foco al abrir y cerrar el modal, y `rel="noopener"` en los enlaces externos.
+
+### Cambiado
+- **«RSVP» y «FAQ» dejan de titular secciones**: son opacos para buena parte de
+  una familia española. Ahora «Confirma tu asistencia» y «Preguntas &
+  respuestas»; en el menú, «Confirmar» y «Dudas».
+- **El menú sigue el orden de la página** (antes «Ceremonia» iba cuarta en el
+  menú y novena al bajar) y suma «Programa».
+- Alternancia de planos: el RSVP pasa a papel cálido y las dudas a papel, para
+  que no queden tres secciones claras seguidas (5.500 px en móvil sin respiro).
+- **La cuenta atrás muestra solo días** hasta la última semana: a nueve meses
+  vista, las horas y los minutos eran ruido de reloj de aeropuerto.
+- Ortotipografía: meses en minúscula, programa en mayúscula solo inicial y
+  comillas latinas «».
+- `--warm` un punto más profundo: con el papel solo contrastaba 1,12:1 y en
+  móvil la alternancia de secciones claras casi no se veía.
+
+### Eliminado
+- CSS de secciones ya retiradas: galería, foto a sangre, tratamiento de foto y
+  separador editorial. Y `.hotels-mosaic`, que estaba declarada dos veces.
+
+### Panel /admin
+- **Se podía quedar inaccesible sin decir por qué**: token equivocado, sin
+  token y ADMIN_TOKEN sin configurar devolvían el mismo formulario, sin una
+  palabra de explicación. Con la variable sin configurar no se entraba nunca.
+  Ahora cada caso se explica, y el de la variable indica cómo crearla.
+- **El token ya no viaja en la URL**: se entra por POST y la sesión va en una
+  cookie HttpOnly, así que no queda en el historial, ni en los marcadores, ni
+  en los registros, ni en el HTML. Los CSV y las acciones del panel usan esa
+  cookie; los enlaces antiguos con `?token=` se canjean y limpian la URL.
+  Añadido un botón de salir.
+- **El servidor autoalojado traía `cambia-este-token` por defecto**, y está en
+  el repositorio público: quien lo supiera entraba. Ya no hay valor por defecto.
+- Comparación del token en tiempo constante, `Referrer-Policy: no-referrer` y
+  botones con más sitio para el dedo en móvil.
+
 ## [2.4.0] - 2026-08-25
 
 ### Añadido
