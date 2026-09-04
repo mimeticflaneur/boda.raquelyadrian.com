@@ -303,7 +303,7 @@ check('el panel no ejecuta HTML de los invitados', () => {
   }).rec];
   const songs = [normalizeSong({ cancion: malo, artista: malo, nombre: malo }).rec];
 
-  const html = renderAdmin(rsvps, songs, 'token-de-prueba');
+  const html = renderAdmin(rsvps, songs);
   // Lo que importa no es que el texto "onerror" aparezca (aparece, escapado y
   // visible como texto), sino que el navegador no pueda abrir ninguna etiqueta.
   assert(!html.includes(malo), 'el <script> del invitado ha llegado crudo al panel');
@@ -400,7 +400,7 @@ check('el CSV sobrevive a 2000 confirmaciones con texto hostil', () => {
 
 check('el panel se pinta con 2000 confirmaciones', () => {
   const filas = lote(2000);
-  const html = renderAdmin(filas, [], 'token');
+  const html = renderAdmin(filas, []);
   assert(html.length > 1000, 'panel vacio');
   assertEq((html.match(/<script/gi) || []).length, 1, 'etiquetas <script> de mas');
 });
