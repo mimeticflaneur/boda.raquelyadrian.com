@@ -355,7 +355,12 @@
         }
         .gallery-heading { max-width: 300px; }
         .gallery-heading .sec-title { font-size: clamp(2.6rem, 4.5vw, 4rem); }
-        .gallery-view { min-width: 0; }
+        .gallery-view { min-width: 0; position: relative; isolation: isolate; }
+        .gallery-view::before {
+            content: ''; position: absolute; inset: 0; z-index: -1;
+            background: url('assets/papel-encina.webp') center / cover no-repeat;
+            opacity: 0.55;
+        }
         .gallery-track {
             position: relative; display: flex; overflow-x: auto;
             scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
@@ -365,6 +370,7 @@
         .gallery-track[data-enhanced]::-webkit-scrollbar { display: none; }
         .gallery-slide {
             flex: 0 0 100%; min-width: 0; margin: 0;
+            padding: clamp(20px, 3.5vw, 44px);
             height: clamp(380px, 68svh, 620px);
             display: flex; justify-content: center; align-items: center;
             scroll-snap-align: center; scroll-snap-stop: always;
@@ -1069,7 +1075,7 @@
             .gallery-heading .sec-title { font-size: clamp(2rem, 6vw, 3rem); }
             .gallery-controls { margin-top: 0; gap: 0.25rem; flex: none; }
             .gallery-counter { min-width: 3.1rem; font-size: 0.75rem; }
-            .gallery-slide { height: clamp(360px, 65svh, 560px); }
+            .gallery-slide { height: clamp(360px, 65svh, 560px); padding: 20px; }
             .avila-map-wrap { grid-template-columns: 1fr; }
             /* A 342 px de ancho los rotulos secundarios bajaban a 4 px: se
                podan y el mapa se recorta. La leyenda ya lleva esa informacion. */
