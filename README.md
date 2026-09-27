@@ -22,6 +22,7 @@ index.html                    Pagina completa (SPA)
 assets/
   corazon_transverberado.svg  Favicon (escudo)
   nuestra-historia.jpeg       Foto de pareja
+  galeria/                   Diez fotos del álbum en WebP, dos tamaños por foto
   retablo.jpeg                Fondo seccion venues
   vidriera.jpeg               Fondo seccion ceremonia
   escaleta-musical.pdf        PDF escaleta musical
@@ -32,6 +33,11 @@ server/
 ```
 
 ## RSVP y backend
+
+El álbum «Nosotros», situado tras la portada, permite avanzar con botones,
+teclado o desplazamiento táctil. No tiene reproducción automática. Las fotos
+conservan su encuadre completo, usan `srcset` y se cargan de forma diferida.
+El desplazamiento horizontal también funciona sin JavaScript.
 
 El RSVP guia al invitado por dos ramas:
 
