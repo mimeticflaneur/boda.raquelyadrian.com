@@ -17,7 +17,7 @@
     copy.inert = true;
     track.append(copy);
 
-    const speed = 32; // Píxeles por segundo: velocidad constante en todos los anchos.
+    const speed = 38.4; // Píxeles por segundo: un 20 % más rápida, constante en todos los anchos.
     let distance = original.getBoundingClientRect().width;
     let animation = null;
     let userPaused = false;

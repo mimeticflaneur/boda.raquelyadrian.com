@@ -20,6 +20,8 @@ test('calendar and event metadata agree on the ceremony and next-day finish', as
     assert.match(unfolded, /Llegada de invitados 13:00h/);
     assert.match(unfolded, /Traslado a la finca 15:00h/);
     assert.match(unfolded, /Cóctel 15:30h/);
+    assert.match(unfolded, /Comida 17:00h/);
+    assert.match(unfolded, /Grupo de música en directo 19:30h/);
     assert.equal(ics.split('\r\n').every(line => Buffer.byteLength(line) <= 75), true);
     const event = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
     assert.equal(event.startDate, '2027-06-12T13:30:00+02:00');

@@ -4,6 +4,8 @@ const { test } = require('node:test');
 const fs = require('node:fs');
 const vm = require('node:vm');
 const source = fs.readFileSync(require.resolve('../assets/gallery.js'), 'utf8');
+const almostEqual = (actual, expected) => assert.ok(Math.abs(actual - expected) < 1e-6,
+    `Expected ${actual} to be within 0.000001 of ${expected}`);
 
 // A controllable browser clock lets us exercise the wrap without waiting a full lap.
 function setup({ reducedMotion = false } = {}) {
@@ -64,15 +66,16 @@ test('continuous lap wraps seamlessly and pause/resume keeps the visible photo p
     assert.equal(s.copy.inert, true);
     assert.equal(s.active().options.iterations, Infinity);
     assert.equal(s.active().options.easing, 'linear');
+    assert.equal(s.active().options.duration, 100000 / 1.2);
     assert.equal(s.active().frames[1].transform, 'translateX(-3200px)');
     s.active().currentTime = s.active().options.duration * 1.25;
     s.toggle.fire('click');
-    assert.equal(s.viewport.scrollLeft, 800);
+    almostEqual(s.viewport.scrollLeft, 800);
     assert.equal(s.active().cancelled, true);
     assert.equal(s.label.textContent, 'Reproducir');
     s.viewport.scrollLeft = 1200; // Guests can browse manually while paused.
     s.toggle.fire('click');
-    assert.equal(s.active().currentTime, 37500);
+    assert.equal(s.active().currentTime, 31250);
     assert.equal(s.viewport.scrollLeft, 0);
     assert.equal(s.images.every(img => img.loading === 'eager'), true);
 });
@@ -89,7 +92,7 @@ test('reduced motion stays manual, and enabling it stops an existing animation',
     s.reduced.matches = true;
     s.reduced.fire('change');
     assert.equal(s.active().cancelled, true);
-    assert.equal(s.viewport.scrollLeft, 32);
+    assert.equal(s.viewport.scrollLeft, 38.4);
     assert.equal(s.copy.hidden, true);
 });
 
@@ -119,12 +122,13 @@ test('hover, focus and tab visibility suspend playback; touch remains paused unt
 test('resizing preserves lap progress and recomputes travel at the same speed', () => {
     const s = setup();
     s.show(true);
-    s.active().currentTime = 25000;
+    const previousDuration = s.active().options.duration;
+    s.active().currentTime = previousDuration / 4;
     s.resize(1600);
-    assert.equal(s.active().currentTime, 12500);
-    assert.equal(s.active().options.duration, 50000);
+    almostEqual(s.active().currentTime, previousDuration / 8);
+    assert.equal(s.active().options.duration, previousDuration / 2);
     s.show(false);
-    assert.equal(s.viewport.scrollLeft, 400);
+    almostEqual(s.viewport.scrollLeft, 400);
     s.show(true);
-    assert.equal(s.active().currentTime, 12500);
+    almostEqual(s.active().currentTime, previousDuration / 8);
 });
