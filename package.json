@@ -4,7 +4,7 @@
   "private": true,
   "description": "Web de la boda de Raquel & Adrian + funciones serverless (Vercel) con almacenamiento en Upstash Redis",
   "scripts": {
-    "test": "node test/ingest.test.js"
+    "test": "node test/ingest.test.js && node --test test/gallery.test.js test/calendar.test.js"
   },
   "engines": {
     "node": "20.x"

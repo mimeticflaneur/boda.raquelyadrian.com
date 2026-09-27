@@ -2,7 +2,7 @@
 
 Sitio web para la boda de Raquel y Adrian. 12 de junio de 2027, Avila.
 
-Ceremonia en la Catedral de Avila. Celebracion en la Dehesa del Pedrosillo.
+Ceremonia a las 13:30h en el Real Monasterio de Santo Tomás de Ávila. Celebracion en la Dehesa del Pedrosillo.
 
 ## Stack
 
@@ -34,10 +34,13 @@ server/
 
 ## RSVP y backend
 
-El álbum «Nosotros», situado tras la portada, permite avanzar con botones,
-teclado o desplazamiento táctil. No tiene reproducción automática. Las fotos
-conservan su encuadre completo, usan `srcset` y se cargan de forma diferida.
-El desplazamiento horizontal también funciona sin JavaScript.
+El álbum «Nosotros» es una cinta automática continua, sin textura de fondo.
+El botón permite pausar y reanudar; al tocar o enfocar las fotografías se puede
+explorar con desplazamiento nativo. El movimiento se detiene al pasar el ratón,
+al salir de pantalla o al ocultar la pestaña. Con movimiento reducido, o sin
+JavaScript, queda una galería horizontal manual. Las fotos conservan su encuadre
+completo y la copia que permite cerrar el bucle está oculta a lectores de pantalla.
+La lógica está en `assets/gallery.js`.
 
 El RSVP guia al invitado por dos ramas:
 
