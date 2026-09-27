@@ -1007,28 +1007,12 @@
         .legend-item .l-sub { color: var(--fg-mute); font-size: 0.75rem; }
 
         /* === MOTIVOS DEL MONASTERIO === */
-        /* Filete de bolas isabelinas: la pausa que buscaba el rosetón, en
-           12 px de alto y sin una sola imagen. */
-        .rule-bolas {
-            width: min(220px, 60%); height: 12px;
-            margin: clamp(2.5rem, 5vw, 4rem) auto;
-            color: var(--sienna); opacity: 0.6;
-            background:
-                radial-gradient(circle at 6px 8.5px, currentColor 2.4px, transparent 3px) 0 0 / 12px 12px repeat-x,
-                linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
-            -webkit-mask: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
-                    mask: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
-        }
-        .bg-dark .rule-bolas, .ceremony-bg .rule-bolas, .venues-bg .rule-bolas { color: var(--sienna-soft); }
-        .foot .rule-bolas { margin: 2.5rem auto 1.5rem; }
         .foot-dev { border-top: none; padding-top: 0; }
 
         .sec-arco {
             display: block; width: 120px; height: 72px;
             margin: 0 auto 1.2rem; color: var(--sienna-soft); opacity: 0.85;
         }
-        .venue-head { display: flex; gap: 1rem; align-items: flex-start; }
-        .venue-icon { width: 36px; height: 42px; flex: none; color: var(--sienna); margin-top: 0.2rem; }
         .ok-granada { display: block; width: 32px; height: 37px; margin: 0 auto 1.2rem; color: var(--sienna); }
         @media (max-width: 768px) { .sec-arco { width: 96px; height: 58px; } }
 
@@ -1409,13 +1393,8 @@
         <div class="venues-grid">
             <div class="venue rv">
                 <a href="https://www.google.com/maps/dir//Real+Monasterio+de+Santo+Tom%C3%A1s+%C3%81vila" target="_blank" rel="noopener" class="venue-map" title="Ver en Google Maps"><img id="map-ceremonia" alt="Mapa del Real Monasterio de Santo Tomás" loading="lazy"></a>
-                <div class="venue-head">
-                    <svg class="venue-icon" aria-hidden="true"><use href="#fachada"/></svg>
-                    <div>
-                        <p class="venue-tag">Ceremonia religiosa</p>
-                        <h3>Real Monasterio de Santo Tomás</h3>
-                    </div>
-                </div>
+                <p class="venue-tag">Ceremonia religiosa</p>
+                <h3>Real Monasterio de Santo Tomás</h3>
                 <p>Plaza de Granada, 1, 05003 Ávila</p>
                 <p class="venue-time">13:00h</p>
                 <a href="https://www.google.com/maps/dir//Real+Monasterio+de+Santo+Tom%C3%A1s+%C3%81vila" target="_blank" rel="noopener" class="venue-link">Cómo llegar &rarr;</a>
@@ -1440,7 +1419,6 @@
             <div class="detail-strip"><span class="d-key">Fecha</span><span class="d-val">Sábado, 12 de junio de 2027</span></div>
             <div class="detail-strip"><span class="d-key">Horario</span><span class="d-val">Ceremonia 13:00h — Cóctel 15:30h</span></div>
             <div class="detail-strip"><span class="d-key">Transporte</span><span class="d-val">Aparcamiento disponible. Autobús Santo Tomás → finca</span></div>
-            <div class="detail-strip"><span class="d-key">Niños</span><span class="d-val">Bienvenidos. Habrá zona infantil</span></div>
         </div>
         <div class="center rv" style="margin-top:2.5rem;">
             <button class="cal-btn" onclick="downloadCal()">
@@ -1448,8 +1426,7 @@
                 Añadir al calendario
             </button>
         </div>
-        <div class="rule-bolas rv" aria-hidden="true"></div>
-        <div class="sec-head rv" style="margin-bottom:clamp(2rem,4vw,3rem);">
+        <div class="sec-head rv" style="margin-top:clamp(4rem,8vw,6rem);margin-bottom:clamp(2rem,4vw,3rem);">
             <p class="sec-tag sec-tag--sub">12 de junio de 2027</p>
             <h2 class="sec-title" style="font-size:clamp(1.6rem,3.5vw,2.5rem);">Programa del <em>día</em></h2>
         </div>
@@ -1706,7 +1683,6 @@
         <div class="faq-list rv">
             <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="faq-1" onclick="toggleFaq(this)">¿Hay aparcamiento?</button><div class="faq-a" id="faq-1" role="region"><p>Sí, en los dos sitios. El Monasterio de Santo Tomás cuenta con aparcamiento público cercano y la Dehesa del Pedrosillo dispone de amplio aparcamiento privado para los invitados.</p></div></div>
             <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="faq-2" onclick="toggleFaq(this)">¿Cómo funciona el autobús?</button><div class="faq-a" id="faq-2" role="region"><p>Habrá un autobús que saldrá de Santo Tomás hacia la finca tras la ceremonia (aprox. 14:30h). Por la noche habrá servicio de vuelta a Ávila ciudad.</p></div></div>
-            <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="faq-3" onclick="toggleFaq(this)">¿Puedo llevar niños?</button><div class="faq-a" id="faq-3" role="region"><p>Por supuesto. Los niños son bienvenidos. Habrá una zona infantil con monitores durante el banquete y la fiesta.</p></div></div>
             <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="faq-4" onclick="toggleFaq(this)">¿Cómo hay que vestir?</button><div class="faq-a" id="faq-4" role="region"><p>Etiqueta formal. Sugerimos tonos cálidos y terrosos que armonicen con el entorno castellano. Evitad el blanco, por favor.</p></div></div>
             <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="faq-5" onclick="toggleFaq(this)">¿Hasta qué hora dura la fiesta?</button><div class="faq-a" id="faq-5" role="region"><p>La fiesta continuará hasta el amanecer. El último autobús de vuelta a Ávila saldrá a las 3:00h aproximadamente.</p></div></div>
             <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="faq-6" onclick="toggleFaq(this)">¿Qué opciones de menú hay?</button><div class="faq-a" id="faq-6" role="region"><p>Ofrecemos tres opciones: carne, pescado y vegano. Puedes indicar tu elección y alergias en el formulario de confirmación.</p></div></div>
@@ -1747,7 +1723,6 @@
         <p class="foot-names">Raquel <em>&</em> Adrián</p>
         <p class="foot-date">12 de junio de 2027 &middot; Ávila</p>
         <p class="foot-quote">«Y sin amor, todo es nada»</p>
-        <div class="rule-bolas" aria-hidden="true"></div>
         <p class="foot-dev">&copy; 2027 Raquel &amp; Adrián. Todos los derechos reservados.<br>Diseñado y desarrollado por Adrián Zapatera</p>
     </footer>
 
