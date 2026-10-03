@@ -1020,7 +1020,7 @@
             display: block; width: 120px; height: 72px;
             margin: 0 auto 1.2rem; color: var(--sienna-soft); opacity: 0.85;
         }
-        .ok-granada { display: block; width: 32px; height: 37px; margin: 0 auto 1.2rem; color: var(--sienna); }
+        .ok-crest { display: block; width: 32px; height: 37px; margin: 0 auto 1.2rem; color: var(--sienna); fill: currentColor; }
         @media (max-width: 768px) { .sec-arco { width: 96px; height: 58px; } }
 
         /* Zonas de toque de al menos 44 px sin mover la maqueta: el relleno
@@ -2251,8 +2251,8 @@
             const { ok, data } = await postJson('/api/rsvp', payload);
             if(ok) {
                 rsvpForm.innerHTML = currentPath === 'no'
-                    ? '<div class="form-ok"><svg class="ok-granada" aria-hidden="true"><use href="#granada"/></svg><h3>Gracias por avisar</h3><p>Os echaremos de menos. Un abrazo enorme.</p></div>'
-                    : '<div class="form-ok"><svg class="ok-granada" aria-hidden="true"><use href="#granada"/></svg><h3>¡Confirmación recibida!</h3><p>Nos vemos en Ávila. Gracias por acompañarnos.</p></div>';
+                    ? '<div class="form-ok"><svg class="ok-crest" aria-hidden="true"><use href="#crest"/></svg><h3>Gracias por avisar</h3><p>Os echaremos de menos. Un abrazo enorme.</p></div>'
+                    : '<div class="form-ok"><svg class="ok-crest" aria-hidden="true"><use href="#crest"/></svg><h3>¡Confirmación recibida!</h3><p>Nos vemos en Ávila. Gracias por acompañarnos.</p></div>';
                 const prog = document.getElementById('rsvp-progress');
                 if(prog) prog.style.display = 'none';
             } else {
