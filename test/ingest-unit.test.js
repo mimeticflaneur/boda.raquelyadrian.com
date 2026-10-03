@@ -47,3 +47,22 @@ test('Redis rechaza fallos y lecturas inválidas en lugar de anunciar éxito o c
 test('un reintento conserva su id; cambiar el contenido crea otro sin almacenar datos de invitados',async()=>{
   const a=await client.submissionId({nombre:'Uno'});assert.equal(await client.submissionId({nombre:'Uno'}),a);assert.notEqual(await client.submissionId({nombre:'Dos'}),a);
 });
+test('comprobación diaria: exige secreto y detecta registros ilegibles',async()=>{
+  const env={...process.env};const originalFetch=global.fetch;
+  const check=require('../api/check-ingestion');
+  const response=()=>({code:200,setHeader(){},status(code){this.code=code;return this},json(body){this.body=body;return this}});
+  try {
+    process.env.UPSTASH_REDIS_REST_URL='https://test.invalid';process.env.UPSTASH_REDIS_REST_TOKEN='test';
+    global.fetch=async()=>{throw new Error('No debe consultar Redis sin autorización')};
+    for(const secret of ['', 'test-cron-secret']) {
+      process.env.CRON_SECRET=secret;
+      const res=response();await check({method:'GET',headers:{authorization:'Bearer incorrecto'}},res);assert.equal(res.code,401);
+    }
+    process.env.CRON_SECRET='test-cron-secret';
+    global.fetch=async()=>Response.json({result:['{"id":"one","nombre":"Dato privado"}']});
+    const req={method:'GET',headers:{authorization:'Bearer test-cron-secret'}};
+    const ok=response();await check(req,ok);assert.equal(ok.code,200);assert.equal(ok.body.responses,1);assert.equal(JSON.stringify(ok.body).includes('Dato privado'),false);
+    global.fetch=async()=>Response.json({result:['broken json']});
+    const bad=response();await check(req,bad);assert.equal(bad.code,503);
+  } finally {global.fetch=originalFetch;for(const k of Object.keys(process.env))if(!(k in env))delete process.env[k];Object.assign(process.env,env);}
+});

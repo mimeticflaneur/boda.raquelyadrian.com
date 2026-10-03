@@ -126,3 +126,14 @@ la incluyas en la URL, el repositorio, capturas ni mensajes públicos. Vercel
 no permite recuperar su valor si se guardó como variable Sensitive; si se ha
 perdido hay que establecer una nueva en Settings → Environment Variables y
 redesplegar. Los accesos nuevos usan una cookie firmada, HttpOnly y de siete días.
+
+### Comprobación diaria
+
+`vercel.json` programa `/api/check-ingestion` cada día a las 08:00 UTC. El
+endpoint necesita `CRON_SECRET` en producción (aleatorio y Sensitive, distinto
+de `ADMIN_TOKEN`). Vercel añade la cabecera de autorización automáticamente.
+Comprueba que las listas de respuestas y canciones se pueden leer y contienen
+registros válidos; no modifica invitados ni devuelve sus datos personales.
+Esta lectura mantiene actividad de la base incluso sin nuevas respuestas.
+Consulta sus ejecuciones en Vercel → Cron Jobs. No sustituye las copias de
+seguridad ni envía avisos por correo.

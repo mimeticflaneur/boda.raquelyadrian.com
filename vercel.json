@@ -1,5 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "crons": [
+    { "path": "/api/check-ingestion", "schedule": "0 8 * * *" }
+  ],
   "rewrites": [
     { "source": "/admin", "destination": "/api/admin" },
     { "source": "/export/rsvp.csv", "destination": "/api/export?type=rsvp" },
