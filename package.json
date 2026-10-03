@@ -5,7 +5,8 @@
   "description": "Web de la boda de Raquel & Adrian + funciones serverless (Vercel) con almacenamiento en Upstash Redis",
   "scripts": {
     "test": "node test/ingest.test.js && node --test test/gallery.test.js test/calendar.test.js test/ingest-unit.test.js",
-    "test:integration": "node --test test/api.integration.test.js"
+    "test:integration": "node --test test/api.integration.test.js",
+    "test:stress": "node test/stress.js"
   },
   "engines": {
     "node": "24.x"

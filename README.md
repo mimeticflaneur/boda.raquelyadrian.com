@@ -79,6 +79,13 @@ entradas aleatorias. `npm run test:integration` necesita `redis-server` instalad
 y crea un Redis efímero local para comprobar 300 grupos simultáneos, reintentos,
 ediciones, borrados, panel y exportaciones. Nunca utiliza la base de producción.
 
+`npm run test:stress` amplía la carga por HTTP a 3.000 grupos (7.500 personas),
+100 solicitudes en vuelo, reintentos, conexiones perdidas después de guardar,
+caída y recuperación de Redis, 450 ediciones/borrados, conflictos y límites por IP.
+Necesita `redis-server` y solo usa un Redis local efímero. Se puede guardar el
+resultado con `STRESS_REPORT=/ruta/informe.json npm run test:stress`.
+Sus tiempos miden este entorno local, no la capacidad de Vercel o Upstash.
+
 Opcion A — solo el sitio estatico:
 
 ```bash

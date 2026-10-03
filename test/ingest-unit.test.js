@@ -2,6 +2,18 @@
 const {test}=require('node:test'); const assert=require('node:assert/strict');
 const phone=require('../assets/phone'); const api=require('../lib/api'); const core=require('../lib/core');
 const store=require('../lib/store'); const client=require('../assets/ingest-client');
+test('acompañantes: nunca acepta cantidades que después se interpretarían de otra forma',()=>{
+  const base={asistencia:'si',nombre:'Prueba',email:'test@example.invalid',telefono:'+34600111222',menu:'carne',preboda:'no',transporte:'no'};
+  for(const value of ['1e1','0xA','10.0','',' ',null,false,1.5]) {
+    const count=Number(value);const length=Number.isInteger(count)&&count>=0&&count<=10?count:0;
+    const r=core.normalizeRsvp({...base,num_acompanantes:value,acompanantes:Array.from({length},()=>({nombre:'Invitado',menu:'vegano'}))},{strict:true});
+    assert.ok(r.error,JSON.stringify(value));
+  }
+  for(const count of [0,1,10])for(const value of [count,String(count)]) {
+    const r=core.normalizeRsvp({...base,num_acompanantes:value,acompanantes:Array.from({length:count},()=>({nombre:'Invitado',menu:'vegano'}))},{strict:true});
+    assert.equal(r.rec.acompanantes.length,count);
+  }
+});
 test('teléfonos: España, Chile, otros países, pegado internacional, ceros y entradas inválidas',()=>{
   for(const [n,p,want] of [['600 111 222','+34','+34600111222'],['9 1234 5678','+56','+56912345678'],['+56 9 1234 5678','+56','+56912345678'],['0034600111222','+34','+34600111222'],['(415) 555-2671','+1','+14155552671'],['20 7946 0958','+44','+442079460958']])assert.equal(phone.normalize(n,p).value,want);
   for(const [n,p] of [['600111222',''],['','+34'],['123','+56'],['+56912345678','+34'],['abc600111222','+34'],['9999999999999999','+1'],['600111222','+000'],[{},'+34']])assert.ok(phone.normalize(n,p).error);
