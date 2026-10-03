@@ -22,15 +22,18 @@ module.exports = async (req, res) => {
     const rows = await readAll('rsvp');
     const existing = rows.find(r => r.id === id);
     if (!existing) return res.status(404).json({ ok: false, error: 'Registro no encontrado.' });
+    if (body.version && body.version !== (existing.editado || existing.ts)) {
+      return res.status(409).json({ ok: false, error: 'Esta respuesta ha cambiado. Recarga el panel antes de editarla.' });
+    }
 
     const { rec, error } = applyRsvpEdit(existing, body.datos || {});
     if (error) return res.status(422).json({ ok: false, error });
 
-    const done = await updateById('rsvp', id, rec);
+    const done = await updateById('rsvp', id, rec, existing);
     if (!done) return res.status(404).json({ ok: false, error: 'Registro no encontrado.' });
     return res.status(200).json({ ok: true });
   } catch (e) {
     console.error('Update error:', e.message);
-    return res.status(500).json({ ok: false, error: 'No se pudo guardar.' });
+    return res.status(e.status || 500).json({ ok: false, error: e.status === 409 ? e.message : 'No se pudo guardar.' });
   }
 };

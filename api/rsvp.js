@@ -1,7 +1,7 @@
 'use strict';
 
 const { normalizeRsvp, clean } = require('../lib/core');
-const { append, isConfigured, overLimit } = require('../lib/store');
+const { appendOnce, isConfigured, overLimit } = require('../lib/store');
 const { cors, getBody, clientIp } = require('../lib/api');
 
 module.exports = async (req, res) => {
@@ -14,8 +14,11 @@ module.exports = async (req, res) => {
   // Honeypot anti-bots: si el campo trampa viene relleno, fingimos exito.
   if (clean(data.website, 100)) return res.status(200).json({ ok: true });
 
-  const { rec, error } = normalizeRsvp(data);
+  const { rec, error } = normalizeRsvp(data, { strict: true });
   if (error) return res.status(422).json({ ok: false, error });
+  if (data.request_id && (typeof data.request_id !== 'string' || !/^[a-f0-9-]{36}$/i.test(data.request_id))) {
+    return res.status(422).json({ ok: false, error: 'Identificador de envío inválido. Recarga la página.' });
+  }
 
   if (!isConfigured()) {
     return res.status(503).json({ ok: false, error: 'Base de datos no configurada. Conecta Upstash Redis en Vercel.' });
@@ -30,10 +33,10 @@ module.exports = async (req, res) => {
   }
 
   try {
-    await append('rsvp', rec);
+    const id = await appendOnce('rsvp', rec, data.request_id);
+    return res.status(200).json({ ok: true, id });
   } catch (e) {
-    console.error('RSVP append error:', e.message);
-    return res.status(500).json({ ok: false, error: 'No se pudo guardar. Intentalo de nuevo.' });
+    console.error('RSVP append error:', e.cause?.code || e.message);
+    return res.status(e.status || 503).json({ ok: false, error: e.status === 409 ? e.message : 'No hemos podido confirmar el guardado. Tus datos siguen en el formulario; espera un momento y vuelve a enviar.' });
   }
-  return res.status(200).json({ ok: true, id: rec.id });
 };

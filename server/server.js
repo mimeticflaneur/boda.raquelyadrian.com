@@ -112,33 +112,7 @@ function clientIp(req) {
   if (xf) return String(xf).split(',')[0].trim();
   return req.socket.remoteAddress || '';
 }
-const COOKIE = 'boda_admin';
-
-function tokenOk(t) {
-  if (!t || !ADMIN_TOKEN) return false;
-  const a = Buffer.from(String(t));
-  const b = Buffer.from(ADMIN_TOKEN);
-  if (a.length !== b.length) { crypto.timingSafeEqual(b, b); return false; }
-  return crypto.timingSafeEqual(a, b);
-}
-function readCookie(req, name) {
-  const raw = req.headers.cookie;
-  if (!raw) return '';
-  for (const trozo of String(raw).split(';')) {
-    const i = trozo.indexOf('=');
-    if (i < 0) continue;
-    if (trozo.slice(0, i).trim() === name) {
-      try { return decodeURIComponent(trozo.slice(i + 1).trim()); } catch { return ''; }
-    }
-  }
-  return '';
-}
-// La sesion del panel va en cookie HttpOnly: el token deja de viajar en la URL.
-function authed(req, u) {
-  return tokenOk(readCookie(req, COOKIE)) ||
-         tokenOk(req.headers['x-admin-token']) ||
-         tokenOk(u.searchParams.get('token'));
-}
+const { tokenOk, authed, sessionCookie, clearCookie, COOKIE } = require('../lib/api');
 
 // ---------------------------------------------------------------------------
 // Servir ficheros estaticos (la web)
@@ -205,8 +179,20 @@ const server = http.createServer(async (req, res) => {
       // Honeypot anti-bots: si el campo trampa viene relleno, fingimos exito.
       if (clean(data.website, 100)) { sendJson(res, 200, { ok: true }); return; }
 
-      const { rec, error } = normalizeRsvp(data);
+      const { rec, error } = normalizeRsvp(data, { strict: true });
       if (error) { sendJson(res, 422, { ok: false, error }); return; }
+      if (data.request_id) {
+        if (typeof data.request_id !== 'string' || !/^[a-f0-9-]{36}$/i.test(data.request_id)) { sendJson(res, 422, { ok: false, error: 'Identificador de envío inválido.' }); return; }
+        const { id, ts, ...fields } = rec;
+        const hash = crypto.createHash('sha256').update(JSON.stringify(fields)).digest('hex');
+        const previous = readNdjson(RSVP_FILE).find(r => r.request_id === data.request_id);
+        if (previous) {
+          sendJson(res, previous.request_hash === hash ? 200 : 409, previous.request_hash === hash ? { ok: true, id: previous.id } : { ok: false, error: 'La solicitud ya se utilizó con otros datos.' });
+          return;
+        }
+        rec.request_id = data.request_id;
+        rec.request_hash = hash;
+      }
       rec.ip = clientIp(req);
       rec.ua = clean(req.headers['user-agent'], 200);
       appendNdjson(RSVP_FILE, rec);
@@ -244,6 +230,7 @@ const server = http.createServer(async (req, res) => {
       const rows = readNdjson(RSVP_FILE);
       const idx = rows.findIndex(r => r.id === id);
       if (idx < 0) { sendJson(res, 404, { ok: false, error: 'Registro no encontrado.' }); return; }
+      if (body.version && body.version !== (rows[idx].editado || rows[idx].ts)) { sendJson(res, 409, { ok: false, error: 'Esta respuesta ha cambiado. Recarga el panel.' }); return; }
       const { rec, error } = applyRsvpEdit(rows[idx], body.datos || {});
       if (error) { sendJson(res, 422, { ok: false, error }); return; }
       rows[idx] = rec;
@@ -282,7 +269,7 @@ const server = http.createServer(async (req, res) => {
     // --- Panel de administracion ---
     if (pathname === '/admin') {
       const HTML = { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'Referrer-Policy': 'no-referrer' };
-      const galleta = t => `${COOKIE}=${encodeURIComponent(t)}; Path=/; HttpOnly; SameSite=Strict; Max-Age=604800`;
+      const galleta = t => sessionCookie(t, req);
       const panel = () => send(res, 200,
         renderAdmin(readNdjson(RSVP_FILE).reverse(), readNdjson(SONGS_FILE).reverse()), HTML);
 
@@ -290,15 +277,14 @@ const server = http.createServer(async (req, res) => {
       if (!ADMIN_TOKEN) { send(res, 503, adminLogin('sin-configurar'), HTML); return; }
 
       if (u.searchParams.get('logout')) {
-        send(res, 200, adminLogin(), Object.assign({ 'Set-Cookie': `${COOKIE}=; Path=/; HttpOnly; SameSite=Strict; Max-Age=0` }, HTML));
+        send(res, 200, adminLogin(), Object.assign({ 'Set-Cookie': clearCookie() }, HTML));
         return;
       }
       if (req.method === 'POST') {
         const raw = await readBody(req);
         const enviado = new URLSearchParams(raw).get('token') || '';
         if (!tokenOk(enviado)) { send(res, 401, adminLogin('incorrecto'), HTML); return; }
-        send(res, 200, renderAdmin(readNdjson(RSVP_FILE).reverse(), readNdjson(SONGS_FILE).reverse()),
-          Object.assign({ 'Set-Cookie': galleta(enviado) }, HTML));
+        send(res, 303, '', Object.assign({ 'Set-Cookie': galleta(enviado), 'Location': '/admin' }, HTML));
         return;
       }
       // Enlace antiguo con ?token=...: se canjea por cookie y se limpia la URL.

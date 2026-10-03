@@ -17,7 +17,7 @@
  */
 
 const {
-  MENUS, isEmail,
+  MENUS, isEmail, clean,
   normalizeRsvp, normalizeSong, applyRsvpEdit,
   buildStats, flattenPersons,
   rsvpCsv, personasCsv, songsCsv,
@@ -55,6 +55,7 @@ const ACENTOS = 'ñÁéíóú'.repeat(2000);
 const VALORES = [
   undefined, null, '', '   ', 0, -1, 1.5, NaN, Infinity, -Infinity,
   true, false, [], {}, [1, 2, 3], { a: 1 }, () => 1,
+  { toString: null }, { toString: 'invalid', valueOf: null },
   'si', 'SI', ' Si ', 'no', 'NO', 'sí', 'quiza', 'carne', 'CARNE', 'pescado',
   'vegano', 'marisco', '0', '1', '5', '11', '-3', '99999', '3.7', '1e309',
   LARGA, ACENTOS, '👰🏻‍♀️🤵🏻‍♂️💍', 'Mª José Ñoño-Pérez',
@@ -93,7 +94,7 @@ function payloadAleatorio() {
     asistencia: campo('asistencia'),
     nombre: campo('nombre'),
     email: campo('email'),
-    telefono: elige(VALORES),
+    telefono: rnd() < 0.55 ? elige(['+34600111222', '+56912345678', '+14155552671']) : elige(VALORES),
     preboda: elige(VALORES),
     menu: elige(VALORES),
     alergias: elige(VALORES),
@@ -174,7 +175,7 @@ function compruebaInvariantes(rec) {
 check('acepta una confirmacion completa', () => {
   const { rec, error } = normalizeRsvp({
     asistencia: 'si', nombre: 'Raquel Ejemplo', email: 'Raquel@Ejemplo.ES',
-    telefono: '600 11 22 33', preboda: 'si', menu: 'pescado', alergias: 'marisco',
+    telefono: '+34 600 11 22 33', preboda: 'si', menu: 'pescado', alergias: 'marisco',
     num_acompanantes: 2,
     acompanantes: [
       { nombre: 'Uno', menu: 'carne' },
@@ -197,15 +198,15 @@ check('acepta un "no asistire" minimo', () => {
 check('rechaza lo que falta', () => {
   assert(normalizeRsvp({}).error, 'deberia exigir asistencia');
   assert(normalizeRsvp({ asistencia: 'si' }).error, 'deberia exigir nombre');
-  assert(normalizeRsvp({ asistencia: 'si', nombre: 'A' }).error, 'deberia exigir email');
-  assert(normalizeRsvp({ asistencia: 'si', nombre: 'A', email: 'roto' }).error, 'deberia validar el email');
+  assert(normalizeRsvp({ asistencia: 'si', telefono: '+34600111222', nombre: 'A' }).error, 'deberia exigir email');
+  assert(normalizeRsvp({ asistencia: 'si', telefono: '+34600111222', nombre: 'A', email: 'roto' }).error, 'deberia validar el email');
   assert(normalizeRsvp(null).error, 'deberia soportar null');
   assert(normalizeSong({}).error, 'deberia exigir la cancion');
 });
 
 check('recorta el grupo a un maximo razonable', () => {
   const { rec } = normalizeRsvp({
-    asistencia: 'si', nombre: 'A', email: 'a@b.c',
+    asistencia: 'si', telefono: '+34600111222', nombre: 'A', email: 'a@b.c',
     num_acompanantes: 500, acompanantes: new Array(500).fill({ nombre: 'X', menu: 'carne' })
   });
   compruebaInvariantes(rec);
@@ -214,7 +215,7 @@ check('recorta el grupo a un maximo razonable', () => {
 
 check('nunca deja pedir mas plazas de autobus que personas', () => {
   const { rec } = normalizeRsvp({
-    asistencia: 'si', nombre: 'A', email: 'a@b.c',
+    asistencia: 'si', telefono: '+34600111222', nombre: 'A', email: 'a@b.c',
     num_acompanantes: 1, acompanantes: [{ nombre: 'B', menu: 'carne' }],
     transporte: 'si', transporte_personas: 99
   });
@@ -262,7 +263,7 @@ check('aguanta canciones basura', () => {
 
 check('aguanta ediciones basura desde el panel', () => {
   const base = normalizeRsvp({
-    asistencia: 'si', nombre: 'Base', email: 'base@ejemplo.es',
+    asistencia: 'si', telefono: '+34600111222', nombre: 'Base', email: 'base@ejemplo.es',
     num_acompanantes: 1, acompanantes: [{ nombre: 'Acomp', menu: 'carne' }],
     transporte: 'si', transporte_personas: 2
   }).rec;
@@ -289,7 +290,7 @@ check('aguanta ediciones basura desde el panel', () => {
 check('no se puede envenenar el prototipo', () => {
   const veneno = JSON.parse('{"__proto__":{"colado":"si"},"asistencia":"si","nombre":"A","email":"a@b.c"}');
   normalizeRsvp(veneno);
-  const base = normalizeRsvp({ asistencia: 'si', nombre: 'A', email: 'a@b.c' }).rec;
+  const base = normalizeRsvp({ asistencia: 'si', telefono: '+34600111222', nombre: 'A', email: 'a@b.c' }).rec;
   applyRsvpEdit(base, JSON.parse('{"__proto__":{"colado":"si"}}'));
   assertEq({}.colado, undefined, 'Object.prototype contaminado');
   assertEq(Object.prototype.colado, undefined, 'Object.prototype contaminado');
@@ -298,7 +299,7 @@ check('no se puede envenenar el prototipo', () => {
 check('el panel no ejecuta HTML de los invitados', () => {
   const malo = '<script>alert(1)</script>';
   const rsvps = [normalizeRsvp({
-    asistencia: 'si', nombre: malo, email: 'a@b.c', alergias: '"><img src=x onerror=alert(1)>',
+    asistencia: 'si', telefono: '+34600111222', nombre: malo, email: 'a@b.c', alergias: '"><img src=x onerror=alert(1)>',
     num_acompanantes: 1, acompanantes: [{ nombre: '</script><script>alert(2)</script>', menu: 'carne' }]
   }).rec];
   const songs = [normalizeSong({ cancion: malo, artista: malo, nombre: malo }).rec];
@@ -360,7 +361,7 @@ function lote(n) {
   for (let i = 0; out.length < n; i++) {
     const p = payloadAleatorio();
     p.asistencia = rnd() < 0.85 ? 'si' : 'no';
-    p.nombre = 'Invitado ' + out.length + ' ' + elige(VALORES);
+    p.nombre = 'Invitado ' + out.length + ' ' + clean(elige(VALORES));
     p.email = 'invitado' + out.length + '@ejemplo.es';
     const { rec } = normalizeRsvp(p);
     if (rec) out.push(rec);

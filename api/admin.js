@@ -17,6 +17,7 @@ module.exports = async (req, res) => {
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
 
   const html = (code, cuerpo) => res.status(code).send(cuerpo);
+  if (!['GET', 'POST'].includes(req.method)) return html(405, 'Método no permitido');
 
   // Sin ADMIN_TOKEN no puede entrar nadie: hay que decirlo en vez de devolver
   // el formulario una y otra vez sin explicacion.
@@ -35,7 +36,8 @@ module.exports = async (req, res) => {
     const enviado = getBody(req).token || '';
     if (!tokenOk(enviado)) return html(401, adminLogin('incorrecto'));
     res.setHeader('Set-Cookie', sessionCookie(enviado, req));
-    return panel(res);
+    res.setHeader('Location', '/admin');
+    return res.status(303).send('');
   }
 
   // Enlace antiguo con ?token=... : se canjea por cookie y se limpia la URL.
@@ -62,7 +64,7 @@ async function panel(res) {
     songs.reverse();
     return res.status(200).send(renderAdmin(rsvps, songs));
   } catch (e) {
-    console.error('Admin error:', e.message);
-    return res.status(500).send('<p style="font-family:sans-serif;padding:2rem">Error al leer los datos.</p>');
+    console.error('Admin error:', e.cause?.code || e.message);
+    return res.status(503).send('<main style="font-family:sans-serif;max-width:640px;margin:12vh auto;padding:2rem"><h1>No podemos leer las confirmaciones</h1><p>El acceso al panel es correcto, pero la base de datos no está respondiendo. No es un error de tu token.</p><p>Comprueba la conexión de Upstash en Vercel. No se han modificado ni borrado respuestas.</p><a href="/admin">Volver a intentar</a> · <a href="/admin?logout=1">Cerrar sesión</a></main>');
   }
 }

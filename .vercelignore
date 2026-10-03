@@ -3,3 +3,6 @@
 server/
 CHANGELOG
 CHANGELOG.md
+.impeccable/
+design/
+test/

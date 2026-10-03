@@ -64,6 +64,21 @@ usamos Formspree.
 
 ## Desarrollo local
 
+El teléfono de los asistentes es obligatorio y se guarda con prefijo internacional.
+El formulario ofrece España (+34), Chile (+56) y un prefijo editable para otros países.
+La normalización se comparte entre navegador y servidor en `assets/phone.js`.
+Los registros antiguos se conservan sin atribuirles un país automáticamente.
+
+Los envíos incluyen una clave de reintento: Redis guarda la respuesta y su recibo
+en una operación atómica y evita duplicados durante siete días. El formulario
+solo anuncia éxito al recibir un recibo válido. Las ediciones detectan cambios
+concurrentes y los borrados buscan por identificador dentro de una operación atómica.
+
+Pruebas: `npm test` valida teléfonos, autenticación, fallos de red, CSV y 20.000
+entradas aleatorias. `npm run test:integration` necesita `redis-server` instalado
+y crea un Redis efímero local para comprobar 300 grupos simultáneos, reintentos,
+ediciones, borrados, panel y exportaciones. Nunca utiliza la base de producción.
+
 Opcion A — solo el sitio estatico:
 
 ```bash

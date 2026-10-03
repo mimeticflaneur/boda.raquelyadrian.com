@@ -58,6 +58,8 @@
     }
     </script>
     <script src="assets/gallery.js" defer></script>
+    <script src="assets/phone.js" defer></script>
+    <script src="assets/ingest-client.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=Jost:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
@@ -423,6 +425,12 @@
             background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Cpath d='M2 3l3 4 3-4' stroke='%238a8580' fill='none' stroke-width='1.2'/%3E%3C/svg%3E") no-repeat right center;
         }
         .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .phone-row { display: grid; grid-template-columns: minmax(130px, .85fr) minmax(0, 1.15fr); gap: 1rem; }
+        .phone-row > div { min-width: 0; }
+        .field .phone-row label { font-size: .62rem; letter-spacing: .1em; }
+        .phone-help { font-size: .85rem; color: var(--fg-mute); margin-top: .6rem; }
+        .form-error { color: var(--sienna); font-size: .95rem; margin-top: 1rem; }
+        [hidden] { display: none !important; }
 
         .menu-pick { margin: 2.5rem 0; }
         .menu-pick h4 { font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: 1.2rem; margin-bottom: 1rem; }
@@ -1283,7 +1291,19 @@
                     </div>
                     <div class="field"><label for="name">Nombre completo</label><input type="text" id="name" name="nombre" autocomplete="name"></div>
                     <div class="field"><label for="email">Email</label><input type="email" id="email" name="email" autocomplete="email"></div>
-                    <div class="field" id="field-phone"><label for="phone">Teléfono</label><input type="tel" id="phone" name="telefono" autocomplete="tel"></div>
+                    <div class="field" id="field-phone">
+                        <div class="phone-row">
+                            <div><label for="phone-country">País / prefijo</label><select id="phone-country" autocomplete="tel-country-code" required>
+                                <option value="+34">España (+34)</option>
+                                <option value="+56">Chile (+56)</option>
+                                <option value="other">Otro país</option>
+                            </select></div>
+                            <div><label for="phone">Teléfono</label><input type="tel" id="phone" name="telefono" autocomplete="tel-national" inputmode="tel" maxlength="60" aria-describedby="phone-help phone-error" required></div>
+                        </div>
+                        <div id="phone-custom-field" hidden><label for="phone-custom">Prefijo internacional</label><input type="tel" id="phone-custom" inputmode="tel" placeholder="Por ejemplo, +54" maxlength="5" aria-describedby="phone-error"></div>
+                        <p class="phone-help" id="phone-help">Selecciona tu país e introduce el número. Guardaremos el teléfono con su prefijo.</p>
+                        <p class="form-error" id="phone-error" role="alert" hidden></p>
+                    </div>
                     <div class="rsvp-nav">
                         <button type="button" class="btn-back" onclick="goStep(1)">Atrás</button>
                         <button type="button" class="btn-next" id="btn-next-2" onclick="nextFrom(2)">Siguiente</button>
@@ -1370,6 +1390,7 @@
                     </div>
                 </div>
 
+                <p class="form-error" id="rsvp-error" role="alert" hidden></p>
             </form>
         </div>
     </section>
@@ -1981,6 +2002,7 @@
                 document.getElementById('rsvp-form').requestSubmit();
                 return;
             }
+            if(!validatePhone()) return;
             showPane(3);
         } else if(n === 3) {
             if(!document.getElementById('preboda').value) { return; }
@@ -2003,6 +2025,28 @@
     }
 
     function goStep(n) { showPane(n); }
+
+    document.getElementById('phone-country').addEventListener('change', function() {
+        document.getElementById('phone-custom-field').hidden = this.value !== 'other';
+        document.getElementById('phone-custom').required = this.value === 'other';
+        document.getElementById('phone-error').hidden = true;
+        if(this.value === 'other') document.getElementById('phone-custom').focus();
+    });
+    function phoneResult() {
+        const country = document.getElementById('phone-country').value;
+        const prefix = country === 'other' ? document.getElementById('phone-custom').value.trim() : country;
+        if(!prefix) return { error: 'Introduce el prefijo de tu país, por ejemplo +54.' };
+        return BodaPhone.normalize(document.getElementById('phone').value, prefix);
+    }
+    function validatePhone() {
+        const result = phoneResult();
+        const error = document.getElementById('phone-error');
+        error.textContent = result.error || '';
+        error.hidden = !result.error;
+        document.getElementById('phone').setAttribute('aria-invalid', String(!!result.error));
+        if(result.error) { showPane(2); document.getElementById('phone').focus(); return false; }
+        return true;
+    }
 
     function pickPreboda(choice) {
         document.getElementById('preboda').value = choice;
@@ -2149,7 +2193,7 @@
             website: document.getElementById('hp-website').value
         };
         if(currentPath === 'si') {
-            p.telefono = document.getElementById('phone').value.trim();
+            p.telefono = phoneResult().value;
             p.preboda = document.getElementById('preboda').value || 'no';
             const menu = document.querySelector('input[name="mi_menu"]:checked');
             p.menu = menu ? menu.value : '';
@@ -2176,26 +2220,35 @@
     }
 
     async function postJson(path, payload) {
-        const res = await fetch(API_BASE + path, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify(payload)
-        });
-        let data = {};
-        try { data = await res.json(); } catch(e) {}
-        return { ok: res.ok && data.ok !== false, data };
+        return BodaIngest.post(API_BASE + path, payload);
     }
 
     const rsvpForm = document.getElementById('rsvp-form');
+    let rsvpSending = false;
     rsvpForm.addEventListener('submit', async function(e) {
         e.preventDefault();
+        if(rsvpSending) return;
+        if(!currentPath) { showPane(1); return; }
+        // Enter en un paso intermedio avanza; nunca envía un formulario incompleto.
+        if(currentPath === 'si' && currentStep !== 5) { nextFrom(currentStep); return; }
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        if(!nameInput.value.trim()) { showPane(2); nameInput.focus(); return; }
+        if(!emailInput.value.trim() || !emailInput.checkValidity()) { showPane(2); emailInput.focus(); return; }
+        if(currentPath === 'si' && !validatePhone()) return;
+        if(currentPath === 'si' && !document.getElementById('bus').value) return;
+        const errorBox = document.getElementById('rsvp-error');
+        errorBox.hidden = true;
         const btn = currentPath === 'no'
             ? document.getElementById('btn-next-2')
             : document.getElementById('btn-submit-final');
         const orig = btn.textContent;
+        rsvpSending = true;
         btn.textContent = 'Enviando…'; btn.disabled = true;
         try {
-            const { ok } = await postJson('/api/rsvp', buildRsvpPayload());
+            const payload = buildRsvpPayload();
+            payload.request_id = await BodaIngest.submissionId(payload);
+            const { ok, data } = await postJson('/api/rsvp', payload);
             if(ok) {
                 rsvpForm.innerHTML = currentPath === 'no'
                     ? '<div class="form-ok"><svg class="ok-granada" aria-hidden="true"><use href="#granada"/></svg><h3>Gracias por avisar</h3><p>Os echaremos de menos. Un abrazo enorme.</p></div>'
@@ -2204,11 +2257,15 @@
                 if(prog) prog.style.display = 'none';
             } else {
                 btn.textContent = orig; btn.disabled = false;
-                alert('No se pudo enviar. Revisa los datos e inténtalo de nuevo.');
+                errorBox.textContent = data.error || 'No hemos podido confirmar el guardado. Tus datos siguen aquí; vuelve a intentarlo.';
+                errorBox.hidden = false;
             }
         } catch(err) {
             btn.textContent = orig; btn.disabled = false;
-            alert('Error de conexión. Inténtalo de nuevo en un momento.');
+            errorBox.textContent = 'No hemos recibido confirmación del servidor. Tus datos siguen aquí; puedes volver a enviar sin duplicar la respuesta.';
+            errorBox.hidden = false;
+        } finally {
+            rsvpSending = false;
         }
     });
 

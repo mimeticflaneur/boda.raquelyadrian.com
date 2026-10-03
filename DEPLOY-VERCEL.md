@@ -58,10 +58,10 @@ Tardarás unos **10 minutos**. No hace falta saber programar.
 1. Abre tu URL `https://boda-xxxx.vercel.app` y rellena una confirmación de
    prueba.
 2. Entra en el panel:
-   `https://boda-xxxx.vercel.app/admin?token=TU_ADMIN_TOKEN`
+   `https://boda-xxxx.vercel.app/admin` e introduce el token en el formulario de acceso
    Deberías ver tu prueba, el resumen de comensales y los botones para
    descargar en CSV.
-3. Comprueba la salud en `…/api/health` (debe poner `"db":"ok"`).
+3. Comprueba la salud en `…/api/health` (debe responder HTTP 200 con `"ok":true` y `"db":"ok"`). Esta comprobación envía un PING real a Redis; si falla responde 503.
 
 ¡Listo! Cada confirmación queda guardada en tu base de datos.
 
@@ -94,7 +94,7 @@ no hay que tocar nada y no hay problemas de permisos entre dominios.
 
 ## Copias de seguridad / exportar
 
-Entra en `/admin?token=…` y pulsa **Descargar RSVP (CSV)** o
+Entra en `/admin` e inicia sesión y pulsa **Descargar RSVP (CSV)** o
 **Descargar canciones (CSV)**. Ese CSV se abre en Excel o Google Sheets. Tus
 datos son tuyos y puedes sacarlos cuando quieras.
 
@@ -107,3 +107,22 @@ datos son tuyos y puedes sacarlos cuando quieras.
 > Nota: el backend autoalojado de la carpeta `server/` sigue existiendo por si
 > algún día quieres llevarte todo a un servidor propio. En Vercel no se usa
 > (lo ignora `.vercelignore`); allí mandan `api/` + `lib/`.
+
+
+## Incidencias de base de datos y acceso
+
+Si el token permite entrar pero aparece «No podemos leer las confirmaciones»,
+el problema está en la base de datos, no en la contraseña. Revisa en Storage
+que la base esté activa. Si Upstash muestra «Archived due to inactivity», sigue
+su restauración de bases inactivas antes de conectar una base vacía: las
+respuestas anteriores deben recuperarse, no reemplazarse.
+
+Después de restaurar, conecta las credenciales de la misma base al proyecto y
+redespliega. Comprueba `/api/health`, una confirmación de prueba, su aparición en
+`/admin`, la edición y las exportaciones; elimina únicamente esa prueba.
+
+`ADMIN_TOKEN` es la contraseña del panel, distinta del token de Redis. Nunca
+la incluyas en la URL, el repositorio, capturas ni mensajes públicos. Vercel
+no permite recuperar su valor si se guardó como variable Sensitive; si se ha
+perdido hay que establecer una nueva en Settings → Environment Variables y
+redesplegar. Los accesos nuevos usan una cookie firmada, HttpOnly y de siete días.
